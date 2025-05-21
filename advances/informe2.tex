@@ -1,0 +1,791 @@
+% Options for packages loaded elsewhere
+\PassOptionsToPackage{unicode}{hyperref}
+\PassOptionsToPackage{hyphens}{url}
+\PassOptionsToPackage{dvipsnames,svgnames,x11names}{xcolor}
+%
+\documentclass[
+  12pt,
+]{article}
+
+\usepackage{amsmath,amssymb}
+\usepackage{setspace}
+\usepackage{iftex}
+\ifPDFTeX
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+  \usepackage{textcomp} % provide euro and other symbols
+\else % if luatex or xetex
+  \usepackage{unicode-math}
+  \defaultfontfeatures{Scale=MatchLowercase}
+  \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
+\fi
+\usepackage{lmodern}
+\ifPDFTeX\else  
+    % xetex/luatex font selection
+  \setmainfont[]{Times New Roman}
+\fi
+% Use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\IfFileExists{microtype.sty}{% use microtype if available
+  \usepackage[]{microtype}
+  \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\makeatletter
+\@ifundefined{KOMAClassName}{% if non-KOMA class
+  \IfFileExists{parskip.sty}{%
+    \usepackage{parskip}
+  }{% else
+    \setlength{\parindent}{0pt}
+    \setlength{\parskip}{6pt plus 2pt minus 1pt}}
+}{% if KOMA class
+  \KOMAoptions{parskip=half}}
+\makeatother
+\usepackage{xcolor}
+\usepackage[margin=2cm]{geometry}
+\setlength{\emergencystretch}{3em} % prevent overfull lines
+\setcounter{secnumdepth}{5}
+% Make \paragraph and \subparagraph free-standing
+\ifx\paragraph\undefined\else
+  \let\oldparagraph\paragraph
+  \renewcommand{\paragraph}[1]{\oldparagraph{#1}\mbox{}}
+\fi
+\ifx\subparagraph\undefined\else
+  \let\oldsubparagraph\subparagraph
+  \renewcommand{\subparagraph}[1]{\oldsubparagraph{#1}\mbox{}}
+\fi
+
+
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}\usepackage{longtable,booktabs,array}
+\usepackage{calc} % for calculating minipage widths
+% Correct order of tables after \paragraph or \subparagraph
+\usepackage{etoolbox}
+\makeatletter
+\patchcmd\longtable{\par}{\if@noskipsec\mbox{}\fi\par}{}{}
+\makeatother
+% Allow footnotes in longtable head/foot
+\IfFileExists{footnotehyper.sty}{\usepackage{footnotehyper}}{\usepackage{footnote}}
+\makesavenoteenv{longtable}
+\usepackage{graphicx}
+\makeatletter
+\def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
+\def\maxheight{\ifdim\Gin@nat@height>\textheight\textheight\else\Gin@nat@height\fi}
+\makeatother
+% Scale images if necessary, so that they will not overflow the page
+% margins by default, and it is still possible to overwrite the defaults
+% using explicit options in \includegraphics[width, height, ...]{}
+\setkeys{Gin}{width=\maxwidth,height=\maxheight,keepaspectratio}
+% Set default figure placement to htbp
+\makeatletter
+\def\fps@figure{htbp}
+\makeatother
+% definitions for citeproc citations
+\NewDocumentCommand\citeproctext{}{}
+\NewDocumentCommand\citeproc{mm}{%
+  \begingroup\def\citeproctext{#2}\cite{#1}\endgroup}
+\makeatletter
+ % allow citations to break across lines
+ \let\@cite@ofmt\@firstofone
+ % avoid brackets around text for \cite:
+ \def\@biblabel#1{}
+ \def\@cite#1#2{{#1\if@tempswa , #2\fi}}
+\makeatother
+\newlength{\cslhangindent}
+\setlength{\cslhangindent}{1.5em}
+\newlength{\csllabelwidth}
+\setlength{\csllabelwidth}{3em}
+\newenvironment{CSLReferences}[2] % #1 hanging-indent, #2 entry-spacing
+ {\begin{list}{}{%
+  \setlength{\itemindent}{0pt}
+  \setlength{\leftmargin}{0pt}
+  \setlength{\parsep}{0pt}
+  % turn on hanging indent if param 1 is 1
+  \ifodd #1
+   \setlength{\leftmargin}{\cslhangindent}
+   \setlength{\itemindent}{-1\cslhangindent}
+  \fi
+  % set entry spacing
+  \setlength{\itemsep}{#2\baselineskip}}}
+ {\end{list}}
+\usepackage{calc}
+\newcommand{\CSLBlock}[1]{\hfill\break\parbox[t]{\linewidth}{\strut\ignorespaces#1\strut}}
+\newcommand{\CSLLeftMargin}[1]{\parbox[t]{\csllabelwidth}{\strut#1\strut}}
+\newcommand{\CSLRightInline}[1]{\parbox[t]{\linewidth - \csllabelwidth}{\strut#1\strut}}
+\newcommand{\CSLIndent}[1]{\hspace{\cslhangindent}#1}
+
+\usepackage[noblocks]{authblk}
+\renewcommand*{\Authsep}{, }
+\renewcommand*{\Authand}{, }
+\renewcommand*{\Authands}{, }
+\renewcommand\Affilfont{\small}
+\makeatletter
+\@ifpackageloaded{caption}{}{\usepackage{caption}}
+\AtBeginDocument{%
+\ifdefined\contentsname
+  \renewcommand*\contentsname{Table of contents}
+\else
+  \newcommand\contentsname{Table of contents}
+\fi
+\ifdefined\listfigurename
+  \renewcommand*\listfigurename{List of Figures}
+\else
+  \newcommand\listfigurename{List of Figures}
+\fi
+\ifdefined\listtablename
+  \renewcommand*\listtablename{List of Tables}
+\else
+  \newcommand\listtablename{List of Tables}
+\fi
+\ifdefined\figurename
+  \renewcommand*\figurename{Figure}
+\else
+  \newcommand\figurename{Figure}
+\fi
+\ifdefined\tablename
+  \renewcommand*\tablename{Table}
+\else
+  \newcommand\tablename{Table}
+\fi
+}
+\@ifpackageloaded{float}{}{\usepackage{float}}
+\floatstyle{ruled}
+\@ifundefined{c@chapter}{\newfloat{codelisting}{h}{lop}}{\newfloat{codelisting}{h}{lop}[chapter]}
+\floatname{codelisting}{Listing}
+\newcommand*\listoflistings{\listof{codelisting}{List of Listings}}
+\makeatother
+\makeatletter
+\makeatother
+\makeatletter
+\@ifpackageloaded{caption}{}{\usepackage{caption}}
+\@ifpackageloaded{subcaption}{}{\usepackage{subcaption}}
+\makeatother
+\ifLuaTeX
+  \usepackage{selnolig}  % disable illegal ligatures
+\fi
+\usepackage{bookmark}
+
+\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
+\urlstyle{same} % disable monospaced font for URLs
+\hypersetup{
+  pdftitle={Preferences for market justice: the role of intergenerational social mobility and beliefs in meritocracy in Chile},
+  pdfauthor={Andreas Laffert},
+  colorlinks=true,
+  linkcolor={blue},
+  filecolor={Maroon},
+  citecolor={Blue},
+  urlcolor={Blue},
+  pdfcreator={LaTeX via pandoc}}
+
+\title{Preferences for market justice: the role of intergenerational
+social mobility and beliefs in meritocracy in Chile}
+
+
+  \author{Andreas Laffert}
+            \affil{%
+                  Instituto de Sociología, Pontificia Universidad
+                  Católica de Chile
+              }
+      
+\date{}
+\begin{document}
+\maketitle
+
+\setstretch{1.15}
+\section{Introduction}\label{introduction}
+
+What makes market-driven inequalities appear legitimate in the eyes of
+the public? Since the early 1980s, many countries have experienced a
+widespread retreat from universal welfare programs and a shift toward
+the privatization and commodification of public goods, welfare policies,
+and social services (\citeproc{ref-gingrich_making_2011}{Gingrich,
+2011}; \citeproc{ref-streeck_how_2016}{Streeck, 2016}). In Latin
+America, as elsewhere, neoliberal reforms reshaped welfare-state
+institutions by extending market logic into domains of social
+reproduction that were traditionally governed by the state
+(\citeproc{ref-arrizabalo_milagro_1995}{Arrizabalo, 1995};
+\citeproc{ref-ferre_welfare_2023}{Ferre, 2023}). This transformation
+reduced the role of public provision and increased the presence of
+private actors in core social services
+(\citeproc{ref-harvey_breve_2015}{Harvey, 2015}). Echoing Polanyi's
+(\citeproc{ref-polanyi_great_1975}{1975}) insight that markets
+constitute a distinct moral order, the institutional diffusion of market
+rules has fostered a corresponding moral economy: a constellation of
+norms and values concerning fair allocation, embedded in institutions
+and shaping individual subjectivities
+(\citeproc{ref-mau_inequality_2015}{Mau, 2015};
+\citeproc{ref-svallforsMoralEconomyClass2006a}{Svallfors, 2006}). Within
+this framework, a growing body of research examines the extent to which,
+and the mechanisms by which, citizens consider it fair that access to
+services like health care, pensions, and education be governed by
+market-based criteria---a phenomenon known as \emph{market justice
+preferences} (\citeproc{ref-busemeyer_skills_2014}{Busemeyer, 2014};
+\citeproc{ref-castillo_socialization_2024}{Castillo et al., 2024};
+\citeproc{ref-immergut_it_2020}{Immergut \& Schneider, 2020};
+\citeproc{ref-koos_moral_2019}{Koos \& Sachweh, 2019};
+\citeproc{ref-lindh_public_2015}{Lindh, 2015};
+\citeproc{ref-lindh_bringing_2023}{Lindh \& McCall, 2023}).
+Understanding these preferences is crucial, as they contribute to
+legitimizing economic inequality by framing it as the fair result of
+individual responsibility and limited state intervention
+(\citeproc{ref-mau_inequality_2015}{Mau, 2015}).
+
+Existing literature shows that market justice preferences are shaped by
+both the economic and institutional context and individuals' positions
+within social stratification. Grounded in the notion that institutions
+influence individual attitudes
+(\citeproc{ref-jacksonActorsInstitutions2010}{Jackson, 2010}), studies
+find that countries with stronger public provision or more expansive
+welfare states exhibit lower levels of market justice preferences
+(\citeproc{ref-busemeyer_skills_2014}{Busemeyer, 2014};
+\citeproc{ref-immergut_it_2020}{Immergut \& Schneider, 2020}), while
+more privatized contexts show stronger support for market-based criteria
+(\citeproc{ref-castillo_socialization_2024}{Castillo et al., 2024};
+\citeproc{ref-lindh_public_2015}{Lindh, 2015}). In such contexts, market
+justice preferences tend to rise as individuals ``ascend'' the social
+structure, with those in more privileged positions in terms of class,
+education, and income holding stronger preferences for market-based
+solutions compared to those in more disadvantaged or at-risk positions
+(\citeproc{ref-castillo_socialization_2024}{Castillo et al., 2024};
+\citeproc{ref-immergut_it_2020}{Immergut \& Schneider, 2020};
+\citeproc{ref-lee_fairness_2023}{Lee \& Stacey, 2023};
+\citeproc{ref-lindh_public_2015}{Lindh, 2015};
+\citeproc{ref-otero_power_2024}{Otero \& Mendoza, 2024};
+\citeproc{ref-svallfors_political_2007}{Svallfors, 2007};
+\citeproc{ref-vondemknesebeck_are_2016}{Von Dem Knesebeck et al.,
+2016}).
+
+Market justice preferences are shaped not only by objective
+socioeconomic conditions but also by popular beliefs about inequality.
+Among these, meritocracy is a key normative principle underpinning
+market-based distributive preferences
+(\citeproc{ref-mau_inequality_2015}{Mau, 2015}). It frames inequality as
+inevitable but justifiable through effort and talent
+(\citeproc{ref-davis_principles_2001}{Davis \& Moore, 2001};
+\citeproc{ref-young_rise_1958}{Young, 1958}). Studies show that
+individuals with stronger meritocratic beliefs tend to perceive less
+inequality and legitimize it by attributing economic differences to
+personal achievement (\citeproc{ref-batruch_belief_2023}{Batruch et al.,
+2023}; \citeproc{ref-mijs_paradox_2019}{Mijs, 2019};
+\citeproc{ref-wilson_role_2003}{Wilson, 2003}). In highly unequal
+societies where access to services is largely governed by market logic,
+such beliefs play a critical role in normalizing inequality. Recent
+evidence from Chile shows that students who believe effort and talent
+are rewarded in their country express stronger preferences for
+market-based access to healthcare, pensions, and education
+(\citeproc{ref-castillo_socialization_2024}{Castillo et al., 2024}).
+
+Although it is clear that one's social position influences market
+preferences, the question of how upward or downward mobility within the
+social structure affects these preferences remains unanswered. This
+question is far from trivial, especially in Latin America, where many
+have experienced various forms of mobility amid high economic inequality
+and deep welfare privatization (\citeproc{ref-ferre_welfare_2023}{Ferre,
+2023}; \citeproc{ref-lopez-roldan_comparative_2021}{López-Roldán \&
+Fachelli, 2021}; \citeproc{ref-torche_intergenerational_2014}{Torche,
+2014}). Social origins and destinations affect attitudes toward
+inequality in distinct ways (\citeproc{ref-day_movin_2017}{Day \& Fiske,
+2017}; \citeproc{ref-gugushvili_intergenerational_2016}{Gugushvili,
+2016b}, \citeproc{ref-gugushvili_subjective_2017}{2017};
+\citeproc{ref-jaime-castillo_social_2019}{Jaime-Castillo \&
+Marqués-Perales, 2019}; \citeproc{ref-mijs_belief_2022}{Mijs et al.,
+2022}; \citeproc{ref-wen_does_2021}{Wen \& Witteveen, 2021}), while
+movement between these positions exposes individuals to different
+experiences and mechanisms that shape their views on what is fair
+(\citeproc{ref-gugushvili_trends_2014}{Gugushvili, 2014};
+\citeproc{ref-mau_inequality_2015}{Mau, 2015}). Building on this
+research, examining the effects of social mobility on market justice
+preferences can help to illuminate how inequalities in access to social
+services are justified among individuals who have experienced, or not,
+changes in their social standing, and what are the normative mechanisms
+that guide this justification (\citeproc{ref-mau_inequality_2015}{Mau,
+2015}).
+
+Beyond their isolated effects, social mobility and meritocratic beliefs
+interact in complex ways to shape market justice preferences. A key
+mechanism proposed in the literature to explain how mobility influences
+distributive justice preferences is the psychological process of
+self-serving bias in causal attribution
+(\citeproc{ref-gugushvili_intergenerational_2016c}{Gugushvili, 2016a};
+\citeproc{ref-schmidt_experience_2011}{Schmidt, 2011}). This bias
+suggests that individuals attribute failures---such as downward
+mobility---to external factors, while crediting successes---such as
+upward mobility---to their own merit and effort
+(\citeproc{ref-miller_selfserving_1975}{Miller \& Ross, 1975}). Those
+who experience upward mobility tend to view their social position as
+earned, making them more likely to believe that individuals are
+responsible for their own success or failure. Research shows that upward
+mobility is associated with weaker preferences for redistribution
+(\citeproc{ref-alesina_intergenerational_2018}{Alesina et al., 2018};
+\citeproc{ref-gugushvili_intergenerational_2016c}{Gugushvili, 2016a};
+\citeproc{ref-jaime-castillo_social_2019}{Jaime-Castillo \&
+Marqués-Perales, 2019}; \citeproc{ref-schmidt_experience_2011}{Schmidt,
+2011}) and stronger legitimacy of income inequality
+(\citeproc{ref-shariff_income_2016}{Shariff et al., 2016}). In contrast,
+individuals who experience downward mobility tend to blame structural
+factors like inequality and are more supportive of redistribution while
+rejecting merit-based explanations
+(\citeproc{ref-gugushvili_trends_2014}{Gugushvili, 2014}). Taken
+together, I argue that meritocratic beliefs may reflect---or
+reinforce---this self-serving attribution mechanism by legitimizing
+one's social status as the outcome of personal merit, closely tied to
+attribution bias.
+
+Against this background, this article pursues two main objectives:
+first, to analyze the extent to which intergenerational social mobility
+influences market justice preferences regarding healthcare, pensions,
+and education; and second, to examine how meritocratic beliefs may
+moderate this relationship. Building on a theoretical framework that
+emphasizes how neoliberal transformations---particularly through the
+privatization and commodification of key areas of social
+reproduction---have profoundly reshaped processes of subject formation
+(\citeproc{ref-mau_inequality_2015}{Mau, 2015}), the central argument is
+that upward mobility increases support for market justice preferences,
+while downward mobility decreases it. Moreover, meritocratic beliefs are
+expected to moderate this relationship by reflecting a self-serving
+attribution bias, whereby individuals justify their social position in
+terms of personal merit.
+
+This study focuses on Chile, a particularly intriguing case for
+examining market justice preferences. Despite significant economic
+growth and poverty reduction, Chile has some of the highest levels of
+inequality in Latin America and among OECD countries
+(\citeproc{ref-chancel_world_2022}{Chancel et al., 2022};
+\citeproc{ref-flores_top_2020}{Flores et al., 2020}). This inequality
+coexists with short-range upward mobility among lower-class segments
+moving into middle strata, though strong barriers remain to reaching
+higher positions (\citeproc{ref-espinoza_estratificacion_2013}{Espinoza
+et al., 2013}; \citeproc{ref-torche_intergenerational_2014}{Torche,
+2014}). What makes Chile especially salient is that much of this
+inequality is rooted in deep neoliberal reforms that institutionalized
+the privatization and commodification of key social sectors
+(\citeproc{ref-madariaga_three_2020}{Madariaga, 2020}). Introduced
+during the dictatorship (1973--1989) and expanded in democracy, these
+reforms enabled the unprecedented emergence of markets in health,
+pensions, and education, with provision segmented by individuals'
+ability to pay and supported by public subsidies
+(\citeproc{ref-boccardo_30_2020}{Boccardo, 2020}). In parallel---and
+despite waves of protest against inequality and commodification from
+2006 to 2019 (\citeproc{ref-somma_no_2021}{Somma et al.,
+2021})---Chilean subjectivities have been increasingly shaped by
+neoliberal discourses and market logics, influencing their attitudes
+toward inequality and welfare distribution
+(\citeproc{ref-arteagaaguirre_politicas_2015}{Arteaga Aguirre \& Iñigo
+Valderrama, 2015}; \citeproc{ref-castillo_socialization_2024}{Castillo
+et al., 2024}).
+
+In this context, the questions that guide this research are as follows:
+
+\begin{enumerate}
+\def\labelenumi{(\arabic{enumi})}
+\tightlist
+\item
+  To what extent does intergenerational social mobility influence market
+  justice preferences regarding healthcare, pensions, and education in
+  Chile?
+\item
+  How do meritocratic beliefs condition or moderate this relationship in
+  the Chilean context?
+\end{enumerate}
+
+To address these questions, this study draws on large-scale,
+representative survey data collected in 2018 from the urban Chilean
+population aged 18 to 75 (n = 2,983). The next section outlines the
+theoretical framework linking market justice preferences, social
+mobility, and meritocratic beliefs, and proposes a set of hypotheses.
+This is followed by a description of the data, variables, and analytical
+strategy. The final sections present the empirical findings, offer an
+interpretation of the results, and conclude with a discussion of their
+implications.
+
+\section{Theoretical and empirical
+background}\label{theoretical-and-empirical-background}
+
+\subsection{Market justice
+preferences}\label{market-justice-preferences}
+
+\subsection{Social mobility}\label{social-mobility}
+
+\subsection{Meritocracy}\label{meritocracy}
+
+\subsection{The Chilean context}\label{the-chilean-context}
+
+\section{Data, variables and methods}\label{data-variables-and-methods}
+
+\subsection{Data}\label{data}
+
+This study draws on data from the Chilean Longitudinal Social Survey
+(ELSOC) of the Center for Social Conflict and Cohesion Studies (COES).
+The survey is an annual panel collected from 2016 to 2023, comprising
+two independent samples (original and refreshment), featuring permanent
+and rotating questionnaire modules. It evaluates how individuals think,
+feel, and behave regarding conflict and social cohesion in Chile. The
+sampling design is complex, probabilistic, clustered, multistage, and
+stratified by city size, targeting men and women aged 18--75 who
+habitually reside in private dwellings in urban areas spanning 40 cities
+(92 municipalities, 13 regions). This analysis focuses on 2023, the most
+recent wave, which includes 1,737 respondents in the original sample and
+989 in the refreshment sample. Further details on sampling, attrition,
+and weighting can be found at https://coes.cl/encuesta-panel/, and the
+dataset is publicly available at
+https://dataverse.harvard.edu/dataverse/elsoc.
+
+\subsection{Variables}\label{variables}
+
+\emph{Outcome variables}
+
+\textbf{Market justice preferences}: The outcome variables in this study
+are market justice preferences. This construct is operationalized
+through three variables that address the degree of justification
+regarding whether access to social services in healthcare, pensions, and
+education should be income conditional. Specifically, the justification
+of inequality in healthcare is assessed by the question: ``Is it fair in
+Chile that people with higher incomes can access better healthcare than
+people with lower incomes?'' The same question is asked for pensions and
+education. In all cases, respondents indicate their level of agreement
+on a five-point Likert scale ranging from 1 (``strongly disagree'') to 5
+(``strongly agree''). Although these items theoretically reflect the
+same underlying concept of market justice
+(\citeproc{ref-castillo_socialization_2024}{Castillo et al., 2024};
+\citeproc{ref-lindh_public_2015}{Lindh, 2015}), they are analyzed
+separately because healthcare, pensions, and education may prompt
+distinct response patterns
+(\citeproc{ref-busemeyer_skills_2014}{Busemeyer, 2014};
+\citeproc{ref-immergut_it_2020}{Immergut \& Schneider, 2020};
+\citeproc{ref-lee_fairness_2023}{Lee \& Stacey, 2023}).
+
+\emph{Independent variables}
+
+\textbf{Social mobility}: Intergenerational social mobility is treated
+as an exposure indicating whether respondents occupy a different class
+position from their fathers. Following Breen and Ermisch's
+(\citeproc{ref-breen_effects_2024}{2024}) framework for estimating
+causal effects of mobility, the variable is constructed in two stages.
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\item
+  Class assignment. Using the International Socio-Economic Index of
+  Occupational Status (ISEI) derived from three-digit ISCO-08 codes,
+  both paternal (origin) and respondent (destination) occupations are
+  grouped into three strata:
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Upper (codes 100--299: managers, directors, professionals)
+  \item
+    Middle (codes 300--499: skilled white‑collar workers)
+  \item
+    Lower (codes 500 and above: manual, semi‑skilled, or unskilled
+    workers)
+  \end{itemize}
+\item
+  Propensity-score estimation. To model mobility as a treatment---i.e.,
+  a transition from origin \emph{j} to destination \emph{k}---I estimate
+  multinomial logit propensity scores using covariates that influence an
+  individual's likelihood of moving between strata: (a) father's
+  educational level, (b) presence of both parents at age 15, (c)
+  nationality, (d) age, (e) sex, and (f) ethnicity.
+\end{enumerate}
+
+These propensity scores are subsequently employed to adjust for
+selection into mobility when assessing its effect on market justice
+preferences.
+
+\textbf{Meritocracy}: Meritocratic perception is operationalized through
+two components: one addressing effort and another focusing on talent
+(\citeproc{ref-young_rise_1958}{Young, 1958}). The item used to gauge
+effort is: ``In Chile, people are rewarded for their efforts,'' while
+the item for talent is: ``In Chile, people are rewarded for their
+intelligence and skills.'' In both cases, respondents indicate their
+level of agreement on a five-point Likert scale, ranging from 1
+(``strongly disagree'') to 5 (``strongly agree'').
+
+\emph{Controls}
+
+Sociodemographic and attitudinal variables are included to control for
+potential composition effects in the population. In terms of
+sociodemographic characteristics, I incorporate per capita household
+income quantile, educational level (1=Primary or below, 2=Secondary,
+3=Technical, 4=University or above), age (in years), and sex (1=Male,
+2=Female), which have been shown to significantly influence market
+justice preferences (\citeproc{ref-castillo_socialization_2024}{Castillo
+et al., 2024}; \citeproc{ref-lindh_public_2015}{Lindh, 2015}). Regarding
+attitudinal variables, I include political identification (1=Left,
+2=Center, 3=Right, 4=No identification) and subjective social status
+(ranging from 1 to 10) because they may confound the relationship
+between market justice preferences and social mobility and meritocracy.
+
+\subsection{Methods}\label{methods}
+
+Following Breen and Ermisch's (\citeproc{ref-breen_effects_2024}{2024})
+strategy for estimating the causal effect of social mobility on market
+justice preferences, I employ linear regression models with
+inverse-probability weights (IPW) for mobility conditional on class of
+origin. This approach allows estimation of the average causal effect of
+moving from an origin class \emph{j} to a destination class \emph{k} by
+comparing individuals who actually reach \emph{k} with their
+counterfactual outcome had they instead moved to an alternative
+destination \emph{k′} (\citeproc{ref-breen_effects_2024}{Breen \&
+Ermisch, 2024}). The resulting estimand is the average treatment effect
+on the treated (ATT).
+
+All the analyses will be conducted using R software.
+
+\section{References}\label{references}
+
+\phantomsection\label{refs}
+\begin{CSLReferences}{1}{0}
+\bibitem[\citeproctext]{ref-alesina_intergenerational_2018}
+Alesina, A., Stantcheva, S., \& Teso, E. (2018). Intergenerational
+{Mobility} and {Preferences} for {Redistribution}. \emph{American
+Economic Review}, \emph{108}(2), 521--554.
+\url{https://doi.org/10.1257/aer.20162015}
+
+\bibitem[\citeproctext]{ref-arrizabalo_milagro_1995}
+Arrizabalo, X. (1995). \emph{{Milagro o quimera: la econom{í}a chilena
+durante la dictadura}}. Libros de la Catarata.
+
+\bibitem[\citeproctext]{ref-arteagaaguirre_politicas_2015}
+Arteaga Aguirre, C., \& Iñigo Valderrama, I. (2015). {Pol{í}ticas
+sociales, modelo de desarrollo y subjetividad de grupos vulnerables en
+Chile}.
+
+\bibitem[\citeproctext]{ref-batruch_belief_2023}
+Batruch, A., Jetten, J., Van De Werfhorst, H., Darnon, C., \& Butera, F.
+(2023). Belief in {School Meritocracy} and the {Legitimization} of
+{Social} and {Income Inequality}. \emph{Social Psychological and
+Personality Science}, \emph{14}(5), 621--635.
+\url{https://doi.org/10.1177/19485506221111017}
+
+\bibitem[\citeproctext]{ref-boccardo_30_2020}
+Boccardo, G. (2020). \emph{30 a{ñ}os de privatizaciones en {Chile}: Lo
+que la pandemia revel{ó}} (Nodo XXI). Santiago.
+
+\bibitem[\citeproctext]{ref-breen_effects_2024}
+Breen, R., \& Ermisch, J. (2024). The {Effects} of {Social Mobility}.
+\emph{Sociological Science}, \emph{11}, 467--488.
+\url{https://doi.org/10.15195/v11.a17}
+
+\bibitem[\citeproctext]{ref-busemeyer_skills_2014}
+Busemeyer, M. R. (2014). \emph{Skills and {Inequality}: {Partisan
+Politics} and the {Political Economy} of {Education Reforms} in {Western
+Welfare States}}. Cambridge University Press.
+
+\bibitem[\citeproctext]{ref-castillo_socialization_2024}
+Castillo, J. C., Salgado, M., Carrasco, K., \& Laffert, A. (2024). The
+{Socialization} of {Meritocracy} and {Market Justice Preferences} at
+{School}. \emph{Societies}, \emph{14}(11), 214.
+\url{https://doi.org/10.3390/soc14110214}
+
+\bibitem[\citeproctext]{ref-chancel_world_2022}
+Chancel, L., Piketty, T., Saez, E., \& Zucman, G. (2022). World
+inequality report 2022.
+https://bibliotecadigital.ccb.org.co/handle/11520/27510.
+
+\bibitem[\citeproctext]{ref-davis_principles_2001}
+Davis, K., \& Moore, W. E. (2001). Some {Principles} of
+{Stratification}. In \emph{Social {Stratification}, {Class}, {Race}, and
+{Gender} in {Sociological Perspective}, {Second Edition}} (2nd ed.).
+Routledge.
+
+\bibitem[\citeproctext]{ref-day_movin_2017}
+Day, M. V., \& Fiske, S. T. (2017). Movin' on {Up}? {How Perceptions} of
+{Social Mobility Affect Our Willingness} to {Defend} the {System}.
+\emph{Social Psychological and Personality Science}, \emph{8}(3),
+267--274. \url{https://doi.org/10.1177/1948550616678454}
+
+\bibitem[\citeproctext]{ref-espinoza_estratificacion_2013}
+Espinoza, V., Barozet, E., \& Méndez, M. L. (2013). {Estratificaci{ó}n y
+movilidad social bajo un}.
+
+\bibitem[\citeproctext]{ref-ferre_welfare_2023}
+Ferre, J. C. (2023). Welfare regimes in twenty-first-century {Latin
+America}. \emph{Journal of International and Comparative Social Policy},
+\emph{39}(2), 101--127. \url{https://doi.org/10.1017/ics.2023.16}
+
+\bibitem[\citeproctext]{ref-flores_top_2020}
+Flores, I., Sanhueza, C., Atria, J., \& Mayer, R. (2020). Top {Incomes}
+in {Chile}: {A Historical Perspective} on {Income Inequality},
+1964--2017. \emph{Review of Income and Wealth}, \emph{66}(4), 850--874.
+\url{https://doi.org/10.1111/roiw.12441}
+
+\bibitem[\citeproctext]{ref-gingrich_making_2011}
+Gingrich, J. R. (2011). \emph{Making {Markets} in the {Welfare State}:
+{The Politics} of {Varying Market Reforms}} (1st ed.). Cambridge
+University Press. \url{https://doi.org/10.1017/CBO9780511791529}
+
+\bibitem[\citeproctext]{ref-gugushvili_trends_2014}
+Gugushvili, A. (2014). Trends, {Covariates} and {Consequences} of
+{Intergenerational Social Mobility} in {Post- Socialist Societies}.
+
+\bibitem[\citeproctext]{ref-gugushvili_intergenerational_2016c}
+Gugushvili, A. (2016a). Intergenerational objective and subjective
+mobility and attitudes towards income differences: Evidence from
+transition societies. \emph{Journal of International and Comparative
+Social Policy}, \emph{32}(3), 199--219.
+\url{https://doi.org/10.1080/21699763.2016.1206482}
+
+\bibitem[\citeproctext]{ref-gugushvili_intergenerational_2016}
+Gugushvili, A. (2016b). Intergenerational {Social Mobility} and {Popular
+Explanations} of {Poverty}: {A Comparative Perspective}. \emph{Social
+Justice Research}, \emph{29}(4), 402--428.
+\url{https://doi.org/10.1007/s11211-016-0275-9}
+
+\bibitem[\citeproctext]{ref-gugushvili_subjective_2017}
+Gugushvili, A. (2017). Subjective {Intergenerational Mobility} and
+{Support} for {Welfare State Programmes}.
+
+\bibitem[\citeproctext]{ref-harvey_breve_2015}
+Harvey, D. (2015). \emph{{Breve historia del neoliberalismo}}. Madrid
+(Espa{ñ}a): Ediciones Akal.
+
+\bibitem[\citeproctext]{ref-immergut_it_2020}
+Immergut, E. M., \& Schneider, S. M. (2020). Is it unfair for the
+affluent to be able to purchase {``better''} healthcare? {Existential}
+standards and institutional norms in healthcare attitudes across 28
+countries. \emph{Social Science \& Medicine}, \emph{267}, 113146.
+\url{https://doi.org/10.1016/j.socscimed.2020.113146}
+
+\bibitem[\citeproctext]{ref-jacksonActorsInstitutions2010}
+Jackson, G. (2010). Actors and institutions. In G. Morgan, J. L.
+Campbell, C. Crouch, O. K. Pedersen, \& R. Whitley (Eds.), \emph{The
+{Oxford Handbook} of {Comparative Institutional Analysis}} (1st ed.).
+Oxford University Press.
+\url{https://doi.org/10.1093/oxfordhb/9780199233762.001.0001}
+
+\bibitem[\citeproctext]{ref-jaime-castillo_social_2019}
+Jaime-Castillo, A. M., \& Marqués-Perales, I. (2019). Social mobility
+and demand for redistribution in {Europe}: A comparative analysis.
+\emph{The British Journal of Sociology}, \emph{70}(1), 138--165.
+\url{https://doi.org/10.1111/1468-4446.12363}
+
+\bibitem[\citeproctext]{ref-koos_moral_2019}
+Koos, S., \& Sachweh, P. (2019). The moral economies of market
+societies: Popular attitudes towards market competition, redistribution
+and reciprocity in comparative perspective. \emph{Socio-Economic
+Review}, \emph{17}(4), 793--821.
+\url{https://doi.org/10.1093/ser/mwx045}
+
+\bibitem[\citeproctext]{ref-lee_fairness_2023}
+Lee, J.-S., \& Stacey, M. (2023). Fairness perceptions of educational
+inequality: The effects of self-interest and neoliberal orientations.
+\emph{The Australian Educational Researcher}.
+\url{https://doi.org/10.1007/s13384-023-00636-6}
+
+\bibitem[\citeproctext]{ref-lindh_public_2015}
+Lindh, A. (2015). Public {Opinion} against {Markets}? {Attitudes}
+towards {Market Distribution} of {Social Services} -- {A Comparison} of
+17 {Countries}. \emph{Social Policy \& Administration}, \emph{49}(7),
+887--910. \url{https://doi.org/10.1111/spol.12105}
+
+\bibitem[\citeproctext]{ref-lindh_bringing_2023}
+Lindh, A., \& McCall, L. (2023). Bringing the market in: An expanded
+framework for understanding popular responses to economic inequality.
+\emph{Socio-Economic Review}, \emph{21}(2), 1035--1055.
+\url{https://doi.org/10.1093/ser/mwac018}
+
+\bibitem[\citeproctext]{ref-lopez-roldan_comparative_2021}
+López-Roldán, P., \& Fachelli, S. (Eds.). (2021). \emph{Towards a
+{Comparative Analysis} of {Social Inequalities} between {Europe} and
+{Latin America}}. Cham: Springer International Publishing.
+\url{https://doi.org/10.1007/978-3-030-48442-2}
+
+\bibitem[\citeproctext]{ref-madariaga_three_2020}
+Madariaga, A. (2020). The three pillars of neoliberalism: {Chile}'s
+economic policy trajectory in comparative perspective.
+\emph{Contemporary Politics}, \emph{26}(3), 308--329.
+\url{https://doi.org/10.1080/13569775.2020.1735021}
+
+\bibitem[\citeproctext]{ref-mau_inequality_2015}
+Mau, S. (2015). \emph{Inequality, {Marketization} and the {Majority
+Class}: {Why Did} the {European Middle Classes Accept Neo-Liberalism}?}
+Houndmills: Palgrave Macmillan.
+
+\bibitem[\citeproctext]{ref-mijs_paradox_2019}
+Mijs, J. (2019). The paradox of inequality: Income inequality and belief
+in meritocracy go hand in hand. \emph{Socio-Economic Review},
+\emph{19}(1), 7--35. \url{https://doi.org/10.1093/ser/mwy051}
+
+\bibitem[\citeproctext]{ref-mijs_belief_2022}
+Mijs, J., Daenekindt, S., de Koster, W., \& van der Waal, J. (2022).
+Belief in {Meritocracy Reexamined}: {Scrutinizing} the {Role} of
+{Subjective Social Mobility}. \emph{Social Psychology Quarterly},
+\emph{85}(2), 131--141. \url{https://doi.org/10.1177/01902725211063818}
+
+\bibitem[\citeproctext]{ref-miller_selfserving_1975}
+Miller, D. T., \& Ross, M. (1975). Self-serving biases in the
+attribution of causality: {Fact} or fiction? \emph{Psychological
+Bulletin}, \emph{82}(2), 213--225.
+\url{https://doi.org/10.1037/h0076486}
+
+\bibitem[\citeproctext]{ref-otero_power_2024}
+Otero, G., \& Mendoza, M. (2024). The {Power} of {Diversity}: {Class},
+{Networks} and {Attitudes Towards Inequality}. \emph{Sociology},
+\emph{58}(4), 851--876. \url{https://doi.org/10.1177/00380385231217625}
+
+\bibitem[\citeproctext]{ref-polanyi_great_1975}
+Polanyi, K. (1975). \emph{The great transformation} (Repr). New York,
+NY: Octagon Books.
+
+\bibitem[\citeproctext]{ref-schmidt_experience_2011}
+Schmidt, A. W. (2011). The experience of social mobility and the
+formation of attitudes toward redistribution. In.
+
+\bibitem[\citeproctext]{ref-shariff_income_2016}
+Shariff, A. F., Wiwad, D., \& Aknin, L. B. (2016). Income {Mobility
+Breeds Tolerance} for {Income Inequality}: {Cross-National} and
+{Experimental Evidence}. \emph{Perspectives on Psychological Science},
+\emph{11}(3), 373--380. \url{https://doi.org/10.1177/1745691616635596}
+
+\bibitem[\citeproctext]{ref-somma_no_2021}
+Somma, N. M., Bargsted, M., Disi Pavlic, R., \& Medel, R. M. (2021). No
+water in the oasis: The {Chilean Spring} of 2019--2020. \emph{Social
+Movement Studies}, \emph{20}(4), 495--502.
+\url{https://doi.org/10.1080/14742837.2020.1727737}
+
+\bibitem[\citeproctext]{ref-streeck_how_2016}
+Streeck, W. (2016). \emph{How will capitalism end? Essays on a failing
+system}. London: Verso.
+
+\bibitem[\citeproctext]{ref-svallforsMoralEconomyClass2006a}
+Svallfors, S. (2006). \emph{The {Moral Economy} of {Class}: {Class} and
+{Attitudes} in {Comparative Perspective}}. Stanford University Press.
+
+\bibitem[\citeproctext]{ref-svallfors_political_2007}
+Svallfors, S. (Ed.). (2007). \emph{The {Political Sociology} of the
+{Welfare State}: {Institutions}, {Social Cleavages}, and {Orientations}}
+(1st ed.). Stanford University Press.
+\url{https://doi.org/10.2307/j.ctvr0qv0q}
+
+\bibitem[\citeproctext]{ref-torche_intergenerational_2014}
+Torche, F. (2014). Intergenerational {Mobility} and {Inequality}: {The
+Latin American Case}. \emph{Annual Review of Sociology}, \emph{40}(1),
+619--642. \url{https://doi.org/10.1146/annurev-soc-071811-145521}
+
+\bibitem[\citeproctext]{ref-vondemknesebeck_are_2016}
+Von Dem Knesebeck, O., Vonneilich, N., \& Kim, T. J. (2016). Are health
+care inequalities unfair? {A} study on public attitudes in 23 countries.
+\emph{International Journal for Equity in Health}, \emph{15}(1), 61.
+\url{https://doi.org/10.1186/s12939-016-0350-8}
+
+\bibitem[\citeproctext]{ref-wen_does_2021}
+Wen, F., \& Witteveen, D. (2021). Does perceived social mobility shape
+attitudes toward government and family educational investment?
+\emph{Social Science Research}, \emph{98}, 102579.
+\url{https://doi.org/10.1016/j.ssresearch.2021.102579}
+
+\bibitem[\citeproctext]{ref-wilson_role_2003}
+Wilson, C. (2003). The {Role} of a {Merit Principle} in {Distributive
+Justice}. \emph{The Journal of Ethics}, \emph{7}(3), 277--314.
+\url{https://doi.org/10.1023/A:1024667228488}
+
+\bibitem[\citeproctext]{ref-young_rise_1958}
+Young, M. (1958). \emph{The rise of the meritocracy}. New Brunswick,
+N.J., U.S.A: Transaction Publishers.
+
+\end{CSLReferences}
+
+
+
+\end{document}

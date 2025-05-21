@@ -1,0 +1,147 @@
+---
+title: "Preferences for market justice: the role of intergenerational social mobility and beliefs in meritocracy in Chile"
+format:
+  html: 
+    code-fold: true
+    html-math-method: katex
+    number-sections: true
+    code-link: true
+    title-block-banner: true
+    theme:
+      - cosmo
+      - pretty.scss
+  pdf: 
+    geometry: margin=2cm
+    template-partials: 
+      - title.tex
+    keep-tex: true
+    include-in-header:
+      text: |
+        \usepackage[noblocks]{authblk}
+        \renewcommand*{\Authsep}{, }
+        \renewcommand*{\Authand}{, }
+        \renewcommand*{\Authands}{, }
+        \renewcommand\Affilfont{\small}
+    number-sections: true
+editor: source
+bibliography: "../input/bib/tesis-magister.bib"
+csl: "../input/bib/apa6.csl"
+author:
+  - name: Andreas Laffert
+    orcid: 0000-0002-9008-2454
+    email: alaffertt@estudiante.uc.cl 
+    affiliations:
+      - ref: 1
+affiliations: 
+  - id: 1
+    name: Instituto de Sociología, Pontificia Universidad Católica de Chile
+citeproc: true
+link-citations: true
+colorlinks: true
+linestretch: 1.15       
+mainfont: Times New Roman
+fontsize: 12pt          
+fig-height: 4
+fig-width: 7.5
+---
+
+```{r setup, include=FALSE}
+ knitr::opts_chunk$set(echo=FALSE, warning = FALSE,message = FALSE, cache = TRUE,out.width = '85%',fig.pos= "H"
+                       # , fig.align = 'center'
+                       )
+ # knitr::opts_knit$set(base.url = "../") #relative path for .html output file
+ # knitr::opts_knit$set(root.dir = "../") #relative path for chunks within .rmd files
+ options(scipen=999)
+ options(kableExtra.auto_format = FALSE)
+ rm(list=ls())
+ options(knitr.kable.NA = '')
+ options(knitr.graphics.error = FALSE)
+ Sys.setlocale("LC_ALL", "ES_ES.UTF-8")
+```
+
+```{r}
+# This document was last modified at {{< modified >}}
+# 
+# and it was last rendered at {{< now >}}
+
+```
+
+# Introduction
+
+:::: {.justify}
+
+What makes market-driven inequalities appear legitimate in the eyes of the public? Since the early 1980s, many countries have experienced a widespread retreat from universal welfare programs and a shift toward the privatization and commodification of public goods, welfare policies, and social services [@gingrich_making_2011; @streeck_how_2016]. In Latin America, as elsewhere, neoliberal reforms reshaped welfare-state institutions by extending market logic into domains of social reproduction that were traditionally governed by the state [@arrizabalo_milagro_1995; @ferre_welfare_2023]. This transformation reduced the role of public provision and increased the presence of private actors in core social services [@harvey_breve_2015]. Echoing Polanyi's [-@polanyi_great_1975] insight that markets constitute a distinct moral order, the institutional diffusion of market rules has fostered a corresponding moral economy: a constellation of norms and values concerning fair allocation, embedded in institutions and shaping individual subjectivities [@mau_inequality_2015; @svallforsMoralEconomyClass2006a]. Within this framework, a growing body of research examines the extent to which, and the mechanisms by which, citizens consider it fair that access to services like health care, pensions, and education be governed by market-based criteria---a phenomenon known as *market justice preferences* [@busemeyer_skills_2014; @immergut_it_2020; @castillo_socialization_2024; @koos_moral_2019; @lindh_bringing_2023; @lindh_public_2015]. Understanding these preferences is crucial, as they contribute to legitimizing economic inequality by framing it as the fair result of individual responsibility and limited state intervention [@mau_inequality_2015].
+
+Existing literature shows that market justice preferences are shaped by both the economic and institutional context and individuals' positions within social stratification. Grounded in the notion that institutions influence individual attitudes [@jacksonActorsInstitutions2010], studies find that countries with stronger public provision or more expansive welfare states exhibit lower levels of market justice preferences [@busemeyer_skills_2014; @immergut_it_2020], while more privatized contexts show stronger support for market-based criteria [@castillo_socialization_2024; @lindh_public_2015]. In such contexts, market justice preferences tend to rise as individuals "ascend" the social structure, with those in more privileged positions in terms of class, education, and income holding stronger preferences for market-based solutions compared to those in more disadvantaged or at-risk positions [@lee_fairness_2023; @vondemknesebeck_are_2016; @immergut_it_2020; @castillo_socialization_2024; @otero_power_2024; @lindh_public_2015; @svallfors_political_2007].
+
+Market justice preferences are shaped not only by objective socioeconomic conditions but also by popular beliefs about inequality. Among these, meritocracy is a key normative principle underpinning market-based distributive preferences [@mau_inequality_2015]. It frames inequality as inevitable but justifiable through effort and talent [@young_rise_1958; @davis_principles_2001]. Studies show that individuals with stronger meritocratic beliefs tend to perceive less inequality and legitimize it by attributing economic differences to personal achievement [@mijs_paradox_2019; @wilson_role_2003; @batruch_belief_2023]. In highly unequal societies where access to services is largely governed by market logic, such beliefs play a critical role in normalizing inequality. Recent evidence from Chile shows that students who believe effort and talent are rewarded in their country express stronger preferences for market-based access to healthcare, pensions, and education [@castillo_socialization_2024].
+
+Although it is clear that one's social position influences market preferences, the question of how upward or downward mobility within the social structure affects these preferences remains unanswered. This question is far from trivial, especially in Latin America, where many have experienced various forms of mobility amid high economic inequality and deep welfare privatization [@lopez-roldan_comparative_2021; @torche_intergenerational_2014; @ferre_welfare_2023]. Social origins and destinations affect attitudes toward inequality in distinct ways [ @jaime-castillo_social_2019; @gugushvili_intergenerational_2016; @day_movin_2017; @gugushvili_subjective_2017; @wen_does_2021; @mijs_belief_2022], while movement between these positions exposes individuals to different experiences and mechanisms that shape their views on what is fair [@gugushvili_trends_2014; @mau_inequality_2015]. Building on this research, examining the effects of social mobility on market justice preferences can help to illuminate how inequalities in access to social services are justified among individuals who have experienced, or not, changes in their social standing, and what are the normative mechanisms that guide this justification [@mau_inequality_2015].
+
+Beyond their isolated effects, social mobility and meritocratic beliefs interact in complex ways to shape market justice preferences. A key mechanism proposed in the literature to explain how mobility influences distributive justice preferences is the psychological process of self-serving bias in causal attribution [@schmidt_experience_2011; @gugushvili_intergenerational_2016c]. This bias suggests that individuals attribute failures---such as downward mobility---to external factors, while crediting successes---such as upward mobility---to their own merit and effort [@miller_selfserving_1975]. Those who experience upward mobility tend to view their social position as earned, making them more likely to believe that individuals are responsible for their own success or failure. Research shows that upward mobility is associated with weaker preferences for redistribution [@schmidt_experience_2011; @gugushvili_intergenerational_2016c; @jaime-castillo_social_2019; @alesina_intergenerational_2018] and stronger legitimacy of income inequality [@shariff_income_2016]. In contrast, individuals who experience downward mobility tend to blame structural factors like inequality and are more supportive of redistribution while rejecting merit-based explanations [@gugushvili_trends_2014]. Taken together, I argue that meritocratic beliefs may reflect---or reinforce---this self-serving attribution mechanism by legitimizing one's social status as the outcome of personal merit, closely tied to attribution bias.
+
+Against this background, this article pursues two main objectives: first, to analyze the extent to which intergenerational social mobility influences market justice preferences regarding healthcare, pensions, and education; and second, to examine how meritocratic beliefs may moderate this relationship. Building on a theoretical framework that emphasizes how neoliberal transformations---particularly through the privatization and commodification of key areas of social reproduction---have profoundly reshaped processes of subject formation [@mau_inequality_2015], the central argument is that upward mobility increases support for market justice preferences, while downward mobility decreases it. Moreover, meritocratic beliefs are expected to moderate this relationship by reflecting a self-serving attribution bias, whereby individuals justify their social position in terms of personal merit.
+
+This study focuses on Chile, a particularly intriguing case for examining market justice preferences. Despite significant economic growth and poverty reduction, Chile has some of the highest levels of inequality in Latin America and among OECD countries [@chancel_world_2022; @flores_top_2020]. This inequality coexists with short-range upward mobility among lower-class segments moving into middle strata, though strong barriers remain to reaching higher positions [@torche_intergenerational_2014; @espinoza_estratificacion_2013]. What makes Chile especially salient is that much of this inequality is rooted in deep neoliberal reforms that institutionalized the privatization and commodification of key social sectors [@madariaga_three_2020]. Introduced during the dictatorship (1973--1989) and expanded in democracy, these reforms enabled the unprecedented emergence of markets in health, pensions, and education, with provision segmented by individuals' ability to pay and supported by public subsidies [@boccardo_30_2020]. In parallel---and despite waves of protest against inequality and commodification from 2006 to 2019 [@somma_no_2021]---Chilean subjectivities have been increasingly shaped by neoliberal discourses and market logics, influencing their attitudes toward inequality and welfare distribution [@arteagaaguirre_politicas_2015; @castillo_socialization_2024].
+
+In this context, the questions that guide this research are as follows:
+
+(1) To what extent does intergenerational social mobility influence market justice preferences regarding healthcare, pensions, and education in Chile?
+(2) How do meritocratic beliefs condition or moderate this relationship in the Chilean context?
+
+To address these questions, this study draws on large-scale, representative survey data collected in 2018 from the urban Chilean population aged 18 to 75 (n = 2,983). The next section outlines the theoretical framework linking market justice preferences, social mobility, and meritocratic beliefs, and proposes a set of hypotheses. This is followed by a description of the data, variables, and analytical strategy. The final sections present the empirical findings, offer an interpretation of the results, and conclude with a discussion of their implications.
+
+# Theoretical and empirical background
+
+## Market justice preferences
+
+## Social mobility
+
+## Meritocracy
+
+## The Chilean context
+
+# Data, variables and methods
+
+## Data
+
+This study draws on data from the Chilean Longitudinal Social Survey (ELSOC) of the Center for Social Conflict and Cohesion Studies (COES). The survey is an annual panel collected from 2016 to 2023, comprising two independent samples (original and refreshment), featuring permanent and rotating questionnaire modules. It evaluates how individuals think, feel, and behave regarding conflict and social cohesion in Chile. The sampling design is complex, probabilistic, clustered, multistage, and stratified by city size, targeting men and women aged 18--75 who habitually reside in private dwellings in urban areas spanning 40 cities (92 municipalities, 13 regions). This analysis focuses on 2023, the most recent wave, which includes 1,737 respondents in the original sample and 989 in the refreshment sample. Further details on sampling, attrition, and weighting can be found at https://coes.cl/encuesta-panel/, and the dataset is publicly available at https://dataverse.harvard.edu/dataverse/elsoc.
+
+## Variables
+
+*Outcome variables*
+
+**Market justice preferences**: The outcome variables in this study are market justice preferences. This construct is operationalized through three variables that address the degree of justification regarding whether access to social services in healthcare, pensions, and education should be income conditional. Specifically, the justification of inequality in healthcare is assessed by the question: "Is it fair in Chile that people with higher incomes can access better healthcare than people with lower incomes?" The same question is asked for pensions and education. In all cases, respondents indicate their level of agreement on a five-point Likert scale ranging from 1 ("strongly disagree") to 5 ("strongly agree"). Although these items theoretically reflect the same underlying concept of market justice [@castillo_socialization_2024; @lindh_public_2015], they are analyzed separately because healthcare, pensions, and education may prompt distinct response patterns [@lee_fairness_2023; @busemeyer_skills_2014; @immergut_it_2020].
+
+*Independent variables*
+
+**Social mobility**: Intergenerational social mobility is treated as an exposure indicating whether respondents occupy a different class position from their fathers. Following Breen and Ermisch's [-@breen_effects_2024] framework for estimating causal effects of mobility, the variable is constructed in two stages.
+
+1.  Class assignment. Using the International Socio-Economic Index of Occupational Status (ISEI) derived from three-digit ISCO-08 codes, both paternal (origin) and respondent (destination) occupations are grouped into three strata:
+
+    -   Upper (codes 100--299: managers, directors, professionals)
+    -   Middle (codes 300--499: skilled white‑collar workers)
+    -   Lower (codes 500 and above: manual, semi‑skilled, or unskilled workers)
+
+2.  Propensity-score estimation. To model mobility as a treatment---i.e., a transition from origin *j* to destination *k*---I estimate multinomial logit propensity scores using covariates that influence an individual's likelihood of moving between strata: (a) father's educational level, (b) presence of both parents at age 15, (c) nationality, (d) age, (e) sex, and (f) ethnicity.
+
+These propensity scores are subsequently employed to adjust for selection into mobility when assessing its effect on market justice preferences.
+
+**Meritocracy**: Meritocratic perception is operationalized through two components: one addressing effort and another focusing on talent [@young_rise_1958]. The item used to gauge effort is: "In Chile, people are rewarded for their efforts," while the item for talent is: "In Chile, people are rewarded for their intelligence and skills." In both cases, respondents indicate their level of agreement on a five-point Likert scale, ranging from 1 ("strongly disagree") to 5 ("strongly agree").
+
+*Controls*
+
+Sociodemographic and attitudinal variables are included to control for potential composition effects in the population. In terms of sociodemographic characteristics, I incorporate per capita household income quantile, educational level (1=Primary or below, 2=Secondary, 3=Technical, 4=University or above), age (in years), and sex (1=Male, 2=Female), which have been shown to significantly influence market justice preferences [@castillo_socialization_2024; @lindh_public_2015]. Regarding attitudinal variables, I include political identification (1=Left, 2=Center, 3=Right, 4=No identification) and subjective social status (ranging from 1 to 10) because they may confound the relationship between market justice preferences and social mobility and meritocracy.
+
+## Methods
+
+Following Breen and Ermisch's [-@breen_effects_2024] strategy for estimating the causal effect of social mobility on market justice preferences, I employ linear regression models with inverse-probability weights (IPW) for mobility conditional on class of origin. This approach allows estimation of the average causal effect of moving from an origin class *j* to a destination class *k* by comparing individuals who actually reach *k* with their counterfactual outcome had they instead moved to an alternative destination *k′* [@breen_effects_2024]. The resulting estimand is the average treatment effect on the treated (ATT).
+
+All the analyses will be conducted using R software.
+
+# References
+
+::: {#refs}
+:::
+
+::::

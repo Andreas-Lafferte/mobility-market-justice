@@ -5,11 +5,11 @@
 }
 
 body {
-  font-size: 1.2em; /* Puedes ajustar: 1em = normal, 1.2em = 20% más grande */
+  font-size: 1.40em; /* Puedes ajustar: 1em = normal, 1.2em = 20% más grande */
 }
 
 .navbar {
-  background-color: #6f42c1 !important; /* Morado */
+  background-color: #523870 !important; /* Morado */
 }
 
 .navbar a, .navbar-brand {
@@ -19,7 +19,7 @@ body {
 
 /* Para cambiar el fondo del banner de título */
 .quarto-title-block .quarto-title-banner {
-  background-color: #6f42c1;  /* morado */
+  background-color: #523870;  /* morado */
   color: white; /* color del texto */
 }
 
@@ -32,14 +32,8 @@ body {
 }
 
 
-
-$primary: #523870 !default;
-
 /*-- scss:rules --*/
 
-.sidebar-title {
-  color: #523870;
-}
 
 div.sidebar-item-container .active {
   font-weight: bold;
