@@ -26,8 +26,9 @@ rm(list = ls())
 
 # 2. Data -----------------------------------------------------------------
 
-load(url("https://dataverse.harvard.edu/api/access/datafile/10797987"))
+#load(url("https://dataverse.harvard.edu/api/access/datafile/10797987"))
 load(here("input/data/elsoc_ciuo08.RData"))
+load(here("input/data/ELSOC_Long_2016_2023_1.00.RData"))
 
 glimpse(elsoc_long_2016_2023)
 
@@ -66,13 +67,13 @@ elsoc_long_2016_2023 <- elsoc_long_2016_2023 %>%
   )
 
 elsoc_long_2016_2023$just_health <- sjlabelled::set_label(elsoc_long_2016_2023$just_health,
-                                        label = "Health distributive justice")
+                                                          label = "Health distributive justice")
 
 elsoc_long_2016_2023$just_pension <- sjlabelled::set_label(elsoc_long_2016_2023$just_pension,
-                                         label = "Pension distributive justice")
+                                                           label = "Pension distributive justice")
 
 elsoc_long_2016_2023$just_educ <- sjlabelled::set_label(elsoc_long_2016_2023$just_educ,
-                                      label = "Education distributive justice")
+                                                        label = "Education distributive justice")
 
 # Meritocracy
 
@@ -93,10 +94,10 @@ elsoc_long_2016_2023 <- elsoc_long_2016_2023 %>%
 
 
 elsoc_long_2016_2023$merit_effort <- sjlabelled::set_label(elsoc_long_2016_2023$merit_effort, 
-                                         label = "People are rewarded for their efforts")
+                                                           label = "People are rewarded for their efforts")
 
 elsoc_long_2016_2023$merit_talent <- sjlabelled::set_label(elsoc_long_2016_2023$merit_talent, 
-                                         label = "People are rewarded for their intelligence")
+                                                           label = "People are rewarded for their intelligence")
 
 
 # IPW variables
@@ -152,16 +153,15 @@ ola6 <- elsoc_long_2016_2023 %>%
 ola6 <- left_join(
   ola6, 
   df %>% 
-  select(idencuesta, cod_final, prob, isco08_orig,
-         isei08_orig, isei92_orig),
+    select(idencuesta, cod_final, prob, isco08_orig,
+           isei08_orig, isei92_orig),
   by = "idencuesta")
-  
+
 vars_invariantes <- elsoc_long_2016_2023 %>%
   arrange(idencuesta, ola) %>%  # ordena temporalmente
   group_by(idencuesta) %>%
   summarise(
     hogar_bip = first(na.omit(hogar_bip)),
-    madre_trab = first(na.omit(madre_trab)),
     educ_orig = first(na.omit(educ_orig)),
     educ_madre = first(na.omit(m27)),
     educ_padre = first(na.omit(m28)),
@@ -173,7 +173,7 @@ ola6 <- ola6 %>%
 
 ola6 <- ola6 %>% 
   select(idencuesta, isei92_orig,
-         hogar_bip.y, madre_trab.y, educ_orig.y, educ_madre, educ_padre)
+         hogar_bip.y, educ_orig.y, educ_madre, educ_padre)
 
 
 # intentar con 2018
@@ -181,10 +181,10 @@ ola6 <- ola6 %>%
 frq(elsoc_long_2016_2023$ola)
 
 db <- left_join(
-elsoc_long_2016_2023 %>% 
-  filter(ola == 3),
-ola6,
-by = "idencuesta")
+  elsoc_long_2016_2023 %>% 
+    filter(ola == 3),
+  ola6,
+  by = "idencuesta")
 
 db <- db %>% 
   mutate(isei08_ocupa = occupar::isco08toISEI08(ciuo08_m03))
@@ -194,7 +194,7 @@ db <- db %>%
 db <- db %>% 
   select(idencuesta, ola, ponderador_long_total, segmento, estrato,
          just_educ, just_pension, just_health, merit_effort, merit_talent,
-         nacionalidad, sexo, m0_edad, etnia, hogar_bip.y, madre_trab.y,
+         nacionalidad, sexo, m0_edad, etnia, hogar_bip.y,
          educ_madre, educ_padre, educ_orig.y, isei92_orig, isei08_ocupa)
 
 
@@ -220,7 +220,7 @@ db <- db %>%
                              isei92_orig >= 50 & isei92_orig < 60 ~ 5,
                              isei92_orig >= 60 & isei92_orig < 70 ~ 6,
                              isei92_orig >= 70 & isei92_orig < 81 ~ 7,
-                              NA ~ NA_real_))
+                             NA ~ NA_real_))
 
 db$terc_ocupa <- ntile(db$isei08_ocupa, n = 3)
 
@@ -269,11 +269,11 @@ db <- db %>%
 
 model_data1 <- db %>% 
   select(idencuesta, low_orig, m0_edad, sexo, nacionalidad, etnia, hogar_bip.y,
-         madre_trab.y, educ_orig.y) %>% na.omit()
+         educ_orig.y) %>% na.omit()
 
 m1 <- multinom(
   low_orig ~ m0_edad + factor(sexo) + factor(nacionalidad) + factor(etnia) + 
-  factor(hogar_bip.y) + factor(madre_trab.y) + educ_orig.y,
+    factor(hogar_bip.y) + educ_orig.y,
   data = model_data1
 )
 
@@ -301,12 +301,12 @@ model_data1 <- model_data1 %>%
 
 
 datos1 <- left_join(
-db %>% 
-  select(-low_orig),
-model_data1 %>% 
-  select(idencuesta, low_orig, plow_orig0, plow_orig1, plow_orig2,
-         wlow_orig1, wlow_orig2),
-by = "idencuesta")
+  db %>% 
+    select(-low_orig),
+  model_data1 %>% 
+    select(idencuesta, low_orig, plow_orig0, plow_orig1, plow_orig2,
+           wlow_orig1, wlow_orig2),
+  by = "idencuesta")
 
 datos1 <- datos1 %>% 
   mutate(
@@ -338,11 +338,11 @@ db <- db %>%
 
 model_data2 <- db %>% 
   select(idencuesta, m_orig, m0_edad, sexo, nacionalidad, etnia, hogar_bip.y,
-         madre_trab.y, educ_orig.y) %>% na.omit()
+         , educ_orig.y) %>% na.omit()
 
 m2 <- multinom(
   m_orig ~ m0_edad + factor(sexo) + factor(nacionalidad) + factor(etnia) + 
-    factor(hogar_bip.y) + factor(madre_trab.y) + educ_orig.y,
+    factor(hogar_bip.y)  + educ_orig.y,
   data = model_data2
 )
 
@@ -355,19 +355,19 @@ model_data2$pm_ml <- probs[, "1"]
 model_data2$pm_mh <- probs[, "2"]
 
 model_data2 <- model_data2 %>%
-    mutate(
-      wm_ml = case_when(
-        m_orig == 1 ~ (pm_mm + pm_ml) / pm_ml,
-        m_orig == 0 ~ (pm_mm + pm_ml) / pm_mm,
-        TRUE ~ NA_real_
-      ),
-      wm_mh = case_when(
-        m_orig == 2 ~ (pm_mm + pm_mh) / pm_mh,
-        m_orig == 0 ~ (pm_mm + pm_mh) / pm_mm,
-        TRUE ~ NA_real_
-      )
+  mutate(
+    wm_ml = case_when(
+      m_orig == 1 ~ (pm_mm + pm_ml) / pm_ml,
+      m_orig == 0 ~ (pm_mm + pm_ml) / pm_mm,
+      TRUE ~ NA_real_
+    ),
+    wm_mh = case_when(
+      m_orig == 2 ~ (pm_mm + pm_mh) / pm_mh,
+      m_orig == 0 ~ (pm_mm + pm_mh) / pm_mm,
+      TRUE ~ NA_real_
     )
-    
+  )
+
 datos2 <- left_join(
   db %>% 
     select(-low_orig, -m_orig),
@@ -404,11 +404,11 @@ db <- db %>%
 
 model_data3 <- db %>% 
   select(idencuesta, h_orig, m0_edad, sexo, nacionalidad, etnia, hogar_bip.y,
-         madre_trab.y, educ_orig.y) %>% na.omit()
+         , educ_orig.y) %>% na.omit()
 
 m3 <- multinom(
   h_orig ~ m0_edad + factor(sexo) + factor(nacionalidad) + factor(etnia) + 
-    factor(hogar_bip.y) + factor(madre_trab.y) + educ_orig.y,
+    factor(hogar_bip.y) + educ_orig.y,
   data = model_data3
 )
 
@@ -463,13 +463,15 @@ datos3 <- datos3 %>%
 
 ### Low to middle
 
+library(texreg)
+
 datos1 %>% 
   select(just_pension, moblm, wlow_orig1) %>% 
   na.omit() %>% 
   mutate(just_pension = as.numeric(just_pension)) %>% 
   lm(just_pension ~ moblm, 
      data = ., 
-     weights = wlow_orig1) %>% summary()
+     weights = wlow_orig1) %>% screenreg()
 
 ### Low to high
 
@@ -479,7 +481,7 @@ datos1 %>%
   mutate(just_pension = as.numeric(just_pension)) %>% 
   lm(just_pension ~ moblh, 
      data = ., 
-     weights = wlow_orig2) %>% summary()
+     weights = wlow_orig2) %>% screenreg()
 
 ### middle to high
 
@@ -489,7 +491,7 @@ datos2 %>%
   mutate(just_pension = as.numeric(just_pension)) %>% 
   lm(just_pension ~ mobmh, 
      data = ., 
-     weights = wm_mh) %>% summary()
+     weights = wm_mh) %>% screenreg()
 
 
 ### middle to low
@@ -500,7 +502,7 @@ datos2 %>%
   mutate(just_pension = as.numeric(just_pension)) %>% 
   lm(just_pension ~ mobml, 
      data = ., 
-     weights = wm_ml) %>% summary()
+     weights = wm_ml) %>% screenreg()
 
 ### High to middle
 
@@ -510,7 +512,7 @@ datos3 %>%
   mutate(just_pension = as.numeric(just_pension)) %>% 
   lm(just_pension ~ mobhm, 
      data = ., 
-     weights = wh_hm) %>% summary()
+     weights = wh_hm) %>% screenreg()
 
 
 ### High to low
@@ -521,7 +523,7 @@ datos3 %>%
   mutate(just_pension = as.numeric(just_pension)) %>% 
   lm(just_pension ~ mobhl, 
      data = ., 
-     weights = wh_hl) %>% summary()
+     weights = wh_hl) %>% screenreg()
 
 ### Salud
 
@@ -533,7 +535,7 @@ datos1 %>%
   mutate(just_health = as.numeric(just_health)) %>% 
   lm(just_health ~ moblm, 
      data = ., 
-     weights = wlow_orig1) %>% summary()
+     weights = wlow_orig1) %>% screenreg()
 
 ### Low to high
 
@@ -543,7 +545,7 @@ datos1 %>%
   mutate(just_health = as.numeric(just_health)) %>% 
   lm(just_health ~ moblh, 
      data = ., 
-     weights = wlow_orig2) %>% summary() # aqui * 
+     weights = wlow_orig2) %>% screenreg()  
 
 ### middle to high
 
@@ -553,7 +555,7 @@ datos2 %>%
   mutate(just_health = as.numeric(just_health)) %>% 
   lm(just_health ~ mobmh, 
      data = ., 
-     weights = wm_mh) %>% summary()
+     weights = wm_mh) %>% screenreg()
 
 
 ### middle to low
@@ -564,7 +566,7 @@ datos2 %>%
   mutate(just_health = as.numeric(just_health)) %>% 
   lm(just_health ~ mobml, 
      data = ., 
-     weights = wm_ml) %>% summary()
+     weights = wm_ml) %>% screenreg()
 
 ### High to middle
 
@@ -574,7 +576,7 @@ datos3 %>%
   mutate(just_health = as.numeric(just_health)) %>% 
   lm(just_health ~ mobhm, 
      data = ., 
-     weights = wh_hm) %>% summary()
+     weights = wh_hm) %>% screenreg()
 
 
 ### High to low
@@ -585,7 +587,7 @@ datos3 %>%
   mutate(just_health = as.numeric(just_health)) %>% 
   lm(just_health ~ mobhl, 
      data = ., 
-     weights = wh_hl) %>% summary()
+     weights = wh_hl) %>% screenreg()
 
 
 ### Educ
@@ -598,7 +600,7 @@ datos1 %>%
   mutate(just_educ = as.numeric(just_educ)) %>% 
   lm(just_educ ~ moblm, 
      data = ., 
-     weights = wlow_orig1) %>% summary()
+     weights = wlow_orig1) %>% screenreg()
 
 ### Low to high
 
@@ -608,7 +610,7 @@ datos1 %>%
   mutate(just_educ = as.numeric(just_educ)) %>% 
   lm(just_educ ~ moblh, 
      data = ., 
-     weights = wlow_orig2) %>% summary() 
+     weights = wlow_orig2) %>% screenreg() 
 
 ### middle to high
 
@@ -618,7 +620,7 @@ datos2 %>%
   mutate(just_educ = as.numeric(just_educ)) %>% 
   lm(just_educ ~ mobmh, 
      data = ., 
-     weights = wm_mh) %>% summary()
+     weights = wm_mh) %>% screenreg()
 
 
 ### middle to low
@@ -629,7 +631,7 @@ datos2 %>%
   mutate(just_educ = as.numeric(just_educ)) %>% 
   lm(just_educ ~ mobml, 
      data = ., 
-     weights = wm_ml) %>% summary()
+     weights = wm_ml) %>% screenreg()
 
 ### High to middle
 
@@ -639,7 +641,7 @@ datos3 %>%
   mutate(just_educ = as.numeric(just_educ)) %>% 
   lm(just_educ ~ mobhm, 
      data = ., 
-     weights = wh_hm) %>% summary()
+     weights = wh_hm) %>% screenreg()
 
 
 ### High to low
@@ -650,10 +652,8 @@ datos3 %>%
   mutate(just_educ = as.numeric(just_educ)) %>% 
   lm(just_educ ~ mobhl, 
      data = ., 
-     weights = wh_hl) %>% summary()
+     weights = wh_hl) %>% screenreg()
 
 # SOLO UN RESULTADO SIGNIFICATIVO
 
 # intentar con issp 2019
-
-

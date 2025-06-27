@@ -1,0 +1,79 @@
+---
+title: "Preferences for mercantilization: the role of intergenerational social mobility and beliefs in meritocracy in Chile"
+format:
+  html: 
+    code-fold: true
+    html-math-method: katex
+    number-sections: true
+    code-link: true
+    title-block-banner: true
+    theme:
+      - cosmo
+      - pretty.scss
+  pdf: 
+    geometry: margin=2cm
+    template-partials: 
+      - title.tex
+    keep-tex: true
+    include-in-header:
+      text: |
+        \usepackage[noblocks]{authblk}
+        \renewcommand*{\Authsep}{, }
+        \renewcommand*{\Authand}{, }
+        \renewcommand*{\Authands}{, }
+        \renewcommand\Affilfont{\small}
+    number-sections: true
+editor: source
+bibliography: "../input/bib/tesis-magister.bib"
+csl: "../input/bib/apa6.csl"
+author:
+  - name: Andreas Laffert Tamayo
+    orcid: 0000-0002-9008-2454
+    email: alaffertt@estudiante.uc.cl 
+    affiliations:
+      - ref: 1
+affiliations: 
+  - id: 1
+    name: Instituto de Sociología, Pontificia Universidad Católica de Chile
+citeproc: true
+link-citations: true
+colorlinks: true
+linestretch: 1.15       
+mainfont: Times New Roman
+fontsize: 12pt          
+fig-height: 4
+fig-width: 7.5
+---
+
+```{r setup, include=FALSE}
+ knitr::opts_chunk$set(echo=FALSE, warning = FALSE,message = FALSE, cache = TRUE,out.width = '85%',fig.pos= "H"
+                       # , fig.align = 'center'
+                       )
+ # knitr::opts_knit$set(base.url = "../") #relative path for .html output file
+ # knitr::opts_knit$set(root.dir = "../") #relative path for chunks within .rmd files
+ options(scipen=999)
+ options(kableExtra.auto_format = FALSE)
+ rm(list=ls())
+ options(knitr.kable.NA = '')
+ options(knitr.graphics.error = FALSE)
+ Sys.setlocale("LC_ALL", "ES_ES.UTF-8")
+```
+
+```{r}
+# This document was last modified at {{< modified >}}
+# 
+# and it was last rendered at {{< now >}}
+
+```
+
+
+
+This article examines how intergenerational social mobility and meritocratic beliefs influence public support for market-based allocation of social services— a phenomenon known as market justice preferences. While previous studies have linked individuals' class position and beliefs about merit to distributive attitudes, less is known about how social mobility—especially in unequal and privatized welfare contexts—shapes support for inequality in access to healthcare, education, and pensions. This study addresses this gap by analyzing whether upward or downward mobility affects market justice preferences, and how this relationship is moderated by meritocratic beliefs.
+
+The analysis focuses on Chile, a paradigmatic case of neoliberal transformation. Despite sustained economic growth and poverty reduction, Chile remains one of the most unequal countries in Latin America and the OECD. Since the 1980s, its welfare system has undergone deep privatization and commodification, generating a segmented structure of service provision and moral discourses that justify inequality. In this context, meritocratic beliefs and mobility trajectories may interact to shape how individuals evaluate fairness in access to core welfare domains.
+
+Using data from the 2023 wave of the Chilean Longitudinal Social Survey (ELSOC), the study analyzes responses from a nationally representative urban sample (n = 2,726). Market justice preferences are measured through agreement with income-based inequalities in access to healthcare, pensions, and education. Intergenerational mobility is operationalized by comparing respondents’ and their fathers’ occupational status using ISEI-based class strata (upper, middle, lower). To estimate the causal effect of mobility, inverse-probability weighted linear regressions are implemented following Breen and Ermisch’s framework, allowing for estimation of average treatment effects on the treated (ATT). Meritocratic beliefs are measured via perceived rewards for effort and talent.
+
+Results show that upward mobility is associated with stronger market justice preferences, while downward mobility reduces support for market-based access. These effects are consistent across service domains and robust to controls for income, education, age, gender, political identification, and subjective social status. Moreover, the strength of meritocratic beliefs moderates this relationship: upwardly mobile individuals who believe effort and talent are rewarded in Chile express the highest support for income-based inequalities, consistent with a self-serving attribution mechanism. In contrast, downwardly mobile individuals who reject meritocratic beliefs are more critical of inequality in access.
+
+The findings contribute to the literature by highlighting the dynamic and interactive nature of distributive preferences. Rather than being solely determined by fixed class position, attitudes toward market justice are shaped by experiences of mobility and the normative frameworks individuals use to interpret them. In contexts of high inequality and welfare commodification, such as Chile, upward mobility may legitimize neoliberal moral orders by reinforcing beliefs in individual responsibility and merit-based allocation. These insights underscore the importance of incorporating mobility trajectories and belief systems into the analysis of welfare attitudes and inequality legitimation.

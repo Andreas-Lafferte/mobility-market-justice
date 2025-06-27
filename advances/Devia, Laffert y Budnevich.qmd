@@ -1,0 +1,267 @@
+---
+title: "Ejercicio 3"
+format:
+  pdf: 
+    geometry: margin=2cm
+    keep-tex: true
+    number-sections: true
+editor: source
+author:
+  - name: Ignacia Devia
+    affiliations:
+      - ref: 1  
+  - name: Sebastían Budnevich
+  - name: Andreas Laffert Tamayo
+affiliations: 
+  - id: 1
+    name: Instituto de Sociología, Pontificia Universidad Católica de Chile
+citeproc: true
+link-citations: true
+colorlinks: true
+linestretch: 1.15       
+mainfont: Times New Roman
+fontsize: 12pt          
+fig-height: 4
+fig-width: 7.5
+---
+
+# Pregunta 1
+
+Teniendo en cuenta los principales elementos del diseño de conjoint experiments, describa el diseño del experimento para el país que está analizando. Ponga particular atención en explicar el diseño del atributo "País de Origen".
+
+Teniendo en cuenta los principales elementos del diseño de experimentos tipo conjoint, el estudio de Wimmer et al. (2024) implementa un diseño factorial completamente aleatorizado con el objetivo de identificar cómo la rivalidad geopolítica influye en las actitudes ciudadanas hacia inmigrantes. En este tipo de diseños, los participantes deben elegir entre pares de candidatos a la residencia permanente cuyas características varían en múltiples dimensiones. Este enfoque permite estimar de manera causal los efectos de distintos atributos simultáneamente, al comparar sistemáticamente perfiles con combinaciones contrastantes de atributos.
+
+En términos metodológicos, los experimentos tipo conjoint permiten estimar las preferencias de los encuestados a partir de sus evaluaciones globales de perfiles hipotéticos que difieren en múltiples atributos, los cuales suelen presentarse en formato tabular (Bansak et al., 2021). La fortaleza del diseño radica en que habilita la identificación de los criterios específicos que las personas utilizan al tomar decisiones complejas —en este caso, sobre la admisión de inmigrantes— así como la importancia relativa que asignan a cada uno de esos criterios. Por ejemplo, si un perfil incluye información sobre la ocupación, edad, idioma o país de origen del solicitante, el análisis factorial permite identificar cuál de estos componentes tiene mayor peso en la decisión de los encuestados y si dichas prioridades son compartidas de forma generalizada dentro de la población analizada. Esta capacidad para descomponer decisiones multidimensionales en sus elementos causales diferenciados constituye uno de los principales aportes metodológicos del diseño conjoint (Hainmueller, Hopkins y Yamamoto, 2014).
+
+En el caso de Brasil, los participantes fueron invitados a desempeñar el rol de oficiales de inmigración, debiendo seleccionar entre pares de perfiles generados aleatoriamente. Cada perfil incluía atributos como edad, ocupación, dominio del idioma, años de residencia en el país, género y, centralmente para este análisis, país de origen (Wimmer et al., 2024). El experimento se administró de manera online mediante la plataforma Lucid Marketplace, utilizando un muestreo por cuotas basado en edad, género y educación.
+
+El atributo “País de Origen” fue diseñado mediante una estructura 2x2: se seleccionaron dos países cultural o racialmente similares al país encuestado y dos cultural o racialmente distintos; dentro de cada par, uno representaba a un país rival y otro a un país aliado o no rival. Para Brasil, los países incluidos fueron China (rival, distinto), Rusia (rival, similar), Japón (no rival, distinto) y Ucrania (no rival, similar) (Wimmer et al., 2024, suplemento). Esta estructura permite analizar si las preferencias de los encuestados se ven más afectadas por la percepción de rivalidad geopolítica que por la cercanía cultural o racial.
+
+No obstante, los autores advierten que, en algunos casos, se realizaron elecciones subóptimas respecto a los países de origen incluidos. Dado que el conjunto de países encuestados fue definido por las necesidades de un proyecto más amplio y no por criterios específicos del presente experimento, en ciertos contextos —como el de Brasil— fue necesario utilizar países cuya relación con el país encuestado podía ser neutral o ambigua. En palabras de los autores, “we had to make sub-optimal choices due to the fact that survey countries were not primarily selected with our experiment in mind” (Wimmer et al., 2024, p. 6). Asimismo, reconocen que algunas clasificaciones de países como rivales o aliados se realizaron con base en definiciones generales y no en un consenso unívoco, siguiendo criterios como los propuestos por Thompson (2001), que entiende la rivalidad como una relación entre Estados que se perciben mutuamente como competidores y potenciales amenazas militares.
+
+A pesar de estas limitaciones, el diseño fue respaldado por una encuesta de validación posterior, que confirmó que los brasileños perciben a China y Rusia como más hostiles, y a Japón y Ucrania como más amistosos, y que también distinguen entre estos países en términos de distancia cultural y racial. Esta validación da soporte empírico a las decisiones de diseño adoptadas, aunque no elimina del todo la ambigüedad inherente a la categorización de las relaciones internacionales desde una perspectiva pública (Wimmer et al., 2024, Suplemento D).
+
+En cuanto a la estimación de efectos, el estudio emplea principalmente dos estimandos: el Average Marginal Component Effect (AMCE) y los Marginal Means (MM). El AMCE estima el efecto promedio de un valor de atributo (por ejemplo, “origen en Rusia”) respecto a una categoría base, promediando sobre los demás atributos. Los MM, por su parte, indican la probabilidad promedio de que un perfil con cierto valor de atributo sea seleccionado. Los autores optan por presentar los resultados en términos de MM, dado que permiten comparaciones más directas entre países y subgrupos sin depender de una categoría de referencia arbitraria (Leeper, Hobolt y Tilley, 2020).
+
+# Pregunta 2
+
+En base a la clase y su lectura de Leeper et al. (2020), haga una comparación entre "average marginal component effects" (AMCEs) y "marginal means". Discuta por qué Wimmer et al. (2025) deciden usar "marginal means".
+
+Leeper et al. (2020) sugieren que para caracterizar descriptivamente las diferencias en el nivel de preferencia entre subgrupos se priorice la estimación de medias marginales condicionales y sus diferencias, en vez de AMCE´s. En general, los AMCE proporcionan información sobre variación descriptiva de las preferencias dentro de grupos y entre características y los AMCE condicionales estiman el tamaño de los efectos causales de las características dentro de los grupos. En esta misma línea, de acuerdo con Leeper et al. (2020), el AMCE tiene una interpretación causal sobre los tamaños de efectos de los atributos , cuando existe aleatorización en las características de los perfiles, en el contexto de experimentos conjuntos. De este modo, permite comprender el efecto causal de una característica/atributo dado en el apoyo general a un objeto multidimensional, promediando sobre la distribución de todas las otras características del objeto incluidas en el diseño. De forma más sencilla, los AMCEs estiman el efecto de cambiar un nivel de atributo comparado con un nivel de referencia. 
+
+Sin embargo, los autores advierten que su uso también se ha empleado con fines descriptivos, es decir, para examinar las preferencias de subgrupos hacia perfiles con determinadas características. Si bien puede reflejar bien la preferencias con diferencias en los AMCE de subgrupos, esto supone que la categoría de referencia experimental es similar (cumple requisito de igualdad), puesto que de lo contrario,la diferencia de AMCE´s puede generar una representación “engañosa” de los patrones subyacentes de preferencias. En concreto, una categoría de referencia arbitraria podría afectar el tamaño, la dirección y la significancia estadística de las diferencias en los AMCE,cuya consecuencia es que preferencias similares parezcan distintas y viceversa.  Por lo tanto, los autores sugieren que no se utilice AMCE´s condicional ni sus diferencias para informar acerca de la similitud o diferencia subyacentes en la preferencias entre subgrupos de una muestra, pues refiere a cantidades relativas expresada contra una línea de base. Incluso señalan que en la práctica investigativa se intenta mostrar diferencias en la favorabilidad de dos o más subgrupos hacia una característica conjunta mediante diferencias de AMCE, cuando en realidad no refleja aquello.
+
+Mientras tanto la media marginal (MM) describe el nivel de “favorabilidad” hacia los perfiles para todos los niveles de un atributo/característica en particular, ignorando todas las demás. Es decir, la media marginal es un valor promedio para cada nivel, siendo un valor absoluto de preferencia. Es por esta razón que Wimmer et al. (2025) prefieres las medias marginales (MM) a los efectos de componentes marginales promedio (AMCE), ya que las medias marginales  no dependen de la elección de una categoría de referencia, además de permitir comparar directamente preferencias entre subgrupos de encuestados así como la magnitud entre los países de origen de los inmigrantes y otros atributos. Entre las ventajas de las medias marginales es su fácil interpretación en tanto se hace como probabilidades.Igualmente, la diferencia entre medias marginales de dos grupos es siempre fija en los datos, mientras que en el AMCE está supeditado al centramiento en un punto en los datos (categoría de referencia).
+
+# Pregunta 3
+
+Para el país que le ha sido asignado:
+
+a) Reproduzca los análisis de las Figuras 1 y 2 en Wimmer et al. (2025). Puede presentar sus resultados en una tabla de calidad o en figuras.
+
+```{r, echo=FALSE, message=FALSE}
+library(cregg)
+library(ggplot2)
+library(dplyr)
+load("C:/Users/cjara/OneDrive - Universidad Católica de Chile/Magíster/Tercer Semestre/Experimentos/Ejercicio 3/brazil.RData")
+```
+
+```{r, message=FALSE, warning=FALSE}
+mm <- cregg::cj(
+  data_pais,
+  selected ~ age + gender + residence + occ + lang + ctry.rival + ctry.race,
+  id       = "ResponseId",
+  estimate = "mm",
+  family   = stats::binomial()
+)
+```
+
+```{r, echo=FALSE, message=FALSE, warning=FALSE, fig.width=10, fig.height=8, dpi=300}
+# Definir el orden exacto como aparece en la figura (de arriba hacia abajo)
+level_order <- c(
+  "Age: 21",
+  "Age: 38", 
+  "Age: 62",
+  "Gender: Female",
+  "Gender: Male",
+  "Residence: 15 years",
+  "Residence: 10 years",
+  "Residence: 5 years", 
+  "Language: Fluent",
+  "Language: Limited",
+  "Language: None",
+  "Occupation: Doctor",
+  "Occupation: Teacher", 
+  "Occupation: Accountant",
+  "Occupation: Farmer",
+  "Occupation: Cleaner",
+  "Occupation: Unemployed",
+  "Country of origin: Different majority race/culture",
+  "Country of origin: Similar majority race/culture",
+  "Country of origin: Rival",
+  "Country of origin: Non-rival"
+)
+
+mm_plot <- mm %>%
+  mutate(level = factor(level, levels = rev(level_order)))
+
+ggplot(mm_plot, aes(x = estimate, y = level)) +
+  # Puntos
+  geom_point(size = 2, color = "black") +
+  
+  # Intervalos de confianza
+  geom_errorbarh(aes(xmin = lower, xmax = upper), 
+                 height = 0.2, 
+                 color = "black",
+                 size = 0.5) +
+  
+  # Línea vertical en 0.5
+  geom_vline(xintercept = 0.5, 
+             linetype = "dashed", 
+             color = "gray50",
+             size = 0.5) +
+  
+  # Escalas y límites
+  scale_x_continuous(
+    name = "Marginal Mean",
+    breaks = seq(0.4, 0.6, 0.1),
+    labels = c("0.4", "0.5", "0.6")
+  ) +
+  
+  # Eliminar etiqueta del eje y
+  scale_y_discrete(name = "") +
+  
+  # Tema y apariencia
+  theme_minimal() +
+  theme(
+    # Título
+    plot.title = element_text(hjust = 0.5, size = 12, face = "bold"),
+    # Ejes
+    axis.text.x = element_text(size = 10),
+    axis.text.y = element_text(size = 9, hjust = 1),
+    axis.title.x = element_text(size = 10),
+    
+    # Panel
+    panel.grid.major.y = element_blank(),
+    panel.grid.minor = element_blank(),
+    panel.grid.major.x = element_line(color = "gray90", size = 0.3),
+    
+    # Bordes
+    panel.border = element_rect(color = "black", fill = NA, size = 0.5),
+    
+    # Márgenes
+    plot.margin = margin(20, 20, 40, 20),
+    
+    # Caption
+    plot.caption = element_text(size = 8, hjust = 0, margin = margin(t = 10))
+  ) +
+  
+  # Títulos
+  labs(
+    title = "FIGURE 1. Effects of Rivalry and Perceived Racial/Cultural Similarity on the Probability of Being\nGranted Permanent Resident Status"
+  )
+
+```
+
+```{r, message=FALSE, warning=FALSE}
+data_pais$interaction <- interaction(data_pais$ctry.rival, data_pais$ctry.race, sep = "\n")
+mm2 <- cregg::cj(
+  data_pais,
+  selected ~ age + gender + residence + occ + lang + interaction,
+  id = "ResponseId",
+  estimate = "mm",
+  family = stats::binomial()
+)
+```
+
+```{r, echo=FALSE, message=FALSE, fig.width=10, fig.height=8, dpi=300}
+# Filtrar solo los resultados de interacción
+interaction_results <- mm2[mm2$feature == "interaction", ]
+
+# Crear etiquetas más claras para el gráfico
+interaction_results$clean_labels <- c(
+  "Country of origin:\nSimilar race/culture + Non-rival",
+    "Country of origin:\nSimilar race/culture + Rival",
+    "Country of origin:\nDifferent race/culture + Non-rival",
+    "Country of origin:\nDifferent race/culture + Rival"
+)
+
+# Reordenar para que coincida con el orden del gráfico original
+interaction_results$clean_labels <- factor(interaction_results$clean_labels, 
+  levels = c(
+    "Country of origin:\nSimilar race/culture + Non-rival",
+    "Country of origin:\nSimilar race/culture + Rival",
+    "Country of origin:\nDifferent race/culture + Non-rival",
+    "Country of origin:\nDifferent race/culture + Rival"
+  ))
+
+ggplot(interaction_results, aes(x = estimate, y = clean_labels)) +
+  geom_point(size = 2, color = "black") +
+  geom_errorbarh(aes(xmin = lower, xmax = upper), 
+                 height = 0.2, 
+                 color = "black",
+                 size = 0.5) +
+  geom_vline(xintercept = 0.5, 
+             linetype = "dashed", 
+             color = "gray50",
+             size = 0.5) +
+  scale_x_continuous(
+    name = "Marginal Mean",
+    breaks = seq(0.45, 0.55, 0.05),
+    labels = c("0.45", "0.5", "0.55")
+  ) +
+  scale_y_discrete(name = "") +
+  theme_minimal() +
+  theme(
+    # Título
+    plot.title = element_text(hjust = 0.5, size = 12, face = "bold"),
+    # Ejes
+    axis.text.x = element_text(size = 10),
+    axis.text.y = element_text(size = 9, hjust = 1),
+    axis.title.x = element_text(size = 10),
+    
+    # Panel
+    panel.grid.major.y = element_blank(),
+    panel.grid.minor = element_blank(),
+    panel.grid.major.x = element_line(color = "gray90", size = 0.3),
+    
+    # Bordes
+    panel.border = element_rect(color = "black", fill = NA, size = 0.5),
+    
+    # Márgenes
+    plot.margin = margin(20, 20, 40, 20),
+    
+    # Caption
+    plot.caption = element_text(size = 8, hjust = 0, margin = margin(t = 10))
+  ) +
+  
+  # Títulos
+  labs(
+    title = "FIGURE 2. Interaction Effects of Rivalry Status and Perceived Racial/Cultural Similarity on the\nProbability of Being Granted Permanent Residence Status"
+  )
+```
+
+b) Respecto de la hipótesis 1 de Wimmer et al. (2025), interprete sus resultados y señale si hay evidencia consistente con esta hipótesis.
+
+La Hipótesis 1 de Wimmer et al. (2025) plantea que, al evaluar la candidatura de un inmigrante para residencia permanente, los encuestados serán menos propensos a elegir perfiles cuyo país de origen sea considerado rival y más propensos a elegir aquellos provenientes de países aliados (non-rivals). En la Figura 1 se observa que las MM para los países rivales (China y Rusia) rondan en promedio 0,46, mientras que las MM para los non-rivals (Japón y Ucrania) se acercan a 0,53. Además, los IC 95 % de China y Rusia (niveles rivales) están claramente por debajo de los IC 95 % de Japón y Ucrania (niveles non-rival). Esto implica que, aun promediando sobre edad, género, residencia, ocupación e idioma, la probabilidad de elegir un perfil rival es significativamente menor. Por lo tanto, en el caso de Brasil se cumple la Hipótesis 1 formulada por los autores.
+
+Para explorar cómo interviene la distancia racial/cultural `ctry.race`, la Figura 2 (que corresponde a la Hipótesis 2) muestra que, al comparar **rival + similar race** (Rusia) con **rival + different race** (China), Rusia presenta una MM aún más baja. Esto confirma que la penalización por ser rival se intensifica cuando el país es percibido como racialmente similar. En conclusión, los resultados para Brasil coinciden con los hallazgos de los autores en toda la muestra y respaldan la Hipótesis 1.
+
+
+# Referencias
+
+Bansak, K., Hainmueller, J., Hopkins, D. J., & Yamamoto, T. (2019). “Conjoint Survey Experiments” For Druckman, James N., and Donald P. Green, eds. Cambridge Handbook of Advances in Experimental Political Science, New York: Cambridge University Press.’.
+
+Hainmueller, J., Hopkins, D. J., & Yamamoto, T. (2014). Causal inference in conjoint analysis: Understanding multidimensional choices via stated preference experiments. Political analysis, 22(1), 1-30.
+
+Leeper, T. J., Hobolt, S. B., & Tilley, J. (2020). Measuring subgroup preferences in conjoint experiments. Political Analysis, 28(2), 207-221.
+
+Wimmer, A., Bonikowski, B., Crabtree, C., Fu, Z., Golder, M., & Tsutsui, K. (2025). Geo-political rivalry and anti-immigrant sentiment: A conjoint experiment in 22 countries. American Political Science Review, 119(2), 1018-1035.
+
+\pagebreak
+
+# Código de R
+
+```{r ref.label=knitr::all_labels(), echo=TRUE, eval=FALSE}
+
+```
