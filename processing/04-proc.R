@@ -400,10 +400,11 @@ library(estimatr)
 ### downward
 
 datos1 %>% 
-  select(idencuesta, ola, just_pension, downward_mob, wdownward_mob1) %>% 
+  select(idencuesta, ola, just_pension, downward_mob, wdownward_mob1, merit_effort) %>% 
   na.omit() %>% 
-  mutate(just_pension = as.numeric(just_pension)) %>% 
-  lm_robust(just_pension ~ downward_mob,
+  mutate(just_pension = as.numeric(just_pension),
+         merit_effort = as.numeric(merit_effort)) %>% 
+  lm_robust(just_pension ~ downward_mob*merit_effort,
             weights = wdownward_mob1,
             se_type = "CR2",
             clusters = idencuesta,
@@ -412,10 +413,11 @@ datos1 %>%
 ### inmobile
 
 datos2 %>% 
-  select(idencuesta, ola, just_pension, inmobile_mob, winmobile1) %>% 
+  select(idencuesta, ola, just_pension, inmobile_mob, winmobile1, merit_effort) %>% 
   na.omit() %>% 
-  mutate(just_pension = as.numeric(just_pension)) %>% 
-  lm_robust(just_pension ~ inmobile_mob,
+  mutate(just_pension = as.numeric(just_pension),
+         merit_effort = as.numeric(merit_effort)) %>% 
+  lm_robust(just_pension ~ inmobile_mob*merit_effort,
             weights = winmobile1,
             se_type = "CR2",
             clusters = idencuesta,
@@ -424,10 +426,11 @@ datos2 %>%
 ### upward
 
 datos3 %>% 
-  select(idencuesta, ola, just_pension, upward_mob, wpupward1) %>% 
+  select(idencuesta, ola, just_pension, upward_mob, wpupward1, merit_effort) %>% 
   na.omit() %>% 
-  mutate(just_pension = as.numeric(just_pension)) %>% 
-  lm_robust(just_pension ~ upward_mob,
+  mutate(just_pension = as.numeric(just_pension),
+         merit_effort = as.numeric(merit_effort)) %>% 
+  lm_robust(just_pension ~ upward_mob*merit_effort,
             weights = wpupward1,
             se_type = "CR2",
             clusters = idencuesta,
@@ -439,10 +442,11 @@ datos3 %>%
 ### downward
 
 datos1 %>% 
-  select(idencuesta, ola, just_health, downward_mob, wdownward_mob1) %>% 
+  select(idencuesta, ola, just_health, downward_mob, wdownward_mob1, merit_effort) %>% 
   na.omit() %>% 
-  mutate(just_health = as.numeric(just_health)) %>% 
-  lm_robust(just_health ~ downward_mob,
+  mutate(just_health = as.numeric(just_health),
+         merit_effort = as.numeric(merit_effort)) %>% 
+  lm_robust(just_health ~ downward_mob*merit_effort,
             weights = wdownward_mob1,
             se_type = "CR2",
             clusters = idencuesta,
@@ -451,10 +455,11 @@ datos1 %>%
 ### inmobile
 
 datos2 %>% 
-  select(idencuesta, ola, just_health, inmobile_mob, winmobile1) %>% 
+  select(idencuesta, ola, just_health, inmobile_mob, winmobile1, merit_effort) %>% 
   na.omit() %>% 
-  mutate(just_health = as.numeric(just_health)) %>% 
-  lm_robust(just_health ~ inmobile_mob,
+  mutate(just_health = as.numeric(just_health),
+         merit_effort = as.numeric(merit_effort))  %>% 
+  lm_robust(just_health ~ inmobile_mob*merit_effort,
             weights = winmobile1,
             se_type = "CR2",
             clusters = idencuesta,
@@ -463,10 +468,11 @@ datos2 %>%
 ### upward
 
 datos3 %>% 
-  select(idencuesta, ola, just_health, upward_mob, wpupward1) %>% 
+  select(idencuesta, ola, just_health, upward_mob, wpupward1, merit_effort) %>% 
   na.omit() %>% 
-  mutate(just_health = as.numeric(just_health)) %>% 
-  lm_robust(just_health ~ upward_mob,
+  mutate(just_health = as.numeric(just_health),
+         merit_effort = as.numeric(merit_effort))  %>% 
+  lm_robust(just_health ~ upward_mob*merit_effort,
             weights = wpupward1,
             se_type = "CR2",
             clusters = idencuesta,
@@ -478,10 +484,11 @@ datos3 %>%
 ### downward
 
 datos1 %>% 
-  select(idencuesta, ola, just_educ, downward_mob, wdownward_mob1) %>% 
+  select(idencuesta, ola, just_educ, downward_mob, wdownward_mob1, merit_effort) %>% 
   na.omit() %>% 
-  mutate(just_educ = as.numeric(just_educ)) %>% 
-  lm_robust(just_educ ~ downward_mob,
+  mutate(just_educ = as.numeric(just_educ),
+         merit_effort = as.numeric(merit_effort)) %>% 
+  lm_robust(just_educ ~ downward_mob*merit_effort,
             weights = wdownward_mob1,
             se_type = "CR2",
             clusters = idencuesta,
@@ -490,10 +497,11 @@ datos1 %>%
 ### inmobile
 
 datos2 %>% 
-  select(idencuesta, ola, just_educ, inmobile_mob, winmobile1) %>% 
+  select(idencuesta, ola, just_educ, inmobile_mob, winmobile1, merit_effort) %>% 
   na.omit() %>% 
-  mutate(just_educ = as.numeric(just_educ)) %>% 
-  lm_robust(just_educ ~ inmobile_mob,
+  mutate(just_educ = as.numeric(just_educ),
+         merit_effort = as.numeric(merit_effort)) %>% 
+  lm_robust(just_educ ~ inmobile_mob*merit_effort,
             weights = winmobile1,
             se_type = "CR2",
             clusters = idencuesta,
@@ -502,10 +510,11 @@ datos2 %>%
 ### upward
 
 datos3 %>% 
-  select(idencuesta, ola, just_educ, upward_mob, wpupward1) %>% 
+  select(idencuesta, ola, just_educ, upward_mob, wpupward1, merit_effort) %>% 
   na.omit() %>% 
-  mutate(just_educ = as.numeric(just_educ)) %>% 
-  lm_robust(just_educ ~ upward_mob,
+  mutate(just_educ = as.numeric(just_educ),
+         merit_effort = as.numeric(merit_effort)) %>% 
+  lm_robust(just_educ ~ upward_mob*merit_effort,
             weights = wpupward1,
             se_type = "CR2",
             clusters = idencuesta,

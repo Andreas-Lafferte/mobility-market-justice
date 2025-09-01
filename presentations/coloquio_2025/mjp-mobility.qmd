@@ -1,0 +1,218 @@
+---
+bibliography: "input/bib/tesis-magister.bib"
+csl: "input/bib/apa6.csl"
+lang: es
+knitr:
+  opts_chunk:
+    collapse: true
+    comment: "#>"
+    R.options:
+      
+      knitr.graphics.auto_pdf: true
+format:
+  revealjs:
+    #logo: images/edumer.png
+    slide-number: true
+    theme: "libs/edumer.scss"
+    auto-stretch: false
+    title-slide-attributes:
+      visibility: false
+    transition: fade
+    transition-speed: slow
+# data-background-image: images/cover.jpg
+# data-background-size: cover
+    auto-play-media: true
+    mathjax: "default"
+  pdf:
+    format: beamer 
+    keep-tex: true  # Debug LaTeX output if needed
+editor_options: 
+  chunk_output_type: console
+---
+
+```{r}
+#| label: setup
+#| include: false
+library(knitr)
+knitr::opts_chunk$set(echo = F,
+                      warning = F,
+                      error = F, 
+                      message = F) 
+```
+
+```{r}
+#| label: packages
+#| include: false
+
+if (! require("pacman")) install.packages("pacman")
+
+#pacman::p_load(tidyverse, 
+#               sjmisc, 
+#               sjPlot, 
+##               sjlabelled, 
+#               here,
+#               kableExtra,
+#               ggdist,
+#               summarytools)
+
+options(scipen=999)
+rm(list = ls())
+```
+
+
+```{r}
+#| label: data
+#| include: false
+
+
+
+```
+
+
+
+::: columns
+
+
+
+
+::: {.column width="20%"}
+</br>
+
+![](images/logo_isuc.png)
+
+</br></br>
+
+![](images/jusmer_trans.png)
+
+
+
+:::
+
+::: {.column .column-right width="80%"}
+
+# **Preferencias por la comodificación**
+
+## **El rol de la movilidad social intergeneracional y las creencias meritocráticas en Chile**
+
+------------------------------------------------------------------------
+
+**Andreas Laffert^1,^^2^** 
+
+::: {.blue2 .medium}
+
+
+**^1^Instituto de Sociología, Pontificia Universidad Católica de Chile**
+
+**^2^Centro de Estudios de Conflicto y Cohesión Social - COES**
+
+:::
+
+Coloquio de investigación en justicia distributiva y desigualdad socioeconómica
+
+4 Septiembre 2025, Santiago
+
+:::
+:::
+
+
+
+# Contexto y motivación {.xlarge data-background-color="#523870"}
+
+
+
+
+## Antecedentes
+
+::: {.incremental .highlight-last style="font-size: 100%;"}
+
+- The justification of social inequality based on market-type criteria has been conceptualized as the individuals' adherence to the deservingness of social goods and services (such as health, education, and pensions) based on prices and individuals' ability to pay [@boltanski_new_2005; @lane_market_1986; @streeck_citizens_2012].
+
+- Research on social stratification beliefs [@kluegel_beliefs_1987], highlights that people's explanations and justifications of social inequality are closely tied to their judgments of deservingness. 
+
+-  The expansion of marketization has been related to a larger justification of market mechanisms, whereby societies with larger private spending on services show larger market justice preferences [@lindh_public_2015].
+
+:::
+
+## Antecedentes
+
+::::: columns
+::: {.column width="50%" .content-box-red}
+
+#### A
+
+- The original definition of merit is a combination of effort and talent [@young_rise_1958]
+- 2
+- 3
+
+:::
+
+::: {.column width="50%" .content-box-yellow}
+
+#### B
+
+- Adolescents from low-socioeconomic-status families are likelier to have an egalitarian fairness view and consider an equal distribution as fair in a situation with unequal merits [@almas_fairness_2017]
+- 2
+- 3
+
+:::
+:::::
+
+## Hipótesis
+
+::: {.incremental .highlight-last style="font-size: 100%;"}
+
+$H_{1}$
+
+$H_{2}$
+
+$H_{3}$
+
+$H_{n}$
+
+
+::: 
+
+# Datos, variables y métodos {.xlarge data-background-color="#523870"}
+
+## Datos
+
+::: {.incremental .highlight-last style="font-size: 100%;"}
+-   Datos
+:::
+
+## Variables
+
+
+:::
+
+## Métodos
+
+- Métodos
+
+
+# Resultados {.xlarge data-background-color="#523870"}
+
+
+## Modelos 
+
+
+
+
+# Discusión y conclusiones {data-background-color="#523870"}
+
+
+# Discusión y conclusiones {data-background-color="#523870"}
+
+::: { .incremental .highlight-last2 style="font-size: 100%;"}
+
+- Discusión 
+
+  - Conclusión
+:::
+
+
+# Gracias por su atención! 
+
+-   **Github del proyecto:** <https://github.com/Andreas-Lafferte/mobility-market-justice>
+
+## Referencias
