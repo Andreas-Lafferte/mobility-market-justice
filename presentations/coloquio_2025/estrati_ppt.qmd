@@ -1,0 +1,257 @@
+---
+bibliography: "input/bib/tesis-magister.bib"
+csl: "input/bib/apa6.csl"
+lang: es
+knitr:
+  opts_chunk:
+    collapse: true
+    comment: "#>"
+    R.options:
+      
+      knitr.graphics.auto_pdf: true
+format:
+  revealjs:
+    #logo: images/edumer.png
+    slide-number: true
+    theme: "libs/edumer.scss"
+    auto-stretch: false
+    title-slide-attributes:
+      visibility: false
+    transition: fade
+    transition-speed: slow
+# data-background-image: images/cover.jpg
+# data-background-size: cover
+    auto-play-media: true
+    mathjax: "default"
+  pdf:
+    format: beamer 
+    keep-tex: true  # Debug LaTeX output if needed
+editor_options: 
+  chunk_output_type: console
+---
+
+```{r}
+#| label: setup
+#| include: false
+library(knitr)
+knitr::opts_chunk$set(echo = F,
+                      warning = F,
+                      error = F, 
+                      message = F) 
+```
+
+```{r}
+#| label: packages
+#| include: false
+
+if (! require("pacman")) install.packages("pacman")
+
+#pacman::p_load(tidyverse, 
+#               sjmisc, 
+#               sjPlot, 
+##               sjlabelled, 
+#               here,
+#               kableExtra,
+#               ggdist,
+#               summarytools)
+
+options(scipen=999)
+rm(list = ls())
+```
+
+
+```{r}
+#| label: data
+#| include: false
+
+
+
+```
+
+
+
+::: columns
+
+
+
+
+::: {.column width="20%"}
+
+
+![](images/logo_isuc.png)
+
+</br></br>
+
+![](images/coes.png)
+
+
+:::
+
+::: {.column .column-right width="80%"}
+
+# **La justificación de la desigualdad salarial**
+
+## **El rol de la movilidad social intergeneracional en Chile**
+
+------------------------------------------------------------------------
+
+**Andreas Laffert^1,^^2^** 
+
+::: {.blue2 .medium}
+
+
+**^1^Instituto de Sociología, Pontificia Universidad Católica de Chile**
+
+**^2^Centro de Estudios de Conflicto y Cohesión Social - COES**
+
+:::
+
+Seminario Estratificación Social - SOL3016
+
+3 Septiembre 2025, Santiago
+
+:::
+:::
+
+
+
+# Contexto y motivación {.xlarge data-background-color="#523870"}
+
+## Contexto y motivación: Mobility effects
+
+::::: columns
+::: {.column width="50%"}
+::: {.fragment}
+
+
+
+![](images/breen.png)
+
+:::
+
+
+:::
+
+::: {.column width="50%" .incremental .highlight-last style="font-size: 100%;"}
+
+- Los efectos de la movilidad —definidos como los resultados derivados del desplazamiento entre las clases de origen y destino [@helgason_class_2025]— han suscitado desde hace tiempo el interés sociológico
+- @breen_effects_2024 proponen un método para estimar el efecto (causal) de la movilidad social intergernacional sobre un outcome
+- Las investigaciones sobre la movilidad social intergeneracional han examinado cada vez más sus efectos en las actitudes hacia la desigualdad 
+
+
+:::
+:::::
+
+## Contexto y motivación: legitimidad de la desigualdad
+
+::: {.incremental .highlight-last style="font-size: 110%;"}
+
+- Desde los 80's, la desigualdad económica y la concentración de la riqueza han aumentado en el mundo [@chancel_world_2022].
+
+- **¿En qué medida la desigualdad económica es vista como justa por las personas?**
+
+- La investigación empírica sobre la justicia distributiva estudia las concepciones de los individuos sobre cómo _debe_ ser la distribución [@jasso_distributive_2016]
+
+- Esta línea de investigación permite examinar hasta qué punto la desigualdad económica se percibe como justa o, en cierto sentido, legítima [@castillo_legitimacy_2011] --> legitimidad de la brecha salarial 
+
+:::
+
+## Antecedentes
+
+
+::::: columns 
+::: {.column width="50%" .incremental .highlight-last style="font-size: 110%;"}
+
+### Brecha salarial
+
+- Niveles de desigualdad económica y marcos institucionales [@castillo_legitimacy_2011; @hadler_why_2005] 
+- Estatus socioeconómico objetivo [@jasso_assessing_1999; @kelley_legitimate_2021]
+- Las percepciones de desigualdad e ideologías [@willis_legitimacy_2015]
+
+:::
+
+::: {.column width="50%" .incremental .highlight-last style="font-size: 110%;"}
+
+### Movilidad social
+
+- Preferencias redistributivas [@alesina_intergenerational_2018; @ares_changing_2020; @schmidt_experience_2011; @breen_effects_2024]
+- Legitimidad de la desigualdad económica [@gugushvili_intergenerational_2016], gasto público [@gugushvili_subjective_2017] y creencias sobre la desigualdad [@bucca_merit_2016; @day_movin_2017]
+- Diversos **mecanismos explicativos**: self-interest, socialización y **atribuciones** [@helgason_class_2025]
+
+:::
+:::::
+
+
+## Contexto chileno
+
+::: {.incremental .highlight-last style="font-size: 110%;"}
+
+- Chile presenta uno de los niveles de desigualdad más altos de América Latina y de los países de la OCDE [@flores_top_2020]
+
+- Movilidad ascendente de corto alcance entre clases bajas y medias adyacentes, aunque siguen existiendo fuertes barreras para alcanzar posiciones más altas [@torche_intergenerational_2014; @espinoza_estratificacion_2013]
+
+-  @castillo_legitimacy_2011 estudia la legitimidad de la desigualdad económica en Chile mediante la brecha salarial justa. Sus hallazgos revelan que 
+
+      - el estatus socioeconómico (ingresos y educación) no influyen en la brecha salarial justa
+      - la percepción de desigualdad o valores igualitarios/individualistas sí influyen
+
+:::
+
+
+
+## Problematización
+
+::: {.incremental .highlight-last style="font-size: 110%;"}
+
+- Aunque está claro que la posición social influye, la cuestión de cómo la movilidad ascendente o descendente dentro de la estructura social afecta a la justificación de la desigualdad salarial sigue sin respuesta
+
+- En Chile, hay pocos estudios sobre la justificación de la desigualdad salarial y aún menos sobre los _efectos_ de la movilidad en las actitudes hacia la desigualdad 
+
+
+:::
+
+
+# Este estudio {.xlarge data-background-color="#523870"}
+
+
+:::: {.incremental style="font-size: 150%;"}
+
+
+_**¿En qué medida la movilidad social intergeneracional afecta la justificación de la desigualdad salarial en Chile?**_
+
+::::
+
+## Hipótesis
+
+::: {.incremental .highlight-last style="font-size: 150%;"}
+
+- $H_{1}$: Experimentar movilidad social ascendente (descendente) se asocia positiva (negativamente) con una mayor justificación de la desigualdad salarial.
+
+- $H_{2}$: Las creencias meritocráticas son un mecanismo a través del cual opera el sesgo egoísta y conduce a diversos grados de justificación de la desigualdad salarial
+
+::: 
+
+# Datos, variables y métodos {.xlarge data-background-color="#523870"}
+
+## Datos
+
+::: {.incremental .highlight-last style="font-size: 100%;"}
+-   Datos
+:::
+
+## Variables
+
+
+:::
+
+## Métodos
+
+- Métodos
+
+
+
+# Gracias por su atención! 
+
+-   **Github del proyecto:** <https://github.com/Andreas-Lafferte/mobility-market-justice>
+
+## Referencias
