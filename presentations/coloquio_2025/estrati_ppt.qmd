@@ -74,7 +74,6 @@ rm(list = ls())
 
 
 
-
 ::: {.column width="20%"}
 
 
@@ -89,9 +88,7 @@ rm(list = ls())
 
 ::: {.column .column-right width="80%"}
 
-# **La justificación de la desigualdad salarial**
-
-## **El rol de la movilidad social intergeneracional en Chile**
+# **La brecha salarial justa: el rol de la movilidad social intergeneracional en Chile**
 
 ------------------------------------------------------------------------
 
@@ -144,7 +141,7 @@ Seminario Estratificación Social - SOL3016
 
 ## Contexto y motivación: legitimidad de la desigualdad
 
-::: {.incremental .highlight-last style="font-size: 110%;"}
+::: {.incremental .highlight-last style="font-size: 120%;"}
 
 - Desde los 80's, la desigualdad económica y la concentración de la riqueza han aumentado en el mundo [@chancel_world_2022].
 
@@ -152,7 +149,7 @@ Seminario Estratificación Social - SOL3016
 
 - La investigación empírica sobre la justicia distributiva estudia las concepciones de los individuos sobre cómo _debe_ ser la distribución [@jasso_distributive_2016]
 
-- Esta línea de investigación permite examinar hasta qué punto la desigualdad económica se percibe como justa o, en cierto sentido, legítima [@castillo_legitimacy_2011] --> legitimidad de la brecha salarial 
+- Esta línea de investigación permite examinar hasta qué punto la desigualdad económica se percibe como justa y, en cierto sentido, legítima [@castillo_legitimacy_2011] --> legitimidad de la brecha salarial 
 
 :::
 
@@ -162,11 +159,11 @@ Seminario Estratificación Social - SOL3016
 ::::: columns 
 ::: {.column width="50%" .incremental .highlight-last style="font-size: 110%;"}
 
-### Brecha salarial
+### Brecha salarial justa
 
 - Niveles de desigualdad económica y marcos institucionales [@castillo_legitimacy_2011; @hadler_why_2005] 
 - Estatus socioeconómico objetivo [@jasso_assessing_1999; @kelley_legitimate_2021]
-- Las percepciones de desigualdad e ideologías [@willis_legitimacy_2015]
+- Percepciones sobre la desigualdad e ideologías [@willis_legitimacy_2015]
 
 :::
 
@@ -175,7 +172,7 @@ Seminario Estratificación Social - SOL3016
 ### Movilidad social
 
 - Preferencias redistributivas [@alesina_intergenerational_2018; @ares_changing_2020; @schmidt_experience_2011; @breen_effects_2024]
-- Legitimidad de la desigualdad económica [@gugushvili_intergenerational_2016], gasto público [@gugushvili_subjective_2017] y creencias sobre la desigualdad [@bucca_merit_2016; @day_movin_2017]
+- Legitimidad de la desigualdad económica [@gugushvili_intergenerational_2016], política social [@gugushvili_subjective_2017] y creencias sobre la desigualdad [@bucca_merit_2016; @day_movin_2017]
 - Diversos **mecanismos explicativos**: self-interest, socialización y **atribuciones** [@helgason_class_2025]
 
 :::
@@ -184,16 +181,16 @@ Seminario Estratificación Social - SOL3016
 
 ## Contexto chileno
 
-::: {.incremental .highlight-last style="font-size: 110%;"}
+::: {.incremental .highlight-last style="font-size: 120%;"}
 
 - Chile presenta uno de los niveles de desigualdad más altos de América Latina y de los países de la OCDE [@flores_top_2020]
 
-- Movilidad ascendente de corto alcance entre clases bajas y medias adyacentes, aunque siguen existiendo fuertes barreras para alcanzar posiciones más altas [@torche_intergenerational_2014; @espinoza_estratificacion_2013]
+- Movilidad ascendente de corto alcance entre clases adyacentes, aunque siguen existiendo fuertes barreras para alcanzar posiciones más altas [@torche_intergenerational_2014; @lopez-roldan_comparative_2021]
 
 -  @castillo_legitimacy_2011 estudia la legitimidad de la desigualdad económica en Chile mediante la brecha salarial justa. Sus hallazgos revelan que 
 
       - el estatus socioeconómico (ingresos y educación) no influyen en la brecha salarial justa
-      - la percepción de desigualdad o valores igualitarios/individualistas sí influyen
+      - la percepción de desigualdad y valores igualitarios/individualistas sí influyen
 
 :::
 
@@ -201,11 +198,11 @@ Seminario Estratificación Social - SOL3016
 
 ## Problematización
 
-::: {.incremental .highlight-last style="font-size: 110%;"}
+::: {.incremental .highlight-last style="font-size: 120%;"}
 
-- Aunque está claro que la posición social influye, la cuestión de cómo la movilidad ascendente o descendente dentro de la estructura social afecta a la justificación de la desigualdad salarial sigue sin respuesta
+- Aunque está claro que la posición social influye, la cuestión de cómo la movilidad ascendente o descendente dentro de la estructura social afecta la brecha salarial justa sigue sin respuesta
 
-- En Chile, hay pocos estudios sobre la justificación de la desigualdad salarial y aún menos sobre los _efectos_ de la movilidad en las actitudes hacia la desigualdad 
+- En Chile, hay pocos estudios sobre la justificación de la desigualdad salarial y aún menos sobre los _efectos_ de la movilidad en las actitudes hacia la desigualdad económica
 
 
 :::
@@ -221,32 +218,99 @@ _**¿En qué medida la movilidad social intergeneracional afecta la justificaci�
 
 ::::
 
-## Hipótesis
+# Hipótesis {data-background-color="#523870"}
 
-::: {.incremental .highlight-last style="font-size: 150%;"}
 
-- $H_{1}$: Experimentar movilidad social ascendente (descendente) se asocia positiva (negativamente) con una mayor justificación de la desigualdad salarial.
+:::: {.incremental style="font-size: 140%;"}
 
-- $H_{2}$: Las creencias meritocráticas son un mecanismo a través del cual opera el sesgo egoísta y conduce a diversos grados de justificación de la desigualdad salarial
 
-::: 
+Experimentar movilidad social ascendente (descendente) se asocia positivamente (negativamente) con una mayor justificación de la desigualdad salarial.
 
-# Datos, variables y métodos {.xlarge data-background-color="#523870"}
+::::
+
+
+# Diseño metodológico {.xlarge data-background-color="#523870"}
 
 ## Datos
 
-::: {.incremental .highlight-last style="font-size: 100%;"}
--   Datos
+::: {.incremental .highlight-last style="font-size: 120%;"}
+
+- Encuesta Longitudinal Social de Chile (ELSOC) de COES.
+
+- Muestra analítica: olas 2016 (N = 2.927), 2018 (N = 3.748) y 2023 (N = 2.726)
+
+- Encuesta panel representativa de zonas urbanas, localizadas en 40 ciudades del país (92 comunas y 13 regiones)
+
+- Diseño muestral complejo: probabilístico, por conglomerados, multietápico y estratificado según el tamaño de las ciudades.
+
+- Población objetivo incluye a mujeres y hombres de entre 18 y 75 años que residen habitualmente en viviendas privadas
+
+
 :::
 
-## Variables
+## Outcome
+
+::: {.incremental style="font-size: 120%;"}
+
+- **Brecha salarial justa**: enfoque para medir la justificación de la desigualdad económica basado en las diferencias salariales consideradas justas entre las ocupaciones de alto y bajo estatus [@castillo_legitimacy_2011]. Los valores más altos de este término indican una mayor justificación de la desigualdad económica (@eq-just).
+
+$$
+\text{just wage gap} = \log_{10}\left(\frac{\text{just salary of a large-company president}}{\text{just salary of an unskilled worker}}\right)
+$$ {#eq-just}
+:::
+
+
+## Tratamiento
+
+::: {style="font-size: 120%;"}
+Siguiendo la propuesta de @breen_effects_2024 para estimar el efecto causal de la movilidad social: 
+:::
+::: {.incremental .highlight-last style="font-size: 120%;"}
+
+1. **Asignación de clase**: En base a la ocupación (ISCO-08) del padre/madre y del entrevistado se crean estratos de origen y destino (bajo, medio y alto) según terciles de la distribución del índice de estatus ocupacional (ISEI)
+
+2. **Propensity-score estimation**: Se estima la probabilidad de movilidad social mediante un modelo logístico multinomial en relación con las trayectorias inmóviles para cada estrato (categ. ref.). Estas puntuaciones de propensión se emplean posteriormente para ajustar la selección en la movilidad al evaluar su efecto.
 
 
 :::
+
+## Tratamiento
+
+![](images/propensity.png)
 
 ## Métodos
 
-- Métodos
+::: {.incremental style="font-size: 120%;"}
+
+- Para estimar el efecto causal de la movilidad social, utilizo modelos de regresión lineal con ponderaciones de probabilidad inversa (IPW) para la movilidad condicional a la clase de origen. 
+
+- Permite estimar el efecto causal promedio de pasar de una clase de origen *j* a una clase de destino *k* comparando a las personas que realmente alcanzan *k* con su resultado contrafactual si se hubieran trasladado a un destino alternativo *k′* [@breen_effects_2024]. El estimador resultante es el efecto promedio del tratamiento sobre los tratados (ATT) (@eq-att).
+
+
+$$ 
+ATT_{jkk′} =E[Y(D=k|O=j, D=k)]−E[Y(D=k′|O=j, D=k)]
+$$ {#eq-att}
+
+
+:::
+
+
+# Mecanismos {.xlarge data-background-color="#523870"}
+
+## Mecanismos... por revisar
+
+::: {.incremental style="font-size: 120%;"}
+
+- ¿Cómo y por qué un movimiento objetivo en la estructura social _afectaría_ o _produciría_ determinada actitud subjetiva?
+
+- **Self-serving bias**: 
+    - Las experiencias de movilidad social de las personas determinan sus atribuciones causales, que a su vez influyen en sus creencias sobre la justicia y sus preferencias distributivas [@gugushvili_trends_2014].  
+    - Atribuciones **internas** (esfuerzo, talento, mérito) vs. **externas** (barreras estructurales). 
+    
+- Estrategia: ACME (?) [@imai_identification_2010]
+
+:::
+
 
 
 
