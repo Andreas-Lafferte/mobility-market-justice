@@ -52,12 +52,14 @@ data <- datos1 %>%
 
 data
 
-data %>% 
+mp_lm <- data %>% 
   lm_robust(y ~ t + edad + sexo + nac + etnia + hogar + edu0,
             weights = w,
             se_type = "CR2",
             clusters = idencuesta,
-            data = .) %>% 
+            data = .) 
+
+mp_lm %>%  
   screenreg()
 
 ### Low to high
@@ -79,12 +81,14 @@ data <- datos1 %>%
 
 data
 
-data %>% 
+mp_lh <- data %>% 
   lm_robust(y ~ t + edad + sexo + nac + etnia + hogar + edu0,
             weights = w,
             se_type = "CR2",
             clusters = idencuesta,
-            data = .) %>% 
+            data = .) 
+            
+mp_lh %>% 
   screenreg()
 
 
@@ -107,12 +111,14 @@ data <- datos2 %>%
 
 data
 
-data %>% 
+mp_mh <- data %>% 
   lm_robust(y ~ t + edad + sexo + nac + etnia + hogar + edu0,
             weights = w,
             se_type = "CR2",
             clusters = idencuesta,
-            data = .) %>% 
+            data = .) 
+    
+mp_mh %>% 
   screenreg()
 
 
@@ -135,12 +141,14 @@ data <- datos2 %>%
 
 data
 
-data %>% 
+mp_ml <- data %>% 
   lm_robust(y ~ t + edad + sexo + nac + etnia + hogar + edu0,
             weights = w,
             se_type = "CR2",
             clusters = idencuesta,
-            data = .) %>% 
+            data = .) 
+            
+mp_ml %>% 
   screenreg()
 
 
@@ -163,12 +171,14 @@ data <- datos3 %>%
 
 data
 
-data %>% 
+mp_hm <- data %>% 
   lm_robust(y ~ t + edad + sexo + nac + etnia + hogar + edu0,
             weights = w,
             se_type = "CR2",
             clusters = idencuesta,
-            data = .) %>% 
+            data = .) 
+            
+mp_hm %>% 
   screenreg()
 
 ### High to low
@@ -190,12 +200,14 @@ data <- datos3 %>%
 
 data
 
-data %>% 
+mp_hl <- data %>% 
   lm_robust(y ~ t + edad + sexo + nac + etnia + hogar + edu0,
             weights = w,
             se_type = "CR2",
             clusters = idencuesta,
-            data = .) %>% 
+            data = .) 
+            
+mp_hl %>% 
   screenreg()
 
 
@@ -220,12 +232,14 @@ data <- datos1 %>%
 
 data
 
-data %>% 
+mh_lm <-data %>% 
   lm_robust(y ~ t + edad + sexo + nac + etnia + hogar + edu0,
             weights = w,
             se_type = "CR2",
             clusters = idencuesta,
-            data = .) %>% 
+            data = .) 
+    
+mh_lm %>% 
   screenreg()
 
 ### Low to high
@@ -247,14 +261,15 @@ data <- datos1 %>%
 
 data
 
-data %>% 
+mh_lh <- data %>% 
   lm_robust(y ~ t + edad + sexo + nac + etnia + hogar + edu0,
             weights = w,
             se_type = "CR2",
             clusters = idencuesta,
-            data = .) %>% 
-  screenreg()
+            data = .) 
 
+mh_lh %>% 
+  screenreg()
 
 ### middle to high
 
@@ -275,12 +290,14 @@ data <- datos2 %>%
 
 data
 
-data %>% 
+mh_mh <- data %>% 
   lm_robust(y ~ t + edad + sexo + nac + etnia + hogar + edu0,
             weights = w,
             se_type = "CR2",
             clusters = idencuesta,
-            data = .) %>% 
+            data = .) 
+        
+mh_mh %>% 
   screenreg()
 
 
@@ -303,12 +320,13 @@ data <- datos2 %>%
 
 data
 
-data %>% 
+mh_ml <- data %>% 
   lm_robust(y ~ t + edad + sexo + nac + etnia + hogar + edu0,
             weights = w,
             se_type = "CR2",
             clusters = idencuesta,
-            data = .) %>% 
+            data = .)
+mh_ml %>% 
   screenreg()
 
 
@@ -331,12 +349,14 @@ data <- datos3 %>%
 
 data
 
-data %>% 
+mh_hm <- data %>% 
   lm_robust(y ~ t + edad + sexo + nac + etnia + hogar + edu0,
             weights = w,
             se_type = "CR2",
             clusters = idencuesta,
-            data = .) %>% 
+            data = .) 
+            
+mh_hm %>% 
   screenreg()
 
 ### High to low
@@ -358,12 +378,14 @@ data <- datos3 %>%
 
 data
 
-data %>% 
+mh_hl <- data %>% 
   lm_robust(y ~ t + edad + sexo + nac + etnia + hogar + edu0,
             weights = w,
             se_type = "CR2",
             clusters = idencuesta,
-            data = .) %>% 
+            data = .) 
+
+mh_hl %>% 
   screenreg()
 
 ### Educ
@@ -387,12 +409,14 @@ data <- datos1 %>%
 
 data
 
-data %>% 
+me_lm <- data %>% 
   lm_robust(y ~ t + edad + sexo + nac + etnia + hogar + edu0,
             weights = w,
             se_type = "CR2",
             clusters = idencuesta,
-            data = .) %>% 
+            data = .) 
+
+me_lm %>% 
   screenreg()
 
 ### Low to high
@@ -414,12 +438,14 @@ data <- datos1 %>%
 
 data
 
-data %>% 
+me_lh <- data %>% 
   lm_robust(y ~ t + edad + sexo + nac + etnia + hogar + edu0,
             weights = w,
             se_type = "CR2",
             clusters = idencuesta,
-            data = .) %>% 
+            data = .) 
+            
+me_lh %>% 
   screenreg()
 
 
@@ -442,12 +468,14 @@ data <- datos2 %>%
 
 data
 
-data %>% 
+me_mh <- data %>% 
   lm_robust(y ~ t + edad + sexo + nac + etnia + hogar + edu0,
             weights = w,
             se_type = "CR2",
             clusters = idencuesta,
-            data = .) %>% 
+            data = .) 
+            
+me_mh %>% 
   screenreg()
 
 
@@ -470,12 +498,13 @@ data <- datos2 %>%
 
 data
 
-data %>% 
+me_ml <- data %>% 
   lm_robust(y ~ t + edad + sexo + nac + etnia + hogar + edu0,
             weights = w,
             se_type = "CR2",
             clusters = idencuesta,
-            data = .) %>% 
+            data = .) 
+me_ml %>% 
   screenreg()
 
 
@@ -498,12 +527,14 @@ data <- datos3 %>%
 
 data
 
-data %>% 
+me_hm <- data %>% 
   lm_robust(y ~ t + edad + sexo + nac + etnia + hogar + edu0,
             weights = w,
             se_type = "CR2",
             clusters = idencuesta,
-            data = .) %>% 
+            data = .) 
+            
+me_hm %>% 
   screenreg()
 
 ### High to low
@@ -525,12 +556,14 @@ data <- datos3 %>%
 
 data
 
-data %>% 
+me_hl <- data %>% 
   lm_robust(y ~ t + edad + sexo + nac + etnia + hogar + edu0,
             weights = w,
             se_type = "CR2",
             clusters = idencuesta,
-            data = .) %>% 
+            data = .) 
+            
+me_hl %>% 
   screenreg()
 
 

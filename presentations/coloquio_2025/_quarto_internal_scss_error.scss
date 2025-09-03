@@ -431,6 +431,30 @@ blockquote {
   padding-left: 1em;
 }
 
+float-left .box-4, .float-left .box-inv-4,
+.float-right .box-4, .float-right .box-inv-4 {
+  display: inline;
+}
+
+.sp-after-half {
+  margin-bottom: 0.7em !important;
+}
+
+.sp-after {
+  margin-bottom: 1em !important;
+}
+
+.box-inv-4,
+.section-title-inv-4 {
+  background-color: #8c69b4;
+}
+
+.box-inv-4,
+.title-inv-4 h1,
+.section-title-inv-4 h1 {
+  color: #ffffff;
+}
+
 // quarto-scss-analysis-annotation { "origin": "Defaults from Quarto's SCSS" }
 
 

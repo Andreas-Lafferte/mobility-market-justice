@@ -46,14 +46,14 @@ knitr::opts_chunk$set(echo = F,
 
 if (! require("pacman")) install.packages("pacman")
 
-#pacman::p_load(tidyverse, 
-#               sjmisc, 
-#               sjPlot, 
-##               sjlabelled, 
-#               here,
-#               kableExtra,
-#               ggdist,
-#               summarytools)
+pacman::p_load(tidyverse, 
+               sjmisc, 
+               sjPlot, 
+               sjlabelled, 
+               here,
+               kableExtra,
+               ggdist,
+               summarytools)
 
 options(scipen=999)
 rm(list = ls())
@@ -64,7 +64,7 @@ rm(list = ls())
 #| label: data
 #| include: false
 
-
+source(file = here("processing/prod_analysis.R"))
 
 ```
 
@@ -98,7 +98,7 @@ rm(list = ls())
 
 **Andreas Laffert^1,^^2^** 
 
-::: {.blue2 .medium}
+::: {.medium}
 
 
 **^1^Instituto de Sociología, Pontificia Universidad Católica de Chile**
@@ -107,38 +107,63 @@ rm(list = ls())
 
 :::
 
-Coloquio de investigación en justicia distributiva y desigualdad socioeconómica
+Coloquio de Investigación en Justicia Distributiva y Desigualdad Socioeconómica
 
 4 Septiembre 2025, Santiago
 
 :::
 :::
 
+---
 
+## ¿A dónde quiero llegar?
 
-# Contexto y motivación {.xlarge data-background-color="#523870"}
+::: {.fragment}
 
-
-
-
-## Antecedentes
-
-::: {.incremental .highlight-last style="font-size: 100%;"}
-
-- The justification of social inequality based on market-type criteria has been conceptualized as the individuals' adherence to the deservingness of social goods and services (such as health, education, and pensions) based on prices and individuals' ability to pay [@boltanski_new_2005; @lane_market_1986; @streeck_citizens_2012].
-
-- Research on social stratification beliefs [@kluegel_beliefs_1987], highlights that people's explanations and justifications of social inequality are closely tied to their judgments of deservingness. 
-
--  The expansion of marketization has been related to a larger justification of market mechanisms, whereby societies with larger private spending on services show larger market justice preferences [@lindh_public_2015].
+<div style="text-align:center;">
+  <img src="images/idea.png" style="width:100%; max-width:none;">
+</div>
 
 :::
 
+# Contexto y motivación {.xlarge data-background-color="#523870"}
+
+## Contexto y motivación
+
+::: {.fragment}
+<div style="text-align:center;">
+  <img src="images/corte.png" style="width:100%; max-width:none;">
+</div>
+:::
+
+
 ## Antecedentes
 
-::::: columns
-::: {.column width="50%" .content-box-red}
+</br>
 
-#### A
+::: {.box-inv-4 .sp-after .fragment style="font-size: 150%;"}
+
+Mercantilización y privatización (M, AL, CL)
+
+:::
+
+::: {.box-inv-4 .sp-after .fragment style="font-size: 150%;"}
+
+Economía moral (Mau, bringing market, policy feedback)
+:::
+
+::: {.box-inv-4 .sp-after .fragment style="font-size: 150%;"}
+
+MJP (Lane, Lindh, implicancias y relevancias)
+:::
+
+
+## Preferencias por justicia de mercado
+
+::::: columns
+::: {.column width="50%"}
+
+### Contextual
 
 - The original definition of merit is a combination of effort and talent [@young_rise_1958]
 - 2
@@ -146,9 +171,9 @@ Coloquio de investigación en justicia distributiva y desigualdad socioeconómic
 
 :::
 
-::: {.column width="50%" .content-box-yellow}
+::: {.column width="50%"}
 
-#### B
+### Individual
 
 - Adolescents from low-socioeconomic-status families are likelier to have an egalitarian fairness view and consider an equal distribution as fair in a situation with unequal merits [@almas_fairness_2017]
 - 2
@@ -157,51 +182,197 @@ Coloquio de investigación en justicia distributiva y desigualdad socioeconómic
 :::
 :::::
 
-## Hipótesis
+## Preferencias por justicia de mercado: Chile
 
 ::: {.incremental .highlight-last style="font-size: 100%;"}
 
-$H_{1}$
+- Otero 2024 (clase)
+- Castillo y laffert 2025 (merit)
 
-$H_{2}$
+:::
 
-$H_{3}$
+## Este estudio
 
-$H_{n}$
+::: {.incremental .highlight-last style="font-size: 100%;"}
+
+- Aunque esta claro... movilidad social
+- Efectos
+- Mecanismos 
+
+:::
 
 
-::: 
+## Este estudio
 
-# Datos, variables y métodos {.xlarge data-background-color="#523870"}
+::: {.incremental .highlight-last style="font-size: 100%;"}
+
+- Mecanismos 
+
+:::
+
+## Contexto chileno
+
+::: {.incremental .highlight-last style="font-size: 100%;"}
+
+- RRelevancia del caso Chileno: extrema comodificacion, desigualdad, limitada movilidad, alta pferencia por la meritocracia etc.
+
+:::
+
+
+
+#  {data-background-color="#523870"}
+
+:::: {style="font-size: 170%;"}
+
+**_(1) ¿En qué medida la movilidad social intergeneracional afecta las preferencias por comodificación en salud, pensiones y educación en Chile?_**
+
+**_(2) ¿Cómo las creencias meritocráticas median esta relación en el contexto chileno?_**
+
+::::
+
+## Hipótesis
+
+::: {.fragment}
+
+<div style="text-align:center;">
+  <img src="images/idea.png" style="width:100%; max-width:none;">
+</div>
+
+:::
+
+# Método {.xlarge data-background-color="#523870"}
+
+## Estrategia de identificación causal
 
 ## Datos
 
-::: {.incremental .highlight-last style="font-size: 100%;"}
--   Datos
+::: {.incremental .highlight-last style="font-size: 120%;"}
+
+- Encuesta Longitudinal Social de Chile [(ELSOC)](https://coes.cl/elsoc/) de COES.
+
+- Muestra analítica: olas 2016 (N = 2.927), 2018 (N = 3.748) y 2023 (N = 2.726)
+
+- Encuesta panel representativa de zonas urbanas, localizadas en 40 ciudades del país (92 comunas y 13 regiones)
+
+- Diseño muestral complejo: probabilístico, por conglomerados, multietápico y estratificado según el tamaño de las ciudades.
+
+- Población objetivo incluye a mujeres y hombres de entre 18 y 75 años que residen habitualmente en viviendas privadas
+
+
 :::
 
-## Variables
+## Outcome
+
+<div style="text-align:center;">
+  <img src="images/outcome.png" style="width:100%; max-width:none;">
+</div>
+
+## Tratamiento
+::: {style="font-size: 120%;"}
+Siguiendo la propuesta de @breen_effects_2024 para estimar el efecto causal de la movilidad social: 
+:::
+::: {.incremental .highlight-last style="font-size: 120%;"}
+
+1. **Asignación de clase**: En base a la ocupación (ISCO-08) del padre/madre y del entrevistado se crean estratos de origen y destino (bajo, medio y alto) según terciles de la distribución del índice de estatus ocupacional (ISEI)
+
+2. **Propensity-score estimation**: Se estima la probabilidad de movilidad social mediante un modelo logístico multinomial en relación con las trayectorias inmóviles para cada estrato (categ. ref.). Estas puntuaciones de propensión se emplean posteriormente para ajustar la selección en la movilidad al evaluar su efecto.
 
 
 :::
 
-## Métodos
+## Tratamiento
+
+
+
+## Tratamiento
+
+<div style="text-align:center;">
+  <img src="images/propensity.png" style="width:105%; max-width:none;">
+</div>
+
+## Mediador
+
+::: {.incremental .highlight-last style="font-size: 120%;"}
+
+- **Meritocracia**: se mide a partir de dos componentes, a saber, el esfuerzo y el talento [@young_rise_1958]
+
+- Medición:   
+
+    * Ítem esfuerzo: “En Chile, se recompensa a las personas por su esfuerzo”
+    * Ítem talento: “En Chile, se recompensa a las personas por su inteligencia y habilidades”
+    * Ambos ítems se responden en una escala Likert de 1 (totalmente en desacuerdo) a 5 (totalmente de acuerdo)
+
+:::
+
+## Estimand y estimando
 
 - Métodos
 
 
 # Resultados {.xlarge data-background-color="#523870"}
 
+## Modelos
 
-## Modelos 
+```{r}
+#| label: fig-mh
+#| fig-cap-location: top
+#| fig-cap: "Estimaciones de efectos de mobilidad en preferencia por comodificación en salud"
+#| fig-align: center
+#| out-width: '100%'
+
+df_health <- bind_rows(
+tidy(mh_lm, conf.int = TRUE) %>%
+  filter(term == "t") %>%
+  mutate(term = "Low→Middle \n(N obs. = 532; N Clusters = 381)") 
+,
+tidy(mh_lh, conf.int = TRUE) %>%
+  filter(term == "t") %>%
+  mutate(term = "Low→High \n(N obs. = 452; N Clusters = 342)") 
+,
+tidy(mh_mh, conf.int = TRUE) %>%
+  filter(term == "t") %>%
+  mutate(term = "Middle→High \n(N obs. = 432; N Clusters = 320)") 
+,
+tidy(mh_ml, conf.int = TRUE) %>%
+  filter(term == "t") %>%
+  mutate(term = "Middle→Low \n(N obs. = 469; N Clusters = 345)") 
+,
+tidy(mh_hm, conf.int = TRUE) %>%
+  filter(term == "t") %>%
+  mutate(term = "High→Middle \n(N obs. = 620; N Clusters = 444)") 
+,
+tidy(mh_hl, conf.int = TRUE) %>%
+  filter(term == "t") %>%
+  mutate(term = "High→Low \n(N obs. = 576; N Clusters = 432)") 
+) 
+  
+df_health %>%   
+  ggplot(aes(x = estimate, y = term)) +
+  geom_vline(xintercept = 0, linetype = "solid", color = "darkorange", size = 0.5, alpha = 0.8,) +
+  geom_point(aes(x = estimate), size = 3.5) +
+  geom_errorbar(aes(xmin = conf.low, xmax = conf.high), 
+                width = 0, size = 1, position = position_dodge2()) +
+  scale_x_continuous(limits = c(-1, 1),
+                     breaks = seq(-1,1,0.5)) +
+  labs(
+    x = "Coeficiente (β)",
+    y = NULL
+  ) +
+  theme_ggdist() +
+  theme(axis.title = element_text(face = "bold"),
+        axis.text = element_text(face = "bold"))
 
 
 
+```
 
-# Discusión y conclusiones {data-background-color="#523870"}
+## Mediación
 
 
-# Discusión y conclusiones {data-background-color="#523870"}
+# Discusión y proyecciones {data-background-color="#523870"}
+
+
+# Discusión y proyecciones {data-background-color="#523870"}
 
 ::: { .incremental .highlight-last2 style="font-size: 100%;"}
 

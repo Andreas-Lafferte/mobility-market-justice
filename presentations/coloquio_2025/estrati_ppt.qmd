@@ -110,7 +110,16 @@ Seminario Estratificación Social - SOL3016
 :::
 :::
 
+---
+## ¿A dónde quiero llegar?
 
+::: {.fragment}
+
+<div style="text-align:center;">
+  <img src="images/estrati.png" style="width:100%; max-width:none;">
+</div>
+
+:::
 
 # Contexto y motivación {.xlarge data-background-color="#523870"}
 
