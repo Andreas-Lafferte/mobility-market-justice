@@ -224,7 +224,7 @@ El movimiento entre posiciones sociales expone a los individuos experiencias y m
 
 ::: {.pull-right .box-inv-5 .sp-after .fragment style="font-size: 120%;"}
 
-Meritocracia como mecanismo de sesgo de atribución[@schmidt_experience_2011; @gugushvili_intergenerational_2016c; @molina_its_2019].
+Meritocracia como mecanismo de sesgo de atribución[@newman_economic_2023; @gugushvili_intergenerational_2016c; @molina_its_2019].
 
 :::
 
@@ -263,6 +263,31 @@ Meritocracia como mecanismo de sesgo de atribución[@schmidt_experience_2011; @g
 :::
 
 # Método {.xlarge data-background-color="#523870"}
+
+## Enfoque: Mobility Effects
+
+::::: columns
+::: {.column width="50%"}
+::: {.fragment}
+
+
+
+![](images/breen.png)
+
+:::
+
+
+:::
+
+::: {.column width="50%" .incremental .highlight-last style="font-size: 100%;"}
+
+- @breen_effects_2024 proponen un método para estimar el efecto (causal) de la movilidad social intergernacional sobre un outcome
+- ¿En qué habría cambiado el resultado _Y_ entre las personas de origen _j_ que llegaron al destino _k_ si, hipotéticamente, hubieran llegado al destino _k'_? 
+
+
+
+:::
+:::::
 
 ## Estrategia de identificación causal
 
@@ -365,7 +390,7 @@ Siguiendo la propuesta de @breen_effects_2024 para estimar el efecto causal de l
 
 1. **Asignación de clase**: En base a la ocupación (ISCO-08) del padre/madre y del entrevistado se crean estratos de origen y destino (bajo, medio y alto) según terciles de la distribución del índice de estatus ocupacional (ISEI)
 
-2. **Propensity-score estimation**: Se estima la probabilidad de movilidad social mediante un modelo logístico multinomial en relación con las trayectorias inmóviles (categ. ref.) para cada estrato. Creación de IPW o "clones"
+2. **Propensity-score weighting**: Se estima la probabilidad de movilidad social mediante un modelo logístico multinomial en relación con las trayectorias inmóviles (categ. ref.) para cada estrato. Creación de IPW o "clones"
 
 
 :::
@@ -449,14 +474,20 @@ $$ {#eq-att}
 - El estimador resultante es el efecto promedio del tratamiento sobre los tratados (ATT) 
 :::
 
+::: {.fragment style="font-size: 120%;"}
+
+- Mi interés es comparar con la situación de inmobilidad: cuando _k'_ = _j_
+:::
+
+
 
 ## Estimando
 
 ::: {.incremental style="font-size: 120%;"}
 
-- Para estimar el efecto causal de la movilidad social, utilizo modelos de regresión lineal con ponderaciones de probabilidad inversa (IPW) para la movilidad condicional a la clase de origen [@breen_effects_2024]
+- Efecto movilidad: modelos de regresión lineal con ponderaciones de probabilidad inversa (IPW) para la movilidad condicional a la clase de origen [@breen_effects_2024] y SE clusterizados por id
 
-- Para mediación ocupo el estimador Average Causal Mediation Effect [@imai_identification_2010]
+- Mediación: Average Causal Mediation Effect [@imai_identification_2010]
 
 :::
 
@@ -471,7 +502,7 @@ $$ {#eq-att}
 ```{r}
 #| label: fig-mh
 #| fig-cap-location: top
-#| fig-cap: "Estimaciones de efectos de mobilidad en preferencia por comodificación en salud"
+#| fig-cap: "Estimaciones de efectos de movilidad en preferencia por comodificación en salud"
 #| fig-align: center
 #| out-width: '180%'
 
@@ -515,7 +546,7 @@ df_health_lab <- df_health %>%
   )
 
 ggplot(df_health_lab, aes(x = estimate, y = term)) +
-  geom_vline(xintercept = 0, linetype = "solid", color = "darkorange", size = 0.5, alpha = 0.8) +
+  geom_vline(xintercept = 0, linetype = "solid", color = "darkred", size = 0.5, alpha = 0.8) +
   geom_errorbarh(aes(xmin = conf.low, xmax = conf.high), height = 0, size = 1) +
   geom_point(size = 3.5) +
   # etiquetas: coef en el punto
@@ -538,7 +569,7 @@ ggplot(df_health_lab, aes(x = estimate, y = term)) +
 ```{r}
 #| label: fig-me
 #| fig-cap-location: top
-#| fig-cap: "Estimaciones de efectos de mobilidad en preferencia por comodificación en educación"
+#| fig-cap: "Estimaciones de efectos de movilidad en preferencia por comodificación en educación"
 #| fig-align: center
 #| out-width: '180%'
 
@@ -578,7 +609,7 @@ df_educ_lab <- df_educ %>%
   )
 
 ggplot(df_educ_lab, aes(x = estimate, y = term)) +
-  geom_vline(xintercept = 0, linetype = "solid", color = "darkorange", size = 0.5, alpha = 0.8) +
+  geom_vline(xintercept = 0, linetype = "solid", color = "darkred", size = 0.5, alpha = 0.8) +
   geom_errorbarh(aes(xmin = conf.low, xmax = conf.high), height = 0, size = 1) +
   geom_point(size = 3.5) +
   # etiquetas: coef en el punto
@@ -600,7 +631,7 @@ ggplot(df_educ_lab, aes(x = estimate, y = term)) +
 ```{r}
 #| label: fig-mp
 #| fig-cap-location: top
-#| fig-cap: "Estimaciones de efectos de mobilidad en preferencia por comodificación en pensiones"
+#| fig-cap: "Estimaciones de efectos de movilidad en preferencia por comodificación en pensiones"
 #| fig-align: center
 #| out-width: '180%'
 
@@ -640,7 +671,7 @@ df_pension_lab <- df_pension %>%
   )
 
 ggplot(df_pension_lab, aes(x = estimate, y = term)) +
-  geom_vline(xintercept = 0, linetype = "solid", color = "darkorange", size = 0.5, alpha = 0.8) +
+  geom_vline(xintercept = 0, linetype = "solid", color = "darkred", size = 0.5, alpha = 0.8) +
   geom_errorbarh(aes(xmin = conf.low, xmax = conf.high), height = 0, size = 1) +
   geom_point(size = 3.5) +
   # etiquetas: coef en el punto

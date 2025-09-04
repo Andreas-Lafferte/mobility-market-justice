@@ -263,7 +263,7 @@
 </div>
 <p><br><br><br><br></p>
 <div class="pull-right box-inv-5 sp-after fragment" style="font-size: 120%;">
-<p>Meritocracia como mecanismo de sesgo de atribución<span class="citation" data-cites="schmidt_experience_2011 gugushvili_intergenerational_2016c molina_its_2019">(<a href="#/referencias" role="doc-biblioref" onclick="">Gugushvili, 2016</a>; <a href="#/referencias" role="doc-biblioref" onclick="">Molina et&nbsp;al., 2019</a>; <a href="#/referencias" role="doc-biblioref" onclick="">Schmidt, 2011</a>)</span>.</p>
+<p>Meritocracia como mecanismo de sesgo de atribución<span class="citation" data-cites="newman_economic_2023 gugushvili_intergenerational_2016c molina_its_2019">(<a href="#/referencias" role="doc-biblioref" onclick="">Gugushvili, 2016</a>; <a href="#/referencias" role="doc-biblioref" onclick="">Molina et&nbsp;al., 2019</a>; <a href="#/referencias" role="doc-biblioref" onclick="">Newman, 2023</a>)</span>.</p>
 </div>
 </section></section>
 <section>
@@ -297,6 +297,20 @@
 <section id="método" class="title-slide slide level1 xlarge center" data-background-color="#523870">
 <h1>Método</h1>
 
+</section>
+<section id="enfoque-mobility-effects" class="slide level2">
+<h2>Enfoque: Mobility Effects</h2>
+<div class="columns">
+<div class="column" style="width:50%;">
+<div class="fragment">
+<p><img data-src="images/breen.png"></p>
+</div>
+</div><div class="column highlight-last" style="font-size: 100%;">
+<ul>
+<li class="fragment"><span class="citation" data-cites="breen_effects_2024">Breen &amp; Ermisch (<a href="#/referencias" role="doc-biblioref" onclick="">2024</a>)</span> proponen un método para estimar el efecto (causal) de la movilidad social intergernacional sobre un outcome</li>
+<li class="fragment">¿En qué habría cambiado el resultado <em>Y</em> entre las personas de origen <em>j</em> que llegaron al destino <em>k</em> si, hipotéticamente, hubieran llegado al destino <em>k’</em>?</li>
+</ul>
+</div></div>
 </section>
 <section id="estrategia-de-identificación-causal" class="slide level2">
 <h2>Estrategia de identificación causal</h2>
@@ -341,7 +355,7 @@ Figura&nbsp;1: DAG movilidad social, meritocracia y preferencias por comodificac
 <div class="highlight-last" style="font-size: 120%;">
 <ol type="1">
 <li class="fragment"><p><strong>Asignación de clase</strong>: En base a la ocupación (ISCO-08) del padre/madre y del entrevistado se crean estratos de origen y destino (bajo, medio y alto) según terciles de la distribución del índice de estatus ocupacional (ISEI)</p></li>
-<li class="fragment"><p><strong>Propensity-score estimation</strong>: Se estima la probabilidad de movilidad social mediante un modelo logístico multinomial en relación con las trayectorias inmóviles (categ. ref.) para cada estrato. Creación de IPW o “clones”</p></li>
+<li class="fragment"><p><strong>Propensity-score weighting</strong>: Se estima la probabilidad de movilidad social mediante un modelo logístico multinomial en relación con las trayectorias inmóviles (categ. ref.) para cada estrato. Creación de IPW o “clones”</p></li>
 </ol>
 </div>
 </section>
@@ -449,13 +463,18 @@ ATT_{jkk′} =E[Y(D=k|O=j, D=k)]−E[Y(D=k′|O=j, D=k)]
 <li>El estimador resultante es el efecto promedio del tratamiento sobre los tratados (ATT)</li>
 </ul>
 </div>
+<div class="fragment" style="font-size: 120%;">
+<ul>
+<li>Mi interés es comparar con la situación de inmobilidad: cuando <em>k’</em> = <em>j</em></li>
+</ul>
+</div>
 </section>
 <section id="estimando" class="slide level2">
 <h2>Estimando</h2>
 <div style="font-size: 120%;">
 <ul>
-<li class="fragment"><p>Para estimar el efecto causal de la movilidad social, utilizo modelos de regresión lineal con ponderaciones de probabilidad inversa (IPW) para la movilidad condicional a la clase de origen <span class="citation" data-cites="breen_effects_2024">(<a href="#/referencias" role="doc-biblioref" onclick="">Breen &amp; Ermisch, 2024</a>)</span></p></li>
-<li class="fragment"><p>Para mediación ocupo el estimador Average Causal Mediation Effect <span class="citation" data-cites="imai_identification_2010">(<a href="#/referencias" role="doc-biblioref" onclick="">Imai et&nbsp;al., 2010</a>)</span></p></li>
+<li class="fragment"><p>Efecto movilidad: modelos de regresión lineal con ponderaciones de probabilidad inversa (IPW) para la movilidad condicional a la clase de origen <span class="citation" data-cites="breen_effects_2024">(<a href="#/referencias" role="doc-biblioref" onclick="">Breen &amp; Ermisch, 2024</a>)</span> y SE clusterizados por id</p></li>
+<li class="fragment"><p>Mediación: Average Causal Mediation Effect <span class="citation" data-cites="imai_identification_2010">(<a href="#/referencias" role="doc-biblioref" onclick="">Imai et&nbsp;al., 2010</a>)</span></p></li>
 </ul>
 </div>
 </section></section>
@@ -472,7 +491,7 @@ ATT_{jkk′} =E[Y(D=k|O=j, D=k)]−E[Y(D=k′|O=j, D=k)]
 <div id="fig-mh" class="quarto-float quarto-figure quarto-figure-center" data-fig-align="center" data-cap-location="top">
 <figure class="quarto-float quarto-float-fig">
 <figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-fig" id="fig-mh-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figura&nbsp;2: Estimaciones de efectos de mobilidad en preferencia por comodificación en salud
+Figura&nbsp;2: Estimaciones de efectos de movilidad en preferencia por comodificación en salud
 </figcaption>
 <div aria-describedby="fig-mh-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <img data-src="mjp-mobility_files/figure-revealjs/fig-mh-1.png" class="quarto-figure quarto-figure-center" style="width:180.0%">
@@ -490,7 +509,7 @@ Figura&nbsp;2: Estimaciones de efectos de mobilidad en preferencia por comodific
 <div id="fig-me" class="quarto-float quarto-figure quarto-figure-center" data-fig-align="center" data-cap-location="top">
 <figure class="quarto-float quarto-float-fig">
 <figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-fig" id="fig-me-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figura&nbsp;3: Estimaciones de efectos de mobilidad en preferencia por comodificación en educación
+Figura&nbsp;3: Estimaciones de efectos de movilidad en preferencia por comodificación en educación
 </figcaption>
 <div aria-describedby="fig-me-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <img data-src="mjp-mobility_files/figure-revealjs/fig-me-1.png" class="quarto-figure quarto-figure-center" style="width:180.0%">
@@ -507,7 +526,7 @@ Figura&nbsp;3: Estimaciones de efectos de mobilidad en preferencia por comodific
 <div id="fig-mp" class="quarto-float quarto-figure quarto-figure-center" data-fig-align="center" data-cap-location="top">
 <figure class="quarto-float quarto-float-fig">
 <figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-fig" id="fig-mp-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figura&nbsp;4: Estimaciones de efectos de mobilidad en preferencia por comodificación en pensiones
+Figura&nbsp;4: Estimaciones de efectos de movilidad en preferencia por comodificación en pensiones
 </figcaption>
 <div aria-describedby="fig-mp-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <img data-src="mjp-mobility_files/figure-revealjs/fig-mp-1.png" class="quarto-figure quarto-figure-center" style="width:180.0%">
@@ -639,6 +658,9 @@ Mau, S. (2015). <em>Inequality, <span>Marketization</span> and the <span>Majorit
 <div id="ref-molina_its_2019" class="csl-entry" role="listitem">
 Molina, M. D., Bucca, M., &amp; Macy, M. W. (2019). It’s Not Just How the Game Is Played, It’s Whether You Win or Lose. <em>SCIENCE ADVANCES</em>.
 </div>
+<div id="ref-newman_economic_2023" class="csl-entry" role="listitem">
+Newman, B. J. (2023). Economic <span>Inequality</span>, the <span>Working Poor</span>, and <span>Belief</span> in the <span>American Dream</span>. <em>Public Opinion Quarterly</em>, <em>86</em>(4), 944-954. <a href="https://doi.org/10.1093/poq/nfac043">https://doi.org/10.1093/poq/nfac043</a>
+</div>
 <div id="ref-nucleodesociologiacontingente_informe_2020" class="csl-entry" role="listitem">
 Núcleo de Sociología Contingente, [NUDESOC]. (2020). <em>Informe de Resultados Oficial <span>Encuesta Zona Cero</span></em>. Santiago de Chile.
 </div>
@@ -647,9 +669,6 @@ Otero, G., &amp; Mendoza, M. (2024). The <span>Power</span> of <span>Diversity</
 </div>
 <div id="ref-panes_criticas_2020" class="csl-entry" role="listitem">
 Panes, D. (2020). <em>Cr<span>í</span>ticas y Experiencias Obreras En Torno al Sistema de <span>AFP</span>’s En <span>Chile</span> (1981-2020)</em> (Tesis doctoral). Universidad de Chile, Santiago.
-</div>
-<div id="ref-schmidt_experience_2011" class="csl-entry" role="listitem">
-Schmidt, A. W. (2011). The Experience of Social Mobility and the Formation of Attitudes toward Redistribution. En.
 </div>
 <div id="ref-somma_no_2021" class="csl-entry" role="listitem">
 Somma, N. M., Bargsted, M., Disi Pavlic, R., &amp; Medel, R. M. (2021). No Water in the Oasis: The <span>Chilean Spring</span> of 2019–2020. <em>Social Movement Studies</em>, <em>20</em>(4), 495-502. <a href="https://doi.org/10.1080/14742837.2020.1727737">https://doi.org/10.1080/14742837.2020.1727737</a>
