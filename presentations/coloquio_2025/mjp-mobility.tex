@@ -254,10 +254,6 @@ Socioeconómica
 
 4 Septiembre 2025, Santiago
 
-\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
-
-\subsection{¿A dónde quiero llegar?}\label{a-duxf3nde-quiero-llegar}
-
 \section{Contexto y motivación}\label{contexto-y-motivaciuxf3n}
 
 \subsection{Contexto y motivación}\label{contexto-y-motivaciuxf3n-1}
@@ -291,7 +287,7 @@ Socioeconómica
 \end{enumerate}
 
 Preferencias por justicia de mercado (Busemeyer, 2014; Castillo et~al.,
-2025; Immergut \& Schneider, 2020; Koos \& Sachweh, 2019; Lindh, 2015)
+2025; Koos \& Sachweh, 2019; Lindh, 2015)
 
 \subsection{Preferencias por justicia de
 mercado}\label{preferencias-por-justicia-de-mercado}
@@ -312,8 +308,8 @@ mercado}\label{preferencias-por-justicia-de-mercado}
 
 Preferencias por la comodificación de servicios
 
-\subsection{Preferencias por justicia de
-mercado}\label{preferencias-por-justicia-de-mercado-1}
+\subsection{Preferencias por la comodificación de
+servicios}\label{preferencias-por-la-comodificaciuxf3n-de-servicios}
 
 \subsubsection{Contextual}\label{contextual}
 
@@ -343,8 +339,8 @@ mercado}\label{preferencias-por-justicia-de-mercado-1}
   Conservadurismo/liberalismo económico (Lee \& Stacey, 2023)
 \end{itemize}
 
-\subsection{Preferencias por justicia de mercado:
-Chile}\label{preferencias-por-justicia-de-mercado-chile}
+\subsection{Preferencias por la comodificación de servicios:
+Chile}\label{preferencias-por-la-comodificaciuxf3n-de-servicios-chile}
 
 \begin{enumerate}
 \def\labelenumi{\arabic{enumi}.}
@@ -374,10 +370,12 @@ Chile}\label{preferencias-por-justicia-de-mercado-chile}
 
 \subsection{Este estudio}\label{este-estudio}
 
-Cómo la movilidad social afecta estas preferencias sigue sin respuesta
+El movimiento entre posiciones sociales expone a los individuos
+experiencias y mecanismos que afectan nociones de justicia (Alesina
+et~al., 2018; Ares, 2020; Day \& Fiske, 2017; Gugushvili, 2017)
 
-El movimiento entre posiciones expone experiencias y \textbf{mecanismos}
-que afectan nociones de justicia
+Meritocracia como mecanismo de sesgo de atribución(Gugushvili, 2016;
+Molina et~al., 2019; Schmidt, 2011).
 
 \section{}\label{section}
 
@@ -387,39 +385,6 @@ Chile?}}
 
 \textbf{\emph{(2) ¿Cómo las creencias meritocráticas median esta
 relación en el contexto chileno?}}
-
-\subsection{Movilidad social}\label{movilidad-social}
-
-\subsubsection{Afecta}\label{afecta}
-
-\begin{itemize}
-\tightlist
-\item
-  Preferencias redistributivas (Alesina et~al., 2018; Ares, 2020; Breen
-  \& Ermisch, 2024; Schmidt, 2011)
-\item
-  Creencias sobre la desigualdad (Bucca, 2016; Day \& Fiske, 2017;
-  Gugushvili, 2016b; Shariff et~al., 2016)
-\item
-  Apoyo al gasto social y políticas de bienestar (Gugushvili, 2016a,
-  2017)
-\end{itemize}
-
-\subsubsection{Mecanismos}\label{mecanismos}
-
-\begin{itemize}
-\tightlist
-\item
-  Intereses materiales (Helgason \& Rehm, 2025)
-\item
-  Socialización (Jaime-Castillo \& Marqués-Perales, 2019)
-\item
-  \textbf{Self-serving bias} (Gugushvili, 2016a; Molina et~al., 2019;
-  Schmidt, 2011).
-\item
-  Meritocracia como proxy al sesgo de atribuciones internas y externas
-  (Young, 1958)
-\end{itemize}
 
 \subsection{Contexto chileno}\label{contexto-chileno}
 
@@ -447,6 +412,19 @@ relación en el contexto chileno?}}
 
 \subsection{Estrategia de identificación
 causal}\label{estrategia-de-identificaciuxf3n-causal}
+
+\begin{figure}
+
+\caption{\label{fig-dag}DAG movilidad social, meritocracia y
+preferencias por comodificación}
+
+\centering{
+
+\includegraphics[width=2\linewidth,height=\textheight,keepaspectratio]{mjp-mobility_files/figure-pdf/fig-dag-1.pdf}
+
+}
+
+\end{figure}%
 
 \subsection{Datos}\label{datos}
 
@@ -485,9 +463,8 @@ causal de la movilidad social:
 \item
   \textbf{Propensity-score estimation}: Se estima la probabilidad de
   movilidad social mediante un modelo logístico multinomial en relación
-  con las trayectorias inmóviles para cada estrato (categ. ref.). Estas
-  puntuaciones de propensión se emplean posteriormente para ajustar la
-  selección en la movilidad al evaluar su efecto.
+  con las trayectorias inmóviles (categ. ref.) para cada estrato.
+  Creación de IPW o ``clones''
 \end{enumerate}
 
 \subsection{Tratamiento}\label{tratamiento-1}
@@ -534,12 +511,40 @@ causal de la movilidad social:
   \end{itemize}
 \end{itemize}
 
-\subsection{Estimand y estimando}\label{estimand-y-estimando}
+\subsection{Estimand}\label{estimand}
 
 \begin{itemize}
 \tightlist
 \item
-  Métodos
+  Efecto causal promedio de pasar de una clase de origen \emph{j} a una
+  clase de destino \emph{k} comparando a las personas que realmente
+  alcanzan \emph{k} con su resultado contrafactual si se hubieran
+  trasladado a un destino alternativo \emph{k′} (Breen \& Ermisch, 2024)
+  (Ecuación~\ref{eq-att}).
+\end{itemize}
+
+\begin{equation}\phantomsection\label{eq-att}{ 
+ATT_{jkk′} =E[Y(D=k|O=j, D=k)]−E[Y(D=k′|O=j, D=k)]
+}\end{equation}
+
+\begin{itemize}
+\tightlist
+\item
+  El estimador resultante es el efecto promedio del tratamiento sobre
+  los tratados (ATT)
+\end{itemize}
+
+\subsection{Estimando}\label{estimando}
+
+\begin{itemize}
+\item
+  Para estimar el efecto causal de la movilidad social, utilizo modelos
+  de regresión lineal con ponderaciones de probabilidad inversa (IPW)
+  para la movilidad condicional a la clase de origen (Breen \& Ermisch,
+  2024)
+\item
+  Para mediación ocupo el estimador Average Causal Mediation Effect
+  (Imai et~al., 2010)
 \end{itemize}
 
 \section{Resultados}\label{resultados}
@@ -589,6 +594,21 @@ preferencia por comodificación en pensiones}
 
 \end{figure}%
 
+\subsection{Mediación}\label{mediaciuxf3n}
+
+\begin{figure}
+
+\caption{\label{fig-acme}ACME para meritocracia y preferencias por
+comodificación en pensiones}
+
+\centering{
+
+\includegraphics[width=1.8\linewidth,height=\textheight,keepaspectratio]{mjp-mobility_files/figure-pdf/fig-acme-1.pdf}
+
+}
+
+\end{figure}%
+
 \section{Discusión y proyecciones}\label{discusiuxf3n-y-proyecciones}
 
 \section{Discusión y proyecciones}\label{discusiuxf3n-y-proyecciones-1}
@@ -603,8 +623,8 @@ preferencia por comodificación en pensiones}
   \textbf{Contexto chileno}: profunda comodificación y privatización de
   servicios escenciales → trabajador-empresario
 \item
-  \textbf{Mediación}: rol de la meritocracia como mediador → ACME (Imai
-  et~al., 2010), moderación (?)
+  \textbf{Mediación}: rol de la meritocracia como mediador → ACME
+  supuestos muy fuertes = alternativas (?)
 \end{enumerate}
 
 \section{Gracias por su atención!}\label{gracias-por-su-atenciuxf3n}
@@ -641,12 +661,6 @@ Que La Pandemia Revel{ó}} (Nodo XXI). Santiago.
 Breen, R., \& Ermisch, J. (2024). The {Effects} of {Social Mobility}.
 \emph{Sociological Science}, \emph{11}, 467-488.
 \url{https://doi.org/10.15195/v11.a17}
-
-\bibitem[\citeproctext]{ref-bucca_merit_2016}
-Bucca, M. (2016). Merit and Blame in Unequal Societies: {Explaining
-Latin Americans}' Beliefs about Wealth and Poverty. \emph{Research in
-Social Stratification and Mobility}, \emph{44}, 98-112.
-\url{https://doi.org/10.1016/j.rssm.2016.02.005}
 
 \bibitem[\citeproctext]{ref-busemeyer_skills_2014}
 Busemeyer, M. (2014). \emph{Skills and {Inequality}: {Partisan Politics}
@@ -695,26 +709,15 @@ Gingrich, J. R. (2011). \emph{Making {Markets} in the {Welfare State}:
 University Press. \url{https://doi.org/10.1017/CBO9780511791529}
 
 \bibitem[\citeproctext]{ref-gugushvili_intergenerational_2016c}
-Gugushvili, A. (2016a). Intergenerational Objective and Subjective
+Gugushvili, A. (2016). Intergenerational Objective and Subjective
 Mobility and Attitudes towards Income Differences: Evidence from
 Transition Societies. \emph{Journal of International and Comparative
 Social Policy}, \emph{32}(3), 199-219.
 \url{https://doi.org/10.1080/21699763.2016.1206482}
 
-\bibitem[\citeproctext]{ref-gugushvili_intergenerational_2016}
-Gugushvili, A. (2016b). Intergenerational {Social Mobility} and {Popular
-Explanations} of {Poverty}: {A Comparative Perspective}. \emph{Social
-Justice Research}, \emph{29}(4), 402-428.
-\url{https://doi.org/10.1007/s11211-016-0275-9}
-
 \bibitem[\citeproctext]{ref-gugushvili_subjective_2017}
 Gugushvili, A. (2017). Subjective {Intergenerational Mobility} and
 {Support} for {Welfare State Programmes}.
-
-\bibitem[\citeproctext]{ref-helgason_class_2025}
-Helgason, A. F., \& Rehm, P. (2025). Class Experiences and the Long-Term
-Evolution of Economic Values. \emph{Social Forces}, \emph{103}(3),
-1125-1143. \url{https://doi.org/10.1093/sf/soae135}
 
 \bibitem[\citeproctext]{ref-imai_identification_2010}
 Imai, K., Keele, L., \& Yamamoto, T. (2010). Identification, {Inference}
@@ -728,12 +731,6 @@ Affluent to Be Able to Purchase {«Better»} Healthcare? {Existential}
 Standards and Institutional Norms in Healthcare Attitudes across 28
 Countries. \emph{Social Science \& Medicine}, \emph{267}, 113146.
 \url{https://doi.org/10.1016/j.socscimed.2020.113146}
-
-\bibitem[\citeproctext]{ref-jaime-castillo_social_2019}
-Jaime-Castillo, A. M., \& Marqués-Perales, I. (2019). Social Mobility
-and Demand for Redistribution in {Europe}: A Comparative Analysis.
-\emph{The British Journal of Sociology}, \emph{70}(1), 138-165.
-\url{https://doi.org/10.1111/1468-4446.12363}
 
 \bibitem[\citeproctext]{ref-kluegel_legitimation_1999}
 Kluegel, J. R., Mason, D. S., \& Wegener, B. (1999). The {Legitimation}
@@ -807,12 +804,6 @@ de Chile, Santiago.
 \bibitem[\citeproctext]{ref-schmidt_experience_2011}
 Schmidt, A. W. (2011). The Experience of Social Mobility and the
 Formation of Attitudes toward Redistribution. En.
-
-\bibitem[\citeproctext]{ref-shariff_income_2016}
-Shariff, A. F., Wiwad, D., \& Aknin, L. B. (2016). Income {Mobility
-Breeds Tolerance} for {Income Inequality}: {Cross-National} and
-{Experimental Evidence}. \emph{Perspectives on Psychological Science},
-\emph{11}(3), 373-380. \url{https://doi.org/10.1177/1745691616635596}
 
 \bibitem[\citeproctext]{ref-somma_no_2021}
 Somma, N. M., Bargsted, M., Disi Pavlic, R., \& Medel, R. M. (2021). No

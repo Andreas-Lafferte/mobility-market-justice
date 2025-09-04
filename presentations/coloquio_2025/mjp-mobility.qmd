@@ -23,9 +23,6 @@ format:
 # data-background-size: cover
     auto-play-media: true
     mathjax: "default"
-  pdf:
-    format: beamer 
-    keep-tex: true  # Debug LaTeX output if needed
 editor_options: 
   chunk_output_type: console
 ---
@@ -114,17 +111,6 @@ Coloquio de Investigación en Justicia Distributiva y Desigualdad Socioeconómic
 :::
 :::
 
----
-
-## ¿A dónde quiero llegar?
-
-::: {.fragment}
-
-<div style="text-align:center;">
-  <img src="images/idea.png" style="width:100%; max-width:none;">
-</div>
-
-:::
 
 # Contexto y motivación {.xlarge data-background-color="#523870"}
 
@@ -139,32 +125,30 @@ Coloquio de Investigación en Justicia Distributiva y Desigualdad Socioeconómic
 
 ## Antecedentes
 
-::: {.box-inv-4 .sp-after .fragment style="font-size: 100%;"}
+::: {.box-inv-4 .sp-after .fragment style="font-size: 110%;"}
 
 1) Privatización y mercantilización de  bienes públicos, políticas de bienestar y servicios sociales [@gingrich_making_2011; @streeck_how_2016]
 
 :::
 
-::: {.box-inv-4 .sp-after .fragment style="font-size: 100%;"}
+::: {.box-inv-4 .sp-after .fragment style="font-size: 110%;"}
 
 2) En AL y Chile, modificaron la arquitectura de las instituciones del bienestar expandiendo lógica de mercado [@ferre_welfare_2023; @madariaga_three_2020]
 
 :::
 
 
-::: {.box-inv-4 .sp-after .fragment style="font-size: 100%;"}
+::: {.box-inv-4 .sp-after .fragment style="font-size: 110%;"}
 
 3) Este orden económico se refleja en una economía moral específica [@mau_inequality_2015; @svallforsMoralEconomyClass2006a]
 
 :::
 
-::: {.box-inv-5 .sp-after-half .fragment style="font-size: 100%;"}
+::: {.box-inv-5 .sp-after-half .fragment style="font-size: 110%;"}
 
-Preferencias por justicia de mercado [@busemeyer_skills_2014; @immergut_it_2020; @castillo_perceptions_2025; @koos_moral_2019; @lindh_public_2015]
+Preferencias por justicia de mercado [@busemeyer_skills_2014; @castillo_perceptions_2025; @koos_moral_2019; @lindh_public_2015]
 
 :::
-
-
 
 ## Preferencias por justicia de mercado
 
@@ -185,7 +169,7 @@ Preferencias por la comodificación de servicios
 
 :::
 
-## Preferencias por justicia de mercado
+## Preferencias por la comodificación de servicios
 
 
 ::::: columns
@@ -210,7 +194,7 @@ Preferencias por la comodificación de servicios
 :::
 :::::
 
-## Preferencias por justicia de mercado: Chile
+## Preferencias por la comodificación de servicios: Chile
 
 ::: {.incremental .highlight-last style="font-size: 110%;"}
 
@@ -232,14 +216,15 @@ Preferencias por la comodificación de servicios
 
 ::: {.pull-left .box-inv-5 .sp-after .fragment style="font-size: 120%;"}
 
-Cómo la movilidad social afecta estas preferencias sigue sin respuesta
+El movimiento entre posiciones sociales expone a los individuos experiencias y mecanismos que afectan nociones de justicia [@alesina_intergenerational_2018; @ares_changing_2020; @gugushvili_subjective_2017; @day_movin_2017]
+
 :::
 
-</br></br>
+</br></br></br></br>
 
 ::: {.pull-right .box-inv-5 .sp-after .fragment style="font-size: 120%;"}
 
-El movimiento entre posiciones expone experiencias y **mecanismos** que afectan nociones de justicia
+Meritocracia como mecanismo de sesgo de atribución[@schmidt_experience_2011; @gugushvili_intergenerational_2016c; @molina_its_2019].
 
 :::
 
@@ -254,30 +239,6 @@ El movimiento entre posiciones expone experiencias y **mecanismos** que afectan 
 
 ::::
 
-## Movilidad social
-
-
-::::: columns
-::: {.column width="50%" .incremental .highlight-last style="font-size: 110%;"}
-
-### Afecta
-
-- Preferencias redistributivas [@alesina_intergenerational_2018; @ares_changing_2020; @schmidt_experience_2011; @breen_effects_2024]
-- Creencias sobre la desigualdad [@gugushvili_intergenerational_2016; @bucca_merit_2016; @shariff_income_2016; @day_movin_2017]
-- Apoyo al gasto social y políticas de bienestar [@gugushvili_subjective_2017; @gugushvili_intergenerational_2016c]
-
-:::
-
-::: {.column width="50%" .incremental .highlight-last style="font-size: 110%;"}
-
-### Mecanismos
-
-- Intereses materiales [@helgason_class_2025]
-- Socialización [@jaime-castillo_social_2019]
-- **Self-serving bias** [@schmidt_experience_2011; @gugushvili_intergenerational_2016c; @molina_its_2019].
-- Meritocracia como proxy al sesgo de atribuciones internas y externas [@young_rise_1958]
-:::
-:::::
 
 ## Contexto chileno
 
@@ -304,6 +265,74 @@ El movimiento entre posiciones expone experiencias y **mecanismos** que afectan 
 # Método {.xlarge data-background-color="#523870"}
 
 ## Estrategia de identificación causal
+
+```{r}
+#| label: fig-dag
+#| fig-cap-location: top
+#| fig-cap: "DAG movilidad social, meritocracia y preferencias por comodificación"
+#| fig-align: center
+#| out-width: '200%'
+library(dagitty)
+library(ggdag)
+library(ggplot2)
+
+# Coordenadas para ubicar los nodos según el tiempo t1–t4
+coords <- list(
+  x = c(C=-1,   # Confusores pre
+        T= 0,   # Tratamiento
+        L= 1,   # Post-tratamiento
+        M= 1,   # Mediador
+        Y= 2),  # Outcome
+  y = c(C= 0.6,
+        T= 0.9,
+        L=-0.4,
+        M= 0.2,
+        Y= 0.9)
+)
+
+# Definición del DAG
+dag_mjp <- dagify(
+  T ~ C,          # Tratamiento depende de confusores pre
+  L ~ T + C,      # Confusor post-T inducido por T y C
+  M ~ T + C + L,  # Mediador depende de T, C y L
+  Y ~ T + M + C + L,  # Outcome depende de todo lo anterior
+  exposure = "T",
+  outcome  = "Y",
+  coords   = coords
+)
+
+# Pasar a formato tidy
+td <- tidy_dagitty(dag_mjp)
+
+# Asignar tiempos por nodo
+time_map <- c(
+  C = "t1",
+  T = "t2",
+  L = "t3",
+  M = "t3",
+  Y = "t4"
+)
+td$data$time <- unname(time_map[td$data$name])
+
+# Graficar DAG
+ggdag(td, node_size = 18, text_size = 6, edge_size = 1.2) +   # <--- aumenta nodos, texto de nodos y grosor de flechas
+  theme_classic() + 
+  remove_axes() + 
+  theme(axis.line = element_blank(),
+        text = element_text(size = 16)) +                     # <--- tamaño global del texto adicional
+  xlim(-1.5, 2.5) + ylim(-1, 1) +
+  
+  # Etiquetas extra
+  geom_text(x=-1, y=-0.45, label="T = Movilidad social\n(upward / downward)", hjust=0, size=5) +
+  geom_text(x=-1, y=-0.70, label="Y = Preferencias por\ncomodificación", hjust=0, size=5) +
+  geom_text(x=-1, y=-0.95, label="M = Creencias\nmeritocráticas", hjust=0, size=5)  +
+  geom_text(x=0.55, y=-0.7, label="C = Confusores pre-tratamiento\n(propensity)", hjust=0, size=5)  +
+  geom_text(x=0.55, y=-0.9, label="L = Confusor post-T", hjust=0, size=5)
+
+
+
+
+```
 
 ## Datos
 
@@ -336,7 +365,7 @@ Siguiendo la propuesta de @breen_effects_2024 para estimar el efecto causal de l
 
 1. **Asignación de clase**: En base a la ocupación (ISCO-08) del padre/madre y del entrevistado se crean estratos de origen y destino (bajo, medio y alto) según terciles de la distribución del índice de estatus ocupacional (ISEI)
 
-2. **Propensity-score estimation**: Se estima la probabilidad de movilidad social mediante un modelo logístico multinomial en relación con las trayectorias inmóviles para cada estrato (categ. ref.). Estas puntuaciones de propensión se emplean posteriormente para ajustar la selección en la movilidad al evaluar su efecto.
+2. **Propensity-score estimation**: Se estima la probabilidad de movilidad social mediante un modelo logístico multinomial en relación con las trayectorias inmóviles (categ. ref.) para cada estrato. Creación de IPW o "clones"
 
 
 :::
@@ -401,9 +430,36 @@ sjPlot::sjt.xtab(db$estrato_orig,
 
 :::
 
-## Estimand y estimando
+## Estimand
 
-- Métodos
+::: {.fragment style="font-size: 120%;"}
+
+- Efecto causal promedio de pasar de una clase de origen *j* a una clase de destino *k* comparando a las personas que realmente alcanzan *k* con su resultado contrafactual si se hubieran trasladado a un destino alternativo *k′* [@breen_effects_2024] (@eq-att).
+:::
+
+::: {.fragment}
+$$ 
+ATT_{jkk′} =E[Y(D=k|O=j, D=k)]−E[Y(D=k′|O=j, D=k)]
+$$ {#eq-att}
+
+:::
+
+::: {.fragment style="font-size: 120%;"}
+
+- El estimador resultante es el efecto promedio del tratamiento sobre los tratados (ATT) 
+:::
+
+
+## Estimando
+
+::: {.incremental style="font-size: 120%;"}
+
+- Para estimar el efecto causal de la movilidad social, utilizo modelos de regresión lineal con ponderaciones de probabilidad inversa (IPW) para la movilidad condicional a la clase de origen [@breen_effects_2024]
+
+- Para mediación ocupo el estimador Average Causal Mediation Effect [@imai_identification_2010]
+
+:::
+
 
 
 # Resultados {.xlarge data-background-color="#523870"}
@@ -463,7 +519,7 @@ ggplot(df_health_lab, aes(x = estimate, y = term)) +
   geom_errorbarh(aes(xmin = conf.low, xmax = conf.high), height = 0, size = 1) +
   geom_point(size = 3.5) +
   # etiquetas: coef en el punto
-  geom_text(aes(label = est_lab), vjust = -0.8, size = 3.3) +
+  geom_text(aes(label = est_lab), vjust = -0.8, size = 4) +
   scale_x_continuous(limits = c(-1, 1), breaks = seq(-1, 1, 0.5)) +
   labs(x = "Estimate (β)", y = NULL) +
   theme_ggdist() +
@@ -526,7 +582,7 @@ ggplot(df_educ_lab, aes(x = estimate, y = term)) +
   geom_errorbarh(aes(xmin = conf.low, xmax = conf.high), height = 0, size = 1) +
   geom_point(size = 3.5) +
   # etiquetas: coef en el punto
-  geom_text(aes(label = est_lab), vjust = -0.8, size = 3.3) +
+  geom_text(aes(label = est_lab), vjust = -0.8, size = 4) +
   scale_x_continuous(limits = c(-1, 1), breaks = seq(-1, 1, 0.5)) +
   labs(x = "Estimate (β)", y = NULL) +
   theme_ggdist() +
@@ -588,7 +644,7 @@ ggplot(df_pension_lab, aes(x = estimate, y = term)) +
   geom_errorbarh(aes(xmin = conf.low, xmax = conf.high), height = 0, size = 1) +
   geom_point(size = 3.5) +
   # etiquetas: coef en el punto
-  geom_text(aes(label = est_lab), vjust = -0.8, size = 3.3) +
+  geom_text(aes(label = est_lab), vjust = -0.8, size = 4) +
   scale_x_continuous(limits = c(-1, 1), breaks = seq(-1, 1, 0.5)) +
   labs(x = "Estimate (β)", y = NULL) +
   theme_ggdist() +
@@ -598,6 +654,18 @@ ggplot(df_pension_lab, aes(x = estimate, y = term)) +
 
 ```
 
+## Mediación
+
+```{r}
+#| label: fig-acme
+#| fig-cap-location: top
+#| fig-cap: "ACME para meritocracia y preferencias por comodificación en pensiones"
+#| fig-align: center
+#| out-width: '180%'
+
+
+plot(med.fit)
+```
 
 # Discusión y proyecciones {data-background-color="#523870"}
 
@@ -608,7 +676,7 @@ ggplot(df_pension_lab, aes(x = estimate, y = term)) +
 
 1. **Movilidad social**: ascendente (Middle→High) _incrementa_ la preferencia por comodificación en pensiones (dominio), no en otros. 
 2. **Contexto chileno**: profunda comodificación y privatización de servicios escenciales → trabajador-empresario 
-3. **Mediación**: rol de la meritocracia como mediador → ACME [@imai_identification_2010], moderación (?)
+3. **Mediación**: rol de la meritocracia como mediador → ACME supuestos muy fuertes =  alternativas (?)
 :::
 
 
