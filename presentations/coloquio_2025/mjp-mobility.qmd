@@ -139,96 +139,157 @@ Coloquio de Investigación en Justicia Distributiva y Desigualdad Socioeconómic
 
 ## Antecedentes
 
-</br>
+::: {.box-inv-4 .sp-after .fragment style="font-size: 100%;"}
 
-::: {.box-inv-4 .sp-after .fragment style="font-size: 150%;"}
-
-Mercantilización y privatización (M, AL, CL)
+1) Privatización y mercantilización de  bienes públicos, políticas de bienestar y servicios sociales [@gingrich_making_2011; @streeck_how_2016]
 
 :::
 
-::: {.box-inv-4 .sp-after .fragment style="font-size: 150%;"}
+::: {.box-inv-4 .sp-after .fragment style="font-size: 100%;"}
 
-Economía moral (Mau, bringing market, policy feedback)
+2) En AL y Chile, modificaron la arquitectura de las instituciones del bienestar expandiendo lógica de mercado [@ferre_welfare_2023; @madariaga_three_2020]
+
 :::
 
-::: {.box-inv-4 .sp-after .fragment style="font-size: 150%;"}
 
-MJP (Lane, Lindh, implicancias y relevancias)
+::: {.box-inv-4 .sp-after .fragment style="font-size: 100%;"}
+
+3) Este orden económico se refleja en una economía moral específica [@mau_inequality_2015; @svallforsMoralEconomyClass2006a]
+
 :::
+
+::: {.box-inv-5 .sp-after-half .fragment style="font-size: 100%;"}
+
+Preferencias por justicia de mercado [@busemeyer_skills_2014; @immergut_it_2020; @castillo_perceptions_2025; @koos_moral_2019; @lindh_public_2015]
+
+:::
+
 
 
 ## Preferencias por justicia de mercado
 
-::::: columns
-::: {.column width="50%"}
+::: {.incremental .highlight-last style="font-size: 120%;"}
 
-### Contextual
+- Lane [-@lane_market_1986]: justicia de mercado vs. justicia política
 
-- The original definition of merit is a combination of effort and talent [@young_rise_1958]
-- 2
-- 3
+- Creencias normativas que legitiman la idea de que el acceso a los servicios sociales esenciales —como la salud, la educación o las pensiones— debe determinarse según criterios basados en el mercado [@lindh_public_2015, p.895]
+
+- Medición: evaluar si las personas consideran justo que el acceso a dichos servicios dependa de los ingresos [@lindh_public_2015; @kluegel_legitimation_1999; @castillo_perceptions_2025]
+
 
 :::
 
-::: {.column width="50%"}
+::: {.box-inv-5 .sp-after .fragment style="font-size: 120%;"}
+
+Preferencias por la comodificación de servicios
+
+:::
+
+## Preferencias por justicia de mercado
+
+
+::::: columns
+::: {.column width="50%" .incremental .highlight-last style="font-size: 110%;"}
+
+### Contextual
+
+- Gasto social [@immergut_it_2020; @busemeyer_skills_2014; @busemeyer_welfare_2020]
+- Desigualdad económica [@koos_moral_2019]
+- Nivel de privatización de servicios y regulación del mercado [@lindh_public_2015; @koos_moral_2019]
+
+:::
+
+::: {.column width="50%" .incremental .highlight-last style="font-size: 110%;"}
 
 ### Individual
 
-- Adolescents from low-socioeconomic-status families are likelier to have an egalitarian fairness view and consider an equal distribution as fair in a situation with unequal merits [@almas_fairness_2017]
-- 2
-- 3
+- Estatus socioeconómico -ingresos, educación y ocupación- [@lindh_public_2015; @koos_moral_2019; @busemeyer_welfare_2020; @svallfors_political_2007]
+- Percepciones sobre la desigualdad y meritocracia [@castillo_perceptions_2025]
+- Conservadurismo/liberalismo económico [@lee_fairness_2023]
 
 :::
 :::::
 
 ## Preferencias por justicia de mercado: Chile
 
-::: {.incremental .highlight-last style="font-size: 100%;"}
+::: {.incremental .highlight-last style="font-size: 110%;"}
 
-- Otero 2024 (clase)
-- Castillo y laffert 2025 (merit)
+1. @otero_power_2024 proveen evidencia sobre:
+          
+   * Personas en posiciones sociales bajas/subordinadas muestran menor apoyo a la justicia de mercado que aquellas en posiciones altas/privilegiadas.
+
+2. @castillo_perceptions_2025 encuentran que:
+        
+   * La percepción de la desigualdad económica reduce el apoyo a la justicia de mercado.
+   * Las percepciones meritocráticas (esfuerzo) aumenta el respaldo a la justicia de mercado.
+
 
 :::
 
 ## Este estudio
 
-::: {.incremental .highlight-last style="font-size: 100%;"}
+</br>
 
-- Aunque esta claro... movilidad social
-- Efectos
-- Mecanismos 
+::: {.pull-left .box-inv-5 .sp-after .fragment style="font-size: 120%;"}
 
+Cómo la movilidad social afecta estas preferencias sigue sin respuesta
 :::
 
+</br></br>
 
-## Este estudio
+::: {.pull-right .box-inv-5 .sp-after .fragment style="font-size: 120%;"}
 
-::: {.incremental .highlight-last style="font-size: 100%;"}
-
-- Mecanismos 
-
-:::
-
-## Contexto chileno
-
-::: {.incremental .highlight-last style="font-size: 100%;"}
-
-- RRelevancia del caso Chileno: extrema comodificacion, desigualdad, limitada movilidad, alta pferencia por la meritocracia etc.
+El movimiento entre posiciones expone experiencias y **mecanismos** que afectan nociones de justicia
 
 :::
-
 
 
 #  {data-background-color="#523870"}
 
 :::: {style="font-size: 170%;"}
 
-**_(1) ¿En qué medida la movilidad social intergeneracional afecta las preferencias por comodificación en salud, pensiones y educación en Chile?_**
+**_(1) ¿Cómo la movilidad social intergeneracional afecta las preferencias por comodificación en salud, pensiones y educación en Chile?_**
 
 **_(2) ¿Cómo las creencias meritocráticas median esta relación en el contexto chileno?_**
 
 ::::
+
+## Movilidad social
+
+
+::::: columns
+::: {.column width="50%" .incremental .highlight-last style="font-size: 110%;"}
+
+### Afecta
+
+- Preferencias redistributivas [@alesina_intergenerational_2018; @ares_changing_2020; @schmidt_experience_2011; @breen_effects_2024]
+- Creencias sobre la desigualdad [@gugushvili_intergenerational_2016; @bucca_merit_2016; @shariff_income_2016; @day_movin_2017]
+- Apoyo al gasto social y políticas de bienestar [@gugushvili_subjective_2017; @gugushvili_intergenerational_2016c]
+
+:::
+
+::: {.column width="50%" .incremental .highlight-last style="font-size: 110%;"}
+
+### Mecanismos
+
+- Intereses materiales [@helgason_class_2025]
+- Socialización [@jaime-castillo_social_2019]
+- **Self-serving bias** [@schmidt_experience_2011; @gugushvili_intergenerational_2016c; @molina_its_2019].
+- Meritocracia como proxy al sesgo de atribuciones internas y externas [@young_rise_1958]
+:::
+:::::
+
+## Contexto chileno
+
+::: {.incremental .highlight-last style="font-size: 120%;"}
+
+- Crecimiento con elevada desigualdad [@llorca-jana_historia_2021; @flores_top_2020]
+- Profunda privatización y comodificación de áreas de reproducción social con fuerte dependencia Estatal [@madariaga_three_2020; @boccardo_30_2020]
+- Rigida movilidad relativa y fuerte clausura cúspide [@lopez-roldan_comparative_2021; @torche_intergenerational_2014]
+- Conflictividad social [@somma_no_2021; @nucleodesociologiacontingente_informe_2020] y legitimidad de la desigualdad [@castillo_perceptions_2025; @canalesceron_sujeto_2021; @panes_criticas_2020]
+:::
+
+
 
 ## Hipótesis
 
@@ -282,7 +343,43 @@ Siguiendo la propuesta de @breen_effects_2024 para estimar el efecto causal de l
 
 ## Tratamiento
 
+```{r}
+#| label: tbl-ocup
+#| tbl-cap-location: top
+#| tbl-cap: "Movilidad ocupacional por grupos ocupacionales"
 
+library(sjPlot)
+
+db <- db %>% 
+  mutate(
+    across(
+      .cols = c(estrato_orig, estrato_ocupa),
+      .fns = ~ car::recode(.,
+                           recodes = c("1 = 'Low';
+                                       2 = 'Middle';
+                                       3 = 'High'"),
+                           as.factor = T)
+    )
+  ) %>% 
+  mutate(
+    across(
+      .cols = c(estrato_orig, estrato_ocupa),
+      .fns = ~ factor(., levels = c("Low", "Middle", "High"))
+    )
+  )
+
+db$estrato_orig <- sjlabelled::set_label(db$estrato_orig, "Father stratum")
+
+db$estrato_ocupa <- sjlabelled::set_label(db$estrato_ocupa, "Offspring stratum")
+
+sjPlot::sjt.xtab(db$estrato_orig, 
+                 db$estrato_ocupa, 
+                 show.row.prc = T,
+                 show.col.prc = T,
+                 statistics = NULL)
+```
+
+- _N_ (id único) = 4.447. Porcentajes en azul corresponde a las filas y en verde a las columnas.
 
 ## Tratamiento
 
@@ -313,12 +410,19 @@ Siguiendo la propuesta de @breen_effects_2024 para estimar el efecto causal de l
 
 ## Modelos
 
+::: {.fragment}
+
 ```{r}
 #| label: fig-mh
 #| fig-cap-location: top
 #| fig-cap: "Estimaciones de efectos de mobilidad en preferencia por comodificación en salud"
 #| fig-align: center
-#| out-width: '100%'
+#| out-width: '180%'
+
+library(broom)
+library(forcats)
+conflicts_prefer(dplyr::filter)
+
 
 df_health <- bind_rows(
 tidy(mh_lm, conf.int = TRUE) %>%
@@ -346,27 +450,153 @@ tidy(mh_hl, conf.int = TRUE) %>%
   mutate(term = "High→Low \n(N obs. = 576; N Clusters = 432)") 
 ) 
   
-df_health %>%   
-  ggplot(aes(x = estimate, y = term)) +
-  geom_vline(xintercept = 0, linetype = "solid", color = "darkorange", size = 0.5, alpha = 0.8,) +
-  geom_point(aes(x = estimate), size = 3.5) +
-  geom_errorbar(aes(xmin = conf.low, xmax = conf.high), 
-                width = 0, size = 1, position = position_dodge2()) +
-  scale_x_continuous(limits = c(-1, 1),
-                     breaks = seq(-1,1,0.5)) +
-  labs(
-    x = "Coeficiente (β)",
-    y = NULL
-  ) +
+df_health_lab <- df_health %>%
+  mutate(
+    sig     = ifelse(conf.low * conf.high > 0, "*", ""),  # IC no cruza 0
+    est_lab = sprintf("%.2f%s", estimate, sig),
+    low_lab = sprintf("%.2f", conf.low),
+    high_lab= sprintf("%.2f", conf.high)
+  )
+
+ggplot(df_health_lab, aes(x = estimate, y = term)) +
+  geom_vline(xintercept = 0, linetype = "solid", color = "darkorange", size = 0.5, alpha = 0.8) +
+  geom_errorbarh(aes(xmin = conf.low, xmax = conf.high), height = 0, size = 1) +
+  geom_point(size = 3.5) +
+  # etiquetas: coef en el punto
+  geom_text(aes(label = est_lab), vjust = -0.8, size = 3.3) +
+  scale_x_continuous(limits = c(-1, 1), breaks = seq(-1, 1, 0.5)) +
+  labs(x = "Estimate (β)", y = NULL) +
   theme_ggdist() +
   theme(axis.title = element_text(face = "bold"),
-        axis.text = element_text(face = "bold"))
-
+        axis.text  = element_text(face = "bold"),
+        text = element_text(size = 18))
 
 
 ```
 
-## Mediación
+:::
+
+## Modelos
+
+
+```{r}
+#| label: fig-me
+#| fig-cap-location: top
+#| fig-cap: "Estimaciones de efectos de mobilidad en preferencia por comodificación en educación"
+#| fig-align: center
+#| out-width: '180%'
+
+
+df_educ <- bind_rows(
+tidy(me_lm, conf.int = TRUE) %>%
+  filter(term == "t") %>%
+  mutate(term = "Low→Middle \n(N obs. = 534; N Clusters = 380)") 
+,
+tidy(me_lh, conf.int = TRUE) %>%
+  filter(term == "t") %>%
+  mutate(term = "Low→High \n(N obs. = 450; N Clusters = 342)") 
+,
+tidy(me_mh, conf.int = TRUE) %>%
+  filter(term == "t") %>%
+  mutate(term = "Middle→High \n(N obs. = 424; N Clusters = 311)") 
+,
+tidy(me_ml, conf.int = TRUE) %>%
+  filter(term == "t") %>%
+  mutate(term = "Middle→Low \n(N obs. = 467; N Clusters = 342)") 
+,
+tidy(me_hm, conf.int = TRUE) %>%
+  filter(term == "t") %>%
+  mutate(term = "High→Middle \n(N obs. = 611; N Clusters = 437)") 
+,
+tidy(me_hl, conf.int = TRUE) %>%
+  filter(term == "t") %>%
+  mutate(term = "High→Low \n(N obs. = 569; N Clusters = 430)") 
+) 
+  
+df_educ_lab <- df_educ %>%
+  mutate(
+    sig     = ifelse(conf.low * conf.high > 0, "*", ""),  # IC no cruza 0
+    est_lab = sprintf("%.2f%s", estimate, sig),
+    low_lab = sprintf("%.2f", conf.low),
+    high_lab= sprintf("%.2f", conf.high)
+  )
+
+ggplot(df_educ_lab, aes(x = estimate, y = term)) +
+  geom_vline(xintercept = 0, linetype = "solid", color = "darkorange", size = 0.5, alpha = 0.8) +
+  geom_errorbarh(aes(xmin = conf.low, xmax = conf.high), height = 0, size = 1) +
+  geom_point(size = 3.5) +
+  # etiquetas: coef en el punto
+  geom_text(aes(label = est_lab), vjust = -0.8, size = 3.3) +
+  scale_x_continuous(limits = c(-1, 1), breaks = seq(-1, 1, 0.5)) +
+  labs(x = "Estimate (β)", y = NULL) +
+  theme_ggdist() +
+   theme(axis.title = element_text(face = "bold"),
+        axis.text  = element_text(face = "bold"),
+        text = element_text(size = 18))
+
+```
+
+
+## Modelos
+
+
+
+```{r}
+#| label: fig-mp
+#| fig-cap-location: top
+#| fig-cap: "Estimaciones de efectos de mobilidad en preferencia por comodificación en pensiones"
+#| fig-align: center
+#| out-width: '180%'
+
+
+df_pension <- bind_rows(
+tidy(mp_lm, conf.int = TRUE) %>%
+  filter(term == "t") %>%
+  mutate(term = "Low→Middle \n(N obs. = 511; N Clusters = 365)") 
+,
+tidy(mp_lh, conf.int = TRUE) %>%
+  filter(term == "t") %>%
+  mutate(term = "Low→High \n(N obs. = 435; N Clusters = 333)") 
+,
+tidy(mp_mh, conf.int = TRUE) %>%
+  filter(term == "t") %>%
+  mutate(term = "Middle→High \n(N obs. = 396; N Clusters = 298)") 
+,
+tidy(mp_ml, conf.int = TRUE) %>%
+  filter(term == "t") %>%
+  mutate(term = "Middle→Low \n(N obs. = 447; N Clusters = 335)") 
+,
+tidy(mp_hm, conf.int = TRUE) %>%
+  filter(term == "t") %>%
+  mutate(term = "High→Middle \n(N obs. = 581; N Clusters = 421)") 
+,
+tidy(mp_hl, conf.int = TRUE) %>%
+  filter(term == "t") %>%
+  mutate(term = "High→Low \n(N obs. = 544; N Clusters = 415)") 
+) 
+  
+df_pension_lab <- df_pension %>%
+  mutate(
+    sig     = ifelse(conf.low * conf.high > 0, "*", ""),  # IC no cruza 0
+    est_lab = sprintf("%.2f%s", estimate, sig),
+    low_lab = sprintf("%.2f", conf.low),
+    high_lab= sprintf("%.2f", conf.high)
+  )
+
+ggplot(df_pension_lab, aes(x = estimate, y = term)) +
+  geom_vline(xintercept = 0, linetype = "solid", color = "darkorange", size = 0.5, alpha = 0.8) +
+  geom_errorbarh(aes(xmin = conf.low, xmax = conf.high), height = 0, size = 1) +
+  geom_point(size = 3.5) +
+  # etiquetas: coef en el punto
+  geom_text(aes(label = est_lab), vjust = -0.8, size = 3.3) +
+  scale_x_continuous(limits = c(-1, 1), breaks = seq(-1, 1, 0.5)) +
+  labs(x = "Estimate (β)", y = NULL) +
+  theme_ggdist() +
+  theme(axis.title = element_text(face = "bold"),
+        axis.text  = element_text(face = "bold"),
+        text = element_text(size = 18))
+
+```
 
 
 # Discusión y proyecciones {data-background-color="#523870"}
@@ -374,11 +604,11 @@ df_health %>%
 
 # Discusión y proyecciones {data-background-color="#523870"}
 
-::: { .incremental .highlight-last2 style="font-size: 100%;"}
+::: { .incremental .highlight-last2 style="font-size: 120%;"}
 
-- Discusión 
-
-  - Conclusión
+1. **Movilidad social**: ascendente (Middle→High) _incrementa_ la preferencia por comodificación en pensiones (dominio), no en otros. 
+2. **Contexto chileno**: profunda comodificación y privatización de servicios escenciales → trabajador-empresario 
+3. **Mediación**: rol de la meritocracia como mediador → ACME [@imai_identification_2010], moderación (?)
 :::
 
 
