@@ -316,17 +316,6 @@ iframe {
   margin-bottom: 1em !important;
 }
 
-.box-inv-4,
-.section-title-inv-4 {
-  background-color: #F9D6D8;
-}
-
-.box-inv-4,
-.title-inv-4 h1,
-.section-title-inv-4 h1 {
-  color: #E0343E;
-}
-
 
 .left-column2 {
   width: 25%;
@@ -446,13 +435,23 @@ float-left .box-4, .float-left .box-inv-4,
 
 .box-inv-4,
 .section-title-inv-4 {
-  background-color: #8c69b4;
+  background-color: #e7caed;
 }
 
 .box-inv-4,
 .title-inv-4 h1,
 .section-title-inv-4 h1 {
-  color: #ffffff;
+  color: #36224e;
+}
+
+.box-inv-5,
+.section-title-inv-5 {
+  background-color: #523870;
+}
+.box-inv-5,
+.title-inv-5 h1,
+.section-title-inv-5 h1 {
+  color: #FFFFFF;
 }
 
 // quarto-scss-analysis-annotation { "origin": "Defaults from Quarto's SCSS" }

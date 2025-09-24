@@ -211,9 +211,6 @@ db <- db %>%
     )
   )
 
-db$merit_i <- rowMeans(db[, c("merit_effort", "merit_talent")], na.rm = TRUE)
-
-
 # Crear estrato_ocupa basado en rangos de isei_ocupa
 
 #db <- db %>% 
