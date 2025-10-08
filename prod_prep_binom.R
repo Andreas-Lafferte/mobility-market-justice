@@ -19,8 +19,7 @@ pacman::p_load(tidyverse,
                summarytools,
                nnet,
                occupar,
-               cobalt,
-               WeightIt)
+               PSweight)
 
 options(scipen=999)
 rm(list = ls())
@@ -201,14 +200,13 @@ db <- db %>%
 
 db <- db %>% 
   select(idencuesta, ola, ponderador_long_total, segmento, estrato,
-         just_health, just_pension, just_educ, merit_effort,
+         just_pension, merit_effort,
          nacionalidad, sexo, m0_edad, etnia, hogar_bip_f,
          educ_orig_f, isei08_orig, 
          isei08_ocupa) %>% 
   mutate(just_pension = as.integer(just_pension),
-         just_health = as.integer(just_health),
-         just_educ = as.integer(just_educ),
-         merit_effort = as.integer(merit_effort))
+         merit_effort = as.integer(merit_effort),
+         merit_effort = if_else(merit_effort <= 3, 0, 1))
 
 # Crear estrato_ocupa basado en rangos de isei_ocupa
 
@@ -276,300 +274,164 @@ db$estrato_ocupa <- db$terc_ocupa
 
 table(db$estrato_orig, db$estrato_ocupa)
 
-# Combinations
+db <- db %>%
+  mutate(
+    inmobile = if_else(estrato_ocupa == estrato_orig, 1, 0),
+    upward = if_else(estrato_ocupa > estrato_orig, 1, 0),
+    downward = if_else(estrato_ocupa < estrato_orig, 1, 0))
+
+# Downward
 
 db <- db %>%
   mutate(
-    ll = if_else(estrato_orig == 1 & estrato_ocupa == 1, 1, 0),
-    lm = if_else(estrato_orig == 1 & estrato_ocupa == 2, 1, 0),
-    lh = if_else(estrato_orig == 1 & estrato_ocupa == 3, 1, 0),
-    
-    ml = if_else(estrato_orig == 2 & estrato_ocupa == 1, 1, 0),
-    mm = if_else(estrato_orig == 2 & estrato_ocupa == 2, 1, 0),
-    mh = if_else(estrato_orig == 2 & estrato_ocupa == 3, 1, 0),
-    
-    hl = if_else(estrato_orig == 3 & estrato_ocupa == 1, 1, 0),
-    hm = if_else(estrato_orig == 3 & estrato_ocupa == 2, 1, 0),
-    hh = if_else(estrato_orig == 3 & estrato_ocupa == 3, 1, 0)
-  )
-
-
-
-# =====
-# Low
-# =====
-db <- db %>%
-  mutate(
-    low_orig = case_when(
-      ll == 1 ~ "ll",
-      lm == 1 ~ "lm",
-      lh == 1 ~ "lh",
-      TRUE ~ NA_character_
+    downward_mob = case_when(
+      inmobile == 1 ~ 0,
+      downward == 1 ~ 1,
+      TRUE ~ NA_real_
     )
-  ) %>%
-  mutate(low_orig = factor(low_orig, levels = c("ll","lm","lh")))
+  )
 
 model_data1 <- db %>%
-  select(idencuesta, ola, low_orig, m0_edad, sexo, nacionalidad, etnia, hogar_bip_f, educ_orig_f) %>%
+  select(idencuesta, ola, downward_mob,
+         m0_edad, sexo, nacionalidad, etnia, hogar_bip_f, educ_orig_f) %>%
   tidyr::drop_na()
 
-# --- lm vs ll (ATT de lm)
-pair_lm_ll <- model_data1 %>%
-  filter(low_orig %in% c("lm","ll")) %>%
-  mutate(treat_lm = as.integer(low_orig == "lm"))
+W.dw <- weightit(
+  downward_mob ~ m0_edad + factor(sexo) + factor(nacionalidad) +
+    factor(etnia) + factor(hogar_bip_f) + educ_orig_f,
+  data     = model_data1,
+  method   = "glm",
+  estimand = "ATT")
 
-W_lm_ll <- weightit(
-  treat_lm ~ m0_edad + factor(sexo) + factor(nacionalidad) +
-    factor(etnia) + factor(hogar_bip_f) + educ_orig_f + factor(ola),
-  data     = pair_lm_ll,
-  method   = "ebal",
-  estimand = "ATT"
-)
+summary(W.dw)
+bal.tab(W.dw, stats = c("m", "v"),
+        thresholds = c(m = .05),
+        estimand = "ATT")
+cobalt::love.plot(W.dw, stats = "m", abs = TRUE, threshold = .10,
+                  var.order = "unadjusted", line = TRUE,
+                  colors = c("grey70","black")) +
+  ggtitle("Balance SMD — downward (ATT)")
 
-bal.tab(W_lm_ll, un = TRUE, m.threshold = .05, v.threshold = 2, pairwise = TRUE)
-
-pair_lm_ll <- pair_lm_ll %>%
-  mutate(
-    w_low_lm   = as.numeric(W_lm_ll$weights),
-    w_low_lm   = w_low_lm / mean(w_low_lm, na.rm = TRUE),
-    w_low_lm_t = pmin(w_low_lm, quantile(w_low_lm, 0.99, na.rm = TRUE))
-  )
-
-# --- lh vs ll (ATT de lh)
-pair_lh_ll <- model_data1 %>%
-  filter(low_orig %in% c("lh","ll")) %>%
-  mutate(treat_lh = as.integer(low_orig == "lh"))
-
-W_lh_ll <- weightit(
-  treat_lh ~ m0_edad + factor(sexo) + factor(nacionalidad) +
-    factor(etnia) + factor(hogar_bip_f) + educ_orig_f + factor(ola),
-  data     = pair_lh_ll,
-  method   = "ebal",
-  estimand = "ATT"
-)
-
-bal.tab(W_lh_ll, un = TRUE, m.threshold = .05, v.threshold = 2, pairwise = TRUE)
-
-pair_lh_ll <- pair_lh_ll %>%
-  mutate(
-    w_low_lh   = as.numeric(W_lh_ll$weights),
-    w_low_lh   = w_low_lh / mean(w_low_lh, na.rm = TRUE),
-    w_low_lh_t = pmin(w_low_lh, quantile(w_low_lh, 0.99, na.rm = TRUE))
-  )
-
-# Pega pesos de ambos pares en model_data1 (quedan NA donde no aplica)
 model_data1 <- model_data1 %>%
-  left_join(pair_lm_ll %>% select(idencuesta, ola, w_low_lm, w_low_lm_t), by = c("idencuesta","ola")) %>%
-  left_join(pair_lh_ll %>% select(idencuesta, ola, w_low_lh, w_low_lh_t), by = c("idencuesta","ola"))
-
-# Construye datos1 como en tu pipeline
-datos1 <- left_join(
-  db %>% select(-low_orig),
-  model_data1 %>% select(idencuesta, ola, low_orig, starts_with("w_low_")),
-  by = c("idencuesta", "ola")
-) %>%
   mutate(
-    moblm = case_when(lm == 1 ~ 1, ll == 1 ~ 0, TRUE ~ NA_real_),
-    moblh = case_when(lh == 1 ~ 1, ll == 1 ~ 0, TRUE ~ NA_real_)
+    w_att = as.numeric(W.dw$weights),
+    w_att = w_att / mean(w_att)      # reescalado opcional
   )
 
-# =========
-# Middle
-# =========
+cap <- quantile(model_data1$w_att, 0.99, na.rm = TRUE)
+model_data1 <- model_data1 %>% mutate(w_att_trim = pmin(w_att, cap))
+
+datos1 <- db %>%
+  select(-downward_mob) %>%
+  left_join(
+    model_data1 %>% 
+      select(idencuesta, ola, downward_mob, w_att, w_att_trim),
+    by = c("idencuesta","ola")
+  )
+
+# inmobile
+
 db <- db %>%
   mutate(
-    m_orig = case_when(
-      mm == 1 ~ "mm",
-      ml == 1 ~ "ml",
-      mh == 1 ~ "mh",
-      TRUE ~ NA_character_
+    inmobile_mob = case_when(
+      downward == 1 ~ 0,
+      upward == 1 ~ 0,
+      inmobile == 1 ~ 1,
+      TRUE ~ NA_real_
     )
-  ) %>%
-  mutate(m_orig = factor(m_orig, levels = c("mm","ml","mh")))
+  )
 
 model_data2 <- db %>%
-  select(idencuesta, ola, m_orig, m0_edad, sexo, nacionalidad, etnia, hogar_bip_f, educ_orig_f) %>%
+  select(idencuesta, ola, inmobile_mob,
+         m0_edad, sexo, nacionalidad, etnia, hogar_bip_f, educ_orig_f) %>%
   tidyr::drop_na()
 
-# --- ml vs mm (ATT de ml)
-pair_ml_mm <- model_data2 %>%
-  filter(m_orig %in% c("ml","mm")) %>%
-  mutate(treat_ml = as.integer(m_orig == "ml"))
+W.inm <- weightit(
+  inmobile_mob ~ m0_edad + factor(sexo) + factor(nacionalidad) +
+    factor(etnia) + factor(hogar_bip_f) + educ_orig_f,
+  data     = model_data2,
+  method   = "glm",
+  estimand = "ATT")
 
-W_ml_mm <- weightit(
-  treat_ml ~ m0_edad + factor(sexo) + factor(nacionalidad) +
-    factor(etnia) + factor(hogar_bip_f) + educ_orig_f + factor(ola),
-  data     = pair_ml_mm,
-  method   = "ebal",
-  estimand = "ATT"
-)
+summary(W.inm)
+bal.tab(W.inm, stats = c("m", "v"),
+        thresholds = c(m = .05),
+        estimand = "ATT")
+cobalt::love.plot(W.inm, stats = "m", abs = TRUE, threshold = .10,
+                  var.order = "unadjusted", line = TRUE,
+                  colors = c("grey70","black")) +
+  ggtitle("Balance SMD — innmobile (ATT)")
 
-bal.tab(W_ml_mm, un = TRUE, m.threshold = .05, v.threshold = 2, pairwise = TRUE)
-
-pair_ml_mm <- pair_ml_mm %>%
-  mutate(
-    w_mid_ml   = as.numeric(W_ml_mm$weights),
-    w_mid_ml   = w_mid_ml / mean(w_mid_ml, na.rm = TRUE),
-    w_mid_ml_t = pmin(w_mid_ml, quantile(w_mid_ml, 0.99, na.rm = TRUE))
-  )
-
-# --- mh vs mm (ATT de mh)
-pair_mh_mm <- model_data2 %>%
-  filter(m_orig %in% c("mh","mm")) %>%
-  mutate(treat_mh = as.integer(m_orig == "mh"))
-
-W_mh_mm <- weightit(
-  treat_mh ~ m0_edad + factor(sexo) + factor(nacionalidad) +
-    factor(etnia) + factor(hogar_bip_f) + educ_orig_f + factor(ola),
-  data     = pair_mh_mm,
-  method   = "ebal",
-  estimand = "ATT"
-)
-
-bal.tab(W_mh_mm, un = TRUE, m.threshold = .05, v.threshold = 2, pairwise = TRUE)
-
-pair_mh_mm <- pair_mh_mm %>%
-  mutate(
-    w_mid_mh   = as.numeric(W_mh_mm$weights),
-    w_mid_mh   = w_mid_mh / mean(w_mid_mh, na.rm = TRUE),
-    w_mid_mh_t = pmin(w_mid_mh, quantile(w_mid_mh, 0.99, na.rm = TRUE))
-  )
-
-# Pega pesos en model_data2
 model_data2 <- model_data2 %>%
-  left_join(pair_ml_mm %>% select(idencuesta, ola, w_mid_ml, w_mid_ml_t), by = c("idencuesta","ola")) %>%
-  left_join(pair_mh_mm %>% select(idencuesta, ola, w_mid_mh, w_mid_mh_t), by = c("idencuesta","ola"))
-
-# Construye datos2
-datos2 <- left_join(
-  db %>% select(-low_orig, -m_orig),
-  model_data2 %>% select(idencuesta, ola, m_orig, starts_with("w_mid_")),
-  by = c("idencuesta", "ola")
-) %>%
   mutate(
-    mobml = case_when(ml == 1 ~ 1, mm == 1 ~ 0, TRUE ~ NA_real_),
-    mobmh = case_when(mh == 1 ~ 1, mm == 1 ~ 0, TRUE ~ NA_real_)
+    w_att = as.numeric(W.inm$weights),
+    w_att = w_att / mean(w_att)      # reescalado opcional
   )
 
-# ======
-# High
-# ======
+cap <- quantile(model_data2$w_att, 0.99, na.rm = TRUE)
+model_data2 <- model_data2 %>% mutate(w_att_trim = pmin(w_att, cap))
+
+datos2 <- db %>%
+  select(-downward_mob, -inmobile_mob) %>%
+  left_join(
+    model_data2 %>% 
+      select(idencuesta, ola, inmobile_mob, w_att, w_att_trim),
+    by = c("idencuesta","ola")
+  )
+
+
+# Upward
+
 db <- db %>%
   mutate(
-    h_orig = case_when(
-      hh == 1 ~ "hh",
-      hm == 1 ~ "hm",
-      hl == 1 ~ "hl",
-      TRUE ~ NA_character_
+    upward_mob = case_when(
+      inmobile == 1 ~ 0,
+      upward == 1 ~ 1,
+      TRUE ~ NA_real_
     )
-  ) %>%
-  mutate(h_orig = factor(h_orig, levels = c("hh","hm","hl")))
+  )
 
 model_data3 <- db %>%
-  select(idencuesta, ola, h_orig, m0_edad, sexo, nacionalidad, etnia, hogar_bip_f, educ_orig_f) %>%
+  select(idencuesta, ola, upward_mob,
+         m0_edad, sexo, nacionalidad, etnia, hogar_bip_f, educ_orig_f) %>%
   tidyr::drop_na()
 
-# --- hm vs hh (ATT de hm)
-pair_hm_hh <- model_data3 %>%
-  filter(h_orig %in% c("hm","hh")) %>%
-  mutate(treat_hm = as.integer(h_orig == "hm"))
+W.uw <- weightit(
+  upward_mob ~ m0_edad + factor(sexo) + factor(nacionalidad) +
+    factor(etnia) + factor(hogar_bip_f) + educ_orig_f,
+  data     = model_data3,
+  method   = "glm",
+  estimand = "ATT")
 
-W_hm_hh <- weightit(
-  treat_hm ~ m0_edad + factor(sexo) + factor(nacionalidad) +
-    factor(etnia) + factor(hogar_bip_f) + educ_orig_f + factor(ola),
-  data     = pair_hm_hh,
-  method   = "ebal",
-  estimand = "ATT"
-)
+summary(W.uw)
+bal.tab(W.uw, stats = c("m", "v"),
+        thresholds = c(m = .05),
+        estimand = "ATT")
+cobalt::love.plot(W.uw, stats = "m", abs = TRUE, threshold = .10,
+                  var.order = "unadjusted", line = TRUE,
+                  colors = c("grey70","black")) +
+  ggtitle("Balance SMD — upward (ATT)")
 
-bal.tab(W_hm_hh, un = TRUE, m.threshold = .05, v.threshold = 2, pairwise = TRUE)
-
-pair_hm_hh <- pair_hm_hh %>%
-  mutate(
-    w_hig_hm   = as.numeric(W_hm_hh$weights),
-    w_hig_hm   = w_hig_hm / mean(w_hig_hm, na.rm = TRUE),
-    w_hig_hm_t = pmin(w_hig_hm, quantile(w_hig_hm, 0.99, na.rm = TRUE))
-  )
-
-# --- hl vs hh (ATT de hl)
-pair_hl_hh <- model_data3 %>%
-  filter(h_orig %in% c("hl","hh")) %>%
-  mutate(treat_hl = as.integer(h_orig == "hl"))
-
-W_hl_hh <- weightit(
-  treat_hl ~ m0_edad + factor(sexo) + factor(nacionalidad) +
-    factor(etnia) + factor(hogar_bip_f) + educ_orig_f + factor(ola),
-  data     = pair_hl_hh,
-  method   = "ebal",
-  estimand = "ATT"
-)
-
-bal.tab(W_hl_hh, un = TRUE, m.threshold = .05, v.threshold = 2, pairwise = TRUE)
-
-pair_hl_hh <- pair_hl_hh %>%
-  mutate(
-    w_hig_hl   = as.numeric(W_hl_hh$weights),
-    w_hig_hl   = w_hig_hl / mean(w_hig_hl, na.rm = TRUE),
-    w_hig_hl_t = pmin(w_hig_hl, quantile(w_hig_hl, 0.99, na.rm = TRUE))
-  )
-
-# Pega pesos en model_data3
 model_data3 <- model_data3 %>%
-  left_join(pair_hm_hh %>% select(idencuesta, ola, w_hig_hm, w_hig_hm_t), by = c("idencuesta","ola")) %>%
-  left_join(pair_hl_hh %>% select(idencuesta, ola, w_hig_hl, w_hig_hl_t), by = c("idencuesta","ola"))
-
-# Construye datos3 (tu forma)
-datos3 <- left_join(
-  db %>% select(-low_orig, -m_orig, -h_orig),
-  model_data3 %>% select(idencuesta, ola, h_orig, starts_with("w_hig_")),
-  by = c("idencuesta", "ola")
-) %>%
   mutate(
-    mobhm = case_when(hm == 1 ~ 1, hh == 1 ~ 0, TRUE ~ NA_real_),
-    mobhl = case_when(hl == 1 ~ 1, hh == 1 ~ 0, TRUE ~ NA_real_)
+    w_att = as.numeric(W.uw$weights),
+    w_att = w_att / mean(w_att)      # reescalado opcional
+  )
+
+cap <- quantile(model_data3$w_att, 0.99, na.rm = TRUE)
+model_data3 <- model_data3 %>% mutate(w_att_trim = pmin(w_att, cap))
+
+datos3 <- db %>%
+  select(-downward_mob, -inmobile_mob, -upward_mob) %>%
+  left_join(
+    model_data3 %>% 
+      select(idencuesta, ola, upward_mob, w_att, w_att_trim),
+    by = c("idencuesta","ola")
   )
 
 # 4. Save and export ------------------------------------------------------
 
-db <- db %>%
-  select(-c(isei08_orig, isei08_ocupa, terc_orig, terc_ocupa)) %>% 
-  mutate(ola = case_when(ola == 1 ~ 1,
-                         ola == 3 ~ 2,
-                         ola == 7 ~ 3,
-                         TRUE ~ NA_real_)) %>% 
-  mutate(
-    across(
-      .cols = c(estrato_orig, estrato_ocupa),
-      .fns = ~ car::recode(.,
-                           recodes = c("1 = 'Low';
-                                       2 = 'Middle';
-                                       3 = 'High'"),
-                           as.factor = T)
-    )
-  ) %>% 
-  mutate(
-    across(
-      .cols = c(estrato_orig, estrato_ocupa),
-      .fns = ~ factor(., levels = c("Low", "Middle", "High"))
-    )
-  ) %>% 
-  mutate(wave = case_when(ola == 1 ~ "2016",
-                          ola == 2 ~ "2018",
-                          ola == 3 ~ "2023"),
-         wave = factor(wave, levels = c("2016",
-                                        "2018",
-                                        "2023"))) 
-
-db$estrato_orig <- sjlabelled::set_label(db$estrato_orig, "Father stratum")
-
-db$estrato_ocupa <- sjlabelled::set_label(db$estrato_ocupa, "Offspring stratum")
-
-
 save(db,
      datos1,
      datos2,
-     datos3, 
-     W_lm_ll, W_lh_ll,
-     W_ml_mm, W_mh_mm,
-     W_hm_hh, W_hl_hh,
-     file = here("input/data/proc/data_v2.RData"))
+     datos3, file = here("input/data/proc/data_v3.RData"))

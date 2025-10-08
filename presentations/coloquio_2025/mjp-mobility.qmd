@@ -674,15 +674,11 @@ ggplot(df_pension_lab, aes(x = estimate, y = term)) +
   geom_vline(xintercept = 0, linetype = "solid", color = "darkred", size = 0.5, alpha = 0.8) +
   geom_errorbarh(aes(xmin = conf.low, xmax = conf.high), height = 0, size = 1) +
   geom_point(size = 3.5) +
-  # etiquetas: coef en el punto
-  geom_text(aes(label = est_lab), vjust = -0.8, size = 4) +
   scale_x_continuous(limits = c(-1, 1), breaks = seq(-1, 1, 0.5)) +
+  coord_flip() +
+  geom_text(aes(label = est_lab), hjust = -0.3, size = 4) +
   labs(x = "Estimate (β)", y = NULL) +
-  theme_ggdist() +
-  theme(axis.title = element_text(face = "bold"),
-        axis.text  = element_text(face = "bold"),
-        text = element_text(size = 18))
-
+  theme_ggdist() 
 ```
 
 ## Mediación
