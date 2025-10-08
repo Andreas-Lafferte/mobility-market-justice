@@ -285,7 +285,7 @@ El movimiento entre posiciones sociales expone a los individuos a condiciones y 
 
 
 ## ¿Cómo?
-::: {.incremental .highlight-last style="font-size: 120%;"}
+::: {.incremental .highlight-last style="font-size: 110%;"}
 - **No solo cambia intereses materiales**, también cambia **cómo las personas entienden la justicia** [@gugushvili_intergenerational_2016; @helgason_class_2025].
 - Al moverse, los individuos **recalibran sus creencias sobre la meritocracia** [@mijs_belief_2022a].
 - **Movilidad ascendente →** refuerza la creencia en un mercado justo (asignador legítimo de recompensas).
@@ -347,7 +347,7 @@ El movimiento entre posiciones sociales expone a los individuos a condiciones y 
 #| fig-cap-location: top
 #| fig-cap: "DAG movilidad social, meritocracia y preferencias por comodificación"
 #| fig-align: center
-#| out-width: '180%'
+#| out-width: '160%'
 library(dagitty)
 library(ggdag)
 library(ggplot2)
@@ -406,7 +406,7 @@ ggdag(td, node_size = 18, text_size = 6, edge_size = 1.2) +   # <--- aumenta nod
   geom_text(x=0.55, y=-0.9, label="L = Confusor post-T", hjust=0, size=5)
 ```
 
-::: {.fragment style="font-size: 100%;"}
+::: {.fragment style="font-size: 60%;"}
 - M es post-tratamiento; lo uso para caracterizar heterogeneidad del efecto, sin atribuir causalidad a 
 T×M. El efecto principal (ATT) no depende de M.
 ::::
