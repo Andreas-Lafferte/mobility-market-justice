@@ -356,22 +356,16 @@ library(ggplot2)
 coords <- list(
   x = c(C=-1,   # Confusores pre
         T= 0,   # Tratamiento
-        L= 1,   # Post-tratamiento
-        M= 1,   # Mediador
         Y= 2),  # Outcome
   y = c(C= 0.6,
         T= 0.9,
-        L=-0.4,
-        M= 0.2,
         Y= 0.9)
 )
 
 # Definición del DAG
 dag_mjp <- dagify(
   T ~ C,          # Tratamiento depende de confusores pre
-  L ~ T + C,      # Confusor post-T inducido por T y C
-  M ~ T + C + L,  # Mediador depende de T, C y L
-  Y ~ T + M + C + L,  # Outcome depende de todo lo anterior
+  Y ~ T  + C ,  # Outcome depende de todo lo anterior
   exposure = "T",
   outcome  = "Y",
   coords   = coords
@@ -383,10 +377,8 @@ td <- tidy_dagitty(dag_mjp)
 # Asignar tiempos por nodo
 time_map <- c(
   C = "t1",
-  T = "t2",
-  L = "t3",
-  M = "t3",
-  Y = "t4"
+  T = "t2",,
+  Y = "t3"
 )
 td$data$time <- unname(time_map[td$data$name])
 

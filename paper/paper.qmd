@@ -1,46 +1,84 @@
 ---
-title: "My paper"
+title: "Preferences for the commodification of pensions in Chile: the rol of intergenerational social mobility"
 format:
-  html: default
-  hikmah-pdf: 
-    indent: false
+  html: 
+    code-fold: true
+    html-math-method: katex
+    number-sections: true
+    code-link: true
+    title-block-banner: true
+    theme:
+      - pretty.scss
+  pdf: 
+    pdf-engine: xelatex
+    geometry: margin=2cm
+    template-partials: 
+      - title.tex
+    keep-tex: true
+    include-in-header:
+      text: |
+        \usepackage[noblocks]{authblk}
+        \renewcommand*{\Authsep}{, }
+        \renewcommand*{\Authand}{, }
+        \renewcommand*{\Authands}{, }
+        \renewcommand\Affilfont{\small}
+    number-sections: true
+editor: source
+bibliography: "../input/bib/tesis-magister.bib"
+csl: "../input/bib/apa6.csl"
 author:
-  - name: First author
-    email: firstauthor@email.com
-    orcid: 0000-0003-1265-7854
-    affiliations: 
-        name: Department of X
-        country: Chile
-    attributes:
-      corresponding: true
-  - name: Second author
-    email: secondauthor@email.com
-    orcid: 0000-0002-8108-6154
-    affiliations: 
-        name: Department of X
-        country: Chile
-abstract: |
-  My abstract
-keywords: 
-  - first 
-  - second
-  - third
-  - fourth
-  - fifth
-bibliography: "input/bib/refs.bib"
-csl: "input/bib/apa6.csl"
+  - name: Andreas Laffert Tamayo
+    orcid: 0000-0002-9008-2454
+    email: alaffertt@estudiante.uc.cl 
+    affiliations:
+      - ref: 1
+affiliations: 
+  - id: 1
+    name: Instituto de Sociología, Pontificia Universidad Católica de Chile
+citeproc: true
+abstract: | 
+ My abstract
+  \newline
+ **Keywords**: pension commodification, social mobility, causal inference, Chile, public preferences
 link-citations: true
-linestretch: 1.15       
+linestretch: 1.5
 mainfont: Times New Roman
-fontsize: 12pt          
-geometry: "left=2.54cm,right=2.54cm,top=2.54cm,bottom=2.54cm"
-papersize: letter
+fontsize: 13pt          
 colorlinks: true
 fig-height: 4
 fig-width: 7.5
-header-includes:
-  - \usepackage{threeparttable}
 ---
+
+
+```{r setup, include=FALSE, message=FALSE}
+knitr::opts_chunk$set(echo=FALSE, 
+                      warning = FALSE,
+                      message = FALSE, 
+                      cache = TRUE,
+                      out.width = '85%',
+                      fig.pos= "H")
+options(scipen=999)
+options(kableExtra.auto_format = FALSE)
+options(knitr.kable.NA = '')
+options(knitr.graphics.error = FALSE)
+Sys.setlocale("LC_ALL", "ES_ES.UTF-8")
+table_format = if (knitr::is_html_output()) {
+   #conditional instructions for kable
+   "html" #if html set "html" in format
+ } else if (knitr::is_latex_output()) {
+   "latex"#if latex set "latex" in format
+ }
+
+library(conflicted)
+conflicts_prefer(dplyr::filter)
+
+```
+
+
+This document was last modified at {{< modified >}}
+and it was last rendered at {{< now >}}.
+
+:::: {.justify}
 
 {{< include 01-introduction.qmd >}}
 
@@ -48,12 +86,16 @@ header-includes:
 
 {{< include 03-methods.qmd >}}
 
-{{< include 04-analisis.qmd >}}
+{{< include 04-analysis.qmd >}}
 
 {{< include 05-discussion.qmd >}}
 
 {{< include 06-conclusion.qmd >}}
 
-{{< pagebreak >}}
+# References
+
+::: {#refs}
+:::
+::::
 
 {{< include 07-supplementary-material.qmd >}}
