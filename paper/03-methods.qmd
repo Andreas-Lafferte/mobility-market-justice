@@ -289,7 +289,7 @@ Within each origin stratum $O=j$, I estimate average treatment effects on the tr
 
 The selection of the adjustment set $C$ follows two principles. First, it mirrors the logic in Breen and Ermisch [-@breen_effects_2024]—who condition on attributes determined in childhood or earlier (e.g., parental resources, household structure, ascriptive traits)—and, second, it is constrained to origin-side characteristics available in ELSOC. Guided by theory and Chilean evidence on relative mobility determinants [mainly @brunori_inequality_2025; @celhay_intergenerational_2010; @espinoza_movilidad_2014;@torche_unequal_2005], I include six covariates covering family resources, household composition, and ascriptive status: (a) parental education (highest of father/mother), 10 categories coded ordinally from no schooling to postgraduate studies; (b) co-residence with both parents at age 15 (0 = no, 1 = yes); (c) nationality (0 = non-Chilean, 1 = Chilean); (d) age in years; (e) sex (0 = male, 1 = female); and (f) indigenous ethnicity (0 = no, 1 = yes). These variables are fixed before the destination class, plausibly affect selection into mobility, and constitute the maximal origin set in ELSOC, thereby making the conditional independence assumption more credible within each $O=j$. 
 
-After balancing, I construct stabilized IPW-ATT, setting treated weights to 1 and assigning ebal-derived weights to controls, thus aligning the counterfactual distribution of non-movers with the covariate profile of movers in each origin stratum. These weights are then used in the outcome stage to estimate the causal effect of mobility on preferences for the commodification of pensions.
+After balancing, I construct stabilized IPW-ATT, setting treated weights to 1 and assigning ebal-derived weights to controls, thus aligning the counterfactual distribution of non-movers with the covariate profile of movers in each origin stratum (see [Supplementary Material](#anexo) for the evaluation of balance). These weights are then used in the outcome stage to estimate the causal effect of mobility on preferences for the commodification of pensions.
 
 ### Effect heterogeneity
 
@@ -307,7 +307,7 @@ Because the dependent variable—the preference for pension commodification—is
 Formally, the model is:
  
 $$
-Y_{it}=\alpha+\beta T_i+X_i'\gamma+\lambda_t+\varepsilon_{it},
+Y_{it}=\alpha+\beta T_i+X_i'\gamma+\lambda_t+\varepsilon_{it}
 $$ {#eq-final}
 
 where $Y_{it}$ indicates whether individual $i$ in wave $t$ supports more market-based pension access; $\alpha$ is the baseline probability for the reference categories; $\beta T_i$ captures the intergenerational mobility contrast: $T_i=1$ when the observed destination is $D_i=k$ (mobile to $k$) and $T_i=0$ when $D_i=j$ (immobile), so that $\beta$ is the ATT within origin $O=j (\widehat\beta=\widehat{ATT}{j,k\mid j})$, i.e., the percentage-point change in the probability of preferring pension commodification from reaching $k$ rather than remaining in $j$. The term $X_i'\gamma$ includes the pre-treatment covariates $(C)$ used to construct the entropy-balancing weights; $\lambda_t$ are wave fixed effects; and $\varepsilon_{it}$ is idiosyncratic error. The analytic sample is restricted to individuals sharing the same origin $(O=j)$. Estimation uses pooled WLS with stabilized IPW–ATT from entropy balancing and CR2 standard errors clustered by individual to address heteroskedasticity and within-person dependence.

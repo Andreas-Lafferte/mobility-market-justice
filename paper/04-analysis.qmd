@@ -64,7 +64,7 @@ load(here("input/data/proc/data_v2.3.RData"))
 ## Descriptive statistics
 
 
-Lorem ipsoThe specification is doubly robust: entropy-balancing weights are combined with covariate adjustment so consistency holds ifeither the weighting model or the outcome model is correctly specified, while also improving efficiency (Wooldridge, 2009).I report both IPW-only and doubly robust specifications to document robustnessThe specification is doubly robust: entropy-balancing weights are combined with covariate adjustment so consistency holds ifeither the weighting model or the outcome model is correctly specified, while also improving efficiency (Wooldridge, 2009).I report both IPW-only and doubly robust specifications to document robustness
+@fig-alluvial shows the annual frequencies of preferences for pension commodification in 2016, 2018, and 2023. Each year presents stacked percentages frequencies for the level of agreement and disagreement. Overall, a large majority rejects market-based access to old-age benefits, but this opposition has eased over time: 83.5% in 2016, 81.2% in 2018, and 71.8% in 2023. The 2016–2018 change is modest, whereas 2023 registers a 9.4 point drop in disagreement relative to 2018, mirrored by rising agreement: 16.5% (2016), 18.8% (2018), 28.2% (2023). Substantively, while most respondents continue to oppose the idea that higher-income individuals should obtain better pensions via the market, a non-trivial and growing portion endorses commodification, with the sharpest expansion concentrated in the latest wave (+9.4 points from 2018 to 2023). 
 
 
 ```{r}
@@ -103,7 +103,8 @@ db %>%
   theme(legend.position = "top") 
 ```
 
-The specification is doubly robust: entropy-balancing weights are combined with covariate adjustment so consistency holds ifeither the weighting model or the outcome model is correctly specified, while also improving efficiency (Wooldridge, 2009).I report both IPW-only and doubly robust specifications to document robustness
+Regarding the relationship between preferences for the commodification of pensions and intergenerational occupational mobility, @fig-mean shows the percentage of agreement with the market provision of pension benefits according to mobility trajectories and survey waves. Averaging across waves, agreement is highest among the High-High immobile (27.8%), followed by the Middle-High upwardly mobile (24.6%) and the High-Middle downwardly mobile (24.0%); the lowest levels are found among Low-High (17.3%), Low-Low (17.4%), and descending High-Low (17.6%) groups. The specific profiles of each wave accentuate these gradients, especially in 2023: agreement reaches 31.9% for high-high, 29.4% for upward middle-high, and peaks at 36.8% for downward high-middle (the highest of all trajectories for that year). Descriptively, immobility at the top is associated with greater support for commodification; among those who move, support is greatest for the upward Middle-High trajectory and the downward High-Middle trajectory, patterns that intensify in 2023. These shifts anticipate the heterogeneity documented below.
+
 
 ```{r}
 #| label: fig-mean
@@ -169,7 +170,9 @@ ggplot(pdat, aes(x = mobility, y = y, group = wave)) +
 
 ## Models
 
-The specification is doubly robust: entropy-balancing weights are combined with covariate adjustment so consistency holds ifeither the weighting model or the outcome model is correctly specified, while also improving efficiency (Wooldridge, 2009).I report both IPW-only and doubly robust specifications to document robustness
+@fig-reg reports the doubly robust estimates of the effect of intergenerational mobility on preferences for pension commodification, obtained from weighted models combining stabilized IPW–ATT with covariate adjustment and wave fixed effects. This specification ensures consistency if either the weighting or the outcome model is correctly specified, while improving efficiency [@wooldridge_introductory_2009]. Results are virtually identical to baseline models without covariates (see [Supplementary Material](#anexo) for complete models), with no substantive change in the size or significance of the mobility coefficients.
+
+
 
 ```{r}
 #| label: models
@@ -398,12 +401,15 @@ ggplot(df_pension_lab, aes(x = estimate, y = term)) +
 ```
 
 
-The specification is doubly robust: entropy-balancing weights are combined with covariate adjustment so consistency holds ifeither the weighting model or the outcome model is correctly specified, while also improving efficiency (Wooldridge, 2009).I report both IPW-only and doubly robust specifications to document robustnessThe specification is doubly robust: entropy-balancing weights are combined with covariate adjustment so consistency holds ifeither the weighting model or the outcome model is correctly specified, while also improving efficiency (Wooldridge, 2009).I report both IPW-only and doubly robust specifications to document robustness
+Results reveal a clear directional asymmetry between upward and downward mobility trajectories. Among upwardly mobile respondents, only the Middle→High trajectory exhibits a significant positive effect on support for pension commodification ($\beta$ = 0.09, 95% CI [0.02, 0.16]). Interpreted as an origin-specific ATT, this estimate compares—for individuals who actually moved from the middle to the high class—their observed endorsement with the counterfactual endorsement they would have expressed had they remained immobile in the middle class. Holding all other predictors constant, the point estimate implies a 9 percentage point higher probability of endorsing market-based access to pension benefits for Middle→High movers relative to their own immobility counterfactual, statistically significant at the 95% confidence level. In contrast, two downward trajectories: High→Middle ($\beta$ = −0.07, CI [−0.15, −0.00]) and High→Low ($\beta$ = −0.10, CI [−0.18, −0.02]), show significant negative effects, suggesting that individuals who experience downward mobility from higher-class origins express weaker preferences for market provision. The remaining pathways (Low→Middle, Low→High, Middle→Low) display no significant differences relative to their non-mobile counterparts. These patterns indicate that upward movement within the upper segment (Middle→High) reinforces pro-commodification attitudes, whereas downward movement from privileged origins reduces them. 
 
 ## Effect heterogeneity
 
 
-The specification is doubly robust: entropy-balancing weights are combined with covariate adjustment so consistency holds ifeither the weighting model or the outcome model is correctly specified, while also improving efficiency (Wooldridge, 2009).I report both IPW-only and doubly robust specifications to document robustness
+To probe potential mechanisms underlying the mobility effects, I estimate origin-specific ATT models that interact the mobility treatment with high meritocratic perceptions (ref. = low), using stabilized IPW–ATT weights, covariate adjustment, and wave fixed effects. I also estimate an analogous specification interacting mobility with survey waves (ref. = 2016) to assess temporal heterogeneity in the treatment effect (see [Supplementary Material](#anexo) for complete models).
+
+
+
 ```{r}
 #| echo: false
 #| results: false
@@ -596,7 +602,6 @@ mp_hl_i %>%
   screenreg()
 ```
 
-The specification is doubly robust: entropy-balancing weights are combined with covariate adjustment so consistency holds ifeither the weighting model or the outcome model is correctly specified, while also improving efficiency (Wooldridge, 2009).I report both IPW-only and doubly robust specifications to document robustness
 
 ```{r}
 #| label: fig-interact
@@ -664,6 +669,7 @@ ggplot(df_pension_lab_i, aes(x = estimate, y = name)) +
 
 ```
 
+@fig-interact shows that neither the interaction terms nor the mobility coefficients reach conventional significance across trajectories, indicating no detectable moderation of the causal mobility effect by meritocratic perceptions at the 95% level. Directionally, the interaction is positive for Middle→High ($\beta$ = 0.15, 95% CI [−0.03, 0.33]) and Low→High ($\beta$ = 0.05, [−0.14, 0.24]), suggesting, if anything, somewhat larger pro-commodification effects among high-merit respondents when upwardly mobile, whereas it is negative for High→Low ($\beta$ = −0.14, [−0.38, 0.10]) and High→Middle ($\beta$ = −0.03, [−0.23, 0.17]), showing weaker pro-commodification effects under downward mobility at high merit (left panel). Focusing on the treatment effect at low meritocracy (the reference category), the mobility coefficient captures the origin-specific ATT comparing movers to their immobility counterfactual among low-merit respondents (right panel). These effects are small and imprecise across trajectories: Low→Middle ($\beta$ = −0.02, [−0.09, 0.04]) and Low→High ($\beta$ = −0.03, [−0.10, 0.05]) are near zero. Middle→High is positive but not significant ($\beta$ = 0.07, [−0.01, 0.14]), Middle→Low is null ($\beta$ = -0.00, [−0.07, 0.06]), and downward from high shows negative, borderline estimates: High→Middle ($\beta$ = −0.07, [−0.15, 0.00]) and High→Low ($\beta$ = −0.08, [−0.15, 0.00]). Substantively, I do not find evidence that meritocratic perceptions moderate the causal effect of mobility, although the signs align with the idea that upward mobility at high merit tilts attitudes toward commodification, and downward mobility at high merit tilts them away.
 
 
 ```{r}
@@ -766,7 +772,10 @@ texreg::texreg(list(mp_lm_t,
 ```
 
 
+@tbl-inttime shows the causal heterogeneity of the mobility effect across the different waves of the survey. The treatment effect in 2016 (reference category) closely replicates the reference ATT patterns: positive for Middle→High ($\beta$ = 0.13, 95% CI [0.05, 0.22]) and negative for High→Middle ($\beta$ = −0.19, [−0.33, −0.05]) and High→Low ($\beta$ = −0.19, [−0.32, −0.05]). This indicates that, holding all other predictors constant, individuals who moved from Middle to high status in 2016 were, on average, 13 percentage points more likely to support access to the pension market compared to their counterfactual of immobility, while those who moved down from higher classes were approximately 19 percentage points less likely. Beyond these reference effects, there is a notable temporal change in the High→Middle trajectory: the interaction between mobility and the 2023 wave is positive and statistically significant ($\beta$ = 0.19, [0.01, 0.38]). This suggests that, although people with downward mobility from high backgrounds were less supportive of commodification in 2016, by 2023 the same trajectory shows a change in sign, implying that the negative causal effect of downward mobility attenuated and eventually turned positive. No comparable changes are observed in other trajectories. In essence, this pattern reveals time-conditional heterogeneity in the mobility effect: among those who experienced downward mobility, preferences for market-based access to old-age pensions appear to have realigned in the most recent wave, reflecting a notable shift toward greater support for commodification within this trajectory by 2023.
 
 ## Sensitivity analysis
 
-The specification is doubly robust: entropy-balancing weights are combined with covariate adjustment so consistency holds ifeither the weighting model or the outcome model is correctly specified, while also improving efficiency (Wooldridge, 2009).I report both IPW-only and doubly robust specifications to document robustness
+The first sensitivity check corresponds to @ding_sensitivity_2016 approach to assess unmeasured confounding (E values). This indicates the minimum strength of association that an unobserved confounder would need to have with both the treatment and the outcome—on the relative risk scale—to explain an effect, the Middle-High ATT would require an $RR ≈ 1.74$ to offset the point estimate ($E_{point}$ = 1.736) and an $RR ≈ 1.26$ to move its CI to include the null value ($E_{CI}$ = 1.264). High→Low shows comparable robustness ($E_{point}$ = 1.759; $E_{CI}$ = 1.239), while High→Middle is comparatively fragile near zero ($E_{point}$ = 1.591; $E_{CI}$ = 1.037). For non-significant trajectories (Low→Middle, Low→High, Middle→Low), $E_{CI}$ = 1, as expected. In conclusion, the directional pattern—stronger in favor of commodification in Middle→High and weaker in the descent from High—seems reasonably robust to moderate unmeasured confounding in Middle→High and High→Low, but borderline in High→Middle. These results justify treating signs and relative magnitudes as informative, while recognizing limited protection against omitted variables for High→Middle (see [Supplementary Material](#anexo) for complete tables).
+
+The second sensitivity check applies Holm’s step-down correction—a multiple-testing procedure that controls the familywise error rate (FWER) while retaining more power than Bonferroni—across the six mobility trajectories. After FWER control, none of the effects remain significant at $\alpha$ = .05: Middle→High ($p_{raw}$ = .0116 → $p_{Holm}$ = .0698), High→Low (.0167 → .0834), and High→Middle (.0481 → .1924). Accordingly, claims of statistical significance should be tempered under strict multiplicity control. Substantively, however, this adjustment affects the strength of inference, not its direction: the pattern remains consistent with the theorized asymmetry (positive for Middle→High; negative for downward from high). I therefore treat signs and effect sizes as the primary evidence and regard p-values as exploratory once multiplicity is accounted for (see [Supplementary Material](#anexo) for complete tables).

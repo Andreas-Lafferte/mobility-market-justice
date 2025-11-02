@@ -576,7 +576,7 @@ evalues_tbl <- imap_dfr(mods, function(mod, name) {
 })
 
 # Tabla bonita (kable); puedes usar 'gt(evalues_tbl)' si prefieres
-kable(evalues_tbl,
+kableExtra::kable(evalues_tbl,
       caption = "E-values for ATT estimates by mobility trajectory (Ding & VanderWeele, 2016 approximation)",
       align = "lrrrrrrrrr")
 
@@ -884,38 +884,68 @@ mp_hl_t <- lm_robust(y ~ t*ola + edad + sexo + nac + etnia + hogar + edu0,
 
 
 
+ccoef <- list(
+  "(Intercept)" = "Intercept",
+  "t" = "Mobility treatment"
+)
 
-screenreg(list(mp_lm,
-               mp_lh,
-               mp_ml,
-               mp_mh,
-               mp_hm,
-               mp_hl),
-          custom.model.names = c(
-            "Low-Middle",
-            "Low-High",
-            "Middle-Low",
-            "Middle-High",
-            "High-Middle",
-            "High-Low"
-          ))
+texreg::screenreg(list(mp_lm,
+                       mp_lh,
+                       mp_mh,
+                       mp_ml,
+                       mp_hm,
+                       mp_hl),
+                  custom.model.names = c(
+                    "Low-Middle",
+                    "Low-High",
+                    "Middle-High",
+                    "Middle-Low",
+                    "High-Middle",
+                    "High-Low"
+                  ),   caption.above = NULL,
+               caption = NULL,
+               custom.coef.map = ccoef,
+               digits = 2,
+               custom.note = "Note: Cells contain regression coefficients with confidence intervals in parentheses. %stars.",
+               leading.zero = T,
+               use.packages = F,
+               booktabs = F,
+               scalebox = 0.80,
+               center = T,float.pos = "H!",
+               custom.gof.rows = list("Controls"=rep("Yes",6)))
 
-
+ccoef <- list(
+  "(Intercept)" = "Intercept",
+  "t" = "Mobility treatment",
+  "mHigh" = "High meritocracy perception (Ref.= Low)",
+  "t:mHigh" = "Mobility treatment x High meritocracy perception (Ref.= Low)"
+)
 
 screenreg(list(mp_lm_i,
                mp_lh_i,
-               mp_ml_i,
                mp_mh_i,
+               mp_ml_i,
                mp_hm_i,
                mp_hl_i),
           custom.model.names = c(
             "Low-Middle",
             "Low-High",
-            "Middle-Low",
             "Middle-High",
+            "Middle-Low",
             "High-Middle",
             "High-Low"
-          ))
+          ),
+          caption.above = NULL,
+          caption = NULL,
+          custom.coef.map = ccoef,
+          digits = 2,
+          custom.note = "Note: Cells contain regression coefficients with confidence intervals in parentheses. %stars.",
+          leading.zero = T,
+          use.packages = F,
+          booktabs = F,
+          scalebox = 0.80,
+          center = T,float.pos = "H!",
+          custom.gof.rows = list("Controls"=rep("Yes",6)))
 
 screenreg(list(mp_lm_t,
                mp_lh_t,
