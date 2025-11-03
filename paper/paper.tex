@@ -231,8 +231,8 @@ mobility, causal inference, Chile, public preferences
 
 
 \setstretch{1.5}
-This document was last modified at 2025-11-03 01:00:05 and it was last
-rendered at 2025-11-03 01:00:05.
+This document was last modified at 2025-11-03 17:04:08 and it was last
+rendered at 2025-11-03 17:04:08.
 
 \section{Introduction}\label{introduction}
 
@@ -1080,15 +1080,15 @@ social class)---have long been a focus of sociological research
 (\citeproc{ref-eyles_social_2022}{Eyles et al., 2022};
 \citeproc{ref-langsaether_explaining_2022}{Langsæther et al., 2022}).
 Yet, as Breen and Ermisch (\citeproc{ref-breen_effects_2024}{2024, p.
-467}) emphasize, most hypotheses are, at their core, individual-level
-counterfactual comparisons between the observed outcome under a mobility
-trajectory and the outcome the same person would have shown if they had
-remained in their origin class (or moved to an alternative destination).
-Standard specifications (e.g., SAM, DRM, and mobility-contrast models)
-struggle to retrieve these inherently counterfactual quantities due to
-identification constraints and their reliance on between-group contrasts
-constructed from additive terms and interactions, thereby yielding
-primarily associational evidence
+467}) emphasize, most of the mobility hypotheses are, at their core,
+individual-level counterfactual comparisons between the observed outcome
+under a mobility trajectory and the outcome the same person would have
+shown if they had remained in their origin class (or moved to an
+alternative destination). Standard specifications (e.g., SAM, DRM, and
+mobility-contrast models) struggle to retrieve these inherently
+counterfactual quantities due to identification constraints and their
+reliance on between-group contrasts constructed from additive terms and
+interactions, thereby yielding primarily associational evidence
 (\citeproc{ref-breen_effects_2024}{Breen \& Ermisch, 2024};
 \citeproc{ref-song_there_2025}{Song \& Zhou, 2025}). I therefore adopt
 Breen and Ermisch's (\citeproc{ref-breen_effects_2024}{2024}) causal
@@ -1138,8 +1138,8 @@ requires the following assumptions:
 
 \textbf{Positivity}: For all \((j,c)\) in the support of \((O,C)\) and
 for each relevant destination \((k)\), the probability of receiving
-\(D=k\) is strictly between 0 and 1; substantively, every \((O,C)\)-type
-has non-zero chance of each comparison destination.
+\(D=k\) is strictly between 0 and 1; substantively, each type \((O,C)\)
+has a nonzero probability of entering each comparison destination.
 
 \begin{equation}\phantomsection\label{eq-posi}{
  0<P(D=k\mid O=j, C=c)<1
@@ -1167,23 +1167,24 @@ immobile individuals (controls).
 Y(D)\ \perp\kern-5pt \perp D\ \mid\ (O,C)
 }\end{equation}
 
-In fact, establishing the causal relationship between social mobility
-and subjective outcomes, such as preferences, poses several challenges
-for causal inference. Below, I use directed acyclic graphs (DAGs) to
-illustrate some of these challenges and evaluate possible strategies for
-identifying the effects of social mobility. Figure~\ref{fig-dag} depicts
-the causal model guiding identification. In this model, a person's
-preference (\(Y\)) is directly caused by her class destination (\(D\))
-and can also be affected by different attributes determined in childhood
-or earlier (\(C\)), such as family resources, household composition, and
-ascriptive status (pre-treatment confounders). Class origin (\(O\)) is
-determined by those origin-attributes (\(C\)) and, in turn, affects
-destination (\(D\)). In addition, denotes unobserved factors (\(U\)) can
-also influence origin-attributes (\(C\)). There is no direct arrow from
-\(O\) to \(Y\), reflecting the assumption that the effect of origin on
-the outcome operates entirely through background factors \((C)\) and
-destination \((D)\). Accordingly, conditioning on \((O,C)\) could blocks
-the relevant back-door paths from \(D\) to \(Y\), specifically
+In fact, establishing the causal relationship between objective social
+mobility and subjective outcomes, such as preferences, poses several
+challenges for causal inference. Below, I use directed acyclic graphs
+(DAGs) to illustrate some of these challenges and evaluate possible
+strategies for identifying the effects of social mobility.
+Figure~\ref{fig-dag} depicts the causal model guiding identification. In
+this model, a person's preference (\(Y\)) is directly caused by her
+class destination (\(D\)) and can also be affected by different
+attributes determined in childhood or earlier (\(C\)), such as family
+resources, household composition, and ascriptive status (pre-treatment
+confounders). Class origin (\(O\)) is determined by those
+origin-attributes (\(C\)) and, in turn, affects destination (\(D\)). In
+addition, unobserved factors (\(U\)) can also influence
+origin-attributes (\(C\)). There is no direct arrow from \(O\) to \(Y\),
+reflecting the assumption that the effect of origin on the outcome
+operates entirely through background factors \((C)\) and destination
+\((D)\). Accordingly, conditioning on \((O,C)\) could blocks the
+relevant back-door paths from \(D\) to \(Y\), specifically
 \(D\leftarrow O\leftarrow C\rightarrow Y\) and, if present,
 \(D \leftarrow O \rightarrow Y\), so \((O,C)\) is a minimal sufficient
 adjustment set.
@@ -1198,11 +1199,11 @@ adjustment set.
 
 \caption{\label{fig-dag}Causal graph of the effect of intergenerational
 social mobility on preferences for commodification. Y = preferences for
-pension commodification, my outcome of interest, D = an individual's
-class of destination, O = an individual's class of origin, C = different
-attributes determined in childhood or earlier that affects an
-individual's class of origin and destination. Finally, U = unobserved
-factors influencing origin attributes.}
+pension commodification, D = an individual's class of destination, O =
+an individual's class of origin, C = different attributes determined in
+childhood or earlier that affects an individual's class of origin and
+destination. Finally, U = unobserved factors influencing origin
+attributes.}
 
 \end{figure}%
 
@@ -1213,20 +1214,21 @@ U \rightarrow C,\quad C \rightarrow O,\quad C \rightarrow D,\quad C \rightarrow 
 \]
 
 This structure corresponds to a nonparametric structural causal model in
-which \((D)\) is the treatment variable, \((Y)\) the outcome, and
-\((O, C)\) the minimal sufficient adjustment set. Conditioning on these
-variables satisfies the back-door criterion for identifying the causal
-effect of mobility on preferences
-(\citeproc{ref-breen_effects_2024}{Breen \& Ermisch, 2024}).
+which \(D\) is the treatment variable, \(Y\) the outcome, and \((O, C)\)
+the minimal sufficient adjustment set. Conditioning on these variables
+satisfies the back-door criterion for identifying the causal effect of
+mobility on preferences (\citeproc{ref-breen_effects_2024}{Breen \&
+Ermisch, 2024}).
 
 Why are the assumptions plausible here? Conditional independence is
 targeted by controlling for a plausible sufficient adjustment set
-\((O,C)\); entropy balancing/IPW enforces covariate balance within each
-origin stratum. Positivity is assessed via propensity scores and
-trimming of extreme weights, restricting to common support. SUTVA holds
-by treating the destination class as a single exposure measured before
-\((Y)\) and assuming no interference. Together, the DAG and assumptions
-define conditions for identifying the causal effect of intergenerational
+\((O,C)\); inverse probability weights (IPW) obtained via entropy
+balancing enforces covariate balance within each origin stratum.
+Positivity is assessed via propensity scores and trimming of extreme
+weights, restricting to common support. SUTVA holds by treating the
+destination class as a single exposure measured before \((Y)\) and
+assuming no interference. Together, the DAG and assumptions define
+conditions for identifying the causal effect of intergenerational social
 mobility on preferences for commodification.
 
 \subsection{Inquiry and estimand}\label{inquiry-and-estimand}
@@ -1607,8 +1609,8 @@ meritocracy (≥ 4). Time is measured by survey wave (2016, 2018, 2023)
 and entered as a categorical (dummy) variable. Both variables are used
 as moderators by interacting them with the mobility treatment to assess
 conditional average treatment effects---i.e., whether the effect of
-mobility varies across levels of meritocratic beliefs or across survey
-waves.
+mobility varies across levels of meritocratic perceptions or across
+survey waves.
 
 \subsubsection{Controls}\label{controls}
 
@@ -1663,9 +1665,9 @@ term \(X_i'\gamma\) includes the pre-treatment covariates \((C)\) used
 to construct the entropy-balancing weights; \(\lambda_t\) are wave fixed
 effects; and \(\varepsilon_{it}\) is idiosyncratic error. The analytic
 sample is restricted to individuals sharing the same origin \((O=j)\).
-Estimation uses pooled WLS with stabilized IPW--ATT from entropy
-balancing and CR2 standard errors clustered by individual to address
-heteroskedasticity and within-person dependence.
+Therefore, estimation uses pooled WLS with stabilized IPW--ATT from
+entropy balancing and CR2 standard errors clustered by individual to
+address heteroskedasticity and within-person dependence.
 
 The specification is doubly robust: entropy-balancing weights are
 combined with covariate adjustment so consistency holds if either the
@@ -1695,15 +1697,15 @@ Figure~\ref{fig-alluvial} shows the annual frequencies of preferences
 for pension commodification in 2016, 2018, and 2023. Each year presents
 stacked percentages frequencies for the level of agreement and
 disagreement. Overall, a large majority rejects market-based access to
-old-age benefits, but this opposition has eased over time: 83.5\% in
-2016, 81.2\% in 2018, and 71.8\% in 2023. The 2016--2018 change is
-modest, whereas 2023 registers a 9.4 point drop in disagreement relative
-to 2018, mirrored by rising agreement: 16.5\% (2016), 18.8\% (2018),
-28.2\% (2023). Substantively, while most respondents continue to oppose
-the idea that higher-income individuals should obtain better pensions
-via the market, a non-trivial and growing portion endorses
-commodification, with the sharpest expansion concentrated in the latest
-wave (+9.4 points from 2018 to 2023).
+old-age pension benefits, but this opposition has eased over time:
+83.5\% in 2016, 81.2\% in 2018, and 71.8\% in 2023. The 2016--2018
+change is modest, whereas 2023 registers a 9.4 point drop in
+disagreement relative to 2018, mirrored by rising agreement: 16.5\%
+(2016), 18.8\% (2018), 28.2\% (2023). Substantively, while most
+respondents continue to oppose the idea that higher-income individuals
+should obtain better pensions via the market, a non-trivial and growing
+portion endorses this statement, with the sharpest expansion
+concentrated in the latest wave (+9.4 points from 2018 to 2023).
 
 \begin{figure}[H]
 
@@ -1720,21 +1722,21 @@ commodification over time (2016, 2018, and 2023).}
 
 Regarding the relationship between preferences for the commodification
 of pensions and intergenerational occupational mobility,
-Figure~\ref{fig-mean} shows the percentage of agreement with the market
-provision of pension benefits according to mobility trajectories and
-survey waves. Averaging across waves, agreement is highest among the
-High-High immobile (27.8\%), followed by the Middle-High upwardly mobile
-(24.6\%) and the High-Middle downwardly mobile (24.0\%); the lowest
-levels are found among Low-High (17.3\%), Low-Low (17.4\%), and
-descending High-Low (17.6\%) groups. The specific profiles of each wave
-accentuate these gradients, especially in 2023: agreement reaches 31.9\%
-for high-high, 29.4\% for upward middle-high, and peaks at 36.8\% for
-downward high-middle (the highest of all trajectories for that year).
-Descriptively, immobility at the top is associated with greater support
-for commodification; among those who move, support is greatest for the
-upward Middle-High trajectory and the downward High-Middle trajectory,
-patterns that intensify in 2023. These shifts anticipate the
-heterogeneity documented below.
+Figure~\ref{fig-mean} shows the percentage of agreement with
+market-based access to pension benefits according to mobility
+trajectories and survey waves. Averaging across waves, agreement is
+highest among the High-High immobile (27.8\%), followed by the
+Middle-High upwardly mobile (24.6\%) and the High-Middle downwardly
+mobile (24.0\%). The lowest levels are found among ascending Low-High
+(17.3\%), and immobile Low-Low (17.4\%) groups. The specific profiles of
+each wave accentuate these gradients in most trajectories, especially in
+2023: agreement reaches 31.9\% for High-High, 29.4\% for upward
+Middle-High, and peaks at 36.8\% for downward High-Middle (the highest
+of all trajectories for that year). Descriptively, immobility at the top
+is associated with greater support for commodification; among those who
+move, support is greatest for the upward Middle-High trajectory and the
+downward High-Middle trajectory, patterns that intensify in 2023. These
+shifts anticipate the heterogeneity documented below.
 
 \begin{figure}[H]
 
@@ -1752,32 +1754,33 @@ and 2023).}
 
 \subsection{Models}\label{models}
 
-Figure~\ref{fig-reg} reports the doubly robust estimates of the effect
-of intergenerational mobility on preferences for pension
-commodification, obtained from weighted models combining stabilized IPW
-with covariate adjustment and wave fixed effects. Results reveal a clear
-directional asymmetry between upward and downward mobility trajectories.
-Among upwardly mobile respondents, only the Middle→High trajectory
-exhibits a significant positive effect on support for pension
+Figure~\ref{fig-reg} reports the double-robust estimates of the effect
+of intergenerational occupational mobility on preferences for pension
+commodification, obtained from weighted models that combine stabilized
+IPW with covariate adjustment and fixed wave effects. Results reveal a
+clear directional asymmetry between upward and downward mobility
+trajectories. Among upwardly mobile respondents, only the Middle→High
+trajectory exhibits a significant positive effect on support for pension
 commodification (\(\beta\) = 0.09, 95\% CI {[}0.02, 0.16{]}).
 Interpreted as an origin-specific ATT, this estimate compares---for
-individuals who actually moved from the middle to the high class---their
-observed endorsement with the counterfactual endorsement they would have
-expressed had they remained immobile in the middle class. Holding all
-other predictors constant, the point estimate implies a 9 percentage
-point higher probability of endorsing market-based access to pension
-benefits for Middle→High movers relative to their own immobility
-counterfactual, statistically significant at the 95\% confidence level.
-In contrast, two downward trajectories: High→Middle (\(\beta\) = −0.07,
-CI {[}−0.15, −0.00{]}) and High→Low (\(\beta\) = −0.10, CI {[}−0.18,
-−0.02{]}), show significant negative effects, suggesting that
-individuals who experience downward mobility from higher-class origins
-express weaker preferences for market provision. The remaining pathways
-(Low→Middle, Low→High, Middle→Low) display no significant differences
-relative to their non-mobile counterparts. These patterns indicate that
-upward movement within the upper segment (Middle→High) reinforces
-pro-commodification attitudes, whereas downward movement from privileged
-origins reduces them.
+individuals who actually moved from the middle to the high socioeconomic
+status---their observed endorsement with the counterfactual endorsement
+they would have expressed had they remained immobile in the middle
+socioeconomic status. Holding all other predictors constant, the point
+estimate implies a 9 percentage point higher probability of endorsing
+market-based access to pension benefits for Middle→High movers relative
+to their own immobility counterfactual, statistically significant at the
+95\% confidence level. In contrast, two downward trajectories:
+High→Middle (\(\beta\) = −0.07, CI {[}−0.15, −0.00{]}) and High→Low
+(\(\beta\) = −0.10, CI {[}−0.18, −0.02{]}), show significant negative
+effects, suggesting that individuals who experience downward mobility
+from higher-status origins express weaker preferences for market-based
+pension benefits. The remaining pathways (Low→Middle, Low→High,
+Middle→Low) display no significant differences relative to their
+non-mobile counterparts. These patterns indicate that upward movement
+within the upper segment (Middle→High) reinforces pro-commodification
+attitudes, whereas downward movement from privileged origins reduces
+them.
 
 \begin{figure}[H]
 
@@ -1828,29 +1831,29 @@ standard errors clustered by individual.}
 Figure~\ref{fig-interact} shows that neither the interaction terms nor
 the mobility coefficients reach conventional significance across
 trajectories, indicating no detectable moderation of the causal mobility
-effect by meritocratic perceptions at the 95\% level. Directionally, the
-interaction is positive for Middle→High (\(\beta\) = 0.15, 95\% CI
-{[}−0.03, 0.33{]}) and Low→High (\(\beta\) = 0.05, {[}−0.14, 0.24{]}),
-suggesting, if anything, somewhat larger pro-commodification effects
-among high-merit respondents when upwardly mobile, whereas it is
-negative for High→Low (\(\beta\) = −0.14, {[}−0.38, 0.10{]}) and
-High→Middle (\(\beta\) = −0.03, {[}−0.23, 0.17{]}), showing weaker
-pro-commodification effects under downward mobility at high merit (left
-panel). Focusing on the treatment effect at low meritocracy (the
-reference category), the mobility coefficient captures the
-origin-specific ATT comparing movers to their immobility counterfactual
-among low-merit respondents (right panel). These effects are small and
-imprecise across trajectories: Low→Middle (\(\beta\) = −0.02, {[}−0.09,
-0.04{]}) and Low→High (\(\beta\) = −0.03, {[}−0.10, 0.05{]}) are near
-zero. Middle→High is positive but not significant (\(\beta\) = 0.07,
-{[}−0.01, 0.14{]}), Middle→Low is null (\(\beta\) = -0.00, {[}−0.07,
-0.06{]}), and downward from high shows negative, borderline estimates:
-High→Middle (\(\beta\) = −0.07, {[}−0.15, 0.00{]}) and High→Low
-(\(\beta\) = −0.08, {[}−0.15, 0.00{]}). Substantively, I do not find
-evidence that meritocratic perceptions moderate the causal effect of
-mobility, although the signs align with the idea that upward mobility at
-high merit tilts attitudes toward commodification, and downward mobility
-at high merit tilts them away.
+effect by meritocratic perceptions at the 95\% level. Directionally, in
+the left panel, the interaction is positive for Middle→High (\(\beta\) =
+0.15, 95\% CI {[}−0.03, 0.33{]}) and Low→High (\(\beta\) = 0.05,
+{[}−0.14, 0.24{]}), suggesting, if anything, somewhat larger
+pro-commodification effects among high-merit respondents when upwardly
+mobile, whereas it is negative for High→Low (\(\beta\) = −0.14,
+{[}−0.38, 0.10{]}) and High→Middle (\(\beta\) = −0.03, {[}−0.23,
+0.17{]}), showing weaker pro-commodification effects under downward
+mobility at high merit. Focusing on the treatment effect at low
+meritocracy (the reference category) at the right panel, the mobility
+coefficient captures the origin-specific ATT comparing movers to their
+immobility counterfactual among low-merit respondents. These effects are
+small and imprecise across trajectories: Low→Middle (\(\beta\) = −0.02,
+{[}−0.09, 0.04{]}) and Low→High (\(\beta\) = −0.03, {[}−0.10, 0.05{]})
+are near zero. Middle→High is positive but not significant (\(\beta\) =
+0.07, {[}−0.01, 0.14{]}), Middle→Low is null (\(\beta\) = -0.00,
+{[}−0.07, 0.06{]}), and downward from high shows negative, borderline
+estimates: High→Middle (\(\beta\) = −0.07, {[}−0.15, 0.00{]}) and
+High→Low (\(\beta\) = −0.08, {[}−0.15, 0.00{]}). Substantively, I do not
+find evidence that meritocratic perceptions moderate the causal effect
+of mobility, although the signs align with the idea that upward mobility
+at high merit tilts attitudes toward commodification, and downward
+mobility at high merit tilts them away.
 
 \begin{table}
 
@@ -1905,41 +1908,41 @@ effect across the different waves of the survey. The treatment effect in
 positive for Middle→High (\(\beta\) = 0.13, 95\% CI {[}0.05, 0.22{]})
 and negative for High→Middle (\(\beta\) = −0.19, {[}−0.33, −0.05{]}) and
 High→Low (\(\beta\) = −0.19, {[}−0.32, −0.05{]}). This indicates that,
-holding all other predictors constant, individuals who moved from Middle
-to high status in 2016 were, on average, 13 percentage points more
-likely to support access to the pension market compared to their
-counterfactual of immobility, while those who moved down from higher
-classes were approximately 19 percentage points less likely. Beyond
-these reference effects, there is a notable temporal change in the
-High→Middle trajectory: the interaction between mobility and the 2023
-wave is positive and statistically significant (\(\beta\) = 0.19,
-{[}0.01, 0.38{]}). This suggests that, although people with downward
-mobility from high backgrounds were less supportive of commodification
-in 2016, by 2023 the same trajectory shows a change in sign, implying
-that the negative causal effect of downward mobility attenuated and
-eventually turned positive. No comparable changes are observed in other
-trajectories. In essence, this pattern reveals time-conditional
-heterogeneity in the mobility effect: among those who experienced
-downward mobility, preferences for market-based access to old-age
-pensions appear to have realigned in the most recent wave, reflecting a
-notable shift toward greater support for commodification within this
-trajectory by 2023.
+holding all other predictors constant, individuals who moved from middle
+to high socioeconomic status in 2016 were, on average, 13 percentage
+points more likely to support market-based access to the pension
+benefits compared to their counterfactual of immobility, while those who
+moved down from higher status were approximately 19 percentage points
+less likely. Beyond these reference effects, there is a notable temporal
+change in the High→Middle trajectory: the interaction between mobility
+and the 2023 wave is positive and statistically significant (\(\beta\) =
+0.19, {[}0.01, 0.38{]}). This suggests that, although people with
+downward mobility from high backgrounds were less supportive of
+commodification in 2016, by 2023 the same trajectory shows a change in
+sign, implying that the negative causal effect of downward mobility
+attenuated and eventually turned positive. No comparable changes are
+observed in other trajectories. In essence, this pattern reveals
+time-conditional heterogeneity in the mobility effect: among those who
+experienced downward mobility, preferences for market-based access to
+old-age pensions appear to have realigned in the most recent wave,
+reflecting a notable shift toward greater support for commodification
+within this trajectory by 2023.
 
 \subsection{Sensitivity analysis}\label{sensitivity-analysis}
 
-The first sensitivity check corresponds to Ding \& VanderWeele
+The first sensitivity check corresponds to the Ding \& VanderWeele
 (\citeproc{ref-ding_sensitivity_2016}{2016}) approach to assess
-unmeasured confounding (E values). This indicates the minimum strength
-of association that an unobserved confounder would need to have with
-both the treatment and the outcome---on the relative risk scale---to
-explain an effect, the Middle-High ATT would require an \(RR ≈ 1.74\) to
-offset the point estimate (\(E_{point}\) = 1.736) and an \(RR ≈ 1.26\)
-to move its CI to include the null value (\(E_{CI}\) = 1.264). High→Low
-shows comparable robustness (\(E_{point}\) = 1.759; \(E_{CI}\) = 1.239),
-while High→Middle is comparatively fragile near zero (\(E_{point}\) =
-1.591; \(E_{CI}\) = 1.037). For non-significant trajectories
-(Low→Middle, Low→High, Middle→Low), \(E_{CI}\) = 1, as expected. In
-conclusion, the directional pattern---stronger in favor of
+unmeasured confounding (E values). This values indicates the minimum
+strength of association that an unobserved confounder would need to have
+with both the treatment and the outcome---on the relative risk
+scale---to explain an effect. The Middle-High ATT would require an
+\(RR ≈ 1.74\) to offset the point estimate (\(E_{point}\) = 1.736) and
+an \(RR ≈ 1.26\) to move its CI to include the null value (\(E_{CI}\) =
+1.264). High→Low shows comparable robustness (\(E_{point}\) = 1.759;
+\(E_{CI}\) = 1.239), while High→Middle is comparatively fragile near
+zero (\(E_{point}\) = 1.591; \(E_{CI}\) = 1.037). For non-significant
+trajectories (Low→Middle, Low→High, Middle→Low), \(E_{CI}\) = 1, as
+expected. In conclusion, the directional pattern---stronger in favor of
 commodification in Middle→High and weaker in the descent from
 High---seems reasonably robust to moderate unmeasured confounding in
 Middle→High and High→Low, but borderline in High→Middle. These results
@@ -1947,9 +1950,9 @@ justify treating signs and relative magnitudes as informative, while
 recognizing limited protection against omitted variables for High→Middle
 (see \hyperref[anexo]{Supplementary Material} for complete tables).
 
-The second sensitivity check applies Holm's step-down correction---a
-multiple-testing procedure that controls the familywise error rate
-(FWER) while retaining more power than Bonferroni---across the six
+The second sensitivity check applies Holm's step-down correction, which
+is a multiple-testing procedure that controls the familywise error rate
+(FWER) while retaining more power than Bonferroni, across the six
 mobility trajectories. After FWER control, none of the effects remain
 significant at \(\alpha\) = .05: Middle→High (\(p_{raw}\) = .0116 →
 \(p_{Holm}\) = .0698), High→Low (.0167 → .0834), and High→Middle (.0481

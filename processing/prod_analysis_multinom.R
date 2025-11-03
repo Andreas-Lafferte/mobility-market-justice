@@ -153,7 +153,7 @@ g2 <- ggplot(pdat, aes(x = mobility, y = y, group = wave)) +
   labs(
     y = "% of Agreement",
     x = NULL,
-    caption = "Source: own elaboration with data from ELSOC 2016–2023 (N obs = 3,435)"
+    caption = "Source: own elaboration with data from ELSOC 2016-2023 (N obs = 3,435)"
   ) +
   theme_ggdist() +
   theme(legend.position = "top")
