@@ -98,4 +98,3 @@ and it was last rendered at {{< now >}}.
 :::
 ::::
 
-{{< include 07-supplementary-material.qmd >}}

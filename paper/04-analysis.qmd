@@ -1,8 +1,4 @@
----
-output: html_document
-editor_options: 
-  chunk_output_type: console
----
+
 
 # Results
 
@@ -26,40 +22,18 @@ editor_options:
  }
 ```
 
-
 ```{r}
-#| label: libraries2
-#| message: false
+#| label: source1
 #| echo: false
+#| results: false
+#| message: false
+#| warning: false
+#| include: false
 
-if (!require("pacman")) install.packages("pacman")
-
-pacman::p_load(tidyverse,
-               here,
-               sjPlot,
-               sjmisc,
-               texreg,
-               estimatr,
-               conflicted,
-               ggdist,
-               summarytools,
-               dagitty,
-               ggdag)
-
-conflicts_prefer(dplyr::filter)
-
-options(scipen=999)
-rm(list = ls())
+library(here)
+source(here("processing/prod_analysis_multinom.R"))
 ```
 
-```{r}
-#| label: data2
-#| message: false
-#| echo: false
-
-load(here("input/data/proc/data_v2.3.RData"))
-
-```
 
 ## Descriptive statistics
 
@@ -73,34 +47,7 @@ load(here("input/data/proc/data_v2.3.RData"))
 #| fig-cap-location: bottom
 #| echo: false
 #| results: asis
-db %>% 
-  mutate(just_pension_f = factor(just_pension_f, levels = c(0,1), labels = c("Disagree", "Agree"))) %>%
-  group_by(wave, just_pension_f) %>% 
-  count() %>% 
-  group_by(wave) %>% 
-  mutate(porcentaje=n/sum(n)) %>% 
-  ungroup() %>% 
-  ggplot(aes(x = wave, y = porcentaje, group = just_pension_f)) +
-  geom_col(aes(fill = just_pension_f)) +
-  scale_y_continuous(labels = scales::percent) + 
-  scale_fill_manual(
-    values = c("#5b59d4", "#c8237d"),
-    breaks = c("Agree","Disagree")
-  )  +
-  coord_flip() +
-  geom_text(
-    aes(label = paste0(round(porcentaje * 100, 1), "%")),
-    position = position_stack(vjust = 0.5),
-    color = "white",
-    size = 3,
-    fontface = "bold"
-  ) +
-  labs(y = NULL,
-       x = NULL,
-       fill = NULL,
-       caption = "Source: own elaboration with data from ELSOC 2016-2023 (N obs = 3,435)") +
-  theme_ggdist() +
-  theme(legend.position = "top") 
+g1
 ```
 
 Regarding the relationship between preferences for the commodification of pensions and intergenerational occupational mobility, @fig-mean shows the percentage of agreement with the market provision of pension benefits according to mobility trajectories and survey waves. Averaging across waves, agreement is highest among the High-High immobile (27.8%), followed by the Middle-High upwardly mobile (24.6%) and the High-Middle downwardly mobile (24.0%); the lowest levels are found among Low-High (17.3%), Low-Low (17.4%), and descending High-Low (17.6%) groups. The specific profiles of each wave accentuate these gradients, especially in 2023: agreement reaches 31.9% for high-high, 29.4% for upward middle-high, and peaks at 36.8% for downward high-middle (the highest of all trajectories for that year). Descriptively, immobility at the top is associated with greater support for commodification; among those who move, support is greatest for the upward Middle-High trajectory and the downward High-Middle trajectory, patterns that intensify in 2023. These shifts anticipate the heterogeneity documented below.
@@ -114,227 +61,14 @@ Regarding the relationship between preferences for the commodification of pensio
 #| echo: false
 #| results: asis
 
-pdat <- db %>% 
-  select(wave, estrato_orig, estrato_ocupa, just_pension_f) %>% 
-  drop_na() %>% 
-  mutate(
-    mobility = paste(estrato_orig, estrato_ocupa, sep = "-"),
-    facet = case_when(
-      mobility %in% c("High-Middle","High-Low","Middle-Low") ~ "Downward",
-      estrato_orig == estrato_ocupa ~ "Inmobile",
-      mobility %in% c("Middle-High","Low-Middle","Low-High") ~ "Upward"
-    )
-  ) %>% 
-  group_by(wave, mobility, facet) %>% 
-  summarise(y = mean(just_pension_f), .groups = "drop") %>% 
-  group_by(mobility, facet) %>% 
-  mutate(gm = mean(y)) %>% 
-  ungroup()
-
-# datos SOLO para el punto (uno por categoría)
-pdat_gm <- pdat %>% distinct(mobility, facet, gm)
-
-ggplot(pdat, aes(x = mobility, y = y, group = wave)) +
-  geom_col(aes(fill = wave), position = "dodge", alpha = 0.9) +
-  # Punto "X" (pch 4) con su propia leyenda (shape)
-  geom_point(
-    data = pdat_gm,
-    aes(x = mobility, y = gm, shape = "All waves"),
-    inherit.aes = FALSE,
-    size = 3, stroke = 1, color = "black"
-  ) +
-  scale_y_continuous(labels = scales::percent, limits = c(0, 1)) + 
-  scale_fill_manual(
-    values = c("2016" = "#5b59d4", "2018" = "#b3b3b3ff", "2023" = "#c8237d"),
-    name   = "Wave"
-  ) +
-  scale_shape_manual(                     # <-- leyenda separada para el shape
-    name = NULL,                          # o "Marker" si quieres título
-    values = c("All waves" = 4)          # 4 = "X"
-  ) +
-  guides(
-    fill  = guide_legend(order = 1),
-    shape = guide_legend(order = 2, override.aes = list(color = "black"))
-  ) +
-  facet_wrap(~ facet, scales = "free_x") +
-  labs(
-    y = "% of Agreement",
-    x = NULL,
-    caption = "Source: own elaboration with data from ELSOC 2016–2023 (N obs = 3,435)"
-  ) +
-  theme_ggdist() +
-  theme(legend.position = "top")
+g2
 
 ```
 
 
 ## Models
 
-@fig-reg reports the doubly robust estimates of the effect of intergenerational mobility on preferences for pension commodification, obtained from weighted models combining stabilized IPW–ATT with covariate adjustment and wave fixed effects. This specification ensures consistency if either the weighting or the outcome model is correctly specified, while improving efficiency [@wooldridge_introductory_2009]. Results are virtually identical to baseline models without covariates (see [Supplementary Material](#anexo) for complete models), with no substantive change in the size or significance of the mobility coefficients.
-
-
-
-```{r}
-#| label: models
-#| echo: false
-#| results: false
-
-### Pensiones 
-
-### Low to middle
-
-data_lm <- datos1 %>% 
-  select(idencuesta, 
-         ola, 
-         y = just_pension_f, 
-         t = moblm, 
-         w = w_low_lm_t, 
-         edad = m0_edad_f, 
-         sexo = sexo_f, 
-         nac = nacionalidad_f,
-         etnia = etnia_f,
-         hogar = hogar_bip_f, 
-         edu0 = educ_orig_f) %>% 
-  filter(!is.na(t), !is.na(w)) %>% 
-  mutate(ola = factor(ola, levels = c("1", "2", "3"),
-                      labels = c("2016", "2018", "2023")))
-
-mp_lm <-
-  lm_robust(y ~ t + edad + sexo + nac + etnia + hogar + edu0 + ola,
-            weights = w,
-            se_type = "CR2",
-            clusters = idencuesta,
-            data = data_lm) 
-
-### Low to high
-
-data_lh <- datos1 %>% 
-  select(idencuesta, 
-         ola, 
-         y = just_pension_f, 
-         t = moblh, 
-         w = w_low_lh_t, 
-         edad = m0_edad_f, 
-         sexo = sexo_f, 
-         nac = nacionalidad_f,
-         etnia = etnia_f,
-         hogar = hogar_bip_f, 
-         edu0 = educ_orig_f) %>% 
-  filter(!is.na(t), !is.na(w)) %>% 
-  mutate(ola = factor(ola, levels = c("1", "2", "3"),
-                      labels = c("2016", "2018", "2023")))
-
-mp_lh <- 
-  lm_robust(y ~ t + edad + sexo + nac + etnia + hogar + edu0+ ola,
-            weights = w,
-            se_type = "CR2",
-            clusters = idencuesta,
-            data = data_lh) 
-
-### middle to high
-
-data_mh <- datos2 %>% 
-  select(idencuesta, 
-         ola, 
-         y = just_pension_f, 
-         t = mobmh, 
-         w = w_mid_mh_t, 
-         edad = m0_edad_f, 
-         sexo = sexo_f, 
-         nac = nacionalidad_f,
-         etnia = etnia_f,
-         hogar = hogar_bip_f, 
-         edu0 = educ_orig_f) %>% 
-  filter(!is.na(t), !is.na(w)) %>% 
-  mutate(ola = factor(ola, levels = c("1", "2", "3"),
-                      labels = c("2016", "2018", "2023")))
-
-mp_mh <-  
-  lm_robust(y ~ t + edad + sexo + nac + etnia + hogar + edu0+ ola,
-            weights = w,
-            se_type = "CR2",
-            clusters = idencuesta,
-            data = data_mh) 
-
-### middle to low
-
-data_ml <- datos2 %>% 
-  select(idencuesta, 
-         ola, 
-         y = just_pension_f, 
-         t = mobml, 
-         w = w_mid_ml_t, 
-         edad = m0_edad_f, 
-         sexo = sexo_f, 
-         nac = nacionalidad_f,
-         etnia = etnia_f,
-         hogar = hogar_bip_f, 
-         edu0 = educ_orig_f) %>% 
-  filter(!is.na(t), !is.na(w)) %>% 
-  mutate(ola = factor(ola, levels = c("1", "2", "3"),
-                      labels = c("2016", "2018", "2023")))
-
-mp_ml <- 
-  lm_robust(y ~ t + edad + sexo + nac + etnia + hogar + edu0+ ola,
-            weights = w,
-            se_type = "CR2",
-            clusters = idencuesta,
-            data = data_ml) 
-
-
-### High to middle
-
-data_hm <- datos3 %>% 
-  select(idencuesta, 
-         ola, 
-         y = just_pension_f, 
-         t = mobhm, 
-         w = w_hig_hm_t, 
-         edad = m0_edad_f, 
-         sexo = sexo_f, 
-         nac = nacionalidad_f,
-         etnia = etnia_f,
-         hogar = hogar_bip_f, 
-         edu0 = educ_orig_f) %>% 
-  filter(!is.na(t), !is.na(w)) %>% 
-  mutate(ola = factor(ola, levels = c("1", "2", "3"),
-                      labels = c("2016", "2018", "2023")))
-
-mp_hm <- 
-  lm_robust(y ~ t + edad + sexo + nac + etnia + hogar + edu0+ ola,
-            weights = w,
-            se_type = "CR2",
-            clusters = idencuesta,
-            data = data_hm) 
-
-
-### High to low
-
-data_hl <- datos3 %>% 
-  select(idencuesta, 
-         ola, 
-         y = just_pension_f, 
-         t = mobhl, 
-         w = w_hig_hl_t, 
-         edad = m0_edad_f, 
-         sexo = sexo_f, 
-         nac = nacionalidad_f,
-         etnia = etnia_f,
-         hogar = hogar_bip_f, 
-         edu0 = educ_orig_f) %>% 
-  filter(!is.na(t), !is.na(w)) %>% 
-  mutate(ola = factor(ola, levels = c("1", "2", "3"),
-                      labels = c("2016", "2018", "2023")))
-
-mp_hl <- 
-  lm_robust(y ~ t + edad + sexo + nac + etnia + hogar + edu0 + ola,
-            weights = w,
-            se_type = "CR2",
-            clusters = idencuesta,
-            data = data_hl) 
-
-```
-
+@fig-reg reports the doubly robust estimates of the effect of intergenerational mobility on preferences for pension commodification, obtained from weighted models combining stabilized IPW with covariate adjustment and wave fixed effects. Results reveal a clear directional asymmetry between upward and downward mobility trajectories. Among upwardly mobile respondents, only the Middle→High trajectory exhibits a significant positive effect on support for pension commodification ($\beta$ = 0.09, 95% CI [0.02, 0.16]). Interpreted as an origin-specific ATT, this estimate compares—for individuals who actually moved from the middle to the high class—their observed endorsement with the counterfactual endorsement they would have expressed had they remained immobile in the middle class. Holding all other predictors constant, the point estimate implies a 9 percentage point higher probability of endorsing market-based access to pension benefits for Middle→High movers relative to their own immobility counterfactual, statistically significant at the 95% confidence level. In contrast, two downward trajectories: High→Middle ($\beta$ = −0.07, CI [−0.15, −0.00]) and High→Low ($\beta$ = −0.10, CI [−0.18, −0.02]), show significant negative effects, suggesting that individuals who experience downward mobility from higher-class origins express weaker preferences for market provision. The remaining pathways (Low→Middle, Low→High, Middle→Low) display no significant differences relative to their non-mobile counterparts. These patterns indicate that upward movement within the upper segment (Middle→High) reinforces pro-commodification attitudes, whereas downward movement from privileged origins reduces them. 
 
 
 ```{r}
@@ -345,262 +79,15 @@ mp_hl <-
 #| echo: false
 #| results: asis
 
-conflicts_prefer(dplyr::filter)
-
-df_pension <- bind_rows(
-  tidy(mp_lm, conf.int = TRUE) %>%
-    dplyr::filter(term == "t") %>%
-    dplyr::mutate(term = paste0("Low-Middle\n", "(N obs. = ", mp_hl$nobs, ";", "\nN clusters = ", mp_hl$nclusters, ")")
-) 
-  ,
-  tidy(mp_lh, conf.int = TRUE) %>%
-    dplyr::filter(term == "t") %>%
-  dplyr::mutate(term = paste0("Low-High\n", "(N obs. = ", mp_lh$nobs, ";", "\nN clusters = ", mp_lh$nclusters, ")"))
-  ,
-tidy(mp_mh, conf.int = TRUE) %>%
-    dplyr::filter(term == "t") %>%
-    dplyr::mutate(term = paste0("Middle-High\n", "(N obs. = ", mp_mh$nobs, ";", "\nN clusters = ", mp_mh$nclusters, ")"))
-,
-  tidy(mp_ml, conf.int = TRUE) %>%
-    dplyr::filter(term == "t") %>%
-  dplyr::mutate(term = paste0("Middle-Low\n", "(N obs. = ", mp_ml$nobs, ";", "\nN clusters = ", mp_ml$nclusters, ")"))
-,
-  tidy(mp_hm, conf.int = TRUE) %>%
-    dplyr::filter(term == "t") %>%
-  dplyr::mutate(term = paste0("High-Middle\n", "(N obs. = ", mp_hm$nobs, ";", "\nN clusters = ", mp_hm$nclusters, ")"))
-,
-  tidy(mp_hl, conf.int = TRUE) %>%
-    dplyr::filter(term == "t") %>%
-  dplyr::mutate(term = paste0("High-Low\n", "(N obs. = ", mp_hl$nobs, ";", "\nN clusters = ", mp_hl$nclusters, ")"))
-) 
-
-df_pension_lab <- df_pension %>%
-  dplyr::mutate(
-    sig     = ifelse(conf.low * conf.high > 0, "*", ""),  # IC no cruza 0
-    est_lab = sprintf("%.2f%s", estimate, sig),
-    low_lab = sprintf("%.2f", conf.low),
-    high_lab= sprintf("%.2f", conf.high)
-  )
-
-df_pension_lab <- df_pension_lab %>%
-  dplyr::mutate(
-    term = factor(
-      term,
-      levels = term
-      )
-  )
-
-ggplot(df_pension_lab, aes(x = estimate, y = term)) +
-  geom_vline(xintercept = 0, linetype = "dashed", color = "darkred", size = 0.5, alpha = 1) +
-  geom_errorbarh(aes(xmin = conf.low, xmax = conf.high), height = 0, size = 0.7) +
-  geom_point(size = 2.5) +
-  scale_x_continuous(limits = c(-0.5, 0.5), breaks = seq(-0.5, 0.5, 0.25)) +
-  #geom_text(aes(label = est_lab), hjust = -0.05, size = 4, vjust = -0.5) +
-  labs(x = "Estimate", y = NULL) +
-  theme_ggdist() 
+g3
 ```
 
 
-Results reveal a clear directional asymmetry between upward and downward mobility trajectories. Among upwardly mobile respondents, only the Middle→High trajectory exhibits a significant positive effect on support for pension commodification ($\beta$ = 0.09, 95% CI [0.02, 0.16]). Interpreted as an origin-specific ATT, this estimate compares—for individuals who actually moved from the middle to the high class—their observed endorsement with the counterfactual endorsement they would have expressed had they remained immobile in the middle class. Holding all other predictors constant, the point estimate implies a 9 percentage point higher probability of endorsing market-based access to pension benefits for Middle→High movers relative to their own immobility counterfactual, statistically significant at the 95% confidence level. In contrast, two downward trajectories: High→Middle ($\beta$ = −0.07, CI [−0.15, −0.00]) and High→Low ($\beta$ = −0.10, CI [−0.18, −0.02]), show significant negative effects, suggesting that individuals who experience downward mobility from higher-class origins express weaker preferences for market provision. The remaining pathways (Low→Middle, Low→High, Middle→Low) display no significant differences relative to their non-mobile counterparts. These patterns indicate that upward movement within the upper segment (Middle→High) reinforces pro-commodification attitudes, whereas downward movement from privileged origins reduces them. 
 
 ## Effect heterogeneity
 
 
-To probe potential mechanisms underlying the mobility effects, I estimate origin-specific ATT models that interact the mobility treatment with high meritocratic perceptions (ref. = low), using stabilized IPW–ATT weights, covariate adjustment, and wave fixed effects. I also estimate an analogous specification interacting mobility with survey waves (ref. = 2016) to assess temporal heterogeneity in the treatment effect (see [Supplementary Material](#anexo) for complete models).
-
-
-
-```{r}
-#| echo: false
-#| results: false
-
-# 3.4 Interacciones -------------------------------------------------------
-
-# -----------
-# Meritocracy 
-# -----------
-
-### Interacciones
-
-### Low to middle
-
-data_lm_i <- datos1 %>% 
-  select(idencuesta, 
-         ola, 
-         y = just_pension_f, 
-         t = moblm, 
-         w = w_low_lm_t, 
-         edad = m0_edad_f, 
-         sexo = sexo_f, 
-         nac = nacionalidad_f,
-         etnia = etnia_f,
-         hogar = hogar_bip_f, 
-         edu0 = educ_orig_f,
-         m = merit_i) %>% 
-  filter(!is.na(t), !is.na(w)) %>% 
-  mutate(ola = factor(ola, levels = c("1", "2", "3"),
-                      labels = c("2016", "2018", "2023")))
-
-data_lm_i %>% 
-  arrange(idencuesta)
-
-mp_lm_i <-
-  lm_robust(y ~ t*m + edad + sexo + nac + etnia + hogar + edu0 + ola,
-            weights = w,
-            se_type = "CR2",
-            clusters = idencuesta,
-            data = data_lm_i) 
-
-mp_lm_i %>%  
-  screenreg()
-
-### Low to high
-
-data_lh_i <- datos1 %>% 
-  select(idencuesta, 
-         ola, 
-         y = just_pension_f, 
-         t = moblh, 
-         w = w_low_lh_t, 
-         edad = m0_edad_f, 
-         sexo = sexo_f, 
-         nac = nacionalidad_f,
-         etnia = etnia_f,
-         hogar = hogar_bip_f, 
-         edu0 = educ_orig_f,
-         m = merit_i) %>%  
-  filter(!is.na(t), !is.na(w)) %>% 
-  mutate(ola = factor(ola, levels = c("1", "2", "3"),
-                      labels = c("2016", "2018", "2023")))
-
-mp_lh_i <- 
-  lm_robust(y ~ t*m + edad + sexo + nac + etnia + hogar + edu0+ ola,
-            weights = w,
-            se_type = "CR2",
-            clusters = idencuesta,
-            data = data_lh_i) 
-
-mp_lh_i %>% 
-  screenreg()
-
-
-### middle to high
-
-data_mh_i <- datos2 %>% 
-  select(idencuesta, 
-         ola, 
-         y = just_pension_f, 
-         t = mobmh, 
-         w = w_mid_mh_t, 
-         edad = m0_edad_f, 
-         sexo = sexo_f, 
-         nac = nacionalidad_f,
-         etnia = etnia_f,
-         hogar = hogar_bip_f, 
-         edu0 = educ_orig_f,
-         m = merit_i) %>% 
-  filter(!is.na(t), !is.na(w)) %>% 
-  mutate(ola = factor(ola, levels = c("1", "2", "3"),
-                      labels = c("2016", "2018", "2023")))
-
-mp_mh_i <-  
-  lm_robust(y ~ t*m + edad + sexo + nac + etnia + hogar + edu0+ ola,
-            weights = w,
-            se_type = "CR2",
-            clusters = idencuesta,
-            data = data_mh_i) 
-
-mp_mh_i %>% 
-  screenreg()
-
-### middle to low
-
-data_ml_i <- datos2 %>% 
-  select(idencuesta, 
-         ola, 
-         y = just_pension_f, 
-         t = mobml, 
-         w = w_mid_ml_t, 
-         edad = m0_edad_f, 
-         sexo = sexo_f, 
-         nac = nacionalidad_f,
-         etnia = etnia_f,
-         hogar = hogar_bip_f, 
-         edu0 = educ_orig_f,
-         m = merit_i) %>% 
-  filter(!is.na(t), !is.na(w)) %>% 
-  mutate(ola = factor(ola, levels = c("1", "2", "3"),
-                      labels = c("2016", "2018", "2023")))
-
-mp_ml_i <- 
-  lm_robust(y ~ t*m + edad + sexo + nac + etnia + hogar + edu0+ ola,
-            weights = w,
-            se_type = "CR2",
-            clusters = idencuesta,
-            data = data_ml_i) 
-
-mp_ml_i %>% 
-  screenreg()
-
-
-### High to middle
-
-data_hm_i <- datos3 %>% 
-  select(idencuesta, 
-         ola, 
-         y = just_pension_f, 
-         t = mobhm, 
-         w = w_hig_hm_t, 
-         edad = m0_edad_f, 
-         sexo = sexo_f, 
-         nac = nacionalidad_f,
-         etnia = etnia_f,
-         hogar = hogar_bip_f, 
-         edu0 = educ_orig_f,
-         m = merit_i) %>% 
-  filter(!is.na(t), !is.na(w)) %>% 
-  mutate(ola = factor(ola, levels = c("1", "2", "3"),
-                      labels = c("2016", "2018", "2023")))
-
-mp_hm_i <- 
-  lm_robust(y ~ t*m + edad + sexo + nac + etnia + hogar + edu0+ ola,
-            weights = w,
-            se_type = "CR2",
-            clusters = idencuesta,
-            data = data_hm_i) 
-
-mp_hm_i %>% 
-  screenreg()
-
-### High to low
-
-data_hl_i <- datos3 %>% 
-  select(idencuesta, 
-         ola, 
-         y = just_pension_f, 
-         t = mobhl, 
-         w = w_hig_hl_t, 
-         edad = m0_edad_f, 
-         sexo = sexo_f, 
-         nac = nacionalidad_f,
-         etnia = etnia_f,
-         hogar = hogar_bip_f, 
-         edu0 = educ_orig_f,
-         m = merit_i) %>% 
-  filter(!is.na(t), !is.na(w)) %>% 
-  mutate(ola = factor(ola, levels = c("1", "2", "3"),
-                      labels = c("2016", "2018", "2023")))
-
-mp_hl_i <- 
-  lm_robust(y ~ t*m + edad + sexo + nac + etnia + hogar + edu0 + ola,
-            weights = w,
-            se_type = "CR2",
-            clusters = idencuesta,
-            data = data_hl_i) 
-
-mp_hl_i %>% 
-  screenreg()
-```
+To probe potential mechanisms underlying the mobility effects, I estimate origin-specific ATT models that interact the mobility treatment with high meritocratic perceptions (ref. = low), using stabilized IPW weights, covariate adjustment, and wave fixed effects. I also estimate an analogous specification interacting mobility with survey waves (ref. = 2016) to assess temporal heterogeneity in the treatment effect (see [Supplementary Material](#anexo) for complete models).
 
 
 ```{r}
@@ -611,62 +98,7 @@ mp_hl_i %>%
 #| echo: false
 #| results: asis
 
-df_pension_i <-  bind_rows(
-  tidy(mp_lm_i, conf.int = TRUE) %>%
-    filter(term %in% c("t:mHigh", "t")) %>%
-    mutate(name = paste0("Low-Middle\n", "(N obs. = ", mp_hl_i$nobs, ";", "\nN clusters = ", mp_hl_i$nclusters, ")")
-    ) 
-  ,
-  tidy(mp_lh_i, conf.int = TRUE) %>%
-    filter(term %in% c("t:mHigh", "t")) %>%
-    mutate(name = paste0("Low-High\n", "(N obs. = ", mp_lh_i$nobs, ";", "\nN clusters = ", mp_lh_i$nclusters, ")"))
-  ,
-  tidy(mp_mh_i, conf.int = TRUE) %>%
-    filter(term %in% c("t:mHigh", "t")) %>%
-    mutate(name = paste0("Middle-High\n", "(N obs. = ", mp_mh_i$nobs, ";", "\nN clusters = ", mp_mh_i$nclusters, ")"))
-  ,
-  tidy(mp_ml_i, conf.int = TRUE) %>%
-    filter(term %in% c("t:mHigh", "t")) %>%
-    mutate(name = paste0("Middle-Low\n", "(N obs. = ", mp_ml_i$nobs, ";", "\nN clusters = ", mp_ml_i$nclusters, ")"))
-  ,
-  tidy(mp_hm_i, conf.int = TRUE) %>%
-    filter(term %in% c("t:mHigh", "t")) %>%
-    mutate(name = paste0("High-Middle\n", "(N obs. = ", mp_hm_i$nobs, ";", "\nN clusters = ", mp_hm_i$nclusters, ")"))
-  ,
-  tidy(mp_hl_i, conf.int = TRUE) %>%
-    filter(term %in% c("t:mHigh", "t")) %>%
-    mutate(name = paste0("High-Low\n", "(N obs. = ", mp_hl_i$nobs, ";", "\nN clusters = ", mp_hl_i$nclusters, ")"))
-) 
-
-df_pension_lab_i <- df_pension_i %>%
-  mutate(
-    sig     = ifelse(conf.low * conf.high > 0, "*", ""),  # IC no cruza 0
-    est_lab = sprintf("%.2f%s", estimate, sig),
-    low_lab = sprintf("%.2f", conf.low),
-    high_lab= sprintf("%.2f", conf.high)
-  )
-
-df_pension_lab_i <- df_pension_lab_i %>%
-  mutate(
-    name = factor(
-      name,
-      levels = unique(name)
-    ),
-    term = if_else(term == "t", "Low Meritocracy", "High Meritocracy"),
-    term = factor(term, levels = c("High Meritocracy", "Low Meritocracy"))
-  )
-
-
-ggplot(df_pension_lab_i, aes(x = estimate, y = name)) +
-  geom_vline(xintercept = 0, linetype = "dashed", color = "darkred", size = 0.5, alpha = 1) +
-  geom_errorbarh(aes(xmin = conf.low, xmax = conf.high), height = 0, size = 0.7) +
-  geom_point(size = 2.5) +
-  scale_x_continuous(limits = c(-0.5, 0.5), breaks = seq(-0.5, 0.5, 0.25)) +
-  facet_wrap(~term) + 
-  #geom_text(aes(label = est_lab), hjust = -0.05, size = 4, vjust = -0.5) +
-  labs(x = "Estimate", y = NULL) +
-  theme_ggdist()
-
+g4
 ```
 
 @fig-interact shows that neither the interaction terms nor the mobility coefficients reach conventional significance across trajectories, indicating no detectable moderation of the causal mobility effect by meritocratic perceptions at the 95% level. Directionally, the interaction is positive for Middle→High ($\beta$ = 0.15, 95% CI [−0.03, 0.33]) and Low→High ($\beta$ = 0.05, [−0.14, 0.24]), suggesting, if anything, somewhat larger pro-commodification effects among high-merit respondents when upwardly mobile, whereas it is negative for High→Low ($\beta$ = −0.14, [−0.38, 0.10]) and High→Middle ($\beta$ = −0.03, [−0.23, 0.17]), showing weaker pro-commodification effects under downward mobility at high merit (left panel). Focusing on the treatment effect at low meritocracy (the reference category), the mobility coefficient captures the origin-specific ATT comparing movers to their immobility counterfactual among low-merit respondents (right panel). These effects are small and imprecise across trajectories: Low→Middle ($\beta$ = −0.02, [−0.09, 0.04]) and Low→High ($\beta$ = −0.03, [−0.10, 0.05]) are near zero. Middle→High is positive but not significant ($\beta$ = 0.07, [−0.01, 0.14]), Middle→Low is null ($\beta$ = -0.00, [−0.07, 0.06]), and downward from high shows negative, borderline estimates: High→Middle ($\beta$ = −0.07, [−0.15, 0.00]) and High→Low ($\beta$ = −0.08, [−0.15, 0.00]). Substantively, I do not find evidence that meritocratic perceptions moderate the causal effect of mobility, although the signs align with the idea that upward mobility at high merit tilts attitudes toward commodification, and downward mobility at high merit tilts them away.
@@ -678,61 +110,6 @@ ggplot(df_pension_lab_i, aes(x = estimate, y = name)) +
 #| tbl-cap-location: top
 #| results: asis
 #| echo: false
-
-# -----------
-# Time 
-# -----------
-
-# Low to middle
-
-mp_lm_t <- lm_robust(y ~ t*ola + edad + sexo + nac + etnia + hogar + edu0,
-          weights = w,
-          se_type = "CR2",
-          clusters = idencuesta,
-          data = data_lm) 
-
-# Low to high
-
-mp_lh_t <- lm_robust(y ~ t*ola+ edad + sexo + nac + etnia + hogar + edu0,
-          weights = w,
-          se_type = "CR2",
-          clusters = idencuesta,
-          data = data_lh) 
-
-# Middle to high
-
-mp_mh_t <- lm_robust(y ~ t*ola + edad + sexo + nac + etnia + hogar + edu0,
-          weights = w,
-          se_type = "CR2",
-          clusters = idencuesta,
-          data = data_mh) 
-
-
-# Middle to low
-
-mp_ml_t <- lm_robust(y ~ t*ola + edad + sexo + nac + etnia + hogar + edu0,
-          weights = w,
-          se_type = "CR2",
-          clusters = idencuesta,
-          data = data_ml) 
-
-# High to middle
-
-# tiempo: descender se vuelve un efecto positivo en la ultima ola (con mi plata no)
-mp_hm_t <- lm_robust(y ~ t*ola + edad + sexo + nac + etnia + hogar + edu0,
-          weights = w,
-          se_type = "CR2",
-          clusters = idencuesta,
-          data = data_hm) 
-
-# High to low
-
-mp_hl_t <- lm_robust(y ~ t*ola + edad + sexo + nac + etnia + hogar + edu0,
-          weights = w,
-          se_type = "CR2",
-          clusters = idencuesta,
-          data = data_hl) 
-
 
 ccoef <- list(
   "(Intercept)" = "Intercept",

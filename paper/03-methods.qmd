@@ -24,38 +24,19 @@ editor_options:
  }
 ```
 
-
-```{r}
-#| label: libraries1
-#| message: false
-#| echo: false
-
-if (!require("pacman")) install.packages("pacman")
-
-pacman::p_load(tidyverse,
-               here,
-               sjPlot,
-               sjmisc,
-               texreg,
-               estimatr,
-               conflicted,
-               ggdist,
-               summarytools,
-               dagitty,
-               ggdag)
-
-conflicts_prefer(dplyr::filter)
-options(scipen=999)
-rm(list = ls())
-```
-
 ```{r}
 #| label: data1
-#| message: false
 #| echo: false
+#| results: false
+#| message: false
+#| warning: false
+library(here)
+library(janitor)
+library(dagitty)
+library(ggdag)
+library(tidyverse)
 
 load(here("input/data/proc/data_v2.3.RData"))
-
 ```
 
 # Method
@@ -64,14 +45,13 @@ Social mobility effects—understood as impacts on an outcome arising from movem
 
 ## A Causal Model for Mobility Effects
 
-Breen and Ermisch [-@breen_effects_2024], building on a critical reassessment of the inferential limits of standard mobility models, propose a causal framework that reconceptualizes the “mobility effect” as the treatment effect of reaching a destination class, with impacts heterogeneous by class of origin. The core claim is that typical mobility hypotheses are fundamentally within-person counterfactual comparisons rather than between-person contrasts. Defining mobility as $(M = D - O)$ —a change from origin $(O)$ to destination $(D)$, rather than an additive or interactive combination—places the focus squarely on the Neyman–Rubin problem: for any individual, we observe the outcome under the realized destination but not under alternative destinations or under immobility.
+Breen and Ermisch [-@breen_effects_2024], building on a critical reassessment of the inferential limits of standard mobility models, propose a causal framework that reconceptualizes the “mobility effect” as the treatment effect of reaching a destination class, with impacts heterogeneous by class of origin. The core claim is that typical mobility hypotheses are fundamentally within-person counterfactual comparisons rather than between-person contrasts. Defining mobility as $M = D - O$ —a change from origin $(O)$ to destination $(D)$, rather than an additive or interactive combination—places the focus squarely on the Neyman–Rubin problem: for any individual, we observe the result in the social position they currently occupy, but not in the situation of other alternative destinations or immobility.
 
-Exploiting the temporal ordering of origin, destination and outcome, Breen and Ermisch [-@breen_effects_2024] frame mobility as a treatment process that motivates the causal question: "how would the outcome among people from origin *j* who entered destination *k* have been different if those people had, counterfactually, entered destination *k’* instead?" (p.472). The corresponding estimand is the conditional causal effect of destination given origin. It is of particular interest when *k' = j*, i.e., immobility. This estimand compares movers’ observed outcomes with the hypothetical outcomes those same individuals would have exhibited had they remained in their origin class. This formulation provides a coherent potential-outcomes basis for studying how class transitions shape individual preferences and attitudes.
+Exploiting the temporal ordering of origin, destination and outcome, Breen and Ermisch [-@breen_effects_2024] frame mobility as a treatment process that motivates the causal question: "how would the outcome among people from origin *j* who entered destination *k* have been different if those people had, counterfactually, entered destination *k’* instead?" (p.472). The corresponding estimand is the conditional causal effect of destination given origin. It is of particular interest when *k' = j*, i.e., immobility. This estimand compares movers’ observed outcomes with the hypothetical outcomes those same individuals would have exhibited had they remained in their origin class. This formulation provides a coherent potential-outcomes basis for studying how social mobility shape individual preferences and attitudes.
 
 Following Breen and Ermisch [-@breen_effects_2024], the identification of causal mobility effects from observational data requires the following assumptions:
 
-**Positivity**: For all $(j,c)$ in the support of $(O,C)$ and for each relevant destination $(k)$, the probability of receiving $D=k$ is strictly between 0 and 1; substantively, every $(O,C)$-type has some chance of each comparison destination.
-
+**Positivity**: For all $(j,c)$ in the support of $(O,C)$ and for each relevant destination $(k)$, the probability of receiving $D=k$ is strictly between 0 and 1; substantively, every $(O,C)$-type has non-zero chance of each comparison destination.
 
 $$
  0<P(D=k\mid O=j, C=c)<1
@@ -84,13 +64,13 @@ $$
 Y_i(D_i) = Y_i\big(D_i, D_{-i}\big)\quad \forall, D_{-i}
 $$ {#eq-sutva}
 
-**Conditional Independence**: Also known as conditional unconfoundedness or exchangeability, this assumption emphasizes that, conditional on origin $O$ and pre-treatment covariates $C$ (e.g., parental education, ethnicity, cohort, early-life factors), assignment to $D$ is as good as random. This underlies IPW and regression adjustment, which seek exchangeability between mobile and immobile individuals.
+**Conditional Independence**: Also known as conditional unconfoundedness or exchangeability, this assumption emphasizes that, conditional on origin $O$ and pre-treatment covariates $C$ (e.g., parental education, ethnicity, cohort, early-life factors), assignment to $D$ is as good as random. This underlies IPW and regression adjustment, which seek exchangeability between mobile (treated) and immobile individuals (controls).
 
 $$
 Y(D)\ \perp\kern-5pt \perp D\ \mid\ (O,C)
 $$ {#eq-indep}
 
-@fig-dag depicts the causal model guiding identification. In this DAG, $C$ represents pre-treatment confounders (e.g., family resources, household composition, and ascriptive status) affecting both origin and destination, and $U$ denotes unobserved factors influencing $C$. Class origin $O$ is determined by $C$ and, in turn, affects destination $D$. The outcome $Y$ (preferences for commodification) is caused by $D$ and can also be affected by $C$. There is no direct arrow from $O$ to $Y$, reflecting the assumption that the effect of origin on the outcome operates entirely through background factors $(C)$ and destination $(D)$.  Accordingly, conditioning on $(O,C)$ blocks the relevant back-door paths from $D$ to $Y$, specifically $D\leftarrow O\leftarrow C\rightarrow Y$ and, if present, $D \leftarrow O \rightarrow Y$, so $(O,C)$ is a minimal sufficient adjustment set.
+In fact, establishing the causal relationship between social mobility and subjective outcomes, such as preferences, poses several challenges for causal inference. Below, I use directed acyclic graphs (DAGs) to illustrate some of these challenges and evaluate possible strategies for identifying the effects of social mobility. @fig-dag depicts the causal model guiding identification. In this model, a person's preference ($Y$) is directly caused by her class destination ($D$) and can also be affected by different attributes determined in childhood or earlier ($C$), such as family resources, household composition, and ascriptive status (pre-treatment confounders). Class origin ($O$) is determined by those origin-attributes ($C$) and, in turn, affects destination ($D$). In addition, denotes unobserved factors ($U$) can also influence origin-attributes ($C$). There is no direct arrow from $O$ to $Y$, reflecting the assumption that the effect of origin on the outcome operates entirely through background factors $(C)$ and destination $(D)$.  Accordingly, conditioning on $(O,C)$ could blocks the relevant back-door paths from $D$ to $Y$, specifically $D\leftarrow O\leftarrow C\rightarrow Y$ and, if present, $D \leftarrow O \rightarrow Y$, so $(O,C)$ is a minimal sufficient adjustment set.
 
 ```{r}
 #| label: fig-dag
@@ -158,7 +138,7 @@ $$
 ATT_{j,k,k′} =E[Y(D=k|O=j, D=k)]−E[Y(D=k′|O=j, D=k)]
 $$ {#eq-breen}
 
-In this study, I focus on the specific case where the counterfactual destination corresponds to class immobility $(k' = j)$, that is, how the outcome among people from origin *k* who entered destination *k* would have bee different if those people had, counterfactually, remained in origin *j* instead (inmobility). Accordingly, the estimand becomes:
+In this study, I focus on the specific case where the counterfactual destination corresponds to class immobility $(k' = j)$, that is, how the outcome among people from origin *j* who entered destination *k* would have bee different if those people had, counterfactually, remained in origin *j* instead (inmobility). Accordingly, the estimand becomes:
 
 $$ 
 ATT_{j,k,j} =E[Y(D=k|O=j, D=k)]−E[Y(D=j|O=j, D=k)]
@@ -173,12 +153,12 @@ which represents the average causal effect of attaining class *(k)*—for instan
 
 This study draws on data from the Chilean Longitudinal Social Survey (ELSOC) of the Center for Social Conflict and Cohesion Studies (COES). This survey is a nationally representative panel study of the urban adult population in Chile, conducted annually between 2016 and 2023. Designed to examine individuals’ attitudes, emotions, and behaviors regarding social conflict and cohesion, ELSOC employs a probabilistic, stratified, clustered, and multistage sampling design covering both major urban centers and smaller cities. The sampling frame was proportionally stratified into six categories of urban population size (e.g., large and small cities), followed by a random selection of households within 1,067 city blocks. The target population includes men and women aged 18 to 75 who are habitual residents of private dwellings.
 
-Because respondent occupation is not measured in every wave, I restrict the analysis to the 2016, 2018, and 2023 waves. Parental occupation was collected only in 2023 as open-text labels. I coded these texts to the ISCO-08 two-digit scheme using the National Institute of Statistics of Chile’s automated coding API and retained cases with high-confidence matches (>95%). Treating parental occupation as a time-invariant origin attribute, I carried these codes back to 2016 and 2018. After listwise deletion and restricting to key variables (respondent occupation and the outcome measure), the final analytic sample comprises *N* = 3,435 observations nested within *N* = 1,787 individuals (2016: 914; 2018: 1,377; 2023: 1,144). Consistent with the study design, estimation proceeds within trajectory-specific subsamples (e.g., low→low; low→middle), retaining movers and matched non-movers from the same origin class. Then, I apply weights to construct the corresponding counterfactual control distributions for each trajectory. As Breen and Ermisch [-@breen_effects_2024] did, I use the three waves in the estimations that follow, allowing for correlation between the observations for each individual in calculating the standard errors (i.e. clustering on the personal identifier).
+Because respondent occupation is not measured in every wave, I restrict the analysis to the 2016, 2018, and 2023 waves. Parental occupation was collected only in 2023 as open-text labels. I coded these texts to the ISCO-08 two-digit scheme using the National Institute of Statistics of Chile’s automated coding API and retained cases with high-confidence matches (>95%). Treating parental occupation as a time-invariant origin attribute, I carried these codes back to 2016 and 2018. After listwise deletion and restricting to key variables (respondent occupation and the outcome measure), the final analytic sample comprises *N* = 3,435 observations nested within *N* = 1,787 individuals (2016: 914; 2018: 1,377; 2023: 1,144). Consistent with the study design, estimation proceeds within trajectory-specific subsamples (e.g., low→low; low→middle), retaining movers and matched non-movers from the same origin class. Then, I apply weights to construct the corresponding counterfactual control sample for each trajectory. Following Breen and Ermisch [-@breen_effects_2024], I use the three waves in the estimations that follow, allowing for correlation between the observations for each individual in calculating the standard errors (i.e. clustering on the personal identifier).
 
 
 ### Outcome variable
 
-The outcome variable measures preferences regarding the commodification of pensions, operationalized with a single item addressing the degree of public support for market-based access to old-age pension benefits. Respondents were asked: “Is it fair in Chile that people with higher incomes have better pensions than people with lower incomes?” and were asked to indicate their level of agreement on a five-point Likert scale ranging from 1 (“strongly disagree”) to 5 (“strongly agree”). For estimation and interpretability, I dichotomized the item so that values 4-5 indicate agreement with market-based access to old-age pensions (coded as 1), while values 1-3 indicate disagreement (coded as 0). This binary coding treats neutrality as substantially closer to non-support than to support and produces a clear contrast between respondents who support market-based differentiation in pensions and those who do not. I use this item for two main reasons: on the one hand, to be able to make comparisons with existing literature [@lindh_public_2015; @otero_power_2024; @castillo_perceptions_2025] and, on the other hand, because it captures two fundamental dimensions of market-based welfare distribution: the role of economic resources as a key determinant of outcomes and the framing of services as as tradable commodities that can be bought and sold based on ability to pay [@lindh_public_2015].
+The outcome variable measures preferences regarding the commodification of pensions, operationalized with a single item addressing how strongly individuals justify conditioning access to old-age pension benefits based on individual income. Respondents were asked: “Is it fair in Chile that people with higher incomes have better pensions than people with lower incomes?” and were asked to indicate their level of agreement on a five-point Likert scale ranging from 1 (“strongly disagree”) to 5 (“strongly agree”). For estimation and interpretability, I dichotomized the item so that values 4-5 indicate agreement with market-based access to old-age pensions (coded as 1), while values 1-3 indicate disagreement (coded as 0). This binary coding treats neutrality as substantially closer to non-support than to support and produces a clear contrast between respondents who support market-based differentiation in pensions and those who do not. I use this item for two main reasons: on the one hand, to be able to make comparisons with existing literature [@lindh_public_2015; @otero_power_2024; @castillo_perceptions_2025] and, on the other hand, because it captures two fundamental dimensions of market-based welfare distribution: the role of economic resources as a key determinant of outcomes and the framing of services as as tradable commodities that can be bought and sold based on ability to pay [@lindh_public_2015].
 
 @tbl-summary1 shows the descriptive statistics of the variables used in the study.
 
@@ -259,8 +239,6 @@ I treat intergenerational occupational mobility as an exposure indicating whethe
 #| results: asis
 #| echo: false
 
-library(janitor)
-
 db %>%
   tabyl(estrato_orig, estrato_ocupa) %>%
   adorn_totals(where = c("row", "col")) %>%     # agrega totales
@@ -289,7 +267,7 @@ Within each origin stratum $O=j$, I estimate average treatment effects on the tr
 
 The selection of the adjustment set $C$ follows two principles. First, it mirrors the logic in Breen and Ermisch [-@breen_effects_2024]—who condition on attributes determined in childhood or earlier (e.g., parental resources, household structure, ascriptive traits)—and, second, it is constrained to origin-side characteristics available in ELSOC. Guided by theory and Chilean evidence on relative mobility determinants [mainly @brunori_inequality_2025; @celhay_intergenerational_2010; @espinoza_movilidad_2014;@torche_unequal_2005], I include six covariates covering family resources, household composition, and ascriptive status: (a) parental education (highest of father/mother), 10 categories coded ordinally from no schooling to postgraduate studies; (b) co-residence with both parents at age 15 (0 = no, 1 = yes); (c) nationality (0 = non-Chilean, 1 = Chilean); (d) age in years; (e) sex (0 = male, 1 = female); and (f) indigenous ethnicity (0 = no, 1 = yes). These variables are fixed before the destination class, plausibly affect selection into mobility, and constitute the maximal origin set in ELSOC, thereby making the conditional independence assumption more credible within each $O=j$. 
 
-After balancing, I construct stabilized IPW-ATT, setting treated weights to 1 and assigning ebal-derived weights to controls, thus aligning the counterfactual distribution of non-movers with the covariate profile of movers in each origin stratum (see [Supplementary Material](#anexo) for the evaluation of balance). These weights are then used in the outcome stage to estimate the causal effect of mobility on preferences for the commodification of pensions.
+After balancing, I construct stabilized IPW, setting treated weights to 1 and assigning derived weights to controls, thus aligning the counterfactual distribution of non-movers with the covariate profile of movers in each origin stratum (see [Supplementary Material](#anexo) for the evaluation of balance). These weights are then used in the outcome stage to estimate the causal effect of mobility on preferences for the commodification of pensions.
 
 ### Effect heterogeneity
 
@@ -302,7 +280,7 @@ All models include the same pre-treatment covariates $C$ used in the IPW constru
 
 ## Analytical strategy
 
-Because the dependent variable—the preference for pension commodification—is binary $(Y_{it}\in{0,1})$, I estimate weighted linear probability models (WLS) using stabilized inverse probability weights (IPW–ATT) obtained via entropy balancing. Although OLS estimator is often questioned with binary outcomes, it’s unbiased. It consistently estimates the conditional expectation $E(Y|X)$ under standard exogeneity $E[\varepsilon_i|X_i]=0$, with heteroskedasticity addressed by robust or clustered errors [@wooldridge_introductory_2009, ch. 7.5]. WLS further improves efficiency under heteroskedasticity or unequal sampling probabilities [@wooldridge_introductory_2009, ch. 8.4]. Following Gelman, Hill, and Vehtari [-@gelman_regression_2020, pp. 270–272], IPW-weighted regression transparently targets the ATT by recreating the counterfactual distribution. Linear models are preferred here because coefficients are average probability differences; nonlinear models (logit/probit) complicate weighting and interpretation [@gelman_regression_2020, ch. 13].
+Because the dependent variable—the preference for pension commodification—is binary $(Y_{it}\in{0,1})$, I estimate weighted linear probability models (WLS) using stabilized inverse probability weights (IPW) obtained via entropy balancing. Although OLS estimator is often questioned with binary outcomes, it’s unbiased. It consistently estimates the conditional expectation $E(Y|X)$ under standard exogeneity $E[\varepsilon_i|X_i]=0$, with heteroskedasticity addressed by robust or clustered errors [@wooldridge_introductory_2009, ch. 7.5]. WLS further improves efficiency under heteroskedasticity or unequal sampling probabilities [@wooldridge_introductory_2009, ch. 8.4]. Following Gelman, Hill, and Vehtari [-@gelman_regression_2020, pp. 270–272], IPW-weighted regression transparently targets the ATT by recreating the counterfactual distribution. Linear models are preferred here because coefficients are average probability differences; nonlinear models (logit/probit) complicate weighting and interpretation [@gelman_regression_2020, ch. 13].
 
 Formally, the model is:
  
@@ -312,7 +290,7 @@ $$ {#eq-final}
 
 where $Y_{it}$ indicates whether individual $i$ in wave $t$ supports more market-based pension access; $\alpha$ is the baseline probability for the reference categories; $\beta T_i$ captures the intergenerational mobility contrast: $T_i=1$ when the observed destination is $D_i=k$ (mobile to $k$) and $T_i=0$ when $D_i=j$ (immobile), so that $\beta$ is the ATT within origin $O=j (\widehat\beta=\widehat{ATT}{j,k\mid j})$, i.e., the percentage-point change in the probability of preferring pension commodification from reaching $k$ rather than remaining in $j$. The term $X_i'\gamma$ includes the pre-treatment covariates $(C)$ used to construct the entropy-balancing weights; $\lambda_t$ are wave fixed effects; and $\varepsilon_{it}$ is idiosyncratic error. The analytic sample is restricted to individuals sharing the same origin $(O=j)$. Estimation uses pooled WLS with stabilized IPW–ATT from entropy balancing and CR2 standard errors clustered by individual to address heteroskedasticity and within-person dependence.
 
-The specification is doubly robust: entropy-balancing weights are combined with covariate adjustment so consistency holds if either the weighting model or the outcome model is correctly specified, while also improving efficiency [@wooldridge_introductory_2009]. I report both IPW-only and doubly robust specifications to document robustness. In addition, I assess causal heterogeneity by interacting the mobility treatment with (i) meritocratic perceptions and (ii) survey wave, reporting simple slopes (origin-specific ATTs) by moderator levels. To evaluate sensitivity to unmeasured confounding, I compute E-values for point estimates and confidence limits [@ding_sensitivity_2016]. To address multiplicity across the six mobility trajectories, I also report Holm-adjusted p-values alongside 95% confidence intervals.
+The specification is doubly robust: entropy-balancing weights are combined with covariate adjustment so consistency holds if either the weighting model or the outcome model is correctly specified, while also improving efficiency [@wooldridge_introductory_2009]. These results are virtually identical to baseline models without covariates (see [Supplementary Material](#anexo) for complete models), with no substantive changes in the mobility coefficients. In addition, I assess causal heterogeneity by interacting the mobility treatment with (i) meritocratic perceptions and (ii) survey wave, reporting simple slopes (origin-specific ATTs) by moderator levels. To evaluate sensitivity to unmeasured confounding, I compute E-values for point estimates and confidence limits [@ding_sensitivity_2016]. To address multiplicity across the six mobility trajectories, I also report Holm-adjusted p-values alongside 95% confidence intervals.
 
 All the analyses were conducted using R software and the _lm_robust_ package.
 
