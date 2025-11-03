@@ -21,3 +21,5 @@ ggdist
 summarytools
 janitor
 broom
+cobalt
+cowplot

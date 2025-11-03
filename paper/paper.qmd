@@ -98,3 +98,8 @@ and it was last rendered at {{< now >}}.
 :::
 ::::
 
+::: {pagebreak}
+:::
+
+
+{{< include 07-supplementary-material.qmd >}}

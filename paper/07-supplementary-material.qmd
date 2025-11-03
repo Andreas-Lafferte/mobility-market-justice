@@ -1,29 +1,4 @@
----
-title: "Supplementary material"
-format:
-  html: 
-    code-fold: true
-    html-math-method: katex
-    number-sections: true
-  docx:
-    number-sections: true
-  pdf: 
-    geometry: margin=0.5cm
-    template-partials: 
-      - title.tex
-    keep-tex: true
-    number-sections: true
-editor: source
-link-citations: true
-linestretch: 1.15       
-mainfont: Times New Roman
-fontsize: 12pt          
-colorlinks: true
-fig-height: 4
-fig-width: 7.5
-editor_options: 
-  chunk_output_type: console
---- 
+# Supplementary material {#anexo}
 
 This section presents the supplementary material for this study. First, graphs are shown for the evaluation of the balance of IPW-ATT via entropy balance. Second, the complete estimated regression models are shown. Finally, the sensitivity analyses performed are shown.
 
@@ -53,7 +28,7 @@ table_format <- if (knitr::is_html_output()) {
 
 
 ```{r}
-#| label: fig-interact
+#| label: fig-balance
 #| fig-cap: "Balance SMD — Mobility treatment (ATT)"
 #| fig-cap-location: bottom
 #| echo: false
