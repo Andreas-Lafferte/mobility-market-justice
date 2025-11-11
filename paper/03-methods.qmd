@@ -169,7 +169,7 @@ The outcome variable measures preferences regarding the commodification of pensi
 #| results: asis
 #| echo: false
 
-
+library(summarytools)
 t1 <- db %>% 
   select(just_pension_f, 
          estrato_orig, 

@@ -34,13 +34,26 @@ glimpse(db)
 
 # 3. Analysis -----------------------------------------------------------
 
+my_pretty_theme <- function(border_width = 0.4) {
+  theme_ggdist() %+replace%
+    theme(
+      panel.border = element_blank(),
+      axis.line.x  = element_line(colour = "black", linewidth = border_width),
+      axis.line.y  = element_line(colour = "black", linewidth = border_width),
+      axis.ticks = element_line(colour = "black", linewidth = border_width),
+      axis.text = element_text(colour = "black"),
+      #legend.text = element_text(size = 12),
+      #plot.caption = element_text(size = 11, hjust = 1)
+      )
+}
+
+
 # 3.1 Descriptive statistics
 
 # Table summary
 
 t1 <- db %>% 
-  select(idencuesta, 
-         wave, 
+  select(wave, 
          just_pension_f, 
          estrato_orig, 
          estrato_ocupa, 
@@ -86,7 +99,7 @@ g1 <- db %>%
   geom_col(aes(fill = just_pension_f)) +
   scale_y_continuous(labels = scales::percent) + 
   scale_fill_manual(
-    values = c("#5b59d4", "#c8237d"),
+    values = c("grey50", "grey20"),
     breaks = c("Agree","Disagree")
   )  +
   coord_flip() +
@@ -101,8 +114,8 @@ g1 <- db %>%
        x = NULL,
        fill = NULL,
        caption = "Source: own elaboration with data from ELSOC 2016-2023 (N obs = 3,435)") +
-  theme_ggdist() +
-  theme(legend.position = "top") 
+  my_pretty_theme() +
+  theme(legend.position = "bottom") 
 
 
 # MJP per mobility
@@ -112,6 +125,16 @@ pdat <- db %>%
   drop_na() %>% 
   mutate(
     mobility = paste(estrato_orig, estrato_ocupa, sep = "-"),
+    mobility = factor(mobility, 
+                      levels = c("High-Middle",
+                                 "High-Low",
+                                 "Middle-Low",
+                                 "Low-Low",
+                                 "Middle-Middle",
+                                 "High-High",
+                                 "Low-Middle",
+                                 "Low-High",
+                                 "Middle-High")),
     facet = case_when(
       mobility %in% c("High-Middle","High-Low","Middle-Low") ~ "Downward",
       estrato_orig == estrato_ocupa ~ "Inmobile",
@@ -124,30 +147,37 @@ pdat <- db %>%
   mutate(gm = mean(y)) %>% 
   ungroup()
 
-# datos SOLO para el punto (uno por categoría)
-pdat_gm <- pdat %>% distinct(mobility, facet, gm)
+pdat <- pdat %>% 
+  pivot_longer(cols = c(y, gm),
+               names_to = "name",
+               values_to = "value") %>% 
+  mutate(wave = if_else(name == "gm", "All waves", wave),
+         wave = factor(wave, levels = c("2016", "2018", "2023", "All waves")))
 
-g2 <- ggplot(pdat, aes(x = mobility, y = y, group = wave)) +
-  geom_col(aes(fill = wave), position = "dodge", alpha = 0.9) +
-  # Punto "X" (pch 4) con su propia leyenda (shape)
-  geom_point(
-    data = pdat_gm,
-    aes(x = mobility, y = gm, shape = "All waves"),
-    inherit.aes = FALSE,
-    size = 3, stroke = 1, color = "black"
-  ) +
+
+# datos SOLO para el punto (uno por categoría)
+#pdat_gm <- pdat %>% distinct(mobility, facet, gm)
+
+breaks_w <- c("2016", "2018", "2023", "All waves")
+
+g2 <- ggplot(pdat, aes(x = mobility, y = value, group = wave)) +
+  geom_point(aes(color = wave, shape = wave), 
+             size = 3, stroke = 1) +
   scale_y_continuous(labels = scales::percent, limits = c(0, 1)) + 
-  scale_fill_manual(
-    values = c("2016" = "#5b59d4", "2018" = "#b3b3b3ff", "2023" = "#c8237d"),
-    name   = "Wave"
-  ) +
-  scale_shape_manual(                     # <-- leyenda separada para el shape
-    name = NULL,                          # o "Marker" si quieres título
-    values = c("All waves" = 4)          # 4 = "X"
-  ) +
-  guides(
-    fill  = guide_legend(order = 1),
-    shape = guide_legend(order = 2, override.aes = list(color = "black"))
+  scale_color_manual(
+    name   = "Wave",
+    breaks = breaks_w,
+    values = c("2016" = "#999999",
+               "2018" = "#666666",
+               "2023" = "#000000",
+               "All waves" = "black")) +
+  scale_shape_manual(
+    name   = "Wave",
+    breaks = breaks_w,
+    values = c("2016" = 16,  # círculo
+               "2018" = 15,  # triángulo
+               "2023" = 17,  # cuadrado
+               "All waves" = 4)  # X
   ) +
   facet_wrap(~ facet, scales = "free_x") +
   labs(
@@ -155,9 +185,9 @@ g2 <- ggplot(pdat, aes(x = mobility, y = y, group = wave)) +
     x = NULL,
     caption = "Source: own elaboration with data from ELSOC 2016-2023 (N obs = 3,435)"
   ) +
-  theme_ggdist() +
-  theme(legend.position = "top")
-
+  my_pretty_theme() +
+  theme(legend.position = "bottom",
+        axis.text.x=element_text(angle=45,hjust = 1))
 
 # 3.2 Pooled WLS with IPW-ATT and CR2 -----------------------------------------------------------
 
@@ -385,8 +415,8 @@ g3 <- ggplot(df_pension_lab, aes(x = estimate, y = term)) +
   geom_point(size = 2.5) +
   scale_x_continuous(limits = c(-0.5, 0.5), breaks = seq(-0.5, 0.5, 0.25)) +
   #geom_text(aes(label = est_lab), hjust = -0.05, size = 4, vjust = -0.5) +
-  labs(x = "Estimate", y = NULL) +
-  theme_ggdist() 
+  labs(x = "Treatment Effect", y = NULL) +
+  my_pretty_theme()
 
 # 3.3 Heterogeneity effects -------------------------------------------------------
 
@@ -616,16 +646,24 @@ df_pension_lab_i <- df_pension_lab_i %>%
     term = factor(term, levels = c("High Meritocracy", "Low Meritocracy"))
   )
 
+pos <- position_dodge(width = 0.55)  # separa las dos series en cada categoría
 
-g4 <- ggplot(df_pension_lab_i, aes(x = estimate, y = name)) +
-  geom_vline(xintercept = 0, linetype = "dashed", color = "darkred", size = 0.5, alpha = 1) +
-  geom_errorbarh(aes(xmin = conf.low, xmax = conf.high), height = 0, size = 0.7) +
-  geom_point(size = 2.5) +
+g4 <- ggplot(
+  df_pension_lab_i,
+  aes(x = estimate, y = name, group = term, colour = term, shape = term)
+) +
+  geom_vline(xintercept = 0, linetype = "dashed", colour = "darkred", linewidth = 0.6) +
+  geom_errorbarh(
+    aes(xmin = conf.low, xmax = conf.high),
+    height = 0, size = 0.7, position = pos
+  ) +
+  geom_point(size = 2.8, position = pos) +
+  scale_shape_manual(values = c(16, 15)) +     # 16 = círculo, 15 = cuadrado
+  scale_colour_manual(values = c("black", "grey50")) +
   scale_x_continuous(limits = c(-0.5, 0.5), breaks = seq(-0.5, 0.5, 0.25)) +
-  facet_wrap(~term) + 
-  #geom_text(aes(label = est_lab), hjust = -0.05, size = 4, vjust = -0.5) +
-  labs(x = "Estimate", y = NULL) +
-  theme_ggdist()
+  labs(x = "Treatment Effect", y = NULL, colour = NULL, shape = NULL) +
+  my_pretty_theme() +
+  theme(legend.position = "bottom")
 
 # -----------
 # Time 

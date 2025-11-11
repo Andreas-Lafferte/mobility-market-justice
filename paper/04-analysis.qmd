@@ -47,7 +47,8 @@ source(here("processing/prod_analysis_multinom.R"))
 #| fig-cap-location: bottom
 #| echo: false
 #| results: asis
-g1
+g1 +
+  theme(legend.text = element_text(size = 10))
 ```
 
 Regarding the relationship between preferences for the commodification of pensions and intergenerational occupational mobility, @fig-mean shows the percentage of agreement with market-based access to pension benefits according to mobility trajectories and survey waves. Averaging across waves, agreement is highest among the High-High immobile (27.8%), followed by the Middle-High upwardly mobile (24.6%) and the High-Middle downwardly mobile (24.0%). The lowest levels are found among ascending Low-High (17.3%), and immobile Low-Low (17.4%) groups. The specific profiles of each wave accentuate these gradients in most trajectories, especially in 2023: agreement reaches 31.9% for High-High, 29.4% for upward Middle-High, and peaks at 36.8% for downward High-Middle (the highest of all trajectories for that year). Descriptively, immobility at the top is associated with greater support for commodification; among those who move, support is greatest for the upward Middle-High trajectory and the downward High-Middle trajectory, patterns that intensify in 2023. These shifts anticipate the heterogeneity documented below.
@@ -57,11 +58,13 @@ Regarding the relationship between preferences for the commodification of pensio
 #| label: fig-mean
 #| fig-cap: "Percentage agreement on preferences for pension commodification according to mobility trajectory and time (2016, 2018, and 2023)."
 #| out-width: '90%'
+#| fig-asp: 0.7
 #| fig-cap-location: bottom
 #| echo: false
 #| results: asis
 
-g2
+g2 +
+  theme(legend.text = element_text(size = 10))
 
 ```
 
@@ -75,6 +78,7 @@ g2
 #| label: fig-reg
 #| fig-cap: "Effects of intergenerational occupational mobility on preferences for pension commodification. Coefficient plot of origin-specific ATT estimates comparing mobility versus immobility. Estimates from pooled WLS with doubly robust adjustment, wave fixed effects, and standard errors clustered by individual; bars show 95% confidence intervals."
 #| out-width: '90%'
+#| fig-asp: 0.7
 #| fig-cap-location: bottom
 #| echo: false
 #| results: asis
@@ -94,11 +98,13 @@ To probe potential mechanisms underlying the mobility effects, I estimate origin
 #| label: fig-interact
 #| fig-cap: "Effects of intergenerational occupational mobility on preferences for pension commodification, by meritocratic perception. Coefficient plot of origin-specific ATT estimates comparing mobility versus immobility, estimated from interaction models (T × Merit). Points show simple slopes of the mobility effect at low merit and high merit; bars are 95% confidence intervals. Estimates from pooled WLS with doubly robust adjustment, wave fixed effects, and standard errors clustered by individual."
 #| out-width: '90%'
+#| fig-asp: 0.8
 #| fig-cap-location: bottom
 #| echo: false
 #| results: asis
 
-g4
+g4+
+  theme(legend.text = element_text(size = 10))
 ```
 
 @fig-interact shows that neither the interaction terms nor the mobility coefficients reach conventional significance across trajectories, indicating no detectable moderation of the causal mobility effect by meritocratic perceptions at the 95% level. Directionally, in the left panel, the interaction is positive for Middle→High ($\beta$ = 0.15, 95% CI [−0.03, 0.33]) and Low→High ($\beta$ = 0.05, [−0.14, 0.24]), suggesting, if anything, somewhat larger pro-commodification effects among high-merit respondents when upwardly mobile, whereas it is negative for High→Low ($\beta$ = −0.14, [−0.38, 0.10]) and High→Middle ($\beta$ = −0.03, [−0.23, 0.17]), showing weaker pro-commodification effects under downward mobility at high merit. Focusing on the treatment effect at low meritocracy (the reference category) at the right panel, the mobility coefficient captures the origin-specific ATT comparing movers to their immobility counterfactual among low-merit respondents. These effects are small and imprecise across trajectories: Low→Middle ($\beta$ = −0.02, [−0.09, 0.04]) and Low→High ($\beta$ = −0.03, [−0.10, 0.05]) are near zero. Middle→High is positive but not significant ($\beta$ = 0.07, [−0.01, 0.14]), Middle→Low is null ($\beta$ = -0.00, [−0.07, 0.06]), and downward from high shows negative, borderline estimates: High→Middle ($\beta$ = −0.07, [−0.15, 0.00]) and High→Low ($\beta$ = −0.08, [−0.15, 0.00]). Substantively, I do not find evidence that meritocratic perceptions moderate the causal effect of mobility, although the signs align with the idea that upward mobility at high merit tilts attitudes toward commodification, and downward mobility at high merit tilts them away.
