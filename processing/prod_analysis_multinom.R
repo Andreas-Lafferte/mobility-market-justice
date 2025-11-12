@@ -89,7 +89,8 @@ sjPlot::sjt.xtab(db$estrato_orig,
 # MJP per year
 
 g1 <- db %>% 
-  mutate(just_pension_f = factor(just_pension_f, levels = c(0,1), labels = c("Disagree", "Agree"))) %>%
+  mutate(just_pension_f = factor(just_pension_f, levels = c(0,1), 
+                                 labels = c("Disagreement", "Agreement"))) %>%
   group_by(wave, just_pension_f) %>% 
   count() %>% 
   group_by(wave) %>% 
@@ -100,20 +101,20 @@ g1 <- db %>%
   scale_y_continuous(labels = scales::percent) + 
   scale_fill_manual(
     values = c("grey50", "grey20"),
-    breaks = c("Agree","Disagree")
+    breaks = c("Agreement","Disagreement")
   )  +
   coord_flip() +
   geom_text(
     aes(label = paste0(round(porcentaje * 100, 1), "%")),
     position = position_stack(vjust = 0.5),
     color = "white",
-    size = 3,
+    size = 4,
     fontface = "bold"
   ) +
   labs(y = NULL,
        x = NULL,
        fill = NULL,
-       caption = "Source: own elaboration with data from ELSOC 2016-2023 (N obs = 3,435)") +
+       caption = "Source: own elaboration with data from ELSOC 2016-2023 (N obs = 3,435)\nNote: Agreement ≥4, Disagreement ≤3") +
   my_pretty_theme() +
   theme(legend.position = "bottom") 
 
@@ -143,9 +144,35 @@ pdat <- db %>%
   ) %>% 
   group_by(wave, mobility, facet) %>% 
   summarise(y = mean(just_pension_f), .groups = "drop") %>% 
-  group_by(mobility, facet) %>% 
-  mutate(gm = mean(y)) %>% 
   ungroup()
+  
+pdat2 <- db %>% 
+  select(wave, estrato_orig, estrato_ocupa, just_pension_f) %>% 
+  drop_na() %>% 
+  mutate(
+    mobility = paste(estrato_orig, estrato_ocupa, sep = "-"),
+    mobility = factor(mobility, 
+                      levels = c("High-Middle",
+                                 "High-Low",
+                                 "Middle-Low",
+                                 "Low-Low",
+                                 "Middle-Middle",
+                                 "High-High",
+                                 "Low-Middle",
+                                 "Low-High",
+                                 "Middle-High")),
+    facet = case_when(
+      mobility %in% c("High-Middle","High-Low","Middle-Low") ~ "Downward",
+      estrato_orig == estrato_ocupa ~ "Inmobile",
+      mobility %in% c("Middle-High","Low-Middle","Low-High") ~ "Upward"
+    )
+  ) %>% 
+  group_by(mobility) %>% 
+  mutate(gm = mean(just_pension_f)) %>% 
+  ungroup() %>% 
+  select(wave, mobility, facet, gm)
+
+pdat <- left_join(pdat, pdat2)
 
 pdat <- pdat %>% 
   pivot_longer(cols = c(y, gm),
@@ -154,6 +181,9 @@ pdat <- pdat %>%
   mutate(wave = if_else(name == "gm", "All waves", wave),
          wave = factor(wave, levels = c("2016", "2018", "2023", "All waves")))
 
+
+pdat <- pdat %>% 
+  distinct(.keep_all = T)
 
 # datos SOLO para el punto (uno por categoría)
 #pdat_gm <- pdat %>% distinct(mobility, facet, gm)
@@ -170,7 +200,7 @@ g2 <- ggplot(pdat, aes(x = mobility, y = value, group = wave)) +
     values = c("2016" = "#999999",
                "2018" = "#666666",
                "2023" = "#000000",
-               "All waves" = "black")) +
+               "All waves" = "darkred")) +
   scale_shape_manual(
     name   = "Wave",
     breaks = breaks_w,
