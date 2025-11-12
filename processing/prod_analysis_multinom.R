@@ -144,35 +144,9 @@ pdat <- db %>%
   ) %>% 
   group_by(wave, mobility, facet) %>% 
   summarise(y = mean(just_pension_f), .groups = "drop") %>% 
+  group_by(mobility, facet) %>% 
+  mutate(gm = mean(y)) %>% 
   ungroup()
-  
-pdat2 <- db %>% 
-  select(wave, estrato_orig, estrato_ocupa, just_pension_f) %>% 
-  drop_na() %>% 
-  mutate(
-    mobility = paste(estrato_orig, estrato_ocupa, sep = "-"),
-    mobility = factor(mobility, 
-                      levels = c("High-Middle",
-                                 "High-Low",
-                                 "Middle-Low",
-                                 "Low-Low",
-                                 "Middle-Middle",
-                                 "High-High",
-                                 "Low-Middle",
-                                 "Low-High",
-                                 "Middle-High")),
-    facet = case_when(
-      mobility %in% c("High-Middle","High-Low","Middle-Low") ~ "Downward",
-      estrato_orig == estrato_ocupa ~ "Inmobile",
-      mobility %in% c("Middle-High","Low-Middle","Low-High") ~ "Upward"
-    )
-  ) %>% 
-  group_by(mobility) %>% 
-  mutate(gm = mean(just_pension_f)) %>% 
-  ungroup() %>% 
-  select(wave, mobility, facet, gm)
-
-pdat <- left_join(pdat, pdat2)
 
 pdat <- pdat %>% 
   pivot_longer(cols = c(y, gm),
@@ -181,9 +155,6 @@ pdat <- pdat %>%
   mutate(wave = if_else(name == "gm", "All waves", wave),
          wave = factor(wave, levels = c("2016", "2018", "2023", "All waves")))
 
-
-pdat <- pdat %>% 
-  distinct(.keep_all = T)
 
 # datos SOLO para el punto (uno por categoría)
 #pdat_gm <- pdat %>% distinct(mobility, facet, gm)
@@ -200,7 +171,7 @@ g2 <- ggplot(pdat, aes(x = mobility, y = value, group = wave)) +
     values = c("2016" = "#999999",
                "2018" = "#666666",
                "2023" = "#000000",
-               "All waves" = "darkred")) +
+               "All waves" = "black")) +
   scale_shape_manual(
     name   = "Wave",
     breaks = breaks_w,

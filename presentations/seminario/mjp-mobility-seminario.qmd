@@ -514,13 +514,14 @@ $$ {#eq-final}
 #| label: fig-mean
 #| fig-cap: "Porcentaje de acuerdo sobre las preferencias respecto a la mercantilización de las pensiones según la trayectoria de movilidad y el tiempo (2016, 2018 y 2023)"
 #| out-width: '90%'
-#| fig-asp: 0.7
+#| fig-asp: 0.6
 #| fig-cap-location: top
 #| echo: false
 #| results: asis
 
 g2+
-  theme(text = element_text(size = 14))
+  theme(text = element_text(size = 14),
+        legend.position = "top")
 
 ```
 
