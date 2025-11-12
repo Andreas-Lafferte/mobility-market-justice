@@ -155,7 +155,7 @@ Preferencias por la comodificación de servicios [@busemeyer_skills_2014; @casti
 
 ## El caso de las pensiones
 
-:: {.incremental .highlight-last style="font-size: 120%;"}
+::: {.incremental .highlight-last style="font-size: 120%;"}
 
 - Ciclos de privatización de sistemas de pensiones en AL: ampliación de cuentas individuales de contribución definida, obligatorias o voluntarias, administradas por empresas privadas [@ferre_welfare_2023; @huber_political_2000; @oecd_pensions_2023]. Chile destaca [@solimano_rise_2021]
 
