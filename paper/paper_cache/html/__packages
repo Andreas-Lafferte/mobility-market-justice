@@ -13,13 +13,14 @@ dplyr
 stringr
 forcats
 lubridate
-summarytools
 pacman
 sjPlot
 sjmisc
 texreg
 estimatr
 ggdist
+summarytools
 broom
+sensemakr
 cobalt
 cowplot

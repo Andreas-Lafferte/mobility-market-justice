@@ -39,7 +39,7 @@ citeproc: true
 abstract: | 
  My abstract
   \newline
- **Keywords**: pension commodification, social mobility, causal inference, Chile, public preferences
+ **Keywords**: Pension commodification · Intergenerational mobility · Causal inference · Meritocracy · Chile
 link-citations: true
 linestretch: 1.5
 mainfont: Times New Roman
