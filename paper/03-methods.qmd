@@ -133,10 +133,8 @@ Following the potential outcomes framework proposed by Breen and Ermisch [-@bree
 Formally,  for individuals with origin $(O=j)$ who attain destination $(D=k)$, the estimand is:
 
 $$ 
-
 ATT_{j,k,j} = E\big[Y(D = k) \mid O = j, D = k \big] - E\big[Y(D = j) \mid O = j, D = k \big]
-
-$$ {#eq-att}
+$${#eq-att}
 
 which represents the mean causal effect of moving from origin class $(j)$ to destination class $(k)$, compared to the counterfactual outcome those same individuals would have exhibited had they instead remained in $(j)$. Thus, this ATT captures the counterfactual contrast within origin that lies at the heart of mobility effects: how preferences for market-based pensions would differ if, for the same upwardly or downwardly mobile individuals, their observed destination class were replaced by immobility in their origin class.
 

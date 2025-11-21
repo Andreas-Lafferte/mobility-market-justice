@@ -1,0 +1,2999 @@
+% Options for packages loaded elsewhere
+% Options for packages loaded elsewhere
+\PassOptionsToPackage{unicode}{hyperref}
+\PassOptionsToPackage{hyphens}{url}
+\PassOptionsToPackage{dvipsnames,svgnames,x11names}{xcolor}
+%
+\documentclass[
+  13pt,
+]{article}
+\usepackage{xcolor}
+\usepackage[margin=2cm]{geometry}
+\usepackage{amsmath,amssymb}
+\setcounter{secnumdepth}{5}
+\usepackage{iftex}
+\ifPDFTeX
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+  \usepackage{textcomp} % provide euro and other symbols
+\else % if luatex or xetex
+  \usepackage{unicode-math} % this also loads fontspec
+  \defaultfontfeatures{Scale=MatchLowercase}
+  \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
+\fi
+\usepackage{lmodern}
+\ifPDFTeX\else
+  % xetex/luatex font selection
+  \setmainfont[]{Times New Roman}
+\fi
+% Use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\IfFileExists{microtype.sty}{% use microtype if available
+  \usepackage[]{microtype}
+  \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\usepackage{setspace}
+\makeatletter
+\@ifundefined{KOMAClassName}{% if non-KOMA class
+  \IfFileExists{parskip.sty}{%
+    \usepackage{parskip}
+  }{% else
+    \setlength{\parindent}{0pt}
+    \setlength{\parskip}{6pt plus 2pt minus 1pt}}
+}{% if KOMA class
+  \KOMAoptions{parskip=half}}
+\makeatother
+% Make \paragraph and \subparagraph free-standing
+\makeatletter
+\ifx\paragraph\undefined\else
+  \let\oldparagraph\paragraph
+  \renewcommand{\paragraph}{
+    \@ifstar
+      \xxxParagraphStar
+      \xxxParagraphNoStar
+  }
+  \newcommand{\xxxParagraphStar}[1]{\oldparagraph*{#1}\mbox{}}
+  \newcommand{\xxxParagraphNoStar}[1]{\oldparagraph{#1}\mbox{}}
+\fi
+\ifx\subparagraph\undefined\else
+  \let\oldsubparagraph\subparagraph
+  \renewcommand{\subparagraph}{
+    \@ifstar
+      \xxxSubParagraphStar
+      \xxxSubParagraphNoStar
+  }
+  \newcommand{\xxxSubParagraphStar}[1]{\oldsubparagraph*{#1}\mbox{}}
+  \newcommand{\xxxSubParagraphNoStar}[1]{\oldsubparagraph{#1}\mbox{}}
+\fi
+\makeatother
+
+
+\usepackage{longtable,booktabs,array}
+\usepackage{calc} % for calculating minipage widths
+% Correct order of tables after \paragraph or \subparagraph
+\usepackage{etoolbox}
+\makeatletter
+\patchcmd\longtable{\par}{\if@noskipsec\mbox{}\fi\par}{}{}
+\makeatother
+% Allow footnotes in longtable head/foot
+\IfFileExists{footnotehyper.sty}{\usepackage{footnotehyper}}{\usepackage{footnote}}
+\makesavenoteenv{longtable}
+\usepackage{graphicx}
+\makeatletter
+\newsavebox\pandoc@box
+\newcommand*\pandocbounded[1]{% scales image to fit in text height/width
+  \sbox\pandoc@box{#1}%
+  \Gscale@div\@tempa{\textheight}{\dimexpr\ht\pandoc@box+\dp\pandoc@box\relax}%
+  \Gscale@div\@tempb{\linewidth}{\wd\pandoc@box}%
+  \ifdim\@tempb\p@<\@tempa\p@\let\@tempa\@tempb\fi% select the smaller of both
+  \ifdim\@tempa\p@<\p@\scalebox{\@tempa}{\usebox\pandoc@box}%
+  \else\usebox{\pandoc@box}%
+  \fi%
+}
+% Set default figure placement to htbp
+\def\fps@figure{htbp}
+\makeatother
+
+
+% definitions for citeproc citations
+\NewDocumentCommand\citeproctext{}{}
+\NewDocumentCommand\citeproc{mm}{%
+  \begingroup\def\citeproctext{#2}\cite{#1}\endgroup}
+\makeatletter
+ % allow citations to break across lines
+ \let\@cite@ofmt\@firstofone
+ % avoid brackets around text for \cite:
+ \def\@biblabel#1{}
+ \def\@cite#1#2{{#1\if@tempswa , #2\fi}}
+\makeatother
+\newlength{\cslhangindent}
+\setlength{\cslhangindent}{1.5em}
+\newlength{\csllabelwidth}
+\setlength{\csllabelwidth}{3em}
+\newenvironment{CSLReferences}[2] % #1 hanging-indent, #2 entry-spacing
+ {\begin{list}{}{%
+  \setlength{\itemindent}{0pt}
+  \setlength{\leftmargin}{0pt}
+  \setlength{\parsep}{0pt}
+  % turn on hanging indent if param 1 is 1
+  \ifodd #1
+   \setlength{\leftmargin}{\cslhangindent}
+   \setlength{\itemindent}{-1\cslhangindent}
+  \fi
+  % set entry spacing
+  \setlength{\itemsep}{#2\baselineskip}}}
+ {\end{list}}
+\usepackage{calc}
+\newcommand{\CSLBlock}[1]{\hfill\break\parbox[t]{\linewidth}{\strut\ignorespaces#1\strut}}
+\newcommand{\CSLLeftMargin}[1]{\parbox[t]{\csllabelwidth}{\strut#1\strut}}
+\newcommand{\CSLRightInline}[1]{\parbox[t]{\linewidth - \csllabelwidth}{\strut#1\strut}}
+\newcommand{\CSLIndent}[1]{\hspace{\cslhangindent}#1}
+
+
+
+\setlength{\emergencystretch}{3em} % prevent overfull lines
+
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+
+
+
+ 
+
+
+\usepackage{booktabs}
+\usepackage{longtable}
+\usepackage{array}
+\usepackage{multirow}
+\usepackage{wrapfig}
+\usepackage{float}
+\usepackage{colortbl}
+\usepackage{pdflscape}
+\usepackage{tabu}
+\usepackage{threeparttable}
+\usepackage{threeparttablex}
+\usepackage[normalem]{ulem}
+\usepackage{makecell}
+\usepackage{xcolor}
+\usepackage[noblocks]{authblk}
+\renewcommand*{\Authsep}{, }
+\renewcommand*{\Authand}{, }
+\renewcommand*{\Authands}{, }
+\renewcommand\Affilfont{\small}
+\makeatletter
+\@ifpackageloaded{caption}{}{\usepackage{caption}}
+\AtBeginDocument{%
+\ifdefined\contentsname
+  \renewcommand*\contentsname{Table of contents}
+\else
+  \newcommand\contentsname{Table of contents}
+\fi
+\ifdefined\listfigurename
+  \renewcommand*\listfigurename{List of Figures}
+\else
+  \newcommand\listfigurename{List of Figures}
+\fi
+\ifdefined\listtablename
+  \renewcommand*\listtablename{List of Tables}
+\else
+  \newcommand\listtablename{List of Tables}
+\fi
+\ifdefined\figurename
+  \renewcommand*\figurename{Figure}
+\else
+  \newcommand\figurename{Figure}
+\fi
+\ifdefined\tablename
+  \renewcommand*\tablename{Table}
+\else
+  \newcommand\tablename{Table}
+\fi
+}
+\@ifpackageloaded{float}{}{\usepackage{float}}
+\floatstyle{ruled}
+\@ifundefined{c@chapter}{\newfloat{codelisting}{h}{lop}}{\newfloat{codelisting}{h}{lop}[chapter]}
+\floatname{codelisting}{Listing}
+\newcommand*\listoflistings{\listof{codelisting}{List of Listings}}
+\makeatother
+\makeatletter
+\makeatother
+\makeatletter
+\@ifpackageloaded{caption}{}{\usepackage{caption}}
+\@ifpackageloaded{subcaption}{}{\usepackage{subcaption}}
+\makeatother
+\usepackage{bookmark}
+\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
+\urlstyle{same}
+\hypersetup{
+  pdftitle={Preferences for the commodification of pensions in Chile: the rol of intergenerational social mobility},
+  pdfauthor={Andreas Laffert Tamayo},
+  colorlinks=true,
+  linkcolor={blue},
+  filecolor={Maroon},
+  citecolor={Blue},
+  urlcolor={Blue},
+  pdfcreator={LaTeX via pandoc}}
+
+
+\title{Preferences for the commodification of pensions in Chile: the rol
+of intergenerational social mobility}
+
+
+  \author{Andreas Laffert Tamayo}
+            \affil{%
+                  Instituto de Sociología, Pontificia Universidad
+                  Católica de Chile
+              }
+      
+\date{}
+
+% Colores extra por nombre
+\usepackage[dvipsnames]{xcolor}
+% Ajustes de hipervínculos
+% \hypersetup{
+%   colorlinks = true,
+%   citecolor  = DarkSlateBlue,     % << citas
+%   urlcolor   = DarkSlateBlue  % URLs/DOIs
+% }
+% 
+\begin{document}
+\maketitle
+\begin{abstract}
+My abstract \newline \textbf{Keywords}: Pension commodification ·
+Intergenerational mobility · Causal inference · Meritocracy · Chile
+\end{abstract}
+
+
+\setstretch{1.5}
+This document was last modified at 2025-11-19 13:57:11 and it was last
+rendered at 2025-11-19 13:57:11.
+
+\section{Introduction}\label{introduction}
+
+What is the legitimate extent of market inequality in the eyes of the
+public? Since the early 1980s, many countries have experienced a
+widespread retreat from universal welfare programs and a shift toward
+the privatization and commodification of public goods, welfare policies,
+and social services (\citeproc{ref-gingrich_making_2011}{Gingrich,
+2011}; \citeproc{ref-streeck_how_2016}{Streeck, 2016}). In Latin
+America, as elsewhere, neoliberal reforms reshaped welfare-state
+institutions by extending market logic into domains of social
+reproduction that were traditionally governed by the state
+(\citeproc{ref-ferre_welfare_2023}{Ferre, 2023}). This transformation
+reduced the role of public provision and increased the presence of
+private actors in core social services
+(\citeproc{ref-ferre_welfare_2023}{Ferre, 2023}). Echoing Polanyi's
+(\citeproc{ref-polanyi_great_1975}{1975}) insight that markets
+constitute a distinct moral order, the institutional diffusion of market
+rules has fostered a corresponding moral economy: a constellation of
+norms and values concerning fair allocation, embedded in institutions
+and shaping individual subjectivities
+(\citeproc{ref-mau_inequality_2015}{Mau, 2015};
+\citeproc{ref-svallforsMoralEconomyClass2006a}{Svallfors, 2006}). Within
+this framework, a growing body of research examines the extent to which,
+and the mechanisms by which, citizens consider it fair that the
+allocation of services like health care, pensions, and education be
+governed by market-based criteria---a phenomenon known as \emph{market
+justice preferences} (\citeproc{ref-busemeyer_skills_2014}{Busemeyer,
+2014}; \citeproc{ref-castillo_perceptions_2025}{Castillo, Laffert, et
+al., 2025}; \citeproc{ref-castillo_socialization_2024}{Castillo et al.,
+2024}; \citeproc{ref-immergut_it_2020}{Immergut \& Schneider, 2020};
+\citeproc{ref-koos_moral_2019}{Koos \& Sachweh, 2019};
+\citeproc{ref-lindh_public_2015}{Lindh, 2015};
+\citeproc{ref-lindh_bringing_2023}{Lindh \& McCall, 2023}).
+Understanding these preferences is crucial, as they contribute to
+legitimizing economic inequality by framing it as the fair result of
+individual responsibility and limited state intervention
+(\citeproc{ref-mau_inequality_2015}{Mau, 2015}).
+
+Existing literature shows that market justice preferences are shaped by
+both the economic and institutional context and individuals' positions
+within social stratification. Grounded in the notion that economic
+institutions influence people's normative attitudes
+(\citeproc{ref-immergut_theoretical_1998}{Immergut, 1998}), studies find
+that countries with stronger public provision or more expansive welfare
+states exhibit lower levels of market justice preferences
+(\citeproc{ref-busemeyer_skills_2014}{Busemeyer, 2014};
+\citeproc{ref-immergut_it_2020}{Immergut \& Schneider, 2020}), while
+more privatized contexts show stronger support for market-based criteria
+(\citeproc{ref-castillo_socialization_2024}{Castillo et al., 2024};
+\citeproc{ref-lindh_public_2015}{Lindh, 2015}). In such contexts, market
+justice preferences tend to rise as individuals ``ascend'' the social
+structure, with those in more privileged positions in terms of class,
+education, and income holding stronger preferences for market-based
+solutions compared to those in more disadvantaged or at-risk positions
+(\citeproc{ref-castillo_socialization_2024}{Castillo et al., 2024};
+\citeproc{ref-immergut_it_2020}{Immergut \& Schneider, 2020};
+\citeproc{ref-lee_fairness_2023}{Lee \& Stacey, 2023};
+\citeproc{ref-lindh_public_2015}{Lindh, 2015};
+\citeproc{ref-otero_power_2024}{Otero \& Mendoza, 2024};
+\citeproc{ref-svallfors_political_2007}{Svallfors, 2007};
+\citeproc{ref-vondemknesebeck_are_2016}{Von Dem Knesebeck et al.,
+2016}).
+
+Market justice preferences are shaped not only by objective
+socioeconomic conditions but also by popular beliefs about inequality.
+Among these, meritocracy is a key normative principle underpinning
+market-based distributive preferences
+(\citeproc{ref-mau_inequality_2015}{Mau, 2015}). Studies show that
+individuals with stronger meritocratic beliefs tend to perceive less
+inequality and legitimize it by attributing economic differences to
+personal achievement (\citeproc{ref-batruch_belief_2023}{Batruch et al.,
+2023}; \citeproc{ref-mijs_paradox_2019}{Mijs, 2019};
+\citeproc{ref-wilson_role_2003}{Wilson, 2003}). In highly unequal
+societies where access to services is largely governed by market logic,
+such beliefs play a critical role in normalizing inequality. Recent
+evidence from Chile shows that students who believe effort and talent
+are rewarded in their country express stronger preferences for
+market-based access to healthcare, pensions, and education
+(\citeproc{ref-castillo_socialization_2024}{Castillo et al., 2024}).
+
+Although it is clear that one's social position influences market
+justice preferences, the question of how upward or downward mobility
+within the social structure affects these preferences remains
+unanswered. This question is far from trivial, especially in Latin
+America, where many have experienced various forms of mobility amid high
+economic inequality and deep welfare privatization
+(\citeproc{ref-ferre_welfare_2023}{Ferre, 2023};
+\citeproc{ref-lopez-roldan_comparative_2021}{López-Roldán \& Fachelli,
+2021}; \citeproc{ref-torche_intergenerational_2014}{Torche, 2014}).
+Social origins and destinations affect attitudes toward inequality in
+distinct ways (\citeproc{ref-day_movin_2017}{Day \& Fiske, 2017};
+\citeproc{ref-gugushvili_intergenerational_2016}{Gugushvili, 2016b},
+\citeproc{ref-gugushvili_subjective_2017}{2017};
+\citeproc{ref-jaime-castillo_social_2019}{Jaime-Castillo \&
+Marqués-Perales, 2019}; \citeproc{ref-mijs_belief_2022}{Mijs et al.,
+2022}; \citeproc{ref-wen_does_2021}{Wen \& Witteveen, 2021}), while
+movement between these positions exposes individuals to different
+experiences and mechanisms that shape their views on what is fair
+(\citeproc{ref-gugushvili_trends_2014}{Gugushvili, 2014};
+\citeproc{ref-mau_inequality_2015}{Mau, 2015}). Building on this
+research, examining the effects of social mobility on market justice
+preferences can help to illuminate how inequalities in access to social
+services are justified among individuals who have experienced, or not,
+changes in their social standing, and what are the normative mechanisms
+that guide this justification (\citeproc{ref-mau_inequality_2015}{Mau,
+2015}).
+
+Beyond their isolated effects, social mobility and meritocratic beliefs
+interact in complex ways to shape market justice preferences. Among
+others, a key mechanism proposed in the literature to explain how
+mobility influences distributive justice preferences is the
+psychological process of self-serving bias in causal attribution
+(\citeproc{ref-gugushvili_intergenerational_2016c}{Gugushvili, 2016a};
+\citeproc{ref-schmidt_experience_2011}{Schmidt, 2011}). This bias
+suggests that individuals attribute failures---such as downward
+mobility---to external factors, while crediting successes---such as
+upward mobility---to their own merit and effort
+(\citeproc{ref-miller_selfserving_1975}{Miller \& Ross, 1975}). Those
+who experience upward mobility tend to view their social position as
+earned, making them more likely to believe that individuals are
+responsible for their own success or failure. Research shows that upward
+mobility is associated with weaker preferences for redistribution
+(\citeproc{ref-alesina_intergenerational_2018}{Alesina et al., 2018};
+\citeproc{ref-gugushvili_intergenerational_2016c}{Gugushvili, 2016a};
+\citeproc{ref-jaime-castillo_social_2019}{Jaime-Castillo \&
+Marqués-Perales, 2019}; \citeproc{ref-schmidt_experience_2011}{Schmidt,
+2011}) and stronger legitimacy of income inequality
+(\citeproc{ref-shariff_income_2016}{Shariff et al., 2016}). In contrast,
+individuals who experience downward mobility tend to blame structural
+factors like inequality and are more supportive of redistribution while
+rejecting merit-based explanations
+(\citeproc{ref-gugushvili_trends_2014}{Gugushvili, 2014}). Taken
+together, I argue that meritocratic beliefs may reinforce this
+self-serving attribution mechanism by legitimizing one's social status
+as the outcome of personal merit, closely tied to attribution bias.
+
+Against this background, this article pursues two main objectives:
+first, to analyze the extent to which intergenerational social mobility
+influences market justice preferences regarding healthcare, pensions,
+and education; and second, to examine how meritocratic beliefs may
+moderate this relationship. Building on a theoretical framework that
+emphasizes how neoliberal transformations---particularly through the
+privatization and commodification of key areas of social
+reproduction---have profoundly reshaped processes of subject formation
+(\citeproc{ref-mau_inequality_2015}{Mau, 2015}), the central argument is
+that upward mobility increases support for market justice preferences,
+while downward mobility decreases it. Moreover, meritocratic beliefs are
+expected to moderate this relationship by reflecting a self-serving
+attribution bias, whereby individuals justify their social position in
+terms of personal merit.
+
+This study focuses on Chile, a particularly intriguing case for
+examining market justice preferences. Despite significant economic
+growth and poverty reduction, Chile has some of the highest levels of
+inequality in Latin America and among OECD countries
+(\citeproc{ref-chancel_world_2022}{Chancel et al., 2022};
+\citeproc{ref-flores_top_2020}{Flores et al., 2020}). This inequality
+coexists with short-range upward mobility among lower-class segments
+moving into middle strata, though strong barriers remain to reaching
+higher positions (\citeproc{ref-espinoza_estratificacion_2013}{Espinoza
+et al., 2013}; \citeproc{ref-torche_intergenerational_2014}{Torche,
+2014}). What makes Chile especially salient is that much of this
+inequality is rooted in deep neoliberal reforms that institutionalized
+the privatization and commodification of key social sectors
+(\citeproc{ref-madariaga_three_2020}{Madariaga, 2020}). Introduced
+during the dictatorship (1973--1989) and expanded in democracy, these
+reforms enabled the unprecedented emergence of markets in health,
+pensions, and education, with provision segmented by individuals'
+ability to pay and supported by public subsidies
+(\citeproc{ref-boccardo_30_2020}{Boccardo, 2020}). In parallel---and
+despite waves of protest against inequality and commodification from
+2006 to 2019 (\citeproc{ref-somma_no_2021}{Somma et al.,
+2021})---Chilean subjectivities have been increasingly shaped by
+neoliberal discourses and market logics, influencing their attitudes
+toward inequality and welfare distribution
+(\citeproc{ref-araujo_desafios_2012}{Araujo \& Martuccelli, 2012};
+\citeproc{ref-canalesceron_sujeto_2021}{Canales Cerón et al., 2021}).
+
+In this context, the questions that guide this research are as follows:
+
+\begin{enumerate}
+\def\labelenumi{(\arabic{enumi})}
+\tightlist
+\item
+  To what extent does intergenerational social mobility influence market
+  justice preferences regarding healthcare, pensions, and education in
+  Chile?
+\item
+  How do meritocratic beliefs condition or moderate this relationship in
+  the Chilean context?
+\end{enumerate}
+
+To address these questions, this study draws on large-scale,
+representative survey data collected in 2018 from the urban Chilean
+population aged 18 to 75 (n = 2,726). The next section outlines the
+theoretical framework linking market justice preferences, social
+mobility, and meritocratic beliefs, and proposes a set of hypotheses.
+This is followed by a description of the data, variables, and analytical
+strategy. The final sections present the empirical findings, offer an
+interpretation of the results, and conclude with a discussion of their
+implications.
+
+\section{Theoretical and empirical
+background}\label{theoretical-and-empirical-background}
+
+\subsection{Market justice
+preferences}\label{market-justice-preferences}
+
+Beyond state's capacity to reallocate resources from the advantaged to
+the vulnerable, market institutions also play a central role in
+distributing socially valuable goods and rewards
+(\citeproc{ref-koos_moral_2019}{Koos \& Sachweh, 2019};
+\citeproc{ref-lindh_bringing_2023}{Lindh \& McCall, 2023}). As Polanyi
+(\citeproc{ref-polanyi_great_1975}{1975}) observed, economic integration
+in capitalist societies is primarily organized through market exchange,
+governed by a self-regulating price system embedded in institutional
+frameworks. These institutions are not mere aggregates of individual
+behavior, but social realities endowed with rules, mechanisms, and
+normative meanings that shape everyday thinking
+(\citeproc{ref-immergut_theoretical_1998}{Immergut, 1998};
+\citeproc{ref-koos_moral_2019}{Koos \& Sachweh, 2019}). In this sense,
+the economic order is mirrored in a moral economy: collectively shared
+norms and beliefs about justice in distribution, embedded and reinforced
+through institutions (\citeproc{ref-mau_inequality_2015}{Mau, 2015};
+\citeproc{ref-svallfors_political_2007}{Svallfors, 2007}). While most
+research from this perspective has focused on welfare institutions,
+recent scholarship has brought the market back into focus as a site of
+distributive justice beliefs and institutional responses to inequality
+(\citeproc{ref-lindh_bringing_2023}{Lindh \& McCall, 2023}). In many
+countries, privatization and commodification have expanded market logic
+into core areas of social reproduction, such as healthcare, education,
+pensions, and social security, deepening inequality in access to these
+services (\citeproc{ref-ferre_welfare_2023}{Ferre, 2023};
+\citeproc{ref-gingrich_making_2011}{Gingrich, 2011}). Yet public support
+for market-based welfare provision has grown, even in traditional
+welfare states, particularly among higher-income groups who view private
+alternatives as more efficient or higher in quality
+(\citeproc{ref-busemeyer_welfare_2020}{Busemeyer \& Iversen, 2020}).
+This shift calls for broader inquiry into how institutions like markets
+structure access to resources and legitimize inequalities
+(\citeproc{ref-mau_inequality_2015}{Mau, 2015};
+\citeproc{ref-satz_por_2019}{Satz, 2019}).
+
+The legitimacy of market-based inequalities is closely tied to beliefs
+about distributive justice grounded in market principles. Beyond
+stratification structures and socioeconomic conditions, the study of
+inequality also focuses on individuals' beliefs about the origins of
+inequality, the normative frameworks that sustain those beliefs, the
+mechanisms that shape them, and their implications for attitudes and
+behavior (\citeproc{ref-kluegel_beliefs_1981}{Kluegel \& Smith, 1981}).
+In this regard, empirical research on distributive justice focuses on
+individuals' conceptions of how goods and rewards \emph{should} be
+distributed in society (\citeproc{ref-jasso_distributive_2016}{Jasso et
+al., 2016}). This line of inquiry allows for examining the extent to
+which economic inequality is perceived as just, or in a certain sense,
+legitimate (\citeproc{ref-castillo_legitimacy_2011}{Castillo, 2011}).
+Most of the research on this field explores the legitimacy of wage
+inequality, specially salary gaps between jobs at opposite ends of the
+occupational hierarchy
+(\citeproc{ref-castillo_legitimacy_2011}{Castillo, 2011};
+\citeproc{ref-jasso_justice_1978}{Jasso, 1978};
+\citeproc{ref-jasso_gender_1999}{Jasso \& Wegener, 1999}). Recently,
+others examines how individuals justify market-generated inequalities in
+access to core social services such as healthcare, education, pensions
+or social security. Here, legitimacy stems from the belief that access
+to these goods should follow market-based criteria
+(\citeproc{ref-castillo_socialization_2024}{Castillo et al., 2024};
+\citeproc{ref-lindh_public_2015}{Lindh, 2015}). In such views, these
+services are treated as legitimate commodities; goods that can be
+traded, priced, and evaluated through market logic
+(\citeproc{ref-busemeyer_welfare_2020}{Busemeyer \& Iversen, 2020}).
+
+Market justice preferences refer to normative beliefs that legitimize
+the idea that access to core social services---such as healthcare,
+education, or pensions---should be determined by market-based criteria.
+Following Janmaat's (\citeproc{ref-janmaat_subjective_2013}{2013, p.
+359}) distinction, these preferences fall under the category of
+``beliefs,'' understood as normative ideas about what inequality should
+look like, as opposed to ``perceptions,'' which refer to subjective
+evaluations of existing inequality. Market justice preferences reflect
+the view that access to these services should depend on individuals'
+ability to pay, thus justifying inequalities generated by market
+mechanisms (\citeproc{ref-kluegel_legitimation_1999}{Kluegel et al.,
+1999}; \citeproc{ref-lindh_public_2015}{Lindh, 2015}). The concept draws
+on Lane's (\citeproc{ref-lane_market_1986}{1986}) classic contrast
+between market justice and political justice: the former is grounded in
+the idea of earned deserts---where rewards reflect effort, productivity,
+and skill---while the latter prioritizes need and equality, typically
+expressed in welfare state policies. Lane argued that markets and states
+differ in purpose (efficiency vs.~need), logic (individual
+vs.~collective), and fairness criteria (merit vs.~equality). Market
+justice assumes that markets are neutral, self-regulating systems in
+which fair procedures yield outcomes proportional to merit. Inequality,
+from this perspective, is not only expected but legitimate---as long as
+it arises from fair competition. In this way, market justice offers a
+moral lens through which individuals can view the commodification and
+stratified access to social services as fair and justified
+(\citeproc{ref-kluegel_legitimation_1999}{Kluegel et al., 1999};
+\citeproc{ref-lindh_public_2015}{Lindh, 2015}).
+
+The empirical study of market justice preferences has employed various
+strategies to capture how individuals assess inequalities arising from
+market allocation. A common approach evaluates whether people find it
+fair that access to essential social services---such as healthcare,
+education, or pensions---depends on income. This builds on foundational
+work by Kluegel and Smith
+(\citeproc{ref-kluegel_legitimation_1999}{1999}), who examined normative
+justifications for capitalist systems. Subsequent studies have extended
+this logic to a wider set of welfare goods. For example, Immergut and
+Schneider (\citeproc{ref-immergut_it_2020}{2020}) and von dem Knesebeck
+et al. (\citeproc{ref-vondemknesebeck_are_2016}{2016}) explore whether
+respondents believe it is just that higher-income individuals receive
+better healthcare. Similarly, Lee and Stacey
+(\citeproc{ref-lee_fairness_2023}{2023}) and Castillo, Iturra, et al.
+(\citeproc{ref-castillo_changes_2025}{2025}) apply this framework to
+education. Complementing these efforts, more recent research has
+introduced composite indicators to capture broader orientations toward
+market-based allocation. Lindh (\citeproc{ref-lindh_public_2015}{2015}),
+for instance, constructs an index averaging support for income-based
+access to healthcare and education in comparative perspective, while
+Castillo et al. (\citeproc{ref-castillo_socialization_2024}{2024})
+propose a single-item measure covering health, education, and pensions
+in Chile. These instruments seek to gauge to what extent individuals
+view market-generated inequalities as legitimate. Taken together, they
+capture two core dimensions of market distribution: the role of economic
+resources as a key determinant of outcomes, and the framing of services
+as tradable commodities that can be bought and sold according to ability
+to pay (\citeproc{ref-lindh_public_2015}{Lindh, 2015}).
+
+Comparative empirical research has identified several individual-level
+factors that influence support for market justice. Individuals in more
+advantaged socioeconomic positions---those with higher income,
+education, and occupational status---are consistently more likely to
+endorse market-based distributive principles
+(\citeproc{ref-koos_moral_2019}{Koos \& Sachweh, 2019};
+\citeproc{ref-lindh_public_2015}{Lindh, 2015};
+\citeproc{ref-svallfors_political_2007}{Svallfors, 2007}). For example,
+Lindh (\citeproc{ref-lindh_public_2015}{2015}) finds that individuals
+from the service class are more likely to support market-based access to
+healthcare and education than skilled and unskilled workers across 17
+relatively affluent countries. In a comparative analysis, Svallfors
+(\citeproc{ref-svallfors_political_2007}{2007}) observes that this
+expected class pattern appears clearly only in Sweden, where support for
+private education and healthcare varies systematically by class.
+Busemeyer (\citeproc{ref-busemeyer_skills_2014}{2014}) similarly shows
+that support for private education is stronger among high-income groups,
+while Immergut and Schneider (\citeproc{ref-immergut_it_2020}{2020}) and
+von dem Knesebeck et al. (\citeproc{ref-vondemknesebeck_are_2016}{2016})
+report comparable findings for healthcare, suggesting that wealthier
+individuals perceive private provision as a means of maintaining
+relative advantage. In Chile, Otero and Mendoza
+(\citeproc{ref-otero_power_2024}{2024}) show that individuals with
+higher income and university education express stronger support for
+market allocation in healthcare, education, and pensions. Beliefs about
+inequality and political orientation also matter. Castillo et al.
+(\citeproc{ref-castillo_socialization_2024}{2024}) and Castillo,
+Laffert, et al. (\citeproc{ref-castillo_perceptions_2025}{2025}) show
+that individuals who have strong meritocratic beliefs are more likely to
+support market-based distribution in Chile, while Lee and Stacy
+(\citeproc{ref-lee_fairness_2023}{2023}) in Australia suggest that these
+preferences are also greater as people lean toward economic
+conservatism. In this sense, market justice preferences are shaped by
+the interplay between structural position and normative reasoning.
+
+However, individual characteristics alone do not fully explain variation
+in support for market justice. A growing body of cross-national research
+highlights the importance of institutional arrangements in shaping these
+preferences. For instance, Immergut and Schneider
+(\citeproc{ref-immergut_it_2020}{2020}) find that in countries with
+higher public spending on healthcare, individuals are less likely to
+view income-based access as fair. Similarly, Busemeyer
+(\citeproc{ref-busemeyer_skills_2014}{2014}) shows that increased public
+investment in education is associated with lower support for privatized
+provision. Conversely, Lindh (\citeproc{ref-lindh_public_2015}{2015})
+finds that in countries with more market-oriented welfare systems,
+support for market-based distribution tends to be higher, suggesting
+that individual attitudes often align with institutional outputs. These
+findings are consistent with neo-institutionalist and policy feedback
+theories (\citeproc{ref-campbell_institutional_2020}{Campbell, 2020}),
+which argue that institutions do more than redistribute resources---they
+also shape the normative categories through which individuals assess who
+is deserving of support
+(\citeproc{ref-immergut_theoretical_1998}{Immergut, 1998}). In this
+view, dominant values and preferences are both shaped by and embedded in
+institutional configurations
+(\citeproc{ref-busemeyer_skills_2014}{Busemeyer, 2014}), reinforcing the
+notion that institutions are not neutral structures, but active
+producers of the moral frameworks that legitimize or challenge
+inequality.
+
+\subsection{Social mobility}\label{social-mobility}
+
+The study of social mobility, its drivers and consequences has long been
+central to sociology. Classic theorists explored not only movement
+across social hierarchies but also its broader implications for class
+conflict, norm stability, and institutional change
+(\citeproc{ref-breen_effects_2024}{Breen \& Ermisch, 2024}). Sorokin
+(\citeproc{ref-sorokin_social_1927}{1927}) introduced the concept
+formally, defining mobility as the shift of individuals, values, or
+objects between positions within a stratification system, and
+distinguishing between horizontal and vertical forms. Later work
+differentiated intergenerational from intragenerational mobility, as
+well as absolute mobility---driven by structural change---from relative
+mobility, which captures the extent to which origins constrain
+destinations (\citeproc{ref-eyles_social_2022}{Eyles et al., 2022}). In
+Latin America, research shows high absolute but low relative mobility
+(\citeproc{ref-bucca_merit_2016}{Bucca, 2016}): although educational
+expansion and economic modernization have enabled some upward movement,
+status reproduction remains strong, especially among elites
+(\citeproc{ref-lopez-roldan_comparative_2021}{López-Roldán \& Fachelli,
+2021}; \citeproc{ref-torche_intergenerational_2014}{Torche, 2014}). This
+reflects deep structural inequality, segmented education systems,
+stratified labor markets, and legacies of dependent development that
+restrict access to mobility channels and reinforce the intergenerational
+transmission of advantage.
+
+Beyond mapping mobility patterns, growing research has examined its
+subjective and attitudinal effects. Mobility effects---defined as
+outcomes resulting from movement between origin and destination classes
+(\citeproc{ref-breen_effects_2024}{Breen \& Ermisch, 2024})---have long
+attracted theoretical interest. Sorokin's (1959) dissociative hypothesis
+posits that mobility, whether upward or downward, may produce
+psychological strain due to conflicting norms between class contexts,
+leading to lower life satisfaction. Similarly, Lenski
+(\citeproc{ref-lenski_status_1954}{1954}) argued that status
+inconsistency---mismatches among education, income, and occupation---can
+undermine well-being. These ideas underpin extensive empirical work
+linking intergenerational mobility to outcomes such as life
+satisfaction, mental health, and stress
+(\citeproc{ref-gugushvili_heterogeneous_2024}{Gugushvili, 2024};
+\citeproc{ref-hadjar_does_2015}{Hadjar \& Samuel, 2015};
+\citeproc{ref-prag_subjective_2021}{Präg \& Gugushvili, 2021}).
+
+Research on intergenerational social mobility has increasingly examined
+its effects on attitudes toward economic inequality. A key area of
+inquiry focuses on how upward and downward mobility influence support
+for redistribution, though findings remain mixed. Alesina et al.
+(\citeproc{ref-alesina_intergenerational_2018}{2018}) show that
+individuals with pessimistic expectations about their
+mobility---particularly those anticipating downward movement---are more
+likely to support generous redistributive policies. Similarly, Ares
+(\citeproc{ref-ares_changing_2020}{2020}) finds that upwardly mobile
+individuals tend to be less supportive of state-led redistribution
+compared to those who have experienced downward mobility. Comparative
+studies by Schmidt (\citeproc{ref-schmidt_experience_2011}{2011}) and
+Gugushvili (\citeproc{ref-gugushvili_subjective_2017}{2017}) likewise
+report that subjective upward mobility is associated with weaker
+preferences for redistribution, while downward mobility strengthens
+redistributive support. However, recent causal evidence from Breen and
+Ermisch (\citeproc{ref-breen_effects_2024}{2024}) suggests the opposite:
+upward mobility may increase redistributive preferences, while downward
+mobility may reduce them.
+
+Beyond redistribution, other studies have explored the impact of
+mobility on broader beliefs about inequality. Gugushvili
+(\citeproc{ref-gugushvili_intergenerational_2016}{2016b}) finds that
+upwardly mobile individuals are more likely to adopt individualistic
+attributions of poverty and to legitimize income inequality,
+particularly in post-socialist societies. Similarly, Bucca
+(\citeproc{ref-bucca_merit_2016}{2016}) shows that subjective upward
+mobility reinforces individualistic explanations of wealth in seven
+Latin American countries. At the macro level, Shariff et al.
+(\citeproc{ref-shariff_income_2016}{2016}) demonstrate that higher
+levels of national economic mobility correlate with greater tolerance of
+inequality. In contrast, Day and Fiske
+(\citeproc{ref-day_movin_2017}{2017}) find that low perceived mobility
+undermines belief in meritocracy and a just world, thereby weakening
+system justification. Taken together, this body of research suggests
+that mobility shapes attitudes toward inequality and justice through
+multiple, and sometimes contradictory, mechanisms.
+
+The literature on the effects of social mobility has proposed various
+mechanisms to explain how and why changes in social position may
+influence individual outcomes
+(\citeproc{ref-helgason_class_2025}{Helgason \& Rehm, 2025}). One of the
+most prominent is the self-interest mechanism, which posits that
+individuals who experience upward or downward mobility undergo a shift
+in their material interests, thereby altering their perceptions and
+preferences (\citeproc{ref-ares_changing_2020}{Ares, 2020};
+\citeproc{ref-helgason_longterm_2023}{Helgason \& Rehm, 2023};
+\citeproc{ref-langsaether_explaining_2022}{Langsæther et al., 2022}).
+Closely related to this logic is the Prospect of Upward Mobility (POUM)
+hypothesis, which suggests that individuals may oppose redistribution
+not because of their current position, but because they anticipate
+improving their status in the future
+(\citeproc{ref-benabou_social_2001}{Benabou \& Ok, 2001}). A second line
+of explanation draws on the framework of theories of socialization.
+Within this tradition, hypotheses such as acculturation, socialization,
+and status maximization propose that individuals adjust their attitudes
+based on the norms and values of either their class of origin or their
+destination, or a combination of both
+(\citeproc{ref-jaime-castillo_social_2019}{Jaime-Castillo \&
+Marqués-Perales, 2019}). However, most of these mechanisms focus
+primarily on the indirect effects of origin and destination positions,
+rather than on the direct effect of experience of movement itself. In
+response to this gap, recent research has highlighted the role of
+self-serving bias in causal attribution processes, suggesting that
+individuals tend to explain their mobility trajectories in ways that
+justify their current position, which in turn shapes their beliefs and
+preferences
+(\citeproc{ref-gugushvili_intergenerational_2016c}{Gugushvili, 2016a};
+\citeproc{ref-molina_its_2019}{Molina et al., 2019};
+\citeproc{ref-schmidt_experience_2011}{Schmidt, 2011}).
+
+The self-serving bias mechanism builds on a value-oriented perspective,
+emphasizing that individuals' experiences of social mobility shape their
+causal attributions, which in turn influence their beliefs about justice
+and distributive preferences
+(\citeproc{ref-gugushvili_trends_2014}{Gugushvili, 2014}). Causal
+attribution refers to the process through which individuals generate
+explanations for their own behavior and outcomes, as well as those of
+others (\citeproc{ref-gugushvili_intergenerational_2016}{Gugushvili,
+2016b}). In this view, people's interpretations of economic inequality
+depend on whether they believe such disparities reflect unequal
+individual contributions. Individuals who adopt an internal attribution
+framework tend to see success or failure as rooted in personal
+characteristics such as effort, talent, or merit. In contrast, those who
+regard inequality as unjust are more likely to adopt an external
+attribution model, viewing outcomes as the result of structural barriers
+beyond individual control (\citeproc{ref-kluegel_beliefs_1981}{Kluegel
+\& Smith, 1981}). This mechanism, often described as intrapersonal
+causal attribution, reflects how people explain their own socioeconomic
+positions---typically attributing their successes to internal qualities
+while blaming failures on external circumstances
+(\citeproc{ref-miller_selfserving_1975}{Miller \& Ross, 1975}). Over
+time, individuals may revise their beliefs and attitudes: while early
+views are shaped by their social origin, these are later adjusted in
+light of personal experiences of mobility and the perceived role of
+ascribed versus achieved factors in determining socioeconomic outcomes
+(\citeproc{ref-gugushvili_intergenerational_2016}{Gugushvili, 2016b}).
+
+Empirical research has provided support for the self-serving bias
+mechanism in shaping redistributive preferences and attitudes toward the
+legitimacy of inequality. For instance, Schmidt
+(\citeproc{ref-schmidt_experience_2011}{2011}) finds that individuals
+who experience upward mobility are more likely to interpret their
+success as the result of personal effort or merit, and consequently
+perceive redistribution as less necessary. Conversely, individuals who
+experience downward mobility tend to attribute their decline to external
+circumstances---such as structural inequality or unemployment---and show
+stronger support for redistribution. In a comparative analysis across
+different welfare domains, Gugushvili
+(\citeproc{ref-gugushvili_subjective_2017}{2017}) demonstrates that
+upward mobility is associated with lower support for government spending
+on housing and pensions, while individuals who experience downward
+mobility express lower support for healthcare and education spending,
+but favor increased investment in housing and pensions, reflecting the
+material nature of these domains. Moreover, Gugushvili
+(\citeproc{ref-gugushvili_intergenerational_2016c}{2016a}) finds that
+upward mobility is linked to greater justification of income inequality,
+suggesting that improved social standing reinforces an attributional
+view in which success is seen as the result of individual
+characteristics---thus legitimizing inequality as a fair outcome.
+
+Consequently, considering this theoretical and empirical background, the
+first hypothesis of this research is that:
+
+\(H1\): Experiencing upward (downward) social mobility is positively
+(negatively) associated with greater support for market justice in
+healthcare, pensions, and education.
+
+\subsection{Meritocracy}\label{meritocracy}
+
+Meritocracy constitutes a central ideological framework for legitimizing
+different types of social inequality, for instance through market
+justice beliefs. Rooted in the belief that rewards and positions should
+be allocated based on individual effort and talent, meritocracy operates
+as a normative ideal and a descriptive belief about how society
+functions. As initially conceptualized by Michael Young
+(\citeproc{ref-young_rise_1958}{1958}), the term was meant to critique a
+system in which merit-based stratification becomes a new form of
+inequality. However, over time, meritocracy has been widely supported in
+many societies as a fair and desirable principle of distribution,
+particularly within liberal democracies and market-oriented economies
+(\citeproc{ref-mijs_paradox_2019}{Mijs, 2019};
+\citeproc{ref-sandel_tyranny_2020}{Sandel, 2020}). From a sociological
+perspective, the belief in meritocracy is more than a cognitive
+assessment; it reflects a moral lens through which individuals interpret
+inequality. People who believe that success results from hard work and
+talent are more likely to view social and economic disparities as
+legitimate (\citeproc{ref-batruch_belief_2023}{Batruch et al., 2023};
+\citeproc{ref-castillo_meritocracia_2019}{Castillo et al., 2019}).
+Conversely, if they see outcomes as driven by luck, social origin, or
+systemic barriers, inequality is more likely to be perceived as unjust.
+This distinction becomes crucial in societies with persistent structural
+inequality, where public narratives often emphasize personal
+responsibility and merit while overlooking entrenched disadvantages.
+
+I adopt a multidimensional perspective on meritocracy, distinguishing
+between two key dimensions: effort-based and talent-based perceptions.
+This distinction is essential, as it captures different pathways through
+which individuals justify inequality
+(\citeproc{ref-young_rise_1958}{Young, 1958}). Effort-based meritocracy
+emphasizes hard work and perseverance as the basis for social rewards,
+aligning closely with cultural narratives of personal responsibility. A
+talent-based meritocracy, by contrast, emphasizes intelligence and
+innate abilities, which are often perceived as less malleable and more
+unequally distributed. Both dimensions have been shown to correlate with
+acceptance of inequality, but they may carry distinct implications for
+how inequality is justified in specific domains
+(\citeproc{ref-castillo_multidimensional_2023}{Castillo et al., 2023}).
+The relevance of this distinction is supported by recent studies, which
+show that individuals respond differently to these dimensions. For
+instance, perceptions that effort is rewarded in society are more
+strongly associated with positive evaluations of fairness and acceptance
+of unequal outcomes (\citeproc{ref-batruch_belief_2023}{Batruch et al.,
+2023}; \citeproc{ref-wiederkehr_belief_2015}{Wiederkehr et al., 2015};
+\citeproc{ref-wilson_role_2003}{Wilson, 2003}). This may be because
+effort is seen as a controllable and morally virtuous trait, whereas
+talent is often perceived as a natural advantage. Consequently,
+effort-based meritocracy is likely more potent in legitimizing
+inequality, particularly in neoliberal contexts.
+
+These dimensions of meritocracy reflect how respondents perceive
+society's distributive logic, regardless of whether they endorse
+meritocratic principles. This distinction aligns with recent findings
+indicating that individuals distinguish between how merit is perceived
+in society and how it should ideally operate, which in turn shapes their
+preferences for redistribution and justice
+(\citeproc{ref-tejero-peregrina_perceived_2025}{Tejero-Peregrina et al.,
+2025}). Meritocratic beliefs serve as symbolic justifications for
+unequal outcomes, particularly when access is stratified by income or
+social opportunity. Prior studies in Chile have shown that individuals
+who perceive higher levels of meritocracy tend to express stronger
+support for unequal distributions that reflect market outcomes in
+healthcare, education and pensions
+(\citeproc{ref-castillo_perceptions_2025}{Castillo, Laffert, et al.,
+2025}; \citeproc{ref-castillo_socialization_2024}{Castillo et al.,
+2024}).
+
+In addition to influencing individual attitudes toward inequality,
+meritocratic beliefs can contribute to social division and the
+stigmatization of disadvantaged groups. Recent research has demonstrated
+that exposure to meritocratic narratives can reinforce the belief that
+poverty results from individual failings rather than systemic
+conditions, reducing support for redistributive measures and increasing
+the stigmatization of the poor (\citeproc{ref-hoyt_mindsets_2023}{Hoyt
+et al., 2023}). This reinforces negative stereotypes and reduces empathy
+toward individuals from lower socioeconomic backgrounds. Moreover,
+Busemeyer et al. (\citeproc{ref-busemeyer_positive_2021}{2021}) argues
+that meritocratic narratives can serve as feedback mechanisms that shape
+public opinion and well-being by framing individuals' understanding of
+welfare outcomes as deserved or undeserved within existing institutional
+structures. This psychological mechanism highlights the normative power
+of meritocracy in stabilizing unequal systems by shaping political
+attitudes and personal perceptions of success and failure.
+
+Importantly, recent research has explored how meritocratic beliefs
+interact with experiences of intergenerational mobility to shape
+distributive attitudes. The belief that one's success is earned can lead
+upwardly mobile individuals to internalize meritocratic narratives and
+justify existing inequalities, reinforcing support for market justice
+(\citeproc{ref-gugushvili_intergenerational_2016c}{Gugushvili, 2016a};
+\citeproc{ref-molina_its_2019}{Molina et al., 2019}). Conversely,
+downwardly mobile individuals who maintain strong meritocratic beliefs
+may interpret their status as a personal failure, reducing their support
+for redistribution (\citeproc{ref-day_movin_2017}{Day \& Fiske, 2017}).
+At the macro level, Shariff et al.
+(\citeproc{ref-shariff_income_2016}{2016}) show that higher perceived
+mobility increases tolerance for inequality, suggesting that meritocracy
+and mobility are mutually reinforcing.
+
+Taken together, this literature supports the idea that meritocratic
+beliefs can moderate the relationship between mobility and market
+justice preferences. Individuals who experience mobility---especially
+upward---may draw on meritocratic narratives to legitimize both their
+own status and broader inequalities, thereby strengthening their support
+for market-based distribution. Accordingly, the second hypothesis of
+this study is:
+
+\(H2\): The positive (negative) relationship between upward (downward)
+social mobility and support for market justice in healthcare, pensions,
+and education is moderated by meritocratic beliefs; specifically, this
+association is stronger (weaker) among individuals with higher
+perceptions of meritocracy.
+
+\subsection{The Chilean context}\label{the-chilean-context}
+
+Chile offers a compelling case for examining individual preferences for
+market justice in the access to core social services. Since the early
+1990s, the country experienced a long period of sustained economic
+growth, with per capita GDP increasing by nearly 4\% annually until the
+mid-2010s (\citeproc{ref-llorca-jana_historia_2021}{Llorca-Jaña \&
+Miller, 2021}). This growth brought notable improvements in living
+standards, including a strong decline in income poverty---from 38.6\% in
+1990 to 6.5\% in 2022 (\citeproc{ref-mideplan_evolucion_2017}{MIDEPLAN,
+2017}). However, this success story has been tempered by growing
+concerns over the unequal distribution of its benefits. In recent years,
+economic growth has slowed---exacerbated by the global impact of the
+COVID-19 pandemic---and structural inequalities have become more visible
+(\citeproc{ref-barozet_clases_2021}{Barozet et al., 2021}). Despite its
+economic achievements, Chile remains one of the most unequal countries
+in Latin America and the OCDE. The poorest 50\% of the population
+captures just 10\% of total income and holds negative net wealth, while
+the wealthiest 1\% receives nearly 27\% of all income and controls
+almost half (49.6\%) of the country's wealth
+(\citeproc{ref-chancel_world_2022}{Chancel et al., 2022}), a figure that
+has seen little change since the 1990s
+(\citeproc{ref-flores_top_2020}{Flores et al., 2020}). These stark
+disparities extend beyond income, reflecting deep inequalities in access
+to essential social services (\citeproc{ref-pnud_desiguales_2017}{PNUD,
+2017}).
+
+A significant share of Chile's inequality stems from neoliberal reforms
+that privatized and commodified key domains of social reproduction
+(\citeproc{ref-arrizabalo_milagro_1995}{Arrizabalo, 1995};
+\citeproc{ref-ferre_welfare_2023}{Ferre, 2023}). Introduced during the
+military dictatorship (1973--1989) and expanded under democratic
+governments, these reforms embedded market logic into public services
+through concessions, subsidies, demand-side vouchers, and pro-private
+regulatory frameworks (\citeproc{ref-boccardo_30_2020}{Boccardo, 2020};
+\citeproc{ref-madariaga_three_2020}{Madariaga, 2020}). This
+``crowded-out'' welfare model benefits higher-income groups, leaving
+lower-income individuals to rely on limited public options. Scholars
+argue that this neoliberal shift repurposed the state to create niches
+of capitalist accumulation -from water to education-, giving rise to a
+model of ``public-service capitalism'' heavily reliant on state funding
+(\citeproc{ref-boccardo_30_2020}{Boccardo, 2020}). In healthcare, around
+79\% of the population is covered by the public insurer FONASA, while
+15\% are enrolled in private ISAPREs, which offer faster and
+higher-quality services to wealthier groups
+(\citeproc{ref-mideplan_estadisticas_2024}{MIDEPLAN, 2024}). The pension
+system is based on individual capitalization, with mandatory
+contributions managed by private administrators investing in the
+financial market, currently involving 11 million contributors through
+private fund administrators (AFPs), yet 27\% of the labor force remains
+outside the system due to informality
+(\citeproc{ref-superintendenciadepensiones_estadisticas_2024}{Superintendencia
+de Pensiones, 2024}). Education is similarly stratified: only 30.6\% of
+students attend fully public schools, while 54\% are in voucher-funded
+private institutions and 9.3\% in fully private schools that largely
+serve affluent families
+(\citeproc{ref-ministeriodeeducacion_resumen_2023}{Ministerio de
+Educación, 2023}). This arrangement has created a structurally segmented
+system, where access and quality of services depend on ability to pay,
+reinforced by state subsidies to private providers
+(\citeproc{ref-pnud_desiguales_2017}{PNUD, 2017}).
+
+Over recent decades, Chile has undergone a significant transformation in
+its class structure, shaped by sustained economic growth, the expansion
+of the service sector, the massification of education, and major changes
+in the role of the state and social policy
+(\citeproc{ref-ruiz_chilenos_2014}{Ruiz \& Boccardo, 2014}). These
+changes contributed to the growth of the middle sectors, a phenomena
+labelled as ``mesocratrization'' of society
+(\citeproc{ref-espinoza_estratificacion_2013}{Espinoza et al., 2013}).
+However, this expansion did not reduce structural inequalities nor
+facilitate upward mobility into elite positions
+(\citeproc{ref-espinoza_estratificacion_2013}{Espinoza et al., 2013};
+\citeproc{ref-lopez-roldan_comparative_2021}{López-Roldán \& Fachelli,
+2021}). While Chile shows high absolute mobility, most flows occur
+between adjacent classes---particularly from working classes into lower
+service-class positions---while access to upper classes remains limited,
+indicating strong elite closure and reproduction
+(\citeproc{ref-espinoza_estratificacion_2013}{Espinoza et al., 2013};
+\citeproc{ref-espinoza_movilidad_2014}{Espinoza \& Núñez, 2014};
+\citeproc{ref-lopez-roldan_comparative_2021}{López-Roldán \& Fachelli,
+2021}; \citeproc{ref-perez-ahumada_clases_2019}{Pérez-Ahumada, 2019};
+\citeproc{ref-torche_unequal_2005}{Torche, 2005}). Though often
+described as ``unequal but fluid'', recent evidence points to growing
+rigidity in relative mobility, especially after the economic slowdown,
+increased household debt, labor market precarity, and the COVID-19
+crisis (\citeproc{ref-barozet_clases_2021}{Barozet et al., 2021}).
+However, the majority of the population identifies themselves as members
+of the middle class (\citeproc{ref-castillo_todos_2013}{Castillo et al.,
+2013}). These dynamics have fueled a legitimacy crisis: meritocracy is
+increasingly questioned, and many perceive that advancement depends more
+on informal networks than on effort or earned credentials
+(\citeproc{ref-barozet_clases_2021}{Barozet et al., 2021}). The
+combination of constrained mobility, persistent inequality, and
+concentrated opportunity has eroded expectations of upward mobility and
+intensified social discontent (\citeproc{ref-pnud_desiguales_2017}{PNUD,
+2017}).
+
+Despite recurrent social unrest, Chile presents a paradoxical
+coexistence between strong conflict over inequality and widespread
+public legitimation of it. The October 2019 ``social outburst'', a
+period of mass protests and severe political repression throughout the
+country, crystallized discontent over the privatization and
+commodification of social services, alongside a crisis of political
+legitimacy (\citeproc{ref-somma_no_2021}{Somma et al., 2021}). A survey
+during the protests identified pensions, healthcare, and education as
+the top demands
+(\citeproc{ref-nucleodesociologiacontingente_informe_2020}{Núcleo de
+Sociología Contingente, 2020}), reflecting dissatisfaction with Chile's
+stratified welfare regime. Yet, this unrest coexists with strong
+meritocratic beliefs and high tolerance for income inequality. Castillo
+(\citeproc{ref-castillo_legitimacy_2011}{2011}) shows that wage gaps
+between occupations are consistently justified, and the larger the
+perceived gap, the greater its legitimation, an effect amplified by
+Chile's structural inequality. Moreover, perceptions of unfairness due
+to non-meritocratic factors often reinforce belief in effort and talent
+as legitimate bases for success
+(\citeproc{ref-castillo_multidimensional_2023}{Castillo et al., 2023}),
+which are associated with lower perceived injustice
+(\citeproc{ref-castillo_meritocracia_2019}{Castillo et al., 2019}).
+Mac-Clure et al. (\citeproc{ref-mac-clure_justicia_2024}{Mac-Clure et
+al., 2024}) find that low and lower-middle status individuals are less
+likely than upper-status groups to view educational income differences
+as unfair. Qualitative research further reveals the internalization of
+the enterprising self (\citeproc{ref-mau_inequality_2015}{Mau, 2015}),
+understood as a way in which the subjectivization process arises in line
+with positioning the self in the market, generating its own market value
+and subjecting it to competition. Canales et al.
+(\citeproc{ref-canalesceron_sujeto_2021}{2021}) describes how families
+navigate school choice as investment decisions, while Panes
+(\citeproc{ref-panes_criticas_2020}{2020}) finds that many workers frame
+pension contributions as individual investments aimed at maximizing
+future returns. These representations suggest that market-based moral
+orientations are deeply embedded in Chilean subjectivities, offering
+fertile ground to study how support for market justice varies across
+welfare domains.
+
+Although still limited, recent research on market justice preferences in
+Chile indicates that support for these beliefs has increased in recent
+years across domains such as healthcare, pensions, and education, and
+that both objective and subjective dimensions of inequality shape them.
+Castillo et al. (\citeproc{ref-castillo_perceptions_2025}{2025}) show
+that agreement with the notion that it is fair for higher-income
+individuals to access better services was relatively low in 2016, but
+rose significantly by 2023---especially in the pension domain. Otero and
+Mendoza (\citeproc{ref-otero_power_2024}{2024}) provide evidence that
+social class, measured using the EGP scheme, influences these
+preferences: individuals in lower or subordinate class positions are
+less supportive of market-based access to welfare services compared to
+those in higher or privileged positions. Additionally, greater diversity
+in social class networks is associated with lower support for market
+justice. This is particularly relevant in the Chilean context, where one
+of the main determinants of class-diverse networks is intergenerational
+social mobility, which exposes individuals to relationships with people
+from different class backgrounds (\citeproc{ref-otero_lives_2022}{Otero
+et al., 2022}). Regarding subjective factors, Castillo et al.
+(\citeproc{ref-castillo_perceptions_2025}{Castillo, Laffert, et al.,
+2025}; \citeproc{ref-castillo_socialization_2024}{Castillo et al.,
+2024}) find that individuals who endorse meritocratic beliefs---such as
+the idea that effort and talent are rewarded in Chile---are more likely
+to support market justice across welfare domains.
+
+\section{Method}\label{method}
+
+Social mobility effects---understood as impacts on an outcome arising
+from movements between an origin state and a destination state (e.g.,
+social class)---have long been a focus of sociological research
+(\citeproc{ref-eyles_social_2022}{Eyles et al., 2022};
+\citeproc{ref-langsaether_explaining_2022}{Langsæther et al., 2022}).
+Yet, as Breen and Ermisch (\citeproc{ref-breen_effects_2024}{2024, p.
+467}) emphasize, most of the mobility hypotheses are, at their core,
+individual-level counterfactual comparisons between the observed outcome
+under a mobility trajectory and the outcome the same person would have
+shown if they had remained in their origin class (or moved to an
+alternative destination). Standard specifications (e.g., SAM, DRM, and
+mobility-contrast models) struggle to retrieve these inherently
+counterfactual quantities due to identification constraints and their
+reliance on between-group contrasts constructed from additive terms and
+interactions, thereby yielding primarily associational evidence
+(\citeproc{ref-breen_effects_2024}{Breen \& Ermisch, 2024};
+\citeproc{ref-song_there_2025}{Song \& Zhou, 2025}). Following the
+causal framework of Breen and Ermisch
+(\citeproc{ref-breen_effects_2024}{2024}), I conceive of the destination
+class as a treatment, conditioning on the origin class and estimating
+the heterogeneous effects of the destination with observational data
+under explicit identification assumptions. To align design and target, I
+follow the MIDA template (\citeproc{ref-blair_research_2023}{Blair et
+al., 2023}): set out the causal model and assumptions (M), define the
+inquiry and estimand (I), describe the data and variables (D), and
+detail the answer strategy (A) used to identify the causal effect of
+intergenerational occupational mobility on preferences for the
+commodification of pensions.
+
+\subsection{A Causal Model for Mobility
+Effects}\label{a-causal-model-for-mobility-effects}
+
+Breen and Ermisch (\citeproc{ref-breen_effects_2024}{2024}), building on
+a critical reassessment of the inferential limits of standard mobility
+models, propose a causal framework that reconceptualizes the ``mobility
+effect'' as the treatment effect of reaching a destination class, with
+impacts heterogeneous by class of origin. The core claim is that typical
+mobility hypotheses are fundamentally within-person counterfactual
+comparisons rather than between-person contrasts. Defining mobility as
+\(M = D - O\); a change from origin \((O)\) to destination \((D)\),
+rather than an additive or interactive combination, places the focus
+squarely on the Neyman--Rubin problem: for any individual, we observe
+the result in the social position they currently occupy, but not in the
+situation of other alternative destinations or immobility.
+
+Exploiting the temporal ordering of origin, destination and outcome,
+Breen and Ermisch (\citeproc{ref-breen_effects_2024}{2024}) frame
+mobility as a treatment process that motivates the causal question:
+``how would the outcome among people from origin \emph{j} who entered
+destination \emph{k} have been different if those people had,
+counterfactually, entered destination \emph{k'} instead?'' (p.472). The
+corresponding estimand is the conditional causal effect of destination
+given origin. It is of particular interest when \emph{k' = j}, i.e.,
+immobility. This estimand compares movers' observed outcomes with the
+hypothetical outcomes those same individuals would have exhibited had
+they remained in their origin class. This formulation provides a
+coherent potential-outcomes basis for studying how social mobility shape
+individual preferences and attitudes.
+
+Following Breen and Ermisch (\citeproc{ref-breen_effects_2024}{2024}),
+the identification of causal mobility effects from observational data
+requires the following assumptions:
+
+\textbf{Positivity}: For all \((j,c)\) in the support of \((O,C)\) and
+for each relevant destination \((k)\), the probability of receiving
+\(D=k\) is strictly between 0 and 1; substantively, each type \((O,C)\)
+has a nonzero probability of entering each comparison destination.
+
+\begin{equation}\phantomsection\label{eq-posi}{
+ 0<P(D=k\mid O=j, C=c)<1
+}\end{equation}
+
+\textbf{Stable Unit Treatment Value Assumption (SUTVA)}: each unit's
+potential outcomes \(Y_i(D)\) does not depend on the mechanism used to
+assign treatments (destinations) and by the treatments assigned to other
+units (also called no interference), assuming a single, well-defined
+version of each treatment (consistency).
+
+\begin{equation}\phantomsection\label{eq-sutva}{
+Y_i(D_i) = Y_i\big(D_i, D_{-i}\big)\quad \forall, D_{-i}
+}\end{equation}
+
+\textbf{Conditional Independence}: Also known as conditional
+unconfoundedness or exchangeability, this assumption emphasizes that,
+conditional on origin \(O\) and pre-treatment covariates \(C\) (e.g.,
+parental education, ethnicity, cohort, early-life factors), assignment
+to \(D\) is as good as random. This underlies IPW and regression
+adjustment, which seek exchangeability between mobile (treated) and
+immobile individuals (controls).
+
+\begin{equation}\phantomsection\label{eq-indep}{
+Y(D)\ \perp\kern-5pt \perp D\ \mid\ (O,C)
+}\end{equation}
+
+Establishing the causal relationship between objective social mobility
+and subjective outcomes, such as preferences, poses several challenges
+for causal inference. Below, I use directed acyclic graphs (DAGs) to
+illustrate some of these challenges and evaluate possible strategies for
+identifying the effects of social mobility. Figure~\ref{fig-dag} depicts
+the causal model guiding identification. In this model, a respondent's
+preference \(Y\) is directly affected by her class destination \(D\),
+and indirectly influenced by a set of pre-treatment attributes \(C\)
+rooted in childhood---family resources, household composition, parental
+education, and other ascriptive characteristics. Class origin \(O\) is
+itself shaped by these background factors \(C\) and, in turn, affects
+destination \(D\). I allow for unobserved determinants \(U\) that
+influence background factors \(C\), but I assume that any such
+unobserved variation operates only through \(C\). Thus, there are no
+direct paths \(U \rightarrow D\) or \(U \rightarrow Y\) beyond those
+mediated by \(C\).
+
+Under this structure, conditioning on \((O, C)\) blocks all relevant
+backdoor paths from \(D\) to \(Y\)---notably
+\(D \leftarrow O \leftarrow C \rightarrow Y\). This renders \((O, C)\) a
+minimal sufficient adjustment set for identifying the causal effect of
+mobility on preferences, in line with the framework proposed by Breen \&
+Ermisch (\citeproc{ref-breen_effects_2024}{2024}). Identification
+therefore relies on the assumption that background factors \(C\)
+adequately summarize pre-treatment characteristics that jointly shape
+both mobility and attitudes.
+
+\begin{figure}[H]
+
+\centering{
+
+\includegraphics[width=0.85\linewidth,height=\textheight,keepaspectratio]{paper_files/figure-pdf/fig-dag-1.pdf}
+
+}
+
+\caption{\label{fig-dag}Causal graph of the effect of intergenerational
+social mobility on preferences for commodification. Y = preferences for
+pension commodification, D = an individual's class of destination, O =
+an individual's class of origin, C = different attributes determined in
+childhood or earlier that affects an individual's class of origin and
+destination. Finally, U = unobserved factors influencing origin
+attributes.}
+
+\end{figure}%
+
+Why are the assumptions plausible here? Conditional independence is
+targeted by controlling for a plausible sufficient adjustment set
+\((O,C)\) and by using inverse probability weights obtained via entropy
+balancing (\citeproc{ref-hainmueller_entropy_2012}{Hainmueller, 2012}),
+which enforce covariate balance within each origin stratum and mitigate
+selection on observables. Positivity is assessed by inspecting the
+distribution of the entropy-balancing weights and trimming observations
+with extreme weights, thus restricting inference to regions of common
+support. SUTVA holds by treating the destination class as a single
+exposure measured before \((Y)\) and assuming no interference. Together,
+the DAG and assumptions define conditions for identifying the causal
+effect of intergenerational social mobility on preferences for
+commodification.
+
+\subsection{Inquiry and estimand}\label{inquiry-and-estimand}
+
+The causal inquiry guiding this study asks: How does intergenerational
+social mobility affect individuals' preferences for the commodification
+of pensions in Chile? Substantively, I am interested in the effect of
+mobility relative to immobility within a given class of origin.
+
+Following the potential outcomes framework proposed by Breen and Ermisch
+(\citeproc{ref-breen_effects_2024}{2024, p. 473}), the estimand of
+interest is an average treatment effect on the treated (ATT) defined
+within each origin class. I focus on the specific case in which the
+counterfactual destination corresponds to class immobility \((k' = j)\).
+In other words, I ask how the outcome among people from origin \emph{j}
+who entered destination \emph{k} would have bee different if those
+people had, counterfactually, remained in origin \emph{j} instead
+(inmobility).
+
+Formally, for individuals with origin \((O=j)\) who attain destination
+\((D=k)\), the estimand is:
+
+\begin{equation}\phantomsection\label{eq-att}{ 
+ATT_{j,k,j} = E\big[Y(D = k) \mid O = j, D = k \big] - E\big[Y(D = j) \mid O = j, D = k \big]
+}\end{equation}
+
+which represents the mean causal effect of moving from origin class
+\((j)\) to destination class \((k)\), compared to the counterfactual
+outcome those same individuals would have exhibited had they instead
+remained in \((j)\). Thus, this ATT captures the counterfactual contrast
+within origin that lies at the heart of mobility effects: how
+preferences for market-based pensions would differ if, for the same
+upwardly or downwardly mobile individuals, their observed destination
+class were replaced by immobility in their origin class.
+
+\subsection{Data and variables}\label{data-and-variables}
+
+\subsubsection{Data}\label{data}
+
+This study draws on data from the Chilean Longitudinal Social Survey
+(ELSOC) of the Center for Social Conflict and Cohesion Studies (COES).
+This survey is a nationally representative panel study of the urban
+adult population in Chile, conducted annually between 2016 and 2023.
+Designed to examine individuals' attitudes, emotions, and behaviors
+regarding social conflict and cohesion, ELSOC employs a probabilistic,
+stratified, clustered, and multistage sampling design covering both
+major urban centers and smaller cities. The sampling frame was
+proportionally stratified into six categories of urban population size
+(e.g., large and small cities), followed by a random selection of
+households within 1,067 city blocks. The target population includes men
+and women aged 18 to 75 who are habitual residents of private dwellings.
+
+Because respondent occupation\footnote{Parental occupation was collected
+  only in 2023 as open-text labels. I coded these texts to the ISCO-08
+  two-digit scheme using the National Institute of Statistics of Chile's
+  automated coding API and retained cases with high-confidence matches
+  (\textgreater95\%). Treating parental occupation as a time-invariant
+  origin attribute, I carried these codes back to 2016 and 2018.} is not
+measured in every wave, I restrict the analysis to the 2016, 2018, and
+2023 waves. After listwise deletion and restricting to key variables
+(respondent occupation and the outcome measure), the final analytic
+sample comprises \emph{N} = 3,435 observations nested within \emph{N} =
+1,787 individuals (2016: 914; 2018: 1,377; 2023: 1,144). Consistent with
+the study design, estimation proceeds within trajectory-specific
+subsamples (e.g., low→low; low→middle), retaining movers and matched
+non-movers from the same origin class. Then, I apply weights to
+construct the corresponding counterfactual control sample for each
+trajectory. Following Breen and Ermisch
+(\citeproc{ref-breen_effects_2024}{2024}), I use the three waves in the
+estimations that follow, allowing for correlation between the
+observations for each individual in calculating the standard errors
+(i.e.~clustering on the personal identifier).
+
+\subsubsection{Outcome variable}\label{outcome-variable}
+
+The outcome variable measures preferences regarding the commodification
+of pensions, operationalized with a single item addressing how strongly
+individuals justify conditioning access to old-age pension benefits
+based on individual income. Respondents were asked: ``Is it fair in
+Chile that people with higher incomes have better pensions than people
+with lower incomes?'' and answered on a five-point Likert scale ranging
+from 1 (``strongly disagree'') to 5 (``strongly agree''). For estimation
+and interpretability, I construct a binary indicator in which values
+4--5 indicate agreement with market-based access to old-age pensions
+(coded 1), while values 1--3 indicate non-agreement (coded 0).
+Substantively, the dependent variable is meant to capture
+\emph{endorsement} of pension commodification: only responses in the
+upper tail of the scale represent an active, explicit justification of
+market-based differentiation, whereas neutrality corresponds to an
+absence of such endorsement and is therefore treated as closer to
+non-support than to support.\footnote{A potential concern is that the
+  neutral category may reflect genuine ambivalence rather than
+  disagreement. To address this, I conduct robustness checks using
+  alternative codings: (i) excluding neutral respondents from the
+  analysis; (ii) combining the neutral and agreement categories (3--5
+  vs.~1--2); and (iii) estimating models with the original 5-point scale
+  using linear specifications. The main mobility effects reported below
+  are substantively unchanged across these specifications (see
+  \hyperref[anexo]{Supplementary Material}).} This binary coding thus
+yields a clear contrast between respondents who \emph{support}
+market-based differentiation in pensions and those who do not. I use
+this item for two main reasons: first, to enable comparisons with
+existing work on market-based justice in social policy
+(\citeproc{ref-castillo_perceptions_2025}{Castillo, Laffert, et al.,
+2025}; \citeproc{ref-lindh_public_2015}{Lindh, 2015};
+\citeproc{ref-otero_power_2024}{Otero \& Mendoza, 2024}); and second,
+because it taps two core dimensions of market-based welfare
+distribution---(i) the centrality of economic resources as a criterion
+for allocating outcomes and (ii) the framing of pensions as tradable
+commodities that can be bought and sold according to ability to pay
+(\citeproc{ref-lindh_public_2015}{Lindh, 2015}).
+
+\subsubsection{Treatment}\label{treatment}
+
+\paragraph{Intergenerational occupational
+mobility}\label{intergenerational-occupational-mobility}
+
+I treat intergenerational occupational mobility as an exposure
+indicating whether respondents occupy a different occupational status
+than their fathers, closely following Breen and Ermisch's
+(\citeproc{ref-breen_effects_2024}{2024}) causal framework. Occupational
+assignment proceeds in two steps. First, I derive occupational status
+for both origin (father) and destination (respondent) from two-digit
+ISCO-08 codes using the International Socio-Economic Index of
+Occupational Status (ISEI). Second, I group these ISEI scores into
+terciles (low, middle, high), yielding a three-category schema for both
+origin and destination strata (see Table~\ref{tbl-matrix}).
+Substantively, I use ISEI because occupational status is a core
+indicator of stratification and a reliable mobility measure: it locates
+jobs on a hierarchical continuum defined by incumbents' typical
+education level and earnings
+(\citeproc{ref-hauser_intergenerational_2010}{Hauser, 2010};
+\citeproc{ref-salgado_uplifting_2025}{Salgado et al., 2025}), and thus
+approximates long-run socio-economic position more closely than
+volatile, single-year income, which is also prone to recall and
+reporting error for both parental and own resources
+(\citeproc{ref-barone_rise_2022}{Barone et al., 2022}). This
+occupational focus is consistent with a long tradition that interprets
+the occupational structure as the backbone of the stratification system
+and a key determinant of life chances
+(\citeproc{ref-wrightUnderstandingClass2015}{Wright, 2015}). Moreover,
+ISEI was explicitly designed to harmonize occupational stratification
+across class schemes and SES measures
+(\citeproc{ref-ganzeboom_internationally_1996}{Ganzeboom \& Treiman,
+1996}), supporting cross-study comparability. In short, using ISEI
+aligns the measurement of origin and destination on a common vertical
+status continuum that is theoretically meaningful for social mobility
+research and empirically feasible given the available information of
+ELSOC's data.
+
+\begin{table}
+
+\caption{\label{tbl-matrix}Occupational mobility by occupational
+groups.}
+
+\centering{
+
+\centering
+\begin{tabular}{cccccc}
+\toprule
+Father↓ & Offspring→ & Low & Middle & High & Total\\
+\midrule
+Low &  & 44.7\%   (501) & 33.6\%   (377) & 21.7\%   (244) & 100.0\% (1,122)\\
+Middle &  & 35.1\%   (388) & 34.9\%   (385) & 30.0\%   (331) & 100.0\% (1,104)\\
+High &  & 24.6\%   (297) & 28.8\%   (348) & 46.7\%   (564) & 100.0\% (1,209)\\
+Total &  & 34.5\% (1,186) & 32.3\% (1,110) & 33.2\% (1,139) & 100.0\% (3,435)\\
+\bottomrule
+\end{tabular}
+
+}
+
+\end{table}%
+
+\paragraph{Pre-treatment control variables for selection into
+treatment}\label{pre-treatment-control-variables-for-selection-into-treatment}
+
+Within each origin stratum (\(O = j\)), I estimate average treatment
+effects on the treated (ATT) by comparing movers to otherwise similar
+non-movers from the same origin. To reduce bias from non-random
+selection into mobility based on observed characteristics, I preprocess
+the data using entropy balancing, reweighting only the control group
+(the immobile) so that the distribution of pre-treatment origin
+covariates \(C\) among non-movers matches that of movers on selected
+moments. Entropy balancing implements a maximum-entropy reweighting
+scheme that chooses unit weights for non-movers to satisfy a set of
+balance constraints (e.g., equality of means and, where relevant, higher
+moments), while keeping the new weights as close as possible to the
+original weights (\citeproc{ref-hainmueller_entropy_2012}{Hainmueller,
+2012}). Substantively, this procedure addresses selection on
+observables: it reweights immobile respondents so that, within each
+origin class, they resemble mobile respondents in their observed
+background characteristics, making any remaining differences in the
+outcome more plausibly attributable to mobility rather than to
+pre-existing measured advantages.
+
+The selection of the adjustment set \(C\) follows two principles. First,
+it mirrors the logic in Breen and Ermisch
+(\citeproc{ref-breen_effects_2024}{2024}), who condition on attributes
+determined in childhood or earlier (e.g., parental resources, household
+structure, ascriptive traits). Second, it is constrained to origin-side
+characteristics available in ELSOC. Guided by theory and Chilean
+evidence on the determinants of relative mobility (mainly
+\citeproc{ref-brunori_inequality_2025}{Brunori et al., 2025};
+\citeproc{ref-espinoza_movilidad_2014}{Espinoza \& Núñez, 2014};
+\citeproc{ref-salgado_uplifting_2025}{Salgado et al., 2025};
+\citeproc{ref-torche_unequal_2005}{Torche, 2005}), I include six
+covariates covering family resources, household composition, and
+ascriptive status: (a) parental education (highest of father/mother), in
+10 ordinal categories from no schooling to postgraduate studies; (b)
+co-residence with both parents at age 15 (0 = no, 1 = yes); (c)
+nationality (0 = non-Chilean, 1 = Chilean); (d) age in years; (e) sex (0
+= male, 1 = female); and (f) indigenous ethnicity (0 = no, 1 = yes).
+This set of covariates is fixed prior to the destination class and
+constitutes the maximum set on the origin side in ELSOC, thus allowing
+for the plausible capture of both family and contextual influences that
+may affect career trajectories, making the conditional independence
+hypothesis more credible within each \(O = j\). Descriptive statistics
+for all variables are presented in Supplementary Material Table A1.
+
+After achieving balance, I construct stabilized IPW-ATT weights by
+setting treated (mobile) cases to weight 1 and assigning the
+entropy-balancing weights to controls, rescaled within each origin
+stratum so that the mean weight remains close to one. This aligns the
+counterfactual distribution of non-movers with the covariate profile of
+movers in each origin class (see \hyperref[anexo]{Supplementary
+Material} for balance diagnostics). The resulting weights are then used
+in the outcome stage to estimate the causal effect of intergenerational
+mobility on preferences for the commodification of pensions.
+
+\subsubsection{Effect heterogeneity}\label{effect-heterogeneity}
+
+To test heterogeneity in mobility effects, I examine two moderators:
+meritocratic perceptions and time. Meritocracy is captured with two
+items (\citeproc{ref-young_rise_1958}{Young, 1958}), one referring to
+effort (``In Chile, people are rewarded for their efforts'') and one to
+talent (``In Chile, people are rewarded for their intelligence and
+skills''), each answered on a five-point Likert scale (1 = ``strongly
+disagree'' to 5 = ``strongly agree''). I average the two items into a
+single index and dichotomize it into low meritocracy (≤ 3) and high
+meritocracy (≥ 4). Time is measured by survey wave (2016, 2018, 2023)
+and entered as a categorical (dummy) variable. Both variables are used
+as moderators by interacting them with the mobility treatment to assess
+conditional average treatment effects---i.e., whether the effect of
+mobility varies across levels of meritocratic perceptions or across
+survey waves.
+
+\subsubsection{Controls}\label{controls}
+
+All models include the same pre-treatment covariates \(C\) used in the
+IPW construction, not to re-balance groups (entropy balancing already
+does so), but to (i) block backdoor paths from \(C\) to the outcome
+\(Y\) as implied by the DAG, and (ii) achieve double robustness:
+estimates remain consistent if either the weighting model or the outcome
+model is correctly specified. Concretely, I adjust for (a) father's
+educational level, (b) co-residence with both parents at age 15, (c)
+nationality, (d) age, (e) sex, and (f) ethnicity, along with wave fixed
+effects to absorb secular trends.
+
+\subsection{Analytical strategy}\label{analytical-strategy}
+
+Because the dependent variable---the preference for pension
+commodification---is binary \((Y_{it}\in{0,1})\), I estimate weighted
+linear probability models (WLS) using stabilized inverse probability
+weights (IPW) obtained via entropy balancing. Although OLS is often
+questioned with binary outcomes, it consistently estimates the
+conditional mean \(E(Y|X)\) under standard exogeneity
+\(E[\varepsilon_i|X_i]=0\), and heteroskedasticity can be handled with
+robust or clustered standard errors
+(\citeproc{ref-wooldridge_introductory_2009}{Wooldridge, 2009},
+ch.~7.5). WLS with IPW further improves efficiency and implements the
+ATT estimand by recreating the counterfactual distribution of non-movers
+(\citeproc{ref-gelman_regression_2020}{Gelman et al., 2020, pp.
+270--272}). Linear models are preferred here because coefficients are
+directly interpretable as average differences in predicted
+probabilities, whereas non-linear models complicate both weighting and
+interpretation (\citeproc{ref-gelman_regression_2020}{Gelman et al.,
+2020}, ch.~13).
+
+Formally, the model is:
+
+\begin{equation}\phantomsection\label{eq-final}{
+Y_{it}=\alpha+\beta T_i+X_i'\gamma+\lambda_t+\varepsilon_{it}
+}\end{equation}
+
+where \(Y_{it}\) indicates whether individual \(i\) in wave \(t\)
+supports more market-based pension access; \(\alpha\) is the baseline
+probability for the reference categories; \(\beta T_i\) captures the
+intergenerational mobility contrast: \(T_i=1\) when the observed
+destination is \(D_i=k\) (mobile to \(k\)) and \(T_i=0\) when \(D_i=j\)
+(immobile), so that \(\beta\) is the ATT within origin
+\(O=j (\widehat\beta=\widehat{ATT}{j,k\mid j})\), i.e., the
+percentage-point change in the probability of preferring pension
+commodification from reaching \(k\) rather than remaining in \(j\). The
+term \(X_i'\gamma\) includes the pre-treatment covariates \((C)\) used
+to construct the entropy-balancing weights; \(\lambda_t\) are wave fixed
+effects; and \(\varepsilon_{it}\) is idiosyncratic error. The analytic
+sample is restricted to individuals sharing the same origin \((O=j)\).
+Therefore, estimation uses pooled WLS with stabilized IPW--ATT from
+entropy balancing and CR2 standard errors clustered by individual to
+address heteroskedasticity and within-person dependence.
+
+The specification is doubly robust: entropy-balancing weights are
+combined with covariate adjustment so consistency holds if either the
+weighting model or the outcome model is correctly specified, while also
+improving efficiency
+(\citeproc{ref-wooldridge_introductory_2009}{Wooldridge, 2009}). These
+results are virtually identical to baseline models without covariates
+(see \hyperref[anexo]{Supplementary Material} for complete models), with
+no substantive changes in the mobility coefficients. Heterogeneous
+effects by meritocratic perceptions and survey wave are examined through
+interaction models described in the previous section.
+
+To evaluate the robustness of the findings, I implement two sets of
+sensitivity analyses. First, I conduct standard robustness checks by
+re-estimating the models under alternative codings of the outcome: (i)
+excluding neutral responses from the analysis, (ii) combining neutral
+responses with agreement (3--5 vs.~1--2), and (iii) using the original
+5-point item in a linear specification. Second, I assess sensitivity to
+unmeasured confounding using the omitted-variable--bias framework of
+Cinelli and Hazlett (\citeproc{ref-cinelli_making_2020}{2020}), which
+quantifies how strong an unobserved confounder would need to be to
+explain away the estimated ATT.
+
+\section{Results}\label{results}
+
+\subsection{Descriptive statistics}\label{descriptive-statistics}
+
+Figure~\ref{fig-alluvial} shows the annual frequencies of preferences
+for pension commodification in 2016, 2018, and 2023. Each year presents
+stacked percentages frequencies for the level of agreement and
+disagreement. Overall, a large majority rejects market-based access to
+old-age pension benefits, but this opposition has eased over time:
+83.5\% in 2016, 81.2\% in 2018, and 71.8\% in 2023. The 2016--2018
+change is modest, whereas 2023 registers a 9.4 point drop in
+disagreement relative to 2018, mirrored by rising agreement: 16.5\%
+(2016), 18.8\% (2018), 28.2\% (2023). Substantively, while most
+respondents continue to oppose the idea that higher-income individuals
+should obtain better pensions via the market, a non-trivial and growing
+portion endorses this statement, with the sharpest expansion
+concentrated in the latest wave (+9.4 points from 2018 to 2023).
+
+\begin{figure}[H]
+
+\centering{
+
+\includegraphics[width=0.85\linewidth,height=\textheight,keepaspectratio]{paper_files/figure-pdf/fig-alluvial-1.pdf}
+
+}
+
+\caption{\label{fig-alluvial}Change in preferences for pension
+commodification over time (2016, 2018, and 2023).}
+
+\end{figure}%
+
+Regarding the relationship between preferences for the commodification
+of pensions and intergenerational occupational mobility,
+Figure~\ref{fig-mean} shows the percentage of agreement with
+market-based access to pension benefits according to mobility
+trajectories and survey waves. Averaging across waves, agreement is
+highest among the High-High immobile (27.8\%), followed by the
+Middle-High upwardly mobile (24.6\%) and the High-Middle downwardly
+mobile (24.0\%). The lowest levels are found among ascending Low-High
+(17.3\%), and immobile Low-Low (17.4\%) groups. The specific profiles of
+each wave accentuate these gradients in most trajectories, especially in
+2023: agreement reaches 31.9\% for High-High, 29.4\% for upward
+Middle-High, and peaks at 36.8\% for downward High-Middle (the highest
+of all trajectories for that year). Descriptively, immobility at the top
+is associated with greater support for commodification; among those who
+move, support is greatest for the upward Middle-High trajectory and the
+downward High-Middle trajectory, patterns that intensify in 2023. These
+shifts anticipate the heterogeneity documented below.
+
+\begin{figure}[H]
+
+\centering{
+
+\includegraphics[width=0.9\linewidth,height=\textheight,keepaspectratio]{paper_files/figure-pdf/fig-mean-1.pdf}
+
+}
+
+\caption{\label{fig-mean}Percentage agreement on preferences for pension
+commodification according to mobility trajectory and time (2016, 2018,
+and 2023).}
+
+\end{figure}%
+
+\subsection{Mobility effects models}\label{mobility-effects-models}
+
+Figure~\ref{fig-reg} reports the double-robust estimates of the effect
+of intergenerational occupational mobility on preferences for pension
+commodification, obtained from weighted models that combine stabilized
+IPW with covariate adjustment and fixed wave effects. Results reveal a
+clear directional asymmetry between upward and downward mobility
+trajectories. Among upwardly mobile respondents, only the Middle→High
+trajectory exhibits a significant positive effect on support for pension
+commodification (\(\beta\) = 0.09, 95\% CI {[}0.02, 0.16{]}).
+Interpreted as an origin-specific ATT, this estimate compares---for
+individuals who actually moved from the middle to the high socioeconomic
+status---their observed endorsement with the counterfactual endorsement
+they would have expressed had they remained immobile in the middle
+socioeconomic status. Holding all other predictors constant, the point
+estimate implies a 9 percentage point higher probability of endorsing
+market-based access to pension benefits for Middle→High movers relative
+to their own immobility counterfactual, statistically significant at the
+95\% confidence level. In contrast, two downward trajectories:
+High→Middle (\(\beta\) = −0.07, CI {[}−0.15, −0.00{]}) and High→Low
+(\(\beta\) = −0.10, CI {[}−0.18, −0.02{]}), show significant negative
+effects, suggesting that individuals who experience downward mobility
+from higher-status origins express weaker preferences for market-based
+pension benefits. The remaining pathways (Low→Middle, Low→High,
+Middle→Low) display no significant differences relative to their
+non-mobile counterparts. These patterns indicate that upward movement
+within the upper segment (Middle→High) reinforces pro-commodification
+attitudes, whereas downward movement from privileged origins reduces
+them.
+
+\begin{figure}[H]
+
+\centering{
+
+\includegraphics[width=0.9\linewidth,height=\textheight,keepaspectratio]{paper_files/figure-pdf/fig-reg-1.pdf}
+
+}
+
+\caption{\label{fig-reg}Effects of intergenerational occupational
+mobility on preferences for pension commodification. Coefficient plot of
+origin-specific ATT estimates comparing mobility versus immobility.
+Estimates from pooled WLS with doubly robust adjustment, wave fixed
+effects, and standard errors clustered by individual; bars show 95\%
+confidence intervals.}
+
+\end{figure}%
+
+\subsection{Effect heterogeneity}\label{effect-heterogeneity-1}
+
+To probe potential mechanisms underlying the mobility effects, I
+estimate origin-specific ATT models that interact the mobility treatment
+with high meritocratic perceptions (ref. = low), using stabilized IPW
+weights, covariate adjustment, and wave fixed effects. I also estimate
+an analogous specification interacting mobility with survey waves (ref.
+= 2016) to assess temporal heterogeneity in the treatment effect (see
+\hyperref[anexo]{Supplementary Material} for complete models).
+
+\begin{figure}[H]
+
+\centering{
+
+\includegraphics[width=0.9\linewidth,height=\textheight,keepaspectratio]{paper_files/figure-pdf/fig-interact-1.pdf}
+
+}
+
+\caption{\label{fig-interact}Effects of intergenerational occupational
+mobility on preferences for pension commodification, by meritocratic
+perception. Coefficient plot of origin-specific ATT estimates comparing
+mobility versus immobility, estimated from interaction models (T ×
+Merit). Points show the marginal effects (simple slopes) of the mobility
+treatment at low and high merit; bars are 95\% confidence intervals.
+Estimates from pooled WLS with doubly robust adjustment, wave fixed
+effects, and standard errors clustered by individual.}
+
+\end{figure}%
+
+Figure~\ref{fig-interact} displays the origin-specific ATT estimates
+from the meritocracy interaction models as marginal effects of the
+mobility treatment at low and high meritocratic beliefs. For low-merit
+respondents, mobility effects are uniformly small and imprecise across
+trajectories: Low→Middle (\(\beta\) = −0.02, 95\% CI {[}−0.09, 0.04{]}),
+Low→High (\(\beta\) = −0.03, {[}−0.10, 0.05{]}), Middle→Low (\(\beta\) =
+−0.00, {[}−0.07, 0.06{]}), and a modest, non-significant positive
+estimate for Middle→High (\(\beta\) = 0.07, {[}−0.01, 0.14{]}), while
+downward moves from high origin show borderline negative effects
+(High→Middle: \(\beta\) = −0.07, {[}−0.15, 0.00{]}; High→Low: \(\beta\)
+= −0.08, {[}−0.15, 0.00{]}). Among high-merit respondents, the pattern
+is directionally consistent with meritocratic moderation but
+statistically robust only for one trajectory: the ATT for Middle→High at
+high merit is positive and significant (\(\beta\) = 0.22, {[}0.05,
+0.38{]}), whereas Low→Middle (\(\beta\) = 0.02, {[}−0.13, 0.16{]}),
+Low→High (\(\beta\) = 0.02, {[}−0.15, 0.20{]}), High→Middle (\(\beta\) =
+−0.10, {[}−0.28, 0.09{]}), and High→Low (\(\beta\) = −0.22, {[}−0.44,
+0.00{]}) remain statistically indistinguishable from zero. Overall,
+these results provide only limited and trajectory-specific evidence that
+meritocratic beliefs moderate the causal effect of intergenerational
+occupational mobility on preferences for pension commodification, with a
+clearer pro-commodification sign only for upward mobility from middle to
+high status among high-merit respondents.
+
+\begin{figure}[H]
+
+\centering{
+
+\includegraphics[width=0.9\linewidth,height=\textheight,keepaspectratio]{paper_files/figure-pdf/fig-interact-wave-1.pdf}
+
+}
+
+\caption{\label{fig-interact-wave}Effects of intergenerational
+occupational mobility on preferences for pension commodification, by
+survey wave. Coefficient plot of origin-specific ATT estimates comparing
+mobility versus immobility, estimated from interaction models (T ×
+Wave). Points show the marginal effects (simple slopes) of the mobility
+treatment in 2016, 2018, and 2023; bars are 95\% confidence intervals.
+Estimates from pooled WLS with doubly robust adjustment, wave fixed
+effects, and standard errors clustered by individual.}
+
+\end{figure}%
+
+I find no consistent evidence of heterogeneous causal effects across
+survey waves. Figure~\ref{fig-interact-wave} displays the marginal
+effects of mobility trajectories on market-justice preferences for
+pensions in 2016, 2018, and 2023. Across trajectories, the estimated
+ATTs remain small and their confidence intervals largely overlap over
+time. Upward mobility from middle origin shows a positive and
+statistically significant effect in 2016 (Middle→High, \(\beta\) = 0.13,
+95\% CI {[}0.05, 0.22{]}) and downward mobility from high origin
+displays negative effects at baseline (High→Middle and High→Low, both
+\(\beta\) ≈ −0.19, CIs excluding zero), but these patterns attenuate and
+become statistically indistinguishable from zero by 2023. Taken
+together, the results suggest that any initial pro-commodification
+response to upward mobility and de-commodifying response to downward
+mobility are not stable over time, and the causal effect of mobility on
+preferences for pension commodification is effectively time-invariant
+over the 2016--2023 period.
+
+\subsection{Robustness check and sensitivity
+analysis}\label{robustness-check-and-sensitivity-analysis}
+
+As a robustness check, I re-estimate the models under three alternative
+codings of the outcome: (i) recoding the neutral category as agreement
+(3--5 vs.~1--2), (ii) excluding neutral responses from the analysis, and
+(iii) using the original 5-point item in a linear specification. Across
+these alternative models (see \hyperref[anexo]{Supplementary Material}
+for complete tables), the substantive pattern of the main effects is
+preserved: the Middle→High trajectory remains positively associated with
+support for pension commodification, and the High→Low trajectory remains
+negatively associated with it, with both coefficients generally
+increasing in magnitude. By contrast, the negative High→Middle effect
+becomes statistically indistinguishable from zero in the robustness
+specifications, indicating that this particular estimate is more
+sensitive to how the outcome is coded than the other two trajectories.
+
+To assess the extent to which the estimated mobility effects may be
+driven by unmeasured confounding, I implement the sensitivity analysis
+proposed by Cinelli and Hazlett
+(\citeproc{ref-cinelli_making_2020}{2020}), which quantifies how strong
+an unobserved confounder would need to be---in terms of its joint
+explanatory power for both treatment and outcome---to attenuate or
+explain away the ATT, using gender as a benchmark covariate (the
+predictor with the largest partial association with the outcome aside
+from treatment). For the Middle→High trajectory
+(\(\beta \approx 0.09\)), partial \(R^2 \approx 0.013\), an unobserved
+confounder would need to explain about 10--11\% of the residual variance
+of both treatment and outcome to reduce the effect to zero and roughly
+4\% to render it statistically insignificant, substantially more than
+gender does. For the High→Low effect (\(\beta \approx -0.10\)), partial
+\(R^2 \approx 0.012\), the required strength is of similar magnitude
+(around 10--11\% to explain away the effect and about 4\% to remove
+significance), again exceeding the explanatory power of the main
+observed covariates. By contrast, the High→Middle effect
+(\(\beta \approx -0.07\)), partial \(R^2 \approx 0.007\) is somewhat
+less robust: a confounder explaining around 8\% of residual variance in
+both treatment and outcome could nullify the estimate, and one
+explaining about 2\% could make it non-significant. Overall, the
+sensitivity analysis suggests that the positive Middle→High and negative
+High→Low effects are moderately robust to unmeasured confounding,
+whereas the High→Middle effect is more vulnerable to relatively modest
+omitted variables (see \hyperref[anexo]{Supplementary Material} for
+complete tables).
+
+\section{Discussion}\label{discussion}
+
+\section{Conclusion}\label{conclusion}
+
+\section{References}\label{references}
+
+\phantomsection\label{refs}
+\begin{CSLReferences}{1}{0}
+\bibitem[\citeproctext]{ref-alesina_intergenerational_2018}
+Alesina, A., Stantcheva, S., \& Teso, E. (2018). Intergenerational
+{Mobility} and {Preferences} for {Redistribution}. \emph{American
+Economic Review}, \emph{108}(2), 521--554.
+\url{https://doi.org/10.1257/aer.20162015}
+
+\bibitem[\citeproctext]{ref-araujo_desafios_2012}
+Araujo, K., \& Martuccelli, D. (2012). \emph{Desafíos comunes: Retrato
+de la sociedad chilena y sus individuos} (1a. ed). Santiago: LOM
+Ediciones.
+
+\bibitem[\citeproctext]{ref-ares_changing_2020}
+Ares, M. (2020). Changing classes, changing preferences: How social
+class mobility affects economic preferences. \emph{West European
+Politics}, \emph{43}(6), 1211--1237.
+\url{https://doi.org/10.1080/01402382.2019.1644575}
+
+\bibitem[\citeproctext]{ref-arrizabalo_milagro_1995}
+Arrizabalo, X. (1995). \emph{{Milagro o quimera: la economía chilena
+durante la dictadura}}. Libros de la Catarata.
+
+\bibitem[\citeproctext]{ref-barone_rise_2022}
+Barone, C., Hertel, F. R., \& Smallenbroek, O. (2022). The rise of
+income and the demise of class and social status? {A} systematic review
+of measures of socio-economic position in stratification research.
+\emph{Research in Social Stratification and Mobility}, \emph{78},
+100678. \url{https://doi.org/10.1016/j.rssm.2022.100678}
+
+\bibitem[\citeproctext]{ref-barozet_clases_2021}
+Barozet, E., Contreras, D., Espinoza, V., Gayo, M., \& Méndez, M. L.
+(2021). \emph{{Clases medias en tiempos de crisis: vulnerabilidad
+persistente, desafíos para la cohesión y un nuevo pacto social en
+Chile}}. Santiago: Comisión Económica para América Latina y el Caribe
+(CEPAL).
+
+\bibitem[\citeproctext]{ref-batruch_belief_2023}
+Batruch, A., Jetten, J., Van De Werfhorst, H., Darnon, C., \& Butera, F.
+(2023). Belief in {School Meritocracy} and the {Legitimization} of
+{Social} and {Income Inequality}. \emph{Social Psychological and
+Personality Science}, \emph{14}(5), 621--635.
+\url{https://doi.org/10.1177/19485506221111017}
+
+\bibitem[\citeproctext]{ref-benabou_social_2001}
+Benabou, R., \& Ok, E. A. (2001). Social {Mobility} and the {Demand} for
+{Redistribution}: {The Poum Hypothesis}. \emph{The Quarterly Journal of
+Economics}, \emph{116}(2), 447--487.
+\url{https://doi.org/10.1162/00335530151144078}
+
+\bibitem[\citeproctext]{ref-blair_research_2023}
+Blair, G., Coppock, A., \& Humphreys, M. (2023). \emph{Research design
+in the social sciences: Declaration, diagnosis, and redesign}. Princeton
+(N.J.) Oxford: Princeton University press.
+
+\bibitem[\citeproctext]{ref-boccardo_30_2020}
+Boccardo, G. (2020). \emph{30 años de privatizaciones en {Chile}: Lo que
+la pandemia reveló} (Nodo XXI). Santiago.
+
+\bibitem[\citeproctext]{ref-breen_effects_2024}
+Breen, R., \& Ermisch, J. (2024). The {Effects} of {Social Mobility}.
+\emph{Sociological Science}, \emph{11}, 467--488.
+\url{https://doi.org/10.15195/v11.a17}
+
+\bibitem[\citeproctext]{ref-brunori_inequality_2025}
+Brunori, P., Ferreira, F. H. G., \& Neidhöfer, G. (2025). Inequality of
+opportunity and intergenerational persistence in {Latin America}.
+\emph{Oxford Open Economics}, \emph{4}(Supplement\_1), i167--i199.
+\url{https://doi.org/10.1093/ooec/odae021}
+
+\bibitem[\citeproctext]{ref-bucca_merit_2016}
+Bucca, M. (2016). Merit and blame in unequal societies: {Explaining
+Latin Americans}' beliefs about wealth and poverty. \emph{Research in
+Social Stratification and Mobility}, \emph{44}, 98--112.
+\url{https://doi.org/10.1016/j.rssm.2016.02.005}
+
+\bibitem[\citeproctext]{ref-busemeyer_skills_2014}
+Busemeyer, M. (2014). \emph{Skills and {Inequality}: {Partisan Politics}
+and the {Political Economy} of {Education Reforms} in {Western Welfare
+States}}. Cambridge University Press.
+
+\bibitem[\citeproctext]{ref-busemeyer_positive_2021}
+Busemeyer, M., Abrassart, A., \& Nezi, R. (2021). Beyond {Positive} and
+{Negative}: {New Perspectives} on {Feedback Effects} in {Public Opinion}
+on the {Welfare State}. \emph{British Journal of Political Science},
+\emph{51}(1), 137--162. \url{https://doi.org/10.1017/S0007123418000534}
+
+\bibitem[\citeproctext]{ref-busemeyer_welfare_2020}
+Busemeyer, M., \& Iversen, T. (2020). The {Welfare State} with {Private
+Alternatives}: {The Transformation} of {Popular Support} for {Social
+Insurance}. \emph{The Journal of Politics}, \emph{82}(2), 671--686.
+\url{https://doi.org/10.1086/706980}
+
+\bibitem[\citeproctext]{ref-campbell_institutional_2020}
+Campbell, J. L. (2020). \emph{Institutional {Change} and
+{Globalization}}. Princeton University Press.
+\url{https://doi.org/10.2307/j.ctv131bw68}
+
+\bibitem[\citeproctext]{ref-canalesceron_sujeto_2021}
+Canales Cerón, M., Orellana Calderón, V. S., \& Guajardo Mañán, F.
+(2021). Sujeto y cotidiano en la era neoliberal: El caso de la educación
+chilena. \emph{Revista Mexicana de Ciencias Políticas y Sociales},
+\emph{67}(244).
+\url{https://doi.org/10.22201/fcpys.2448492xe.2022.244.70386}
+
+\bibitem[\citeproctext]{ref-castillo_legitimacy_2011}
+Castillo, J. C. (2011). Legitimacy of {Inequality} in a {Highly Unequal
+Context}: {Evidence} from the {Chilean Case}. \emph{Social Justice
+Research}, \emph{24}(4), 314--340.
+\url{https://doi.org/10.1007/s11211-011-0144-5}
+
+\bibitem[\citeproctext]{ref-castillo_changes_2025}
+Castillo, J. C., Iturra, J., \& Carrasco, K. (2025). Changes in the
+{Justification} of {Educational Inequalities}: {The Role} of
+{Perceptions} of {Inequality} and {Meritocracy During} the {COVID
+Pandemic}. \emph{Social Justice Research}.
+\url{https://doi.org/10.1007/s11211-025-00458-0}
+
+\bibitem[\citeproctext]{ref-castillo_multidimensional_2023}
+Castillo, J. C., Iturra, J., Maldonado, L., Atria, J., \& Meneses, F.
+(2023). A {Multidimensional Approach} for {Measuring Meritocratic
+Beliefs}: {Advantages}, {Limitations} and {Alternatives} to the {ISSP
+Social Inequality Survey}. \emph{International Journal of Sociology},
+1--25. \url{https://doi.org/10.1080/00207659.2023.2274712}
+
+\bibitem[\citeproctext]{ref-castillo_perceptions_2025}
+Castillo, J. C., Laffert, A., Carrasco, K., \& Iturra, J. (2025).
+Perceptions of {Inequality} and {Meritocracy}: {Their Interplay} in
+{Shaping Preferences} for {Market Justice} in {Chile} (2016-2023).
+\emph{Under Review at Frontiers in Sociology}.
+
+\bibitem[\citeproctext]{ref-castillo_todos_2013}
+Castillo, J. C., Miranda, D., \& Cabib, I. M. (2013). Todos somos de
+clase media: {Sobre} el estatus social subjetivo en {Chile}. \emph{Latin
+American Research Review}, \emph{48}(1), 155--173.
+\url{https://doi.org/10.1353/lar.2013.0006}
+
+\bibitem[\citeproctext]{ref-castillo_socialization_2024}
+Castillo, J. C., Salgado, M., Carrasco, K., \& Laffert, A. (2024). The
+{Socialization} of {Meritocracy} and {Market Justice Preferences} at
+{School}. \emph{Societies}, \emph{14}(11), 214.
+\url{https://doi.org/10.3390/soc14110214}
+
+\bibitem[\citeproctext]{ref-castillo_meritocracia_2019}
+Castillo, J. C., Torres, A., Atria, J., \& Maldonado, L. (2019).
+Meritocracia y desigualdad económica: {Percepciones}, preferencias e
+implicancias. \emph{Revista Internacional de Sociología}, \emph{77}(1),
+117. \url{https://doi.org/10.3989/ris.2019.77.1.17.114}
+
+\bibitem[\citeproctext]{ref-chancel_world_2022}
+Chancel, L., Piketty, T., Saez, E., \& Zucman, G. (2022). World
+inequality report 2022.
+https://bibliotecadigital.ccb.org.co/handle/11520/27510.
+
+\bibitem[\citeproctext]{ref-cinelli_making_2020}
+Cinelli, C., \& Hazlett, C. (2020). Making {Sense} of {Sensitivity}:
+{Extending Omitted Variable Bias}. \emph{Journal of the Royal
+Statistical Society Series B: Statistical Methodology}, \emph{82}(1),
+39--67. \url{https://doi.org/10.1111/rssb.12348}
+
+\bibitem[\citeproctext]{ref-day_movin_2017}
+Day, M. V., \& Fiske, S. T. (2017). Movin' on {Up}? {How Perceptions} of
+{Social Mobility Affect Our Willingness} to {Defend} the {System}.
+\emph{Social Psychological and Personality Science}, \emph{8}(3),
+267--274. \url{https://doi.org/10.1177/1948550616678454}
+
+\bibitem[\citeproctext]{ref-espinoza_estratificacion_2013}
+Espinoza, V., Barozet, E., \& Méndez, M. L. (2013). {Estratificación y
+movilidad social bajo un modelo neoliberal: El caso de Chile}.
+\emph{Lavboratorio}, (25).
+
+\bibitem[\citeproctext]{ref-espinoza_movilidad_2014}
+Espinoza, V., \& Núñez, J. (2014). Movilidad ocupacional en {Chile}
+2001-2009. \textquestiondown{{Desigualdad}} de ingresos con igualdad de
+oportunidades? \emph{Revista Internacional de Sociología}, \emph{72}(1),
+57--82. \url{https://doi.org/10.3989/ris.2011.11.08}
+
+\bibitem[\citeproctext]{ref-eyles_social_2022}
+Eyles, A., Major, L. E., \& Machin, S. (2022). \emph{Social {Mobility} -
+{Past}, {Present} and {Future}: {The State} of {Play} in {Social
+Mobility}, on the 25th {Anniversary} of the {Sutton Trust}}. Sutton
+Trust.
+
+\bibitem[\citeproctext]{ref-ferre_welfare_2023}
+Ferre, J. C. (2023). Welfare regimes in twenty-first-century {Latin
+America}. \emph{Journal of International and Comparative Social Policy},
+\emph{39}(2), 101--127. \url{https://doi.org/10.1017/ics.2023.16}
+
+\bibitem[\citeproctext]{ref-flores_top_2020}
+Flores, I., Sanhueza, C., Atria, J., \& Mayer, R. (2020). Top {Incomes}
+in {Chile}: {A Historical Perspective} on {Income Inequality},
+1964--2017. \emph{Review of Income and Wealth}, \emph{66}(4), 850--874.
+\url{https://doi.org/10.1111/roiw.12441}
+
+\bibitem[\citeproctext]{ref-ganzeboom_internationally_1996}
+Ganzeboom, H. B. G., \& Treiman, D. J. (1996). Internationally
+{Comparable Measures} of {Occupational Status} for the 1988
+{International Standard Classification} of {Occupations}. \emph{Social
+Science Research}, \emph{25}(3), 201--239.
+\url{https://doi.org/10.1006/ssre.1996.0010}
+
+\bibitem[\citeproctext]{ref-gelman_regression_2020}
+Gelman, A., Hill, J., \& Vehtari, A. (2020). \emph{Regression and {Other
+Stories}} (1st ed.). Cambridge University Press.
+\url{https://doi.org/10.1017/9781139161879}
+
+\bibitem[\citeproctext]{ref-gingrich_making_2011}
+Gingrich, J. R. (2011). \emph{Making {Markets} in the {Welfare State}:
+{The Politics} of {Varying Market Reforms}} (1st ed.). Cambridge
+University Press. \url{https://doi.org/10.1017/CBO9780511791529}
+
+\bibitem[\citeproctext]{ref-gugushvili_trends_2014}
+Gugushvili, A. (2014). Trends, {Covariates} and {Consequences} of
+{Intergenerational Social Mobility} in {Post- Socialist Societies}.
+
+\bibitem[\citeproctext]{ref-gugushvili_intergenerational_2016c}
+Gugushvili, A. (2016a). Intergenerational objective and subjective
+mobility and attitudes towards income differences: Evidence from
+transition societies. \emph{Journal of International and Comparative
+Social Policy}, \emph{32}(3), 199--219.
+\url{https://doi.org/10.1080/21699763.2016.1206482}
+
+\bibitem[\citeproctext]{ref-gugushvili_intergenerational_2016}
+Gugushvili, A. (2016b). Intergenerational {Social Mobility} and {Popular
+Explanations} of {Poverty}: {A Comparative Perspective}. \emph{Social
+Justice Research}, \emph{29}(4), 402--428.
+\url{https://doi.org/10.1007/s11211-016-0275-9}
+
+\bibitem[\citeproctext]{ref-gugushvili_subjective_2017}
+Gugushvili, A. (2017). Subjective {Intergenerational Mobility} and
+{Support} for {Welfare State Programmes}.
+
+\bibitem[\citeproctext]{ref-gugushvili_heterogeneous_2024}
+Gugushvili, A. (2024). The heterogeneous well-being effects of
+intergenerational mobility perceptions. \emph{Journal of Health
+Psychology}, \emph{29}(2), 99--112.
+\url{https://doi.org/10.1177/13591053231187345}
+
+\bibitem[\citeproctext]{ref-hadjar_does_2015}
+Hadjar, A., \& Samuel, R. (2015). Does upward social mobility increase
+life satisfaction? {A} longitudinal analysis using {British} and {Swiss}
+panel data. \emph{Research in Social Stratification and Mobility},
+\emph{39}, 48--58. \url{https://doi.org/10.1016/j.rssm.2014.12.002}
+
+\bibitem[\citeproctext]{ref-hainmueller_entropy_2012}
+Hainmueller, J. (2012). Entropy {Balancing} for {Causal Effects}: {A
+Multivariate Reweighting Method} to {Produce Balanced Samples} in
+{Observational Studies}. \emph{Political Analysis}, \emph{20}(1),
+25--46. \url{https://doi.org/10.1093/pan/mpr025}
+
+\bibitem[\citeproctext]{ref-hauser_intergenerational_2010}
+Hauser, R. M. (2010). Intergenerational {Economic Mobility} in the
+{United States} ---{Measures}, {Differentials}, and {Trends}.
+
+\bibitem[\citeproctext]{ref-helgason_longterm_2023}
+Helgason, A. F., \& Rehm, P. (2023). Long-term income trajectories and
+the evolution of political attitudes. \emph{European Journal of
+Political Research}, \emph{62}(1), 264--284.
+\url{https://doi.org/10.1111/1475-6765.12506}
+
+\bibitem[\citeproctext]{ref-helgason_class_2025}
+Helgason, A. F., \& Rehm, P. (2025). Class experiences and the long-term
+evolution of economic values. \emph{Social Forces}, \emph{103}(3),
+1125--1143. \url{https://doi.org/10.1093/sf/soae135}
+
+\bibitem[\citeproctext]{ref-hoyt_mindsets_2023}
+Hoyt, C. L., Burnette, J. L., Billingsley, J., Becker, W., \& Babij, A.
+D. (2023). Mindsets of poverty: {Implications} for redistributive policy
+support. \emph{Analyses of Social Issues and Public Policy},
+\emph{23}(3), 668--693. \url{https://doi.org/10.1111/asap.12367}
+
+\bibitem[\citeproctext]{ref-immergut_theoretical_1998}
+Immergut, E. M. (1998). The {Theoretical Core} of the {New
+Institutionalism}. \emph{Politics \& Society}, \emph{26}(1), 5--34.
+\url{https://doi.org/10.1177/0032329298026001002}
+
+\bibitem[\citeproctext]{ref-immergut_it_2020}
+Immergut, E. M., \& Schneider, S. M. (2020). Is it unfair for the
+affluent to be able to purchase {``better''} healthcare? {Existential}
+standards and institutional norms in healthcare attitudes across 28
+countries. \emph{Social Science \& Medicine}, \emph{267}, 113146.
+\url{https://doi.org/10.1016/j.socscimed.2020.113146}
+
+\bibitem[\citeproctext]{ref-jaime-castillo_social_2019}
+Jaime-Castillo, A. M., \& Marqués-Perales, I. (2019). Social mobility
+and demand for redistribution in {Europe}: A comparative analysis.
+\emph{The British Journal of Sociology}, \emph{70}(1), 138--165.
+\url{https://doi.org/10.1111/1468-4446.12363}
+
+\bibitem[\citeproctext]{ref-janmaat_subjective_2013}
+Janmaat, J. G. (2013). Subjective {Inequality}: A {Review} of
+{International Comparative Studies} on {People}'s {Views} about
+{Inequality}. \emph{European Journal of Sociology}, \emph{54}(3),
+357--389. \url{https://doi.org/10.1017/S0003975613000209}
+
+\bibitem[\citeproctext]{ref-jasso_justice_1978}
+Jasso, G. (1978). On the {Justice} of {Earnings}: {A New Specification}
+of the {Justice Evaluation Function}. \emph{American Journal of
+Sociology}, \emph{83}(6), 1398--1419.
+\url{https://doi.org/10.1086/226706}
+
+\bibitem[\citeproctext]{ref-jasso_distributive_2016}
+Jasso, G., Törnblom, K. Y., \& Sabbagh, C. (2016). Distributive
+{Justice}. In C. Sabbagh \& M. Schmitt (Eds.), \emph{Handbook of {Social
+Justice Theory} and {Research}} (pp. 201--218). New York, NY: Springer.
+\url{https://doi.org/10.1007/978-1-4939-3216-0_11}
+
+\bibitem[\citeproctext]{ref-jasso_gender_1999}
+Jasso, G., \& Wegener, B. (1999). Gender and {Country Differences} in
+the {Sense} of {Justice}: {Justice Evaluation}, {Gender Earnings Gap},
+and {Earnings Functions} in {Thirteen Countries}. \emph{International
+Journal of Comparative Sociology}, \emph{40}(1), 94--115.
+\url{https://doi.org/10.1177/002071529904000106}
+
+\bibitem[\citeproctext]{ref-kluegel_legitimation_1999}
+Kluegel, J. R., Mason, D. S., \& Wegener, B. (1999). The {Legitimation}
+of {Capitalism} in the {Postcommunist Transition}: {Public Opinion}
+about {Market Justice}, 1991-1996. \emph{European Sociological Review},
+\emph{15}(3), 251--283. Retrieved from
+\url{https://www.jstor.org/stable/522731}
+
+\bibitem[\citeproctext]{ref-kluegel_beliefs_1981}
+Kluegel, J. R., \& Smith, E. R. (1981). Beliefs {About Stratification}.
+\emph{Annual Review of Sociology}, 29--56.
+
+\bibitem[\citeproctext]{ref-koos_moral_2019}
+Koos, S., \& Sachweh, P. (2019). The moral economies of market
+societies: Popular attitudes towards market competition, redistribution
+and reciprocity in comparative perspective. \emph{Socio-Economic
+Review}, \emph{17}(4), 793--821.
+\url{https://doi.org/10.1093/ser/mwx045}
+
+\bibitem[\citeproctext]{ref-lane_market_1986}
+Lane, R. E. (1986). Market {Justice}, {Political Justice}.
+\emph{American Political Science Review}, \emph{80}(2), 383--402.
+\url{https://doi.org/10.2307/1958264}
+
+\bibitem[\citeproctext]{ref-langsaether_explaining_2022}
+Langsæther, P. E., Evans, G., \& O'Grady, T. (2022). Explaining the
+{Relationship Between Class Position} and {Political Preferences}: {A
+Long-Term Panel Analysis} of {Intra-Generational Class Mobility}.
+\emph{British Journal of Political Science}, \emph{52}(2), 958--967.
+\url{https://doi.org/10.1017/S0007123420000599}
+
+\bibitem[\citeproctext]{ref-lee_fairness_2023}
+Lee, J.-S., \& Stacey, M. (2023). Fairness perceptions of educational
+inequality: The effects of self-interest and neoliberal orientations.
+\emph{The Australian Educational Researcher}.
+\url{https://doi.org/10.1007/s13384-023-00636-6}
+
+\bibitem[\citeproctext]{ref-lenski_status_1954}
+Lenski, G. E. (1954). Status {Crystallization}: {A Non-Vertical
+Dimension} of {Social Status}. \emph{American Sociological Review},
+\emph{19}(4), 405. \url{https://doi.org/10.2307/2087459}
+
+\bibitem[\citeproctext]{ref-lindh_public_2015}
+Lindh, A. (2015). Public {Opinion} against {Markets}? {Attitudes}
+towards {Market Distribution} of {Social Services} -- {A Comparison} of
+17 {Countries}. \emph{Social Policy \& Administration}, \emph{49}(7),
+887--910. \url{https://doi.org/10.1111/spol.12105}
+
+\bibitem[\citeproctext]{ref-lindh_bringing_2023}
+Lindh, A., \& McCall, L. (2023). Bringing the market in: An expanded
+framework for understanding popular responses to economic inequality.
+\emph{Socio-Economic Review}, \emph{21}(2), 1035--1055.
+\url{https://doi.org/10.1093/ser/mwac018}
+
+\bibitem[\citeproctext]{ref-llorca-jana_historia_2021}
+Llorca-Jaña, M., \& Miller, R. M. D. (2021). \emph{{Historia económica
+de Chile desde la independencia}}. Santiago de Chile: RIL editores.
+
+\bibitem[\citeproctext]{ref-lopez-roldan_comparative_2021}
+López-Roldán, P., \& Fachelli, S. (Eds.). (2021). \emph{Towards a
+{Comparative Analysis} of {Social Inequalities} between {Europe} and
+{Latin America}}. Cham: Springer International Publishing.
+\url{https://doi.org/10.1007/978-3-030-48442-2}
+
+\bibitem[\citeproctext]{ref-mac-clure_justicia_2024}
+Mac-Clure, O., Barozet, E., \& Franetovic, G. (2024). {Justicia
+distributiva y posición social subjetiva: \textquestiondown la
+meritocracia justifica la desigualdad de ingresos?} \emph{Convergencia
+Revista de Ciencias Sociales}, \emph{31}, 1.
+\url{https://doi.org/10.29101/crcs.v31i0.22258}
+
+\bibitem[\citeproctext]{ref-madariaga_three_2020}
+Madariaga, A. (2020). The three pillars of neoliberalism: {Chile}'s
+economic policy trajectory in comparative perspective.
+\emph{Contemporary Politics}, \emph{26}(3), 308--329.
+\url{https://doi.org/10.1080/13569775.2020.1735021}
+
+\bibitem[\citeproctext]{ref-mau_inequality_2015}
+Mau, S. (2015). \emph{Inequality, {Marketization} and the {Majority
+Class}: {Why Did} the {European Middle Classes Accept Neo-Liberalism}?}
+Houndmills: Palgrave Macmillan.
+
+\bibitem[\citeproctext]{ref-mideplan_evolucion_2017}
+MIDEPLAN. (2017). \emph{Evolución de la pobreza 1990-2017}. Ministerio
+de Desarrollo Social y Familia - PNUD.
+
+\bibitem[\citeproctext]{ref-mideplan_estadisticas_2024}
+MIDEPLAN. (2024). \emph{Estadísticas {Encuesta Casen} 2022, sección
+{Salud}}. Observatorio social.
+
+\bibitem[\citeproctext]{ref-mijs_paradox_2019}
+Mijs, J. (2019). The paradox of inequality: Income inequality and belief
+in meritocracy go hand in hand. \emph{Socio-Economic Review},
+\emph{19}(1), 7--35. \url{https://doi.org/10.1093/ser/mwy051}
+
+\bibitem[\citeproctext]{ref-mijs_belief_2022}
+Mijs, J., Daenekindt, S., de Koster, W., \& van der Waal, J. (2022).
+Belief in {Meritocracy Reexamined}: {Scrutinizing} the {Role} of
+{Subjective Social Mobility}. \emph{Social Psychology Quarterly},
+\emph{85}(2), 131--141. \url{https://doi.org/10.1177/01902725211063818}
+
+\bibitem[\citeproctext]{ref-miller_selfserving_1975}
+Miller, D. T., \& Ross, M. (1975). Self-serving biases in the
+attribution of causality: {Fact} or fiction? \emph{Psychological
+Bulletin}, \emph{82}(2), 213--225.
+\url{https://doi.org/10.1037/h0076486}
+
+\bibitem[\citeproctext]{ref-ministeriodeeducacion_resumen_2023}
+Ministerio de Educación. (2023). \emph{Resumen de matrícula por
+establecimiento educacional}. Datos abiertos Ministerio de Educación.
+
+\bibitem[\citeproctext]{ref-molina_its_2019}
+Molina, M. D., Bucca, M., \& Macy, M. W. (2019). It's not just how the
+game is played, it's whether you win or lose. \emph{SCIENCE ADVANCES}.
+
+\bibitem[\citeproctext]{ref-nucleodesociologiacontingente_informe_2020}
+Núcleo de Sociología Contingente, {[}NUDESOC{]}. (2020). \emph{Informe
+de resultados oficial {Encuesta Zona Cero}}. Santiago de Chile.
+
+\bibitem[\citeproctext]{ref-otero_power_2024}
+Otero, G., \& Mendoza, M. (2024). The {Power} of {Diversity}: {Class},
+{Networks} and {Attitudes Towards Inequality}. \emph{Sociology},
+\emph{58}(4), 851--876. \url{https://doi.org/10.1177/00380385231217625}
+
+\bibitem[\citeproctext]{ref-otero_lives_2022}
+Otero, G., Volker, B., Rözer, J., \& Mollenhorst, G. (2022). The lives
+of others: {Class} divisions, network segregation, and attachment to
+society in {Chile}. \emph{The British Journal of Sociology},
+\emph{73}(4), 754--785. \url{https://doi.org/10.1111/1468-4446.12966}
+
+\bibitem[\citeproctext]{ref-panes_criticas_2020}
+Panes, D. (2020). \emph{Críticas y experiencias obreras en torno al
+sistema de {AFP}'s en {Chile} (1981-2020)} (PhD thesis). Universidad de
+Chile, Santiago.
+
+\bibitem[\citeproctext]{ref-perez-ahumada_clases_2019}
+Pérez-Ahumada, P. (2019). {Clases sociales, sectores económicos y
+cambios en la estructura social chilena entre 1992 y 2013}.
+\emph{Revista de la CEPAL}, \emph{2018}(126), 171--192.
+\url{https://doi.org/10.18356/0ce0faed-es}
+
+\bibitem[\citeproctext]{ref-pnud_desiguales_2017}
+PNUD (Ed.). (2017). \emph{{Desiguales: orígenes, cambios y desafíos de
+la brecha social en Chile}}. Santiago, Chile: PNUD : Uqbar Editores.
+
+\bibitem[\citeproctext]{ref-polanyi_great_1975}
+Polanyi, K. (1975). \emph{The great transformation} (Repr). New York,
+NY: Octagon Books.
+
+\bibitem[\citeproctext]{ref-prag_subjective_2021}
+Präg, P., \& Gugushvili, A. (2021). Subjective social mobility and
+health in {Germany}. \emph{European Societies}, \emph{23}(4), 464--486.
+\url{https://doi.org/10.1080/14616696.2021.1887916}
+
+\bibitem[\citeproctext]{ref-ruiz_chilenos_2014}
+Ruiz, C., \& Boccardo, G. (2014). \emph{Los chilenos bajo el
+neoliberalismo: Clases y conflicto social} (Primera edición). Santiago
+de Chile: Ediciones y Publicaciones El Buen Aire.
+
+\bibitem[\citeproctext]{ref-salgado_uplifting_2025}
+Salgado, M., Díaz, M., Gamarra, C., \& Núñez, J. (2025). Uplifting
+mechanism or equalizing force? {The} expansion of higher education and
+its role in intergenerational mobility in {Chile}. \emph{Higher
+Education}. \url{https://doi.org/10.1007/s10734-025-01560-7}
+
+\bibitem[\citeproctext]{ref-sandel_tyranny_2020}
+Sandel, M. J. (2020). \emph{The tyranny of merit: {What}'s become of the
+common good?} (First edition). New York: {Farrar, Straus and Giroux}.
+
+\bibitem[\citeproctext]{ref-satz_por_2019}
+Satz, D. (2019). \emph{{Por Qué Algunas Cosas No Deberían Estar en
+Venta: Los límites Morales Del Mercado}}. Ciudad Autónoma de Buenos
+Aires: Siglo XXI Editores.
+
+\bibitem[\citeproctext]{ref-schmidt_experience_2011}
+Schmidt, A. W. (2011). The experience of social mobility and the
+formation of attitudes toward redistribution. In.
+
+\bibitem[\citeproctext]{ref-shariff_income_2016}
+Shariff, A. F., Wiwad, D., \& Aknin, L. B. (2016). Income {Mobility
+Breeds Tolerance} for {Income Inequality}: {Cross-National} and
+{Experimental Evidence}. \emph{Perspectives on Psychological Science},
+\emph{11}(3), 373--380. \url{https://doi.org/10.1177/1745691616635596}
+
+\bibitem[\citeproctext]{ref-somma_no_2021}
+Somma, N. M., Bargsted, M., Disi Pavlic, R., \& Medel, R. M. (2021). No
+water in the oasis: The {Chilean Spring} of 2019--2020. \emph{Social
+Movement Studies}, \emph{20}(4), 495--502.
+\url{https://doi.org/10.1080/14742837.2020.1727737}
+
+\bibitem[\citeproctext]{ref-song_there_2025}
+Song, X., \& Zhou, X. (2025). Is {There} a {Mobility Effect}? {On
+Methodological Issues} in the {Mobility Contrast Model}.
+\emph{Sociological Methods \& Research}, \emph{54}(4), 1576--1593.
+\url{https://doi.org/10.1177/00491241251347983}
+
+\bibitem[\citeproctext]{ref-sorokin_social_1927}
+Sorokin, P. A. (1927). \emph{Social {Mobility}}. Harper \& Brothers.
+
+\bibitem[\citeproctext]{ref-streeck_how_2016}
+Streeck, W. (2016). \emph{How will capitalism end? Essays on a failing
+system}. London: Verso.
+
+\bibitem[\citeproctext]{ref-superintendenciadepensiones_estadisticas_2024}
+Superintendencia de Pensiones. (2024). \emph{Estadísticas de {Afiliados}
+en {AFP} en {Sistema} de {Pensiones}. {Abril} 2024}. Superintendencia de
+Pensiones.
+
+\bibitem[\citeproctext]{ref-svallforsMoralEconomyClass2006a}
+Svallfors, S. (2006). \emph{The {Moral Economy} of {Class}: {Class} and
+{Attitudes} in {Comparative Perspective}}. Stanford University Press.
+
+\bibitem[\citeproctext]{ref-svallfors_political_2007}
+Svallfors, S. (Ed.). (2007). \emph{The {Political Sociology} of the
+{Welfare State}: {Institutions}, {Social Cleavages}, and {Orientations}}
+(1st ed.). Stanford University Press.
+\url{https://doi.org/10.2307/j.ctvr0qv0q}
+
+\bibitem[\citeproctext]{ref-tejero-peregrina_perceived_2025}
+Tejero-Peregrina, L., Willis, G., Sánchez-Rodríguez, Á., \&
+Rodríguez-Bailón, R. (2025). From {Perceived Economic Inequality} to
+{Support} for {Redistribution}: {The Role} of {Meritocracy Perception}.
+\emph{International Review of Social Psychology}, \emph{38}(1), 4.
+\url{https://doi.org/10.5334/irsp.1013}
+
+\bibitem[\citeproctext]{ref-torche_unequal_2005}
+Torche, F. (2005). Unequal {But Fluid}: {Social Mobility} in {Chile} in
+{Comparative Perspective}. \emph{American Sociological Review},
+\emph{70}(3), 422--450. \url{https://doi.org/10.1177/000312240507000304}
+
+\bibitem[\citeproctext]{ref-torche_intergenerational_2014}
+Torche, F. (2014). Intergenerational {Mobility} and {Inequality}: {The
+Latin American Case}. \emph{Annual Review of Sociology}, \emph{40}(1),
+619--642. \url{https://doi.org/10.1146/annurev-soc-071811-145521}
+
+\bibitem[\citeproctext]{ref-vondemknesebeck_are_2016}
+Von Dem Knesebeck, O., Vonneilich, N., \& Kim, T. J. (2016). Are health
+care inequalities unfair? {A} study on public attitudes in 23 countries.
+\emph{International Journal for Equity in Health}, \emph{15}(1), 61.
+\url{https://doi.org/10.1186/s12939-016-0350-8}
+
+\bibitem[\citeproctext]{ref-wen_does_2021}
+Wen, F., \& Witteveen, D. (2021). Does perceived social mobility shape
+attitudes toward government and family educational investment?
+\emph{Social Science Research}, \emph{98}, 102579.
+\url{https://doi.org/10.1016/j.ssresearch.2021.102579}
+
+\bibitem[\citeproctext]{ref-wiederkehr_belief_2015}
+Wiederkehr, V., Bonnot, V., Krauth-Gruber, S., \& Darnon, C. (2015).
+Belief in school meritocracy as a system-justifying tool for low status
+students. \emph{Frontiers in Psychology}, \emph{6}.
+
+\bibitem[\citeproctext]{ref-wilson_role_2003}
+Wilson, C. (2003). The {Role} of a {Merit Principle} in {Distributive
+Justice}. \emph{The Journal of Ethics}, \emph{7}(3), 277--314.
+\url{https://doi.org/10.1023/A:1024667228488}
+
+\bibitem[\citeproctext]{ref-wooldridge_introductory_2009}
+Wooldridge, J. M. (2009). \emph{{Introductory econometrics: a modern
+approach}} (4th ed). Mason, OH: South Western, Cengage Learning.
+
+\bibitem[\citeproctext]{ref-wrightUnderstandingClass2015}
+Wright, E. O. (2015). \emph{Understanding {Class}} (Verso).
+
+\bibitem[\citeproctext]{ref-young_rise_1958}
+Young, M. (1958). \emph{The rise of the meritocracy}. New Brunswick,
+N.J., U.S.A: Transaction Publishers.
+
+\end{CSLReferences}
+
+\section{Supplementary material}\label{anexo}
+
+This section presents the supplementary material for this study.
+
+\subsection{Descriptive statistics}\label{descriptive-statistics-1}
+
+\begin{longtable}[]{@{}
+  >{\raggedright\arraybackslash}p{(\linewidth - 6\tabcolsep) * \real{0.4216}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 6\tabcolsep) * \real{0.2647}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 6\tabcolsep) * \real{0.2059}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 6\tabcolsep) * \real{0.1078}}@{}}
+\caption{Descriptive statistics for all
+variables.}\label{tbl-summary1}\tabularnewline
+\toprule\noalign{}
+\begin{minipage}[b]{\linewidth}\raggedright
+Label
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Stats / Values
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Freqs (\% of Valid)
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Valid
+\end{minipage} \\
+\midrule\noalign{}
+\endfirsthead
+\toprule\noalign{}
+\begin{minipage}[b]{\linewidth}\raggedright
+Label
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Stats / Values
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Freqs (\% of Valid)
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Valid
+\end{minipage} \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+Preference for pension commodification &
+\begin{minipage}[t]{\linewidth}\raggedright
+1. Disagree\\
+2. Agree\strut
+\end{minipage} & \begin{minipage}[t]{\linewidth}\raggedright
+2702 (78.7\%)\\
+733 (21.3\%)\strut
+\end{minipage} & \begin{minipage}[t]{\linewidth}\raggedright
+3435\\
+(100.0\%)\strut
+\end{minipage} \\
+Father stratum & \begin{minipage}[t]{\linewidth}\raggedright
+1. Low\\
+2. Middle\\
+3. High\strut
+\end{minipage} & \begin{minipage}[t]{\linewidth}\raggedright
+1122 (32.7\%)\\
+1104 (32.1\%)\\
+1209 (35.2\%)\strut
+\end{minipage} & \begin{minipage}[t]{\linewidth}\raggedright
+3435\\
+(100.0\%)\strut
+\end{minipage} \\
+Offspring stratum & \begin{minipage}[t]{\linewidth}\raggedright
+1. Low\\
+2. Middle\\
+3. High\strut
+\end{minipage} & \begin{minipage}[t]{\linewidth}\raggedright
+1186 (34.5\%)\\
+1110 (32.3\%)\\
+1139 (33.2\%)\strut
+\end{minipage} & \begin{minipage}[t]{\linewidth}\raggedright
+3435\\
+(100.0\%)\strut
+\end{minipage} \\
+Parental education & \begin{minipage}[t]{\linewidth}\raggedright
+Mean (sd) : 4 (2.2)\\
+min \textless{} med \textless{} max:\\
+1 \textless{} 4 \textless{} 10\\
+IQR (CV) : 3 (0.6)\strut
+\end{minipage} & \begin{minipage}[t]{\linewidth}\raggedright
+1 : 222 ( 6.5\%)\\
+2 : 905 (26.3\%)\\
+3 : 576 (16.8\%)\\
+4 : 321 ( 9.3\%)\\
+5 : 826 (24.0\%)\\
+6 : 30 ( 0.9\%)\\
+7 : 214 ( 6.2\%)\\
+8 : 75 ( 2.2\%)\\
+9 : 245 ( 7.1\%)\\
+10 : 21 ( 0.6\%)\strut
+\end{minipage} & \begin{minipage}[t]{\linewidth}\raggedright
+3435\\
+(100.0\%)\strut
+\end{minipage} \\
+Co-residence with both parents at age 15 &
+\begin{minipage}[t]{\linewidth}\raggedright
+1. No co-residence\\
+2. Co-residence\strut
+\end{minipage} & \begin{minipage}[t]{\linewidth}\raggedright
+996 (29.0\%)\\
+2439 (71.0\%)\strut
+\end{minipage} & \begin{minipage}[t]{\linewidth}\raggedright
+3435\\
+(100.0\%)\strut
+\end{minipage} \\
+Nacionality & \begin{minipage}[t]{\linewidth}\raggedright
+1. Non-Chilean\\
+2. Chilean\strut
+\end{minipage} & \begin{minipage}[t]{\linewidth}\raggedright
+62 ( 1.8\%)\\
+3373 (98.2\%)\strut
+\end{minipage} & \begin{minipage}[t]{\linewidth}\raggedright
+3435\\
+(100.0\%)\strut
+\end{minipage} \\
+Sex & \begin{minipage}[t]{\linewidth}\raggedright
+1. Male\\
+2. Female\strut
+\end{minipage} & \begin{minipage}[t]{\linewidth}\raggedright
+1507 (43.9\%)\\
+1928 (56.1\%)\strut
+\end{minipage} & \begin{minipage}[t]{\linewidth}\raggedright
+3435\\
+(100.0\%)\strut
+\end{minipage} \\
+Age (in years) & \begin{minipage}[t]{\linewidth}\raggedright
+Mean (sd) : 42.6 (12.5)\\
+min \textless{} med \textless{} max:\\
+18 \textless{} 43 \textless{} 75\\
+IQR (CV) : 21 (0.3)\strut
+\end{minipage} & 58 distinct values &
+\begin{minipage}[t]{\linewidth}\raggedright
+3435\\
+(100.0\%)\strut
+\end{minipage} \\
+Indigenous ethnicity & \begin{minipage}[t]{\linewidth}\raggedright
+1. Non-indigenous\\
+2. Indigenous\strut
+\end{minipage} & \begin{minipage}[t]{\linewidth}\raggedright
+3035 (88.4\%)\\
+400 (11.6\%)\strut
+\end{minipage} & \begin{minipage}[t]{\linewidth}\raggedright
+3435\\
+(100.0\%)\strut
+\end{minipage} \\
+Meritocracy perception & \begin{minipage}[t]{\linewidth}\raggedright
+1. Low\\
+2. High\strut
+\end{minipage} & \begin{minipage}[t]{\linewidth}\raggedright
+2741 (79.8\%)\\
+694 (20.2\%)\strut
+\end{minipage} & \begin{minipage}[t]{\linewidth}\raggedright
+3435\\
+(100.0\%)\strut
+\end{minipage} \\
+Wave & \begin{minipage}[t]{\linewidth}\raggedright
+1. 2016\\
+2. 2018\\
+3. 2023\strut
+\end{minipage} & \begin{minipage}[t]{\linewidth}\raggedright
+914 (26.6\%)\\
+1377 (40.1\%)\\
+1144 (33.3\%)\strut
+\end{minipage} & \begin{minipage}[t]{\linewidth}\raggedright
+3435\\
+(100.0\%)\strut
+\end{minipage} \\
+\end{longtable}
+
+\subsection{Balance evaluation}\label{balance-evaluation}
+
+\begin{figure}[H]
+
+\centering{
+
+\includegraphics[width=0.9\linewidth,height=\textheight,keepaspectratio]{paper_files/figure-pdf/fig-balance-1.pdf}
+
+}
+
+\caption{\label{fig-balance}Balance SMD --- Mobility treatment (ATT)}
+
+\end{figure}%
+
+\subsection{Mobility effects models}\label{mobility-effects-models-1}
+
+\begin{table}
+
+\caption{\label{tbl-complete1}Effects of intergenerational occupational
+mobility on preferences for pension commodification, with covariates and
+wave fixed effects.}
+
+\centering{
+
+\begin{center}
+\scalebox{0.7}{
+\begin{tabular}{l c c c c c c}
+\hline
+ & Low-Middle & Low-High & Middle-High & Middle-Low & High-Middle & High-Low \\
+\hline
+Intercept                                               & $0.18$            & $-0.02$           & $0.30^{*}$        & $0.23$            & $0.13$            & $0.14$            \\
+                                                        & $ [-0.36;  0.71]$ & $ [-0.35;  0.31]$ & $ [ 0.01;  0.58]$ & $ [-0.08;  0.54]$ & $ [-0.19;  0.46]$ & $ [-0.28;  0.56]$ \\
+Mobility treatment                                      & $-0.02$           & $-0.02$           & $0.09^{*}$        & $0.00$            & $-0.07^{*}$       & $-0.10^{*}$       \\
+                                                        & $ [-0.08;  0.05]$ & $ [-0.09;  0.05]$ & $ [ 0.02;  0.16]$ & $ [-0.06;  0.06]$ & $ [-0.15; -0.00]$ & $ [-0.18; -0.02]$ \\
+Age (in years)                                          & $0.00$            & $0.00$            & $-0.00$           & $-0.00$           & $0.00$            & $0.00$            \\
+                                                        & $ [-0.00;  0.00]$ & $ [-0.00;  0.00]$ & $ [-0.00;  0.00]$ & $ [-0.00;  0.00]$ & $ [-0.00;  0.01]$ & $ [-0.00;  0.01]$ \\
+Female (Ref. = Male)                                    & $-0.14^{*}$       & $-0.14^{*}$       & $-0.13^{*}$       & $-0.07^{*}$       & $-0.11^{*}$       & $-0.12^{*}$       \\
+                                                        & $ [-0.20; -0.08]$ & $ [-0.22; -0.06]$ & $ [-0.20; -0.06]$ & $ [-0.14; -0.01]$ & $ [-0.19; -0.03]$ & $ [-0.21; -0.03]$ \\
+Chilean nacionality (Ref. = Non-Chilean)                & $-0.03$           & $0.20$            & $0.08$            & $0.04$            & $-0.00$           & $0.06$            \\
+                                                        & $ [-0.63;  0.57]$ & $ [-0.05;  0.46]$ & $ [-0.19;  0.36]$ & $ [-0.26;  0.34]$ & $ [-0.27;  0.27]$ & $ [-0.30;  0.42]$ \\
+Indigenous ethnicity (Ref. = Non-indigenous)            & $0.03$            & $-0.05$           & $0.05$            & $-0.01$           & $0.07$            & $0.01$            \\
+                                                        & $ [-0.06;  0.12]$ & $ [-0.15;  0.05]$ & $ [-0.08;  0.18]$ & $ [-0.10;  0.08]$ & $ [-0.08;  0.22]$ & $ [-0.13;  0.14]$ \\
+Co-residence with both parents (Ref. = No co-residence) & $-0.00$           & $0.04$            & $-0.06$           & $-0.01$           & $0.10^{*}$        & $0.10^{*}$        \\
+                                                        & $ [-0.08;  0.07]$ & $ [-0.04;  0.12]$ & $ [-0.14;  0.01]$ & $ [-0.09;  0.06]$ & $ [ 0.01;  0.19]$ & $ [ 0.01;  0.19]$ \\
+Parental education                                      & $0.02$            & $0.01$            & $-0.02^{*}$       & $-0.01$           & $-0.00$           & $-0.01$           \\
+                                                        & $ [-0.00;  0.05]$ & $ [-0.01;  0.04]$ & $ [-0.03; -0.01]$ & $ [-0.02;  0.01]$ & $ [-0.02;  0.02]$ & $ [-0.03;  0.02]$ \\
+Wave (Ref.= 2016)                                       &                   &                   &                   &                   &                   &                   \\
+                                                        &                   &                   &                   &                   &                   &                   \\
+\quad Wave 2018                                         & $0.02$            & $-0.01$           & $0.08^{*}$        & $0.04$            & $-0.00$           & $-0.00$           \\
+                                                        & $ [-0.05;  0.09]$ & $ [-0.09;  0.07]$ & $ [ 0.02;  0.14]$ & $ [-0.02;  0.10]$ & $ [-0.08;  0.08]$ & $ [-0.09;  0.09]$ \\
+\quad Wave 2023                                         & $0.06$            & $0.04$            & $0.15^{*}$        & $0.14^{*}$        & $0.12^{*}$        & $0.10$            \\
+                                                        & $ [-0.02;  0.13]$ & $ [-0.06;  0.13]$ & $ [ 0.08;  0.22]$ & $ [ 0.07;  0.21]$ & $ [ 0.02;  0.21]$ & $ [-0.00;  0.21]$ \\
+\hline
+R$^2$                                                   & $0.04$            & $0.04$            & $0.07$            & $0.03$            & $0.05$            & $0.06$            \\
+Adj. R$^2$                                              & $0.03$            & $0.03$            & $0.06$            & $0.02$            & $0.04$            & $0.05$            \\
+Num. obs.                                               & $878$             & $745$             & $716$             & $773$             & $912$             & $861$             \\
+RMSE                                                    & $0.40$            & $0.37$            & $0.39$            & $0.39$            & $0.44$            & $0.42$            \\
+N Clusters                                              & $497$             & $449$             & $443$             & $470$             & $536$             & $525$             \\
+\hline
+\multicolumn{7}{l}{\scriptsize{Note: Cells contain regression coefficients with confidence intervals in parentheses. $^*$ Null hypothesis value outside the confidence interval..}}
+\end{tabular}
+}
+\label{table:coefficients}
+\end{center}
+
+}
+
+\end{table}%
+
+\begin{table}
+
+\caption{\label{tbl-complete2}Effects of intergenerational occupational
+mobility on preferences for pension commodification.}
+
+\centering{
+
+\begin{center}
+\scalebox{0.8}{
+\begin{tabular}{l c c c c c c}
+\hline
+ & Low-Middle & Low-High & Middle-High & Middle-Low & High-Middle & High-Low \\
+\hline
+Intercept          & $0.21^{*}$       & $0.18^{*}$       & $0.17^{*}$      & $0.19^{*}$       & $0.32^{*}$       & $0.28^{*}$        \\
+                   & $ [ 0.16; 0.26]$ & $ [ 0.13; 0.23]$ & $ [0.12; 0.21]$ & $ [ 0.15; 0.24]$ & $ [ 0.26; 0.38]$ & $ [ 0.21;  0.35]$ \\
+Mobility treatment & $-0.01$          & $-0.02$          & $0.08^{*}$      & $-0.00$          & $-0.07$          & $-0.09^{*}$       \\
+                   & $ [-0.08; 0.05]$ & $ [-0.08; 0.05]$ & $ [0.01; 0.15]$ & $ [-0.06; 0.06]$ & $ [-0.15; 0.00]$ & $ [-0.17; -0.02]$ \\
+\hline
+R$^2$              & $0.00$           & $0.00$           & $0.01$          & $0.00$           & $0.01$           & $0.01$            \\
+Adj. R$^2$         & $-0.00$          & $-0.00$          & $0.01$          & $-0.00$          & $0.01$           & $0.01$            \\
+Num. obs.          & $878$            & $745$            & $716$           & $773$            & $912$            & $861$             \\
+RMSE               & $0.40$           & $0.38$           & $0.40$          & $0.39$           & $0.45$           & $0.43$            \\
+N Clusters         & $497$            & $449$            & $443$           & $470$            & $536$            & $525$             \\
+\hline
+\multicolumn{7}{l}{\scriptsize{Note: Cells contain regression coefficients with confidence intervals in parentheses. $^*$ Null hypothesis value outside the confidence interval..}}
+\end{tabular}
+}
+\label{table:coefficients}
+\end{center}
+
+}
+
+\end{table}%
+
+\begin{table}
+
+\caption{\label{tbl-complete3}Marginal effects of mobility by
+meritocratic perception (Low vs High Meritocracy).}
+
+\centering{
+
+\centering
+\begin{tabular}{l|c|c|c|c|c}
+\hline
+Trajectory & Merit & Estimate & Std. Error & CI Low & CI High\\
+\hline
+Low-Middle & Low Meritocracy & -0.024 & 0.034 & -0.091 & 0.042\\
+\hline
+Low-Middle & High Meritocracy & 0.015 & 0.072 & -0.127 & 0.157\\
+\hline
+Low-High & Low Meritocracy & -0.029 & 0.038 & -0.104 & 0.046\\
+\hline
+Low-High & High Meritocracy & 0.024 & 0.088 & -0.148 & 0.195\\
+\hline
+Middle-High & Low Meritocracy & 0.066 & 0.038 & -0.009 & 0.140\\
+\hline
+Middle-High & High Meritocracy & 0.215 & 0.084 & 0.051 & 0.379\\
+\hline
+Middle-Low & Low Meritocracy & -0.004 & 0.034 & -0.071 & 0.063\\
+\hline
+Middle-Low & High Meritocracy & 0.038 & 0.068 & -0.095 & 0.171\\
+\hline
+High-Middle & Low Meritocracy & -0.074 & 0.039 & -0.150 & 0.003\\
+\hline
+High-Middle & High Meritocracy & -0.100 & 0.094 & -0.285 & 0.085\\
+\hline
+High-Low & Low Meritocracy & -0.077 & 0.039 & -0.153 & 0.000\\
+\hline
+High-Low & High Meritocracy & -0.216 & 0.112 & -0.436 & 0.005\\
+\hline
+\end{tabular}
+
+}
+
+\end{table}%
+
+\begin{table}
+
+\caption{\label{tbl-complete4}Marginal effects of mobility by survey
+wave (2016, 2018, and 2023).}
+
+\centering{
+
+\centering
+\begin{tabular}{l|c|c|c|c|c}
+\hline
+Trajectory & Wave & Estimate & Std. Error & CI Low & CI High\\
+\hline
+Low-Middle & 2016 & -0.048 & 0.055 & -0.156 & 0.060\\
+\hline
+Low-Middle & 2018 & -0.022 & 0.048 & -0.116 & 0.072\\
+\hline
+Low-Middle & 2023 & 0.022 & 0.058 & -0.092 & 0.135\\
+\hline
+Low-High & 2016 & -0.025 & 0.062 & -0.146 & 0.096\\
+\hline
+Low-High & 2018 & -0.088 & 0.050 & -0.186 & 0.011\\
+\hline
+Low-High & 2023 & 0.072 & 0.066 & -0.058 & 0.202\\
+\hline
+Middle-High & 2016 & 0.132 & 0.044 & 0.047 & 0.218\\
+\hline
+Middle-High & 2018 & 0.091 & 0.051 & -0.008 & 0.190\\
+\hline
+Middle-High & 2023 & 0.045 & 0.061 & -0.074 & 0.164\\
+\hline
+Middle-Low & 2016 & 0.061 & 0.044 & -0.025 & 0.147\\
+\hline
+Middle-Low & 2018 & -0.027 & 0.046 & -0.118 & 0.064\\
+\hline
+Middle-Low & 2023 & -0.010 & 0.057 & -0.122 & 0.103\\
+\hline
+High-Middle & 2016 & -0.187 & 0.070 & -0.324 & -0.050\\
+\hline
+High-Middle & 2018 & -0.078 & 0.050 & -0.175 & 0.019\\
+\hline
+High-Middle & 2023 & 0.006 & 0.063 & -0.118 & 0.130\\
+\hline
+High-Low & 2016 & -0.186 & 0.068 & -0.319 & -0.053\\
+\hline
+High-Low & 2018 & -0.125 & 0.053 & -0.228 & -0.022\\
+\hline
+High-Low & 2023 & -0.009 & 0.068 & -0.141 & 0.124\\
+\hline
+\end{tabular}
+
+}
+
+\end{table}%
+
+\newpage{}
+
+\subsection{Robustness check and sensitivity
+analysis}\label{robustness-check-and-sensitivity-analysis-1}
+
+\begin{table}
+
+\caption{\label{tbl-robus1}Effects of intergenerational occupational
+mobility on preferences for pension commodification coded as 3-5
+vs.~1-2, with covariates and wave fixed effects.}
+
+\centering{
+
+\begin{center}
+\scalebox{0.7}{
+\begin{tabular}{l c c c c c c}
+\hline
+ & Low-Middle & Low-High & Middle-High & Middle-Low & High-Middle & High-Low \\
+\hline
+Intercept                                               & $0.16$            & $0.01$            & $0.59^{*}$        & $0.57^{*}$        & $0.48^{*}$        & $0.29$            \\
+                                                        & $ [-0.38;  0.70]$ & $ [-0.37;  0.40]$ & $ [ 0.17;  1.01]$ & $ [ 0.23;  0.92]$ & $ [ 0.04;  0.92]$ & $ [-0.32;  0.90]$ \\
+Mobility treatment                                      & $0.01$            & $0.05$            & $0.09^{*}$        & $-0.02$           & $-0.08$           & $-0.13^{*}$       \\
+                                                        & $ [-0.07;  0.08]$ & $ [-0.02;  0.13]$ & $ [ 0.01;  0.16]$ & $ [-0.09;  0.05]$ & $ [-0.15;  0.00]$ & $ [-0.21; -0.04]$ \\
+Age (in years)                                          & $0.00$            & $-0.00$           & $-0.00^{*}$       & $-0.00$           & $0.00$            & $0.00$            \\
+                                                        & $ [-0.00;  0.00]$ & $ [-0.01;  0.00]$ & $ [-0.01; -0.00]$ & $ [-0.00;  0.00]$ & $ [-0.00;  0.00]$ & $ [-0.00;  0.01]$ \\
+Female (Ref. = Male)                                    & $-0.15^{*}$       & $-0.16^{*}$       & $-0.17^{*}$       & $-0.09^{*}$       & $-0.11^{*}$       & $-0.10^{*}$       \\
+                                                        & $ [-0.22; -0.08]$ & $ [-0.24; -0.07]$ & $ [-0.25; -0.09]$ & $ [-0.16; -0.02]$ & $ [-0.19; -0.03]$ & $ [-0.20; -0.00]$ \\
+Chilean nacionality (Ref. = Non-Chilean)                & $0.03$            & $0.28$            & $-0.10$           & $-0.24$           & $-0.21$           & $-0.02$           \\
+                                                        & $ [-0.57;  0.63]$ & $ [-0.01;  0.57]$ & $ [-0.54;  0.33]$ & $ [-0.56;  0.08]$ & $ [-0.71;  0.29]$ & $ [-0.79;  0.76]$ \\
+Indigenous ethnicity (Ref. = Non-indigenous)            & $-0.03$           & $-0.10$           & $0.02$            & $-0.02$           & $0.02$            & $-0.07$           \\
+                                                        & $ [-0.12;  0.07]$ & $ [-0.22;  0.01]$ & $ [-0.11;  0.15]$ & $ [-0.12;  0.08]$ & $ [-0.13;  0.16]$ & $ [-0.21;  0.07]$ \\
+Co-residence with both parents (Ref. = No co-residence) & $0.01$            & $0.06$            & $0.01$            & $0.00$            & $0.15^{*}$        & $0.12^{*}$        \\
+                                                        & $ [-0.08;  0.09]$ & $ [-0.03;  0.14]$ & $ [-0.07;  0.10]$ & $ [-0.08;  0.08]$ & $ [ 0.06;  0.24]$ & $ [ 0.02;  0.22]$ \\
+Parental education                                      & $0.02$            & $0.02$            & $-0.02$           & $0.00$            & $0.00$            & $0.00$            \\
+                                                        & $ [-0.01;  0.05]$ & $ [-0.01;  0.05]$ & $ [-0.03;  0.00]$ & $ [-0.02;  0.02]$ & $ [-0.01;  0.02]$ & $ [-0.02;  0.02]$ \\
+Wave (Ref.= 2016)                                       &                   &                   &                   &                   &                   &                   \\
+                                                        &                   &                   &                   &                   &                   &                   \\
+\quad Wave 2018                                         & $0.05$            & $0.00$            & $0.07$            & $0.03$            & $0.02$            & $-0.00$           \\
+                                                        & $ [-0.02;  0.12]$ & $ [-0.08;  0.08]$ & $ [-0.01;  0.15]$ & $ [-0.04;  0.11]$ & $ [-0.06;  0.10]$ & $ [-0.09;  0.09]$ \\
+\quad Wave 2023                                         & $0.13^{*}$        & $0.11^{*}$        & $0.23^{*}$        & $0.20^{*}$        & $0.15^{*}$        & $0.15^{*}$        \\
+                                                        & $ [ 0.04;  0.22]$ & $ [ 0.00;  0.21]$ & $ [ 0.14;  0.32]$ & $ [ 0.12;  0.28]$ & $ [ 0.05;  0.25]$ & $ [ 0.05;  0.26]$ \\
+\hline
+R$^2$                                                   & $0.05$            & $0.07$            & $0.09$            & $0.05$            & $0.06$            & $0.07$            \\
+Adj. R$^2$                                              & $0.04$            & $0.05$            & $0.08$            & $0.04$            & $0.05$            & $0.06$            \\
+Num. obs.                                               & $878$             & $745$             & $716$             & $773$             & $912$             & $861$             \\
+RMSE                                                    & $0.44$            & $0.43$            & $0.45$            & $0.44$            & $0.48$            & $0.45$            \\
+N Clusters                                              & $497$             & $449$             & $443$             & $470$             & $536$             & $525$             \\
+\hline
+\multicolumn{7}{l}{\scriptsize{Note: Cells contain regression coefficients with confidence intervals in parentheses. $^*$ Null hypothesis value outside the confidence interval..}}
+\end{tabular}
+}
+\label{table:coefficients}
+\end{center}
+
+}
+
+\end{table}%
+
+\begin{table}
+
+\caption{\label{tbl-robus2}Effects of intergenerational occupational
+mobility on preferences for pension commodification excluding
+intermediate category, with covariates and wave fixed effects.}
+
+\centering{
+
+\begin{center}
+\scalebox{0.7}{
+\begin{tabular}{l c c c c c c}
+\hline
+ & Low-Middle & Low-High & Middle-High & Middle-Low & High-Middle & High-Low \\
+\hline
+Intercept                                               & $1.84^{*}$        & $1.76^{*}$        & $2.39^{*}$        & $2.40^{*}$        & $2.14^{*}$        & $2.35^{*}$        \\
+                                                        & $ [ 1.08;  2.60]$ & $ [ 1.02;  2.49]$ & $ [ 1.80;  2.97]$ & $ [ 1.88;  2.92]$ & $ [ 1.45;  2.82]$ & $ [ 1.53;  3.18]$ \\
+Mobility treatment                                      & $-0.03$           & $-0.03$           & $0.24^{*}$        & $-0.01$           & $-0.12$           & $-0.22^{*}$       \\
+                                                        & $ [-0.16;  0.09]$ & $ [-0.16;  0.11]$ & $ [ 0.10;  0.38]$ & $ [-0.13;  0.11]$ & $ [-0.26;  0.01]$ & $ [-0.37; -0.07]$ \\
+Age (in years)                                          & $0.00$            & $-0.00$           & $-0.00$           & $-0.00$           & $0.00$            & $-0.00$           \\
+                                                        & $ [-0.01;  0.01]$ & $ [-0.01;  0.01]$ & $ [-0.01;  0.00]$ & $ [-0.01;  0.00]$ & $ [-0.00;  0.01]$ & $ [-0.01;  0.01]$ \\
+Female (Ref. = Male)                                    & $-0.24^{*}$       & $-0.23^{*}$       & $-0.27^{*}$       & $-0.16^{*}$       & $-0.16^{*}$       & $-0.22^{*}$       \\
+                                                        & $ [-0.35; -0.12]$ & $ [-0.39; -0.07]$ & $ [-0.42; -0.12]$ & $ [-0.29; -0.03]$ & $ [-0.30; -0.02]$ & $ [-0.39; -0.06]$ \\
+Chilean nacionality (Ref. = Non-Chilean)                & $0.07$            & $0.28$            & $-0.16$           & $-0.34$           & $-0.20$           & $-0.07$           \\
+                                                        & $ [-0.73;  0.87]$ & $ [-0.33;  0.89]$ & $ [-0.69;  0.37]$ & $ [-0.76;  0.07]$ & $ [-0.82;  0.43]$ & $ [-0.75;  0.61]$ \\
+Indigenous ethnicity (Ref. = Non-indigenous)            & $0.03$            & $-0.08$           & $-0.02$           & $0.04$            & $0.05$            & $-0.21$           \\
+                                                        & $ [-0.14;  0.20]$ & $ [-0.28;  0.12]$ & $ [-0.28;  0.25]$ & $ [-0.15;  0.23]$ & $ [-0.20;  0.31]$ & $ [-0.49;  0.07]$ \\
+Co-residence with both parents (Ref. = No co-residence) & $0.00$            & $0.05$            & $-0.09$           & $-0.01$           & $0.15$            & $0.15$            \\
+                                                        & $ [-0.14;  0.15]$ & $ [-0.10;  0.21]$ & $ [-0.23;  0.06]$ & $ [-0.16;  0.13]$ & $ [-0.01;  0.32]$ & $ [-0.03;  0.33]$ \\
+Parental education                                      & $0.01$            & $0.02$            & $-0.04^{*}$       & $-0.01$           & $0.00$            & $-0.01$           \\
+                                                        & $ [-0.04;  0.07]$ & $ [-0.04;  0.07]$ & $ [-0.08; -0.01]$ & $ [-0.05;  0.02]$ & $ [-0.03;  0.04]$ & $ [-0.05;  0.03]$ \\
+Wave (Ref.= 2016)                                       &                   &                   &                   &                   &                   &                   \\
+                                                        &                   &                   &                   &                   &                   &                   \\
+\quad Wave 2018                                         & $0.02$            & $-0.13$           & $0.10$            & $-0.01$           & $-0.08$           & $-0.18$           \\
+                                                        & $ [-0.11;  0.16]$ & $ [-0.28;  0.03]$ & $ [-0.05;  0.26]$ & $ [-0.14;  0.13]$ & $ [-0.24;  0.07]$ & $ [-0.37;  0.01]$ \\
+\quad Wave 2023                                         & $0.21^{*}$        & $0.03$            & $0.39^{*}$        & $0.37^{*}$        & $0.30^{*}$        & $0.16$            \\
+                                                        & $ [ 0.06;  0.36]$ & $ [-0.15;  0.21]$ & $ [ 0.23;  0.54]$ & $ [ 0.23;  0.51]$ & $ [ 0.13;  0.46]$ & $ [-0.04;  0.36]$ \\
+\hline
+R$^2$                                                   & $0.04$            & $0.04$            & $0.10$            & $0.06$            & $0.06$            & $0.08$            \\
+Adj. R$^2$                                              & $0.03$            & $0.02$            & $0.09$            & $0.05$            & $0.05$            & $0.07$            \\
+Num. obs.                                               & $812$             & $677$             & $629$             & $693$             & $808$             & $770$             \\
+RMSE                                                    & $0.77$            & $0.73$            & $0.75$            & $0.75$            & $0.82$            & $0.79$            \\
+N Clusters                                              & $480$             & $431$             & $415$             & $445$             & $499$             & $494$             \\
+\hline
+\multicolumn{7}{l}{\scriptsize{Note: Cells contain regression coefficients with confidence intervals in parentheses. $^*$ Null hypothesis value outside the confidence interval..}}
+\end{tabular}
+}
+\label{table:coefficients}
+\end{center}
+
+}
+
+\end{table}%
+
+\begin{table}
+
+\caption{\label{tbl-robus3}Effects of intergenerational occupational
+mobility on preferences for pension commodification using the original
+5-point likert scale, with covariates and wave fixed effects.}
+
+\centering{
+
+\begin{center}
+\scalebox{0.7}{
+\begin{tabular}{l c c c c c c}
+\hline
+ & Low-Middle & Low-High & Middle-High & Middle-Low & High-Middle & High-Low \\
+\hline
+Intercept                                               & $1.99^{*}$        & $1.76^{*}$        & $2.91^{*}$        & $2.86^{*}$        & $2.53^{*}$        & $2.59^{*}$        \\
+                                                        & $ [ 0.81;  3.17]$ & $ [ 0.82;  2.70]$ & $ [ 2.19;  3.64]$ & $ [ 2.24;  3.47]$ & $ [ 1.59;  3.47]$ & $ [ 1.34;  3.83]$ \\
+Mobility treatment                                      & $-0.03$           & $0.03$            & $0.30^{*}$        & $-0.02$           & $-0.19$           & $-0.33^{*}$       \\
+                                                        & $ [-0.21;  0.15]$ & $ [-0.16;  0.22]$ & $ [ 0.11;  0.48]$ & $ [-0.18;  0.14]$ & $ [-0.38;  0.00]$ & $ [-0.54; -0.12]$ \\
+Age (in years)                                          & $0.00$            & $-0.00$           & $-0.00$           & $-0.00$           & $0.00$            & $0.00$            \\
+                                                        & $ [-0.01;  0.01]$ & $ [-0.01;  0.01]$ & $ [-0.01;  0.00]$ & $ [-0.01;  0.00]$ & $ [-0.01;  0.01]$ & $ [-0.01;  0.01]$ \\
+Female (Ref. = Male)                                    & $-0.37^{*}$       & $-0.37^{*}$       & $-0.40^{*}$       & $-0.23^{*}$       & $-0.26^{*}$       & $-0.32^{*}$       \\
+                                                        & $ [-0.54; -0.20]$ & $ [-0.58; -0.15]$ & $ [-0.60; -0.21]$ & $ [-0.41; -0.06]$ & $ [-0.46; -0.06]$ & $ [-0.55; -0.08]$ \\
+Chilean nacionality (Ref. = Non-Chilean)                & $0.10$            & $0.56$            & $-0.25$           & $-0.49^{*}$       & $-0.32$           & $-0.05$           \\
+                                                        & $ [-1.17;  1.38]$ & $ [-0.08;  1.20]$ & $ [-0.89;  0.39]$ & $ [-0.93; -0.05]$ & $ [-1.23;  0.59]$ & $ [-1.24;  1.15]$ \\
+Indigenous ethnicity (Ref. = Non-indigenous)            & $-0.00$           & $-0.18$           & $-0.00$           & $0.02$            & $0.08$            & $-0.26$           \\
+                                                        & $ [-0.24;  0.24]$ & $ [-0.46;  0.10]$ & $ [-0.35;  0.35]$ & $ [-0.24;  0.28]$ & $ [-0.29;  0.44]$ & $ [-0.66;  0.13]$ \\
+Co-residence with both parents (Ref. = No co-residence) & $0.01$            & $0.11$            & $-0.06$           & $-0.01$           & $0.28^{*}$        & $0.26^{*}$        \\
+                                                        & $ [-0.20;  0.22]$ & $ [-0.11;  0.33]$ & $ [-0.27;  0.15]$ & $ [-0.21;  0.19]$ & $ [ 0.05;  0.50]$ & $ [ 0.01;  0.50]$ \\
+Parental education                                      & $0.04$            & $0.03$            & $-0.06^{*}$       & $-0.01$           & $0.01$            & $-0.01$           \\
+                                                        & $ [-0.04;  0.11]$ & $ [-0.04;  0.11]$ & $ [-0.10; -0.01]$ & $ [-0.05;  0.04]$ & $ [-0.04;  0.05]$ & $ [-0.07;  0.05]$ \\
+Wave (Ref.= 2016)                                       &                   &                   &                   &                   &                   &                   \\
+                                                        &                   &                   &                   &                   &                   &                   \\
+\quad Wave 2018                                         & $0.08$            & $-0.12$           & $0.16$            & $0.03$            & $-0.05$           & $-0.17$           \\
+                                                        & $ [-0.11;  0.26]$ & $ [-0.32;  0.09]$ & $ [-0.04;  0.36]$ & $ [-0.15;  0.21]$ & $ [-0.26;  0.16]$ & $ [-0.42;  0.09]$ \\
+\quad Wave 2023                                         & $0.33^{*}$        & $0.14$            & $0.55^{*}$        & $0.53^{*}$        & $0.42^{*}$        & $0.30^{*}$        \\
+                                                        & $ [ 0.11;  0.54]$ & $ [-0.11;  0.39]$ & $ [ 0.35;  0.76]$ & $ [ 0.35;  0.72]$ & $ [ 0.18;  0.65]$ & $ [ 0.02;  0.57]$ \\
+\hline
+R$^2$                                                   & $0.04$            & $0.05$            & $0.10$            & $0.06$            & $0.06$            & $0.08$            \\
+Adj. R$^2$                                              & $0.03$            & $0.04$            & $0.09$            & $0.05$            & $0.05$            & $0.07$            \\
+Num. obs.                                               & $878$             & $745$             & $716$             & $773$             & $912$             & $861$             \\
+RMSE                                                    & $1.10$            & $1.04$            & $1.06$            & $1.07$            & $1.17$            & $1.12$            \\
+N Clusters                                              & $497$             & $449$             & $443$             & $470$             & $536$             & $525$             \\
+\hline
+\multicolumn{7}{l}{\scriptsize{Note: Cells contain regression coefficients with confidence intervals in parentheses. $^*$ Null hypothesis value outside the confidence interval..}}
+\end{tabular}
+}
+\label{table:coefficients}
+\end{center}
+
+}
+
+\end{table}%
+
+\begin{table}
+
+\caption{\label{tbl-evalues1}E-values for ATT estimates for Middle-High
+trajectory (Cinelli \& Hazlett, 2020 approximation)}
+
+\centering{
+
+\centering
+\begin{tabular}{lrrrrrr}
+\multicolumn{7}{c}{Outcome: \textit{y}} \\
+\hline \hline 
+Treatment: & Est. & S.E. & t-value & $R^2_{Y \sim D |{\bf X}}$ & $RV_{q = 1}$ & $RV_{q = 1, \alpha = 0.05}$  \\ 
+\hline 
+\textit{t} & 0.088 & 0.029 & 2.995 & 1.3\% & 10.7\% & 3.8\% \\ 
+\hline 
+df = 706 & & \multicolumn{5}{r}{ \small \textit{Bound (1x sexo)}: $R^2_{Y\sim Z| {\bf X}, D}$ = 2.7\%, $R^2_{D\sim Z| {\bf X} }$ = 3.6\%} \\
+\end{tabular}
+
+}
+
+\end{table}%
+
+\begin{table}
+
+\caption{\label{tbl-evalues2}E-values for ATT estimates for High-Middle
+trajectory (Cinelli \& Hazlett, 2020 approximation)}
+
+\centering{
+
+\centering
+\begin{tabular}{lrrrrrr}
+\multicolumn{7}{c}{Outcome: \textit{y}} \\
+\hline \hline 
+Treatment: & Est. & S.E. & t-value & $R^2_{Y \sim D |{\bf X}}$ & $RV_{q = 1}$ & $RV_{q = 1, \alpha = 0.05}$  \\ 
+\hline 
+\textit{t} & -0.074 & 0.03 & -2.447 & 0.7\% & 7.8\% & 1.6\% \\ 
+\hline 
+df = 902 & & \multicolumn{5}{r}{ \small \textit{Bound (1x sexo)}: $R^2_{Y\sim Z| {\bf X}, D}$ = 1.5\%, $R^2_{D\sim Z| {\bf X} }$ = 3.9\%} \\
+\end{tabular}
+
+}
+
+\end{table}%
+
+\begin{table}
+
+\caption{\label{tbl-evalues3}E-values for ATT estimates for High-Low
+trajectory (Cinelli \& Hazlett, 2020 approximation)}
+
+\centering{
+
+\centering
+\begin{tabular}{lrrrrrr}
+\multicolumn{7}{c}{Outcome: \textit{y}} \\
+\hline \hline 
+Treatment: & Est. & S.E. & t-value & $R^2_{Y \sim D |{\bf X}}$ & $RV_{q = 1}$ & $RV_{q = 1, \alpha = 0.05}$  \\ 
+\hline 
+\textit{t} & -0.098 & 0.03 & -3.245 & 1.2\% & 10.5\% & 4.3\% \\ 
+\hline 
+df = 851 & & \multicolumn{5}{r}{ \small \textit{Bound (1x sexo)}: $R^2_{Y\sim Z| {\bf X}, D}$ = 1.7\%, $R^2_{D\sim Z| {\bf X} }$ = 0.8\%} \\
+\end{tabular}
+
+}
+
+\end{table}%
+
+
+
+
+\end{document}

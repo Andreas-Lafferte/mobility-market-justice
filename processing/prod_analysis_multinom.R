@@ -100,7 +100,7 @@ g1 <- db %>%
   geom_col(aes(fill = just_pension_f)) +
   scale_y_continuous(labels = scales::percent) + 
   scale_fill_manual(
-    values = c("grey50", "grey20"),
+    values = c("#DE4968FF", "grey20"),
     breaks = c("Agreement","Disagreement")
   )  +
   coord_flip() +
@@ -114,7 +114,7 @@ g1 <- db %>%
   labs(y = NULL,
        x = NULL,
        fill = NULL,
-       caption = "Source: own elaboration with data from ELSOC 2016-2023 (N obs = 3,435)\nNote: Agreement ≥4, Disagreement ≤3") +
+       caption = "Source: own elaboration with data from ELSOC 2016-2023 (N obs = 3,435)\nNote: Agreement 5-4, Disagreement 1-3") +
   my_pretty_theme() +
   theme(legend.position = "bottom") 
 
@@ -168,10 +168,10 @@ g2 <- ggplot(pdat, aes(x = mobility, y = value, group = wave)) +
   scale_color_manual(
     name   = "Wave",
     breaks = breaks_w,
-    values = c("2016" = "#999999",
-               "2018" = "#666666",
-               "2023" = "#000000",
-               "All waves" = "black")) +
+    values = c("2016" = "#DE4968FF",
+               "2018" = "#8C2981FF",
+               "2023" = "#3B0F70FF",
+               "All waves" = "#000004FF")) +
   scale_shape_manual(
     name   = "Wave",
     breaks = breaks_w,
@@ -189,6 +189,7 @@ g2 <- ggplot(pdat, aes(x = mobility, y = value, group = wave)) +
   my_pretty_theme() +
   theme(legend.position = "bottom",
         axis.text.x=element_text(angle=45,hjust = 1))
+
 
 # 3.2 Pooled WLS with IPW-ATT and CR2 -----------------------------------------------------------
 
@@ -411,9 +412,11 @@ df_pension_lab <- df_pension_lab %>%
   )
 
 g3 <- ggplot(df_pension_lab, aes(x = estimate, y = term)) +
-  geom_vline(xintercept = 0, linetype = "solid", color = "darkred", size = 0.5, alpha = 1) +
-  geom_errorbarh(aes(xmin = conf.low, xmax = conf.high), height = 0, size = 0.7) +
-  geom_point(size = 2.5) +
+  geom_vline(xintercept = 0, linewidth = 0.7, color = "grey60", linetype = "dashed") +
+  geom_pointrange(aes(xmin = conf.low, xmax = conf.high), fatten = 2, 
+                  size = 1, color = "#000004FF") +
+  #geom_errorbarh(aes(xmin = conf.low, xmax = conf.high), height = 0, size = 0.7) +
+  #geom_point(size = 2.5) +
   scale_x_continuous(limits = c(-0.5, 0.5), breaks = seq(-0.5, 0.5, 0.25)) +
   #geom_text(aes(label = est_lab), hjust = -0.05, size = 4, vjust = -0.5) +
   labs(x = "Treatment Effect", y = NULL) +
@@ -600,82 +603,82 @@ screenreg(list(mp_lm_i,
             "High-Low"
           ))
 
+library(dplyr)
+library(broom)
 
-# Coef plot
-df_pension_i <-  bind_rows(
-  tidy(mp_lm_i, conf.int = TRUE) %>%
-    filter(term %in% c("t:mHigh", "t")) %>%
-    mutate(name = paste0("Low-Middle\n", "(N obs. = ", mp_hl_i$nobs, ";", "\nN clusters = ", mp_hl_i$nclusters, ")")
-    ) 
-  ,
-  tidy(mp_lh_i, conf.int = TRUE) %>%
-    filter(term %in% c("t:mHigh", "t")) %>%
-    mutate(name = paste0("Low-High\n", "(N obs. = ", mp_lh_i$nobs, ";", "\nN clusters = ", mp_lh_i$nclusters, ")"))
-  ,
-  tidy(mp_mh_i, conf.int = TRUE) %>%
-    filter(term %in% c("t:mHigh", "t")) %>%
-    mutate(name = paste0("Middle-High\n", "(N obs. = ", mp_mh_i$nobs, ";", "\nN clusters = ", mp_mh_i$nclusters, ")"))
-  ,
-  tidy(mp_ml_i, conf.int = TRUE) %>%
-    filter(term %in% c("t:mHigh", "t")) %>%
-    mutate(name = paste0("Middle-Low\n", "(N obs. = ", mp_ml_i$nobs, ";", "\nN clusters = ", mp_ml_i$nclusters, ")"))
-  ,
-  tidy(mp_hm_i, conf.int = TRUE) %>%
-    filter(term %in% c("t:mHigh", "t")) %>%
-    mutate(name = paste0("High-Middle\n", "(N obs. = ", mp_hm_i$nobs, ";", "\nN clusters = ", mp_hm_i$nclusters, ")"))
-  ,
-  tidy(mp_hl_i, conf.int = TRUE) %>%
-    filter(term %in% c("t:mHigh", "t")) %>%
-    mutate(name = paste0("High-Low\n", "(N obs. = ", mp_hl_i$nobs, ";", "\nN clusters = ", mp_hl_i$nclusters, ")"))
-) 
+get_marginals_merit <- function(model, label){
+  b <- coef(model)[c("t", "t:mHigh")]
+  
+  V <- vcov(model)[c("t", "t:mHigh"),
+                   c("t", "t:mHigh")]
+  L <- rbind(
+    "Low Meritocracy"  = c(1, 0),
+    "High Meritocracy" = c(1, 1)
+  )
+  
+  est  <- as.numeric(L %*% b)
+  se   <- sqrt(diag(L %*% V %*% t(L)))
+  z    <- 1.96
+  ci_l <- est - z * se
+  ci_h <- est + z * se
+  
+  tibble(
+    term     = rownames(L),
+    estimate = est,
+    std.error = se,
+    conf.low = ci_l,
+    conf.high = ci_h,
+    name = paste0(
+      label, "\n",
+      "(N obs. = ", model$nobs, ";",
+      "\nN clusters = ", model$nclusters, ")"
+    )
+  )
+}
+
+
+df_pension_i <- bind_rows(
+  get_marginals_merit(mp_lm_i, "Low-Middle"),
+  get_marginals_merit(mp_lh_i, "Low-High"),
+  get_marginals_merit(mp_mh_i, "Middle-High"),
+  get_marginals_merit(mp_ml_i, "Middle-Low"),
+  get_marginals_merit(mp_hm_i, "High-Middle"),
+  get_marginals_merit(mp_hl_i, "High-Low")
+)
 
 df_pension_lab_i <- df_pension_i %>%
   mutate(
     sig     = ifelse(conf.low * conf.high > 0, "*", ""),  # IC no cruza 0
     est_lab = sprintf("%.2f%s", estimate, sig),
     low_lab = sprintf("%.2f", conf.low),
-    high_lab= sprintf("%.2f", conf.high)
-  )
-
-df_pension_lab_i <- df_pension_lab_i %>%
-  mutate(
-    name = factor(
-      name,
-      levels = unique(name)
-    ),
-    term = if_else(term == "t", "Low Meritocracy", "High Meritocracy"),
+    high_lab= sprintf("%.2f", conf.high),
+    name = factor(name, levels = unique(name)),
     term = factor(term, levels = c("High Meritocracy", "Low Meritocracy"))
   )
 
-pos <- position_dodge(width = 0.55)  # separa las dos series en cada categoría
+pos <- position_dodge(width = 0.55)
 
 g4 <- ggplot(
   df_pension_lab_i,
   aes(x = estimate, y = name, group = term, colour = term, shape = term)
 ) +
-  geom_vline(xintercept = 0, linetype = "solid", colour = "darkred", linewidth = 0.6) +
-  geom_errorbarh(
-    aes(xmin = conf.low, xmax = conf.high, linetype = term),  # <- acá
-    height = 0, size = 0.7, position = pos
-  ) +
-  geom_point(size = 2.8, position = pos) +
+  geom_vline(xintercept = 0, linewidth = 0.7, color = "grey60", linetype = "dashed") +
+  geom_pointrange(aes(xmin = conf.low, xmax = conf.high),
+                  fatten = 2.5,
+                  size = 1,
+                  position = pos) +
   scale_shape_manual(values = c(
     "High Meritocracy" = 16,  # círculo
     "Low Meritocracy"  = 15   # cuadrado
   )) +
   scale_colour_manual(values = c(
-    "High Meritocracy" = "black",
-    "Low Meritocracy"  = "grey50"
-  )) +
-  scale_linetype_manual(values = c(
-    "High Meritocracy" = "solid",
-    "Low Meritocracy"  = "dashed"   # <- low en dashed
-  )) +
+    "High Meritocracy" = "#000004FF",
+    "Low Meritocracy"  = "#DE4968FF"
+  ))+
   scale_x_continuous(limits = c(-0.5, 0.5), breaks = seq(-0.5, 0.5, 0.25)) +
-  labs(x = "Treatment Effect", y = NULL, colour = NULL, shape = NULL, linetype = NULL) +
+  labs(x = "Marginal Effect", y = NULL, colour = NULL, shape = NULL, linetype = NULL) +
   my_pretty_theme() +
   theme(legend.position = "bottom")
-
 
 # -----------
 # Time 
@@ -746,6 +749,81 @@ screenreg(list(mp_lm_t,
             "High-Middle",
             "High-Low"
           ))
+
+get_marginals_wave <- function(model, label){
+  
+  b <- coef(model)[c("t", "t:ola2018", "t:ola2023")]
+  
+  V <- vcov(model)[c("t", "t:ola2018", "t:ola2023"),
+                   c("t", "t:ola2018", "t:ola2023")]
+  L <- rbind(
+    "2016" = c(1, 0, 0),
+    "2018" = c(1, 1, 0),
+    "2023" = c(1, 0, 1)
+  )
+  
+  est  <- as.numeric(L %*% b)
+  se   <- sqrt(diag(L %*% V %*% t(L)))
+  z    <- 1.96
+  ci_l <- est - z * se
+  ci_h <- est + z * se
+  
+  tibble(
+    term     = rownames(L),
+    estimate = est,
+    std.error = se,
+    conf.low = ci_l,
+    conf.high = ci_h,
+    name = paste0(
+      label, "\n",
+      "(N obs. = ", model$nobs, ";",
+      "\nN clusters = ", model$nclusters, ")"
+    )
+  )
+}
+
+
+df_pension_t <- bind_rows(
+  get_marginals_wave(mp_lm_t, "Low-Middle"),
+  get_marginals_wave(mp_lh_t, "Low-High"),
+  get_marginals_wave(mp_mh_t, "Middle-High"),
+  get_marginals_wave(mp_ml_t, "Middle-Low"),
+  get_marginals_wave(mp_hm_t, "High-Middle"),
+  get_marginals_wave(mp_hl_t, "High-Low")
+)
+
+df_pension_lab_t <- df_pension_t %>%
+  mutate(
+    sig     = ifelse(conf.low * conf.high > 0, "*", ""),  # IC no cruza 0
+    est_lab = sprintf("%.2f%s", estimate, sig),
+    low_lab = sprintf("%.2f", conf.low),
+    high_lab= sprintf("%.2f", conf.high),
+    name = factor(name, levels = unique(name)),
+    term = factor(term, levels = c("2016", "2018", "2023"))
+  )
+
+pos <- position_dodge(width = 0.55)
+
+g5 <- ggplot(
+  df_pension_lab_t,
+  aes(x = estimate, y = name, group = term, colour = term, shape = term)
+) +
+  geom_vline(xintercept = 0, linewidth = 0.7, color = "grey60", linetype = "dashed") +
+  geom_pointrange(aes(xmin = conf.low, xmax = conf.high),
+                  fatten = 2.5,
+                  size = 1,
+                  position = pos) +
+  scale_colour_manual(values = c(
+    "2016" = "#000004FF",
+    "2018"  = "#DE4968FF",
+    "2023"  = "#8C2981FF"
+  )) +
+  scale_x_continuous(limits = c(-0.5, 0.5), breaks = seq(-0.5, 0.5, 0.25)) +
+  labs(x = "Marginal Effect", y = NULL, colour = NULL, shape = NULL, linetype = NULL) +
+  my_pretty_theme() +
+  theme(legend.position = "bottom")
+
+
 
 # 3.4 Robustness check ------------------------------------------------
 

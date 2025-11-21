@@ -96,66 +96,36 @@ To probe potential mechanisms underlying the mobility effects, I estimate origin
 
 ```{r}
 #| label: fig-interact
-#| fig-cap: "Effects of intergenerational occupational mobility on preferences for pension commodification, by meritocratic perception. Coefficient plot of origin-specific ATT estimates comparing mobility versus immobility, estimated from interaction models (T × Merit). Points show simple slopes of the mobility effect at low merit and high merit; bars are 95% confidence intervals. Estimates from pooled WLS with doubly robust adjustment, wave fixed effects, and standard errors clustered by individual."
+#| fig-cap: "Effects of intergenerational occupational mobility on preferences for pension commodification, by meritocratic perception. Coefficient plot of origin-specific ATT estimates comparing mobility versus immobility, estimated from interaction models (T × Merit). Points show the marginal effects (simple slopes) of the mobility treatment at low and high merit; bars are 95% confidence intervals. Estimates from pooled WLS with doubly robust adjustment, wave fixed effects, and standard errors clustered by individual."
 #| out-width: '90%'
 #| fig-asp: 0.8
 #| fig-cap-location: bottom
 #| echo: false
 #| results: asis
 
+
 g4+
   theme(legend.text = element_text(size = 10))
 ```
 
-@fig-interact shows that neither the interaction terms nor the mobility coefficients reach conventional significance across trajectories, indicating no detectable moderation of the causal mobility effect by meritocratic perceptions at the 95% level. Directionally, in the left panel, the interaction is positive for Middle→High ($\beta$ = 0.15, 95% CI [−0.03, 0.33]) and Low→High ($\beta$ = 0.05, [−0.14, 0.24]), suggesting, if anything, somewhat larger pro-commodification effects among high-merit respondents when upwardly mobile, whereas it is negative for High→Low ($\beta$ = −0.14, [−0.38, 0.10]) and High→Middle ($\beta$ = −0.03, [−0.23, 0.17]), showing weaker pro-commodification effects under downward mobility at high merit. Focusing on the treatment effect at low meritocracy (the reference category) at the right panel, the mobility coefficient captures the origin-specific ATT comparing movers to their immobility counterfactual among low-merit respondents. These effects are small and imprecise across trajectories: Low→Middle ($\beta$ = −0.02, [−0.09, 0.04]) and Low→High ($\beta$ = −0.03, [−0.10, 0.05]) are near zero. Middle→High is positive but not significant ($\beta$ = 0.07, [−0.01, 0.14]), Middle→Low is null ($\beta$ = -0.00, [−0.07, 0.06]), and downward from high shows negative, borderline estimates: High→Middle ($\beta$ = −0.07, [−0.15, 0.00]) and High→Low ($\beta$ = −0.08, [−0.15, 0.00]). Substantively, I do not find evidence that meritocratic perceptions moderate the causal effect of mobility, although the signs align with the idea that upward mobility at high merit tilts attitudes toward commodification, and downward mobility at high merit tilts them away.
+@fig-interact displays the origin-specific ATT estimates from the meritocracy interaction models as marginal effects of the mobility treatment at low and high meritocratic beliefs. For low-merit respondents, mobility effects are uniformly small and imprecise across trajectories: Low→Middle ($\beta$ = −0.02, 95% CI [−0.09, 0.04]), Low→High ($\beta$ = −0.03, [−0.10, 0.05]), Middle→Low ($\beta$ = −0.00, [−0.07, 0.06]), and a modest, non-significant positive estimate for Middle→High ($\beta$ = 0.07, [−0.01, 0.14]), while downward moves from high origin show borderline negative effects (High→Middle: $\beta$ = −0.07, [−0.15, 0.00]; High→Low: $\beta$ = −0.08, [−0.15, 0.00]). Among high-merit respondents, the pattern is directionally consistent with meritocratic moderation but statistically robust only for one trajectory: the ATT for Middle→High at high merit is positive and significant ($\beta$ = 0.22, [0.05, 0.38]), whereas Low→Middle ($\beta$ = 0.02, [−0.13, 0.16]), Low→High ($\beta$ = 0.02, [−0.15, 0.20]), High→Middle ($\beta$ = −0.10, [−0.28, 0.09]), and High→Low ($\beta$ = −0.22, [−0.44, 0.00]) remain statistically indistinguishable from zero. Overall, these results provide only limited and trajectory-specific evidence that meritocratic beliefs moderate the causal effect of intergenerational occupational mobility on preferences for pension commodification, with a clearer pro-commodification sign only for upward mobility from middle to high status among high-merit respondents.
+
 
 
 ```{r}
-#| label: tbl-inttime
-#| tbl-cap: "Effects of intergenerational occupational mobility on preferences for pension commodification, by survey wave"
-#| tbl-cap-location: top
-#| results: asis
+#| label: fig-interact-wave
+#| fig-cap: "Effects of intergenerational occupational mobility on preferences for pension commodification, by survey wave. Coefficient plot of origin-specific ATT estimates comparing mobility versus immobility, estimated from interaction models (T × Wave). Points show the marginal effects (simple slopes) of the mobility treatment in 2016, 2018, and 2023; bars are 95% confidence intervals. Estimates from pooled WLS with doubly robust adjustment, wave fixed effects, and standard errors clustered by individual."
+#| out-width: '90%'
+#| fig-asp: 0.8
+#| fig-cap-location: bottom
 #| echo: false
+#| results: asis
 
-ccoef <- list(
-  "(Intercept)" = "Intercept",
-  "t" = "Mobility treatment",
-  "ola2018" = "Wave 2018",
-  "ola2023" = "Wave 2023",
-  "t:ola2018" = "Mobility treatment x Wave 2018",
-  "t:ola2023" = "Mobility treatment x Wave 2023"
-  )
-
-texreg::texreg(list(mp_lm_t,
-               mp_lh_t,
-               mp_mh_t,               
-               mp_ml_t,
-               mp_hm_t,
-               mp_hl_t),
-          custom.model.names = c(
-            "Low-Middle",
-            "Low-High",
-            "Middle-High",            
-            "Middle-Low",
-            "High-Middle",
-            "High-Low"
-          ),   caption.above = NULL,
-               caption = NULL,
-               custom.coef.map = ccoef,
-               digits = 2,
-               groups = list("Wave (Ref.= 2016)" = 3:4, "Mobility treatment x Wave (Ref.= 2016)" = 5:6),
-               custom.note = "Note: Cells contain regression coefficients with confidence intervals in parentheses. %stars.",
-               leading.zero = T,
-               use.packages = F,
-               booktabs = F,
-               scalebox = 0.80,
-               center = T,float.pos = "H!",
-               custom.gof.rows = list("Controls"=rep("Yes",6)))
-               
+g5+
+  theme(legend.text = element_text(size = 10))
 ```
 
-
-@tbl-inttime shows the causal heterogeneity of the mobility effect across the different waves of the survey. Regarding temporal heterogeneity, the only statistically significant interaction term is observed for the High→Middle trajectory in 2023 ($\beta_{\text{int}} = 0.19$), 95% CI [0.01, 0.38]). However, when this interaction is added to the baseline effect in 2016 (-0.19), the marginal effect of High→Middle mobility in 2023 is approximately zero, and its confidence interval includes the null. Thus, rather than indicating a reversal toward a positive effect, the evidence suggests that the negative impact of downward mobility from high backgrounds is confined to 2016 and attenuates over time. No comparable temporal changes are observed in the remaining trajectories. Overall, the results provide little support for strong time-conditional heterogeneity in mobility effects, beyond the fading of the initially negative High→Middle effect.
+I find no consistent evidence of heterogeneous causal effects across survey waves. @fig-interact-wave displays the marginal effects of mobility trajectories on market-justice preferences for pensions in 2016, 2018, and 2023. Across trajectories, the estimated ATTs remain small and their confidence intervals largely overlap over time. Upward mobility from middle origin shows a positive and statistically significant effect in 2016 (Middle→High, $\beta$ = 0.13, 95% CI [0.05, 0.22]) and downward mobility from high origin displays negative effects at baseline (High→Middle and High→Low, both $\beta$ ≈ −0.19, CIs excluding zero), but these patterns attenuate and become statistically indistinguishable from zero by 2023. Taken together, the results suggest that any initial pro-commodification response to upward mobility and de-commodifying response to downward mobility are not stable over time, and the causal effect of mobility on preferences for pension commodification is effectively time-invariant over the 2016–2023 period.
 
 
 ## Robustness check and sensitivity analysis
