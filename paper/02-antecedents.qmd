@@ -1,6 +1,6 @@
 # Theoretical and empirical background
 
-## Market justice preferences
+## Preferences for market-based welfare
 
 Beyond state’s capacity to reallocate resources from the advantaged to the vulnerable, market institutions also play a central role in distributing socially valuable goods and rewards [@koos_moral_2019; @lindh_bringing_2023]. As Polanyi [-@polanyi_great_1975] observed, economic integration in capitalist societies is primarily organized through market exchange, governed by a self-regulating price system embedded in institutional frameworks. These institutions are not mere aggregates of individual behavior, but social realities endowed with rules, mechanisms, and normative meanings that shape everyday thinking [@koos_moral_2019; @immergut_theoretical_1998]. In this sense, the economic order is mirrored in a moral economy: collectively shared norms and beliefs about justice in distribution, embedded and reinforced through institutions [@mau_inequality_2015; @svallfors_political_2007]. While most research from this perspective has focused on welfare institutions, recent scholarship has brought the market back into focus as a site of distributive justice beliefs and institutional responses to inequality [@lindh_bringing_2023]. In many countries, privatization and commodification have expanded market logic into core areas of social reproduction, such as healthcare, education, pensions, and social security, deepening inequality in access to these services [@gingrich_making_2011; @ferre_welfare_2023]. Yet public support for market-based welfare provision has grown, even in traditional welfare states, particularly among higher-income groups who view private alternatives as more efficient or higher in quality [@busemeyer_welfare_2020]. This shift calls for broader inquiry into how institutions like markets structure access to resources and legitimize inequalities [@satz_por_2019; @mau_inequality_2015].
 
@@ -66,3 +66,30 @@ Over recent decades, Chile has undergone a significant transformation in its cla
 Despite recurrent social unrest, Chile presents a paradoxical coexistence between strong conflict over inequality and widespread public legitimation of it. The October 2019 “social outburst”, a period of mass protests and severe political repression throughout the country,  crystallized discontent over the privatization and commodification of social services, alongside a crisis of political legitimacy [@somma_no_2021]. A survey during the protests identified pensions, healthcare, and education as the top demands [@nucleodesociologiacontingente_informe_2020], reflecting dissatisfaction with Chile’s stratified welfare regime. Yet, this unrest coexists with strong meritocratic beliefs and high tolerance for income inequality. Castillo [-@castillo_legitimacy_2011] shows that wage gaps between occupations are consistently justified, and the larger the perceived gap, the greater its legitimation, an effect amplified by Chile’s structural inequality. Moreover, perceptions of unfairness due to non-meritocratic factors often reinforce belief in effort and talent as legitimate bases for success [@castillo_multidimensional_2023], which are associated with lower perceived injustice [@castillo_meritocracia_2019]. Mac-Clure et al. [@mac-clure_justicia_2024] find that low and lower-middle status individuals are less likely than upper-status groups to view educational income differences as unfair. Qualitative research further reveals the internalization of the enterprising self [@mau_inequality_2015], understood as a way in which the subjectivization process arises in line with positioning the self in the market, generating its own market value and subjecting it to competition. Canales et al. [-@canalesceron_sujeto_2021] describes how families navigate school choice as investment decisions, while Panes [-@panes_criticas_2020] finds that many workers frame pension contributions as individual investments aimed at maximizing future returns. These representations suggest that market-based moral orientations are deeply embedded in Chilean subjectivities, offering fertile ground to study how support for market justice varies across welfare domains.
 
 Although still limited, recent research on market justice preferences in Chile indicates that support for these beliefs has increased in recent years across domains such as healthcare, pensions, and education, and that both objective and subjective dimensions of inequality shape them. Castillo et al. [-@castillo_perceptions_2025] show that agreement with the notion that it is fair for higher-income individuals to access better services was relatively low in 2016, but rose significantly by 2023—especially in the pension domain. Otero and Mendoza [-@otero_power_2024] provide evidence that social class, measured using the EGP scheme, influences these preferences: individuals in lower or subordinate class positions are less supportive of market-based access to welfare services compared to those in higher or privileged positions. Additionally, greater diversity in social class networks is associated with lower support for market justice. This is particularly relevant in the Chilean context, where one of the main determinants of class-diverse networks is intergenerational social mobility, which exposes individuals to relationships with people from different class backgrounds [@otero_lives_2022]. Regarding subjective factors, Castillo et al. [@castillo_perceptions_2025; @castillo_socialization_2024] find that individuals who endorse meritocratic beliefs—such as the idea that effort and talent are rewarded in Chile—are more likely to support market justice across welfare domains. 
+
+
+\begin{table}[htbp]
+\centering
+\caption{Overview of hypotheses with expected directional patterns}
+\begin{tabular}{p{3.2cm} p{3.2cm} p{4cm} p{5cm}}
+\toprule
+\textbf{Hypothesis} & \textbf{Focus} & \textbf{Expected pattern} & \textbf{Interpretation} \\
+\midrule
+\textbf{H1: Average mobility effect} &
+Effect of intergenerational mobility on preferences for pension commodification &
+Upward mobility $\uparrow$ higher support; downward mobility $\downarrow$ lower support relative to immobility &
+Mobility shapes preferences through material stakes and normative frames \\
+\midrule
+\textbf{H2a: Upward $\times$ Meritocracy} &
+Conditional effect of upward mobility by meritocracy &
+Under high meritocracy: amplified pro-market effect $\uparrow\uparrow$; under low meritocracy: modest increase $\uparrow$ &
+Meritocratic lenses strengthen pro-market reactions to upward mobility \\
+\midrule
+\textbf{H2b: Downward $\times$ Meritocracy} &
+Conditional effect of downward mobility by meritocracy &
+Under low meritocracy: moderate decrease $\downarrow$; under high meritocracy: negative effect attenuated $\searrow$ toward neutral or slightly positive attitudes &
+Meritocratic lenses weaken de-commodifying reactions to downward mobility \\
+\bottomrule
+\end{tabular}
+\end{table}
+

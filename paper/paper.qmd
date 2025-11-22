@@ -2,6 +2,7 @@
 title: "Preferences for the commodification of pensions in Chile: the rol of intergenerational social mobility"
 format:
   html: 
+    latex-environment: true
     code-fold: true
     html-math-method: katex
     number-sections: true
