@@ -21,12 +21,16 @@ $endfor$
 
 \date{$date$}
 
-% Colores extra por nombre
-\usepackage[dvipsnames]{xcolor}
+% Paquete para colores
+\usepackage{xcolor}
+
+% Definir color en formato HEX
+\definecolor{mylinkcolor}{HTML}{3827a1}
+
 % Ajustes de hipervínculos
-% \hypersetup{
-%   colorlinks = true,
-%   citecolor  = DarkSlateBlue,     % << citas
-%   urlcolor   = DarkSlateBlue  % URLs/DOIs
-% }
-% 
+\hypersetup{
+  colorlinks = true,       % activar links coloreados
+  linkcolor  = mylinkcolor,
+  citecolor  = mylinkcolor,
+  urlcolor   = mylinkcolor
+}

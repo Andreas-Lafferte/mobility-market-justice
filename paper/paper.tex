@@ -141,20 +141,6 @@
  
 
 
-\usepackage{booktabs}
-\usepackage{longtable}
-\usepackage{array}
-\usepackage{multirow}
-\usepackage{wrapfig}
-\usepackage{float}
-\usepackage{colortbl}
-\usepackage{pdflscape}
-\usepackage{tabu}
-\usepackage{threeparttable}
-\usepackage{threeparttablex}
-\usepackage[normalem]{ulem}
-\usepackage{makecell}
-\usepackage{xcolor}
 \usepackage[noblocks]{authblk}
 \renewcommand*{\Authsep}{, }
 \renewcommand*{\Authand}{, }
@@ -227,15 +213,19 @@ of intergenerational social mobility}
       
 \date{}
 
-% Colores extra por nombre
-\usepackage[dvipsnames]{xcolor}
+% Paquete para colores
+\usepackage{xcolor}
+
+% Definir color en formato HEX
+\definecolor{mylinkcolor}{HTML}{3827a1}
+
 % Ajustes de hipervínculos
-% \hypersetup{
-%   colorlinks = true,
-%   citecolor  = DarkSlateBlue,     % << citas
-%   urlcolor   = DarkSlateBlue  % URLs/DOIs
-% }
-% 
+\hypersetup{
+  colorlinks = true,       % activar links coloreados
+  linkcolor  = mylinkcolor,
+  citecolor  = mylinkcolor,
+  urlcolor   = mylinkcolor
+}
 \begin{document}
 \maketitle
 \begin{abstract}
@@ -245,8 +235,8 @@ Intergenerational mobility · Causal inference · Meritocracy · Chile
 
 
 \setstretch{1.5}
-This document was last modified at 2025-12-01 02:31:26 and it was last
-rendered at 2025-12-01 02:31:26.
+This document was last modified at 2025-12-01 02:47:28 and it was last
+rendered at 2025-12-01 02:47:28.
 
 \section{Introduction}\label{introduction}
 
