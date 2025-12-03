@@ -68,3 +68,4 @@ In the web page it is possible to see/download the paper in html and pdf formats
 - [Presentación seminario ISUC](https://andreas-lafferte.github.io/mobility-market-justice/presentations/seminario/mjp-mobility-seminario.html)
 - [Paper Draft (PDF)](https://andreas-lafferte.github.io/mobility-market-justice/paper/paper.pdf)
 - [Paper Draft (HTML)](https://andreas-lafferte.github.io/mobility-market-justice/paper/paper.html)
+- [Presentación Conference Social Mobility](https://andreas-lafferte.github.io/mobility-market-justice/presentations/social_mobility_2025/mjp-mobility-conf-2025.html)

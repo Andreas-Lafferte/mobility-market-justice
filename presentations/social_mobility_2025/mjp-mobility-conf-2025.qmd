@@ -1,0 +1,493 @@
+---
+bibliography: "bib/tesis-magister.bib"
+csl: "bib/apa6.csl"
+lang: es
+knitr:
+  opts_chunk:
+    collapse: true
+    comment: "#>"
+    R.options:
+      
+      knitr.graphics.auto_pdf: true
+format:
+  revealjs:
+    #logo: images/edumer.png
+    slide-number: true
+    theme: "libs/edumer.scss"
+    auto-stretch: false
+    title-slide-attributes:
+      visibility: false
+    transition: fade
+    transition-speed: slow
+# data-background-image: images/cover.jpg
+# data-background-size: cover
+    auto-play-media: true
+    mathjax: "default"
+editor_options: 
+  chunk_output_type: console
+---
+
+```{r setup2, include=FALSE}
+ knitr::opts_chunk$set(echo=FALSE, warning = FALSE,message = FALSE, cache = TRUE,out.width = '85%',fig.pos= "H"
+                       # , fig.align = 'center'
+                       )
+ # knitr::opts_knit$set(base.url = "../") #relative path for .html output file
+ # knitr::opts_knit$set(root.dir = "../") #relative path for chunks within .rmd files
+ options(scipen=999)
+ options(kableExtra.auto_format = FALSE)
+ options(knitr.kable.NA = '')
+ options(knitr.graphics.error = FALSE)
+ Sys.setlocale("LC_ALL", "ES_ES.UTF-8")
+ 
+ table_format = if (knitr::is_html_output()) {
+   #conditional instructions for kable
+   "html" #if html set "html" in format
+ } else if (knitr::is_latex_output()) {
+   "latex"#if latex set "latex" in format
+ }
+ 
+ library(conflicted)
+
+conflicts_prefer(dplyr::filter)
+```
+
+```{r}
+#| label: packages
+#| include: false
+
+
+
+if (! require("pacman")) install.packages("pacman")
+
+pacman::p_load(here,
+               kableExtra)
+
+options(scipen=999)
+rm(list = ls())
+
+```
+
+
+```{r}
+#| label: data
+#| include: false
+
+source(file = here("processing/prod_analysis_multinom.R"))
+library(here)
+library(janitor)
+library(dagitty)
+library(ggdag)
+library(tidyverse)
+
+
+```
+
+
+
+::: columns
+
+
+::: {.column width="20%"}
+
+
+![](images/logo_isuc.png)
+
+</br>
+
+![](images/jusmer_trans.png)
+
+
+
+:::
+
+::: {.column .column-right width="80%"}
+
+
+
+# **Preferences for the commodification of pensions in Chile: the rol of intergenerational social mobility**
+
+------------------------------------------------------------------------
+
+**Andreas Laffert^1^** 
+
+::: {.blue2 .medium}
+
+
+**^1^Institute of Sociology, Pontifical Catholic University of Chile**
+
+:::
+
+International Conference: The Future of Social Mobility
+
+3-4 December 2025, Chile
+
+:::
+:::
+
+
+# Context and motivation {.xlarge data-background-color="#523870"}
+
+
+## Context: marketisation and pensions
+
+::: {.box-inv-4 .sp-after .fragment style="font-size: 110%;"}
+
+Privatization and commodification of public goods and social services [@gingrich_making_2011; @ferre_welfare_2023]
+
+:::
+
+::: {.box-inv-4 .sp-after .fragment style="font-size: 110%;"}
+
+In Latin America, pension privatization and individual capitalization have been pivotal [@huber_political_2000; @verbic_political_2019]
+
+:::
+
+::: {.box-inv-4 .sp-after .fragment style="font-size: 110%;"}
+
+Reallocate old-age risks and reshape public norms about what is fair in welfare [@busemeyer_welfare_2020; @madero-cabib_private_2019; @borzutzky_pension_2012]
+
+:::
+
+::: {.box-inv-5 .sp-after-half .fragment style="font-size: 110%;"}
+
+Preferences for the market-based access to social welfare [@busemeyer_skills_2014; @castillo_perceptions_2025; @lindh_public_2015; @immergut_it_2020; @svallfors_political_2007]
+
+:::
+
+## Chile and the research gap
+
+
+::: {.box-inv-4 .sp-after .fragment style="font-size: 110%;"}
+
+Chile combines high inequality, deep welfare privatisation and contested private pensions [@flores_top_2020; @somma_no_2021; @madariaga_three_2020]
+
+:::
+
+
+::: {.box-inv-4 .sp-after .fragment style="font-size: 110%;"}
+
+High absolute mobility coexist with short-range class moves, restricted access to elite positions, and persistent intergenerational inequalities [@lopez-roldan_comparative_2021; @salgado_uplifting_2025; @torche_intergenerational_2014]
+:::
+
+
+::: {.box-inv-4 .sp-after .fragment style="font-size: 110%;"}
+
+We know that support for market-based services is stratified [@lindh_public_2015; @busemeyer_welfare_2020; @kerner_pension_2020; @otero_power_2024] and linked to meritocracy [@castillo_perceptions_2025], but less about how social mobility and meritocratic beliefs shape these preferences in the pension domain.
+:::
+
+
+## Research questions and H1
+
+::: {.incremental .highlight-last style="font-size: 120%;"}
+
+- RQ1: How does intergenerational social mobility affect preferences for pension commodification in Chile?
+
+- Social mobility changes incomes, security and risk exposure, altering material interests in a funded DC system [@busemeyer_welfare_2020; @helgason_longterm_2023; @mau_inequality_2015]
+
+- Social mobility and preferences for redistribution and social spending [@alesina_intergenerational_2018; @rodriguez_intergenerational_2024; @langsaether_explaining_2022; @ares_changing_2020; @gugushvili_subjective_2017]
+
+- $H_1$: Compared to immobility, intergenerational upward mobility is associated with stronger, and downward mobility with weaker, support for the commodification of pensions 
+
+:::
+
+## Research questions and H2
+
+::: {.incremental .highlight-last style="font-size: 120%;"}
+
+- RQ2: How do meritocratic beliefs condition the mobility–commodification relationship?
+
+- Social mobility reshapes inequality attitudes by pushing the upwardly mobile toward meritocratic views and the downwardly mobile toward more structural accounts, with strong meritocratic beliefs acting as a key channel of these effects [@mijs_belief_2022; @gugushvili_intergenerational_2016; @bucca_merit_2016; @traini_climbing_2025; @matamoros-lima_social_2025; @deng_its_2025]
+
+- $H_{2}$: Under high meritocracy, upward mobility should be more pro-commodification and downward mobility less de-commodifying than under low meritocracy
+
+:::
+
+
+# Method {.xlarge data-background-color="#523870"}
+
+(M)odel, (I)nquiry, (D)ata, (A)nswer estrategy [@blair_research_2023]
+
+## Causal model (M): @breen_effects_2024
+
+::::: columns
+::: {.column width="50%"}
+::: {.fragment}
+
+
+
+![](images/breen.png)
+
+:::
+
+
+:::
+
+::: {.column width="50%" .incremental .highlight-last style="font-size: 110%;"}
+
+- I follow @breen_effects_2024 to estimate causal effects of intergenerational mobility.
+- For each origin class $O=j$, I compare movers from $j$ to $k$ with their counterfactual outcome if they had remained in $j$
+
+
+:::
+:::::
+
+## A Causal Model for Mobility Effects 
+
+```{r}
+#| label: fig-dag
+#| out-width: '95%'
+#| fig-cap: "Causal graph of the effect of intergenerational social mobility on preferences for commodification. Y = preferences for pension commodification, D = an individual’s class of destination, O = an individual’s class of origin, C = different attributes determined in childhood or earlier that affects an individual’s class of origin and destination. Finally, U = unobserved factors influencing origin attributes."
+#| fig-cap-location: bottom
+#| echo: false
+#| warning: false
+#| message: false
+
+dag_mjp <- dagify(
+  Y ~ D + C,
+  D ~ O + C,
+  O ~ C,
+  C ~ U,
+  coords = time_ordered_coords(
+    list(
+      "U",
+      c("C", "O"),
+      "D",
+      "Y"
+    )
+  ),
+  exposure = "D",
+  outcome = "Y",
+  labels = c(
+    Y = "Y",
+    D = "D",
+    O = "O",
+    C = "C",
+    U = "U"
+  )
+)
+
+curvatures <- rep(0, 8)
+curvatures[3] <- -.25
+
+dag_mjp |>
+  tidy_dagitty() |>
+  ggplot(aes(x, y, xend = xend, yend = yend)) +
+  geom_dag_point(shape = 21, fill = "black", size = 14, stroke = 0.8) +
+  geom_dag_edges_arc(curvature = curvatures) +
+  geom_dag_text(aes(label = label), color = "white", fontface = "bold", size = 4) +
+  theme_dag()
+
+```
+
+
+## Inquiry and estimand
+::: {.incremental .highlight-last style="font-size: 120%;"}
+
+- How does intergenerational social mobility affect individuals’ preferences for the commodification of pensions in Chile?
+
+- @breen_effects_2024: Average causal effect of moving from origin class *j* to destination class *k*, comparing individuals who actually reach *k* with their counterfactual outcome had they remained in their origin *j* (@eq-att).
+
+- Formally,  for individuals with origin $(O=j)$ who attain destination $(D=k)$, the estimand is:
+
+::: 
+
+::: {.fragment}
+$$ 
+ATT_{j,k,j} = E\big[Y(D = k) \mid O = j, D = k \big] - E\big[Y(D = j) \mid O = j, D = k \big]
+$${#eq-att}
+:::
+
+## Data (D)
+
+::: {.incremental .highlight-last style="font-size: 120%;"}
+
+- [ELSOC](https://coes.cl/elsoc/) (COES): national urban panel 2016–2023; stratified, cluster, multistage probability sampling; target population: regular residents aged 18–75
+
+- I analyze 2016, 2018, and 2023 based on the availability of occupational variables
+
+- Analytical sample: *N*=3,435 observations nested in *N*=1,787 individuals (2016: 914; 2018: 1,377; 2023: 1,144)
+
+- Subsamples by mobility trajectories (e.g., low→low, low→medium), retaining movers and non-movers paired from the same class of origin
+:::
+
+
+## Outcome
+
+```{r}
+#| label: fig-desc
+#| fig-cap-location: top
+#| fig-cap: "Distribution of responses for pension commodification preferences in Chile (2016-2023)"
+#| fig-align: center
+#| out-width: '130%'
+
+g1 +
+  labs(title = "It is fair that people with higher incomes have better pensions than people\nwith lower incomes?",
+       subtitle = "Likert: 1 (Strongly disagree) - 5 (Strongly agree)") +
+  theme(legend.position = "top",
+        plot.title = element_text(face = "bold"),
+        text = element_text(size = 16)) 
+
+```
+
+## Treatment: mobility and class matrix (D)
+
+::: {.incremental .highlight-last style="font-size: 120%;"}
+
+- **Class assignment (O and D):** Using ISCO-08/ISEI, I define origin $O$ and destination $D$ based on tertiles ∈ {low, medium, high}
+- For each origin $(O=j)$, the treatment is to reach $(D=k)$ (mobile) vs. immobile $(D=j)$
+
+
+:::
+
+::: {.fragment}
+
+```{r}
+#| label: tbl-matrix
+#| tbl-cap: "Occupational mobility by occupational groups"
+#| tbl-cap-location: top
+#| results: asis
+#| echo: false
+library(janitor)
+db %>%
+  tabyl(estrato_orig, estrato_ocupa) %>%
+  adorn_totals(where = c("row", "col")) %>%     # agrega totales
+  adorn_percentages("row") %>%                  # porcentajes por fila
+  adorn_pct_formatting(digits = 1) %>%          # formato %
+  adorn_ns() %>% 
+  as_tibble() %>% 
+  mutate(Offspring = NA) %>% 
+  select(estrato_orig, Offspring, everything()) %>% 
+  kableExtra::kable(format = "html", 
+                    booktabs= T,
+                    align = 'c', 
+                    col.names = c("Father↓", "Offspring→", "Low", "Middle", "High", "Total"),
+                    caption = NULL) %>%
+  kableExtra::kable_styling(latex_options = "hold_position", 
+                            bootstrap_options = "striped",
+                            full_width = F) 
+
+
+```
+
+
+:::
+
+## Weights and covariates (D → A)
+
+::: {.incremental .highlight-last style="font-size: 120%;"}
+
+
+- Pre-treatment covariates $C$: (a) parental education (highest of father/mother), in 10 ordinal categories from no schooling to postgraduate studies; (b) co-residence with both parents at age 15 (0 = no, 1 = yes); (c) nationality (0 = non-Chilean, 1 = Chilean); (d) age in years; (e) sex (0 = male, 1 = female); and (f) indigenous ethnicity (0 = no, 1 = yes).
+- Within each origin, entropy balancing reweights non-movers so their covariate distribution matches that of movers → stabilised IPW–ATT.
+- These weights target the ATT and help adjust for selection into mobility.
+
+:::
+
+
+## Heterogeneity and controls (D → A)
+
+::: {.incremental .highlight-last style="font-size: 120%;"}
+
+- Meritocracy: two items (effort and intelligence/skills rewarded), averaged and dichotomised into low vs. high meritocracy.
+
+- I estimate models with mobility × meritocracy interactions to study heterogeneous treatment effects.
+
+- The same pre-treatment covariates $C$ enter the outcome model to block backdoor paths and achieve double robustness.
+
+:::
+
+
+## Analytic strategy (A)
+
+
+::: {.incremental .highlight-last style="font-size: 120%;"}
+
+- For each origin class, I estimate weighted linear probability models:
+
+:::
+
+::: {.fragment style="font-size: 120%;"}
+$$
+Y_{it}=\alpha+\beta T_i+X_i'\gamma+\lambda_t+\varepsilon_{it}
+$$ {#eq-final}
+:::
+
+::: {.incremental style="font-size:120%;"}
+
+- Models use stabilised IPW–ATT weights, wave fixed effects and CR2 cluster-robust SEs by individual.
+- $\beta$ is interpreted as $\widehat{ATT}_{j,k,j}$: the causal effect of reaching destination $k$ versus staying in origin $j$
+
+:::
+
+
+# Results {.xlarge data-background-color="#523870"}
+
+
+## Mobility effects
+
+::: {.fragment style="font-size: 120%;"}
+
+```{r}
+#| label: fig-mp
+#| fig-cap-location: top
+#| fig-cap: "Mobility effects on preferences for pension comodification"
+#| fig-align: center
+#| out-width: '180%'
+#| fig-asp: 0.6
+
+g3 +
+  theme(text = element_text(size = 14))
+```
+
+:::
+
+## The rol of meritocracy
+
+::: {.fragment style="font-size: 120%;"}
+
+```{r}
+#| label: fig-mp_i
+#| fig-cap-location: top
+#| fig-cap: "Mobility effects on preferences for pension comodification, by meritocratic perceptions"
+#| fig-align: center
+#| out-width: '160%'
+#| fig-asp: 0.6
+
+g4+
+  theme(text = element_text(size = 14))
+```
+
+:::
+
+## Robustness check and sensitivity analysis
+
+::: {.incremental .highlight-last style="font-size: 120%;"}
+
+- **Unmeasured confounding** [@cinelli_making_2020]: **Moderate robustness** in Middle→High and High→Low; borderline in High→Middle.
+
+- **Robustness check**: I re-estimate the models under three alternative codings of the outcome: (i) recoding the neutral category as agreement (3–5 vs. 1–2), (ii) excluding neutral responses from the analysis, and (iii) using the original 5-point item in a linear specification. The results are maintained and even improved (only in ii).
+:::
+
+# Discussion and conclusions {data-background-color="#523870"}
+
+
+## Discussion and conclusions
+
+::: {.incremental style="font-size: 120%;"}
+
+1) Most Chileans reject income-based pension allocation, yet support for this market principle has grown in a highly marketised and unequal setting [@lindh_public_2015; @castillo_perceptions_2025].
+
+2) Intergenerational moves into and out of upper-status positions causally shape support for pension commodification, while donward High-Middle y High-Low decrease it [@gugushvili_subjective_2017; @rodriguez_intergenerational_2024; @ares_changing_2020]; meritocratic beliefs correlate with these preferences but seem to operate on a parallel track.
+
+3) Future work: better origin-side measures, richer batteries of market-justice items and comparative applications beyond Chile.
+
+
+:::
+
+
+# Thanks!
+
+-   **Github project:** <https://github.com/Andreas-Lafferte/mobility-market-justice>
+
+## References
+

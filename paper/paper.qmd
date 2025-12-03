@@ -1,5 +1,7 @@
 ---
 title: "Preferences for the commodification of pensions in Chile: the rol of intergenerational social mobility"
+date: today
+date-format: "MMMM, YYYY"
 format:
   html: 
     latex-environment: true
@@ -28,7 +30,7 @@ editor: source
 bibliography: "../input/bib/tesis-magister.bib"
 csl: "../input/bib/apa6.csl"
 author:
-  - name: Andreas Laffert Tamayo
+  - name: 'Andreas Laffert Tamayo\thanks{This M.A. thesis in Sociology is one of my first achievements on the long path toward becoming an academic committed to the study of inequalities and to a public sociology. This journey would not have been possible without my relentless effort and the support of my family, friends and colleagues. Last but certainly not least, I want to acknowledge the motivation behind my research: the everyday processes through which neoliberalism is legitimised by ordinary people. This project was made possible through the financial support of ANID (BECAS/MAGÍSTER NACIONAL 2024) and the intellectual support and academic environment provided by the FONDECYT Regular project Nº 1250518. Any errors or omissions in this work are my sole responsibility. Comments are welcome at: andreas.laffert@uchile.cl}'
     orcid: 0000-0002-9008-2454
     email: alaffertt@estudiante.uc.cl 
     affiliations:
@@ -38,7 +40,7 @@ affiliations:
     name: Instituto de Sociología, Pontificia Universidad Católica de Chile
 citeproc: true
 abstract: | 
- My abstract
+ The privatisation and marketisation of social services have been linked to feedback effects on public attitudes towards welfare and market inequality. From a moral-economy perspective, prior research shows that support for market-based access to core services depends on socio-structural position, inequality beliefs and institutional context. Yet, we know little about how citizens judge the fairness of pension commodification, and in particular how intergenerational mobility shapes these judgements and whether meritocratic perceptions condition this relationship. I address this gap by analysing preferences for market-based pension access in Chile, a highly unequal country with constrained mobility and a private pension system based on mandatory individual capitalisation that depends heavily on contribution histories. Drawing on three waves of the Chilean Longitudinal Social Survey (ELSOC; 3,435 observations on 1,787 individuals) and under explicit identification assumptions, I apply a recent causal framework for mobility effects that treats destination class as a treatment conditional on origin class, and estimate heterogeneous destination effects on support for pension commodification. Results show that upward mobility from middle to upper occupational status increases support for market-based pension access relative to immobility. In contrast, downward mobility from upper to middle or lower status reduces it. Meritocratic perceptions do not significantly moderate these effects, suggesting that mobility and meritocracy operate through largely separate pathways. These findings advance research on welfare marketisation by providing causal evidence on how intergenerational mobility shapes preferences for market-based welfare, and by assessing the potential moderating role of meritocratic perceptions in a highly commodified regime.
   \newline
  **Keywords**: Pension commodification · Intergenerational mobility · Causal inference · Meritocracy · Chile
 link-citations: true
@@ -75,9 +77,6 @@ conflicts_prefer(dplyr::filter)
 
 ```
 
-
-This document was last modified at {{< modified >}}
-and it was last rendered at {{< now >}}.
 
 :::: {.justify}
 

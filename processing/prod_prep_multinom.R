@@ -197,13 +197,25 @@ db <- elsoc_long_2016_2023 %>%
 
 db <- left_join(db, ola6, by = "idencuesta")
 
+library(DIGCLASS)
+
+
 db$isco88to08 <- occupar::isco88to08(db$ciuo88_m03)
+db$isco88to08_dig <- DIGCLASS::isco88_to_isco08(as.character(db$ciuo08_m03))
+
+frq(db$isco88to08)
+frq(db$isco88to08_dig)
+
 db$isco08 <- NA
 db$isco08[db$ola %in% c(3,7)] <- db$ciuo08_m03[db$ola %in% c(3,7)]
 db$isco08[db$ola %in% c(1)] <- db$isco88to08[db$ola %in% c(1)]
 
 db <- db %>% 
-  mutate(isei08_ocupa = occupar::isco08toISEI08(isco08))
+  mutate(isei08_ocupa = occupar::isco08toISEI08(isco08),
+         isei08_ocupa_dig = DIGCLASS::isco08_to_isei(as.character(isco08)))
+
+frq(db$isei08_ocupa)
+frq(db$isei08_ocupa_dig)
 
 ## Estimar IPW
 

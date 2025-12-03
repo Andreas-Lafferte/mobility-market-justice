@@ -205,23 +205,19 @@
 of intergenerational social mobility}
 
 
-  \author{Andreas Laffert Tamayo}
+  \author{Andreas Laffert
+Tamayo\thanks{This M.A. thesis in Sociology is one of my first achievements on the long path toward becoming an academic committed to the study of inequalities and to a public sociology. This journey would not have been possible without my relentless effort and the support of my family, friends and colleagues. Last but certainly not least, I want to acknowledge the motivation behind my research: the everyday processes through which neoliberalism is legitimised by ordinary people. This project was made possible through the financial support of ANID (BECAS/MAGÍSTER NACIONAL 2024) and the intellectual support and academic environment provided by the FONDECYT Regular project Nº 1250518. Any errors or omissions in this work are my sole responsibility. Comments are welcome at: andreas.laffert@uchile.cl}}
             \affil{%
                   Instituto de Sociología, Pontificia Universidad
                   Católica de Chile
               }
       
-\date{}
+\date{December, 2025}
 
-% Paquete para colores
 \usepackage{xcolor}
-
-% Definir color en formato HEX
-\definecolor{mylinkcolor}{HTML}{3827a1}
-
-% Ajustes de hipervínculos
+\definecolor{mylinkcolor}{HTML}{413395}
 \hypersetup{
-  colorlinks = true,       % activar links coloreados
+  colorlinks = true,
   linkcolor  = mylinkcolor,
   citecolor  = mylinkcolor,
   urlcolor   = mylinkcolor
@@ -229,15 +225,39 @@ of intergenerational social mobility}
 \begin{document}
 \maketitle
 \begin{abstract}
-My abstract \newline \textbf{Keywords}: Pension commodification ·
-Intergenerational mobility · Causal inference · Meritocracy · Chile
+The privatisation and marketisation of social services have been linked
+to feedback effects on public attitudes towards welfare and market
+inequality. From a moral-economy perspective, prior research shows that
+support for market-based access to core services depends on
+socio-structural position, inequality beliefs and institutional context.
+Yet, we know little about how citizens judge the fairness of pension
+commodification, and in particular how intergenerational mobility shapes
+these judgements and whether meritocratic perceptions condition this
+relationship. I address this gap by analysing preferences for
+market-based pension access in Chile, a highly unequal country with
+constrained mobility and a private pension system based on mandatory
+individual capitalisation that depends heavily on contribution
+histories. Drawing on three waves of the Chilean Longitudinal Social
+Survey (ELSOC; 3,435 observations on 1,787 individuals) and under
+explicit identification assumptions, I apply a recent causal framework
+for mobility effects that treats destination class as a treatment
+conditional on origin class, and estimate heterogeneous destination
+effects on support for pension commodification. Results show that upward
+mobility from middle to upper occupational status increases support for
+market-based pension access relative to immobility. In contrast,
+downward mobility from upper to middle or lower status reduces it.
+Meritocratic perceptions do not significantly moderate these effects,
+suggesting that mobility and meritocracy operate through largely
+separate pathways. These findings advance research on welfare
+marketisation by providing causal evidence on how intergenerational
+mobility shapes preferences for market-based welfare, and by assessing
+the potential moderating role of meritocratic perceptions in a highly
+commodified regime. \newline \textbf{Keywords}: Pension commodification
+· Intergenerational mobility · Causal inference · Meritocracy · Chile
 \end{abstract}
 
 
 \setstretch{1.5}
-This document was last modified at 2025-12-01 02:47:28 and it was last
-rendered at 2025-12-01 02:47:28.
-
 \section{Introduction}\label{introduction}
 
 What is the legitimate scope of market inequality in the eyes of the
@@ -920,7 +940,7 @@ individualistic attributions of poverty and wealth
 (\citeproc{ref-bucca_merit_2016}{Bucca, 2016};
 \citeproc{ref-gugushvili_intergenerational_2016}{Gugushvili, 2016b};
 \citeproc{ref-mijs_belief_2022}{Mijs et al., 2022};
-\citeproc{ref-shariff_income_2016}{Shariff et al., 2016}), even in a
+\citeproc{ref-traini_climbing_2025}{Traini et al., 2025}), even in a
 highly unequal and low mobility setting were the narratives of
 individual success reinforces (\citeproc{ref-deng_its_2025}{Deng \&
 Wang, 2025}). Studies of economic elites in Chile similarly report
@@ -939,11 +959,12 @@ meritocratic convictions, status loss can also be internalised as
 personal failure, sustaining system-justifying attitudes and the
 legitimation of existing hierarchies as a psychological defence strategy
 (\citeproc{ref-day_movin_2017}{Day \& Fiske, 2017};
-\citeproc{ref-deng_its_2025}{Deng \& Wang, 2025};
-\citeproc{ref-mau_inequality_2015}{Mau, 2015}). In sum, upward mobility
-is generally associated with stronger meritocratic perceptions, whereas
-downward mobility is more closely linked to structural explanations of
-inequality, without necessarily eroding meritocratic convictions.
+\citeproc{ref-mau_inequality_2015}{Mau, 2015};
+\citeproc{ref-traini_climbing_2025}{Traini et al., 2025}). In sum,
+upward mobility is generally associated with stronger meritocratic
+perceptions, whereas downward mobility is more closely linked to
+structural explanations of inequality, without necessarily eroding
+meritocratic convictions.
 
 The ways in which social mobility trajectories shape interpretations of
 meritocracy can determine whether mobility translates into stronger or
@@ -965,8 +986,9 @@ inequality supports this mechanism. Survey studies suggest that
 subjective social mobility shapes support for redistribution and pension
 spending through self-serving bias
 (\citeproc{ref-gugushvili_subjective_2017}{Gugushvili, 2017};
-\citeproc{ref-schmidt_experience_2011}{Schmidt, 2011}), although recent
-work indicates that this mechanism is evident only under explicit
+\citeproc{ref-schmidt_experience_2011}{Schmidt, 2011};
+\citeproc{ref-traini_climbing_2025}{Traini et al., 2025}), although
+recent work indicates that this mechanism is evident only under explicit
 constraints in experimental designs
 (\citeproc{ref-molina_its_2019}{Molina et al., 2019}). More in line with
 the acculturation theories, experimental reserach has shown that
@@ -977,12 +999,17 @@ whereas exposure to low or downward mobility produces the opposite
 pattern; crucially, these effects are partly mediated by stronger
 meritocratic perceptions (\citeproc{ref-deng_its_2025}{Deng \& Wang,
 2025}; \citeproc{ref-matamoros-lima_social_2025}{Matamoros-Lima et al.,
-2025}; \citeproc{ref-shariff_income_2016}{Shariff et al., 2016}). In
-this framework, meritocratic perceptions condition the attitudinal
-consequences of mobility by amplifying the pro-market effects of upward
-mobility and muting the critical potential of downward mobility; thus, I
-treat meritocratic perceptions as a moderating mechanism linking
-intergenerational mobility to preferences for pension commodification.
+2025}; \citeproc{ref-shariff_income_2016}{Shariff et al., 2016}).
+However, recent research has tested Piketty's (1995) hypothesis that
+meritocracy would mediate the effect of upward social mobility on
+redistributive preferences, without finding support for it
+(\citeproc{ref-rodriguez_intergenerational_2024}{Rodriguez \&
+Matilla-Garcia, 2024}). In this framework, meritocratic perceptions
+condition the attitudinal consequences of mobility by amplifying the
+pro-market effects of upward mobility and muting the critical potential
+of downward mobility; thus, I treat meritocratic perceptions as a
+moderating mechanism linking intergenerational mobility to preferences
+for pension commodification.
 
 Accordingly, the second set of hypotheses of this study is:
 
@@ -1892,27 +1919,28 @@ minority view. However, it is becoming more common, in line with
 longitudinal evidence of rising support for income-based access to
 welfare services in Chile
 (\citeproc{ref-castillo_perceptions_2025}{Castillo, Laffert, et al.,
-2025}). This coexistence unfolds in a system of mandatory, privately
+2025}). This coexistence unfolds within a system of mandatory, privately
 managed, defined-contribution accounts that tightly link old-age income
-to earnings, contribution density and financial returns. This design has
-produced low and unequal pensions and state interventions against
-old-age poverty (\citeproc{ref-galvez_pensiones_2024}{Gálvez et al.,
-2024}; \citeproc{ref-madero-cabib_private_2019}{Madero-Cabib et al.,
-2019}), while framing pensions as personal investments rather than
-solidarity-based rights and promoting individual responsibility and
-contribution-based desert
-(\citeproc{ref-borzutzky_pension_2012}{Borzutzky, 2012}). The Chilean
-case fits evidence that supports the claim that income-based welfare
-access is stronger in liberal, marketised regimes
-(\citeproc{ref-lindh_public_2015}{Lindh, 2015}). This coexistence also
+to earnings, contribution density and financial returns
+(\citeproc{ref-galvez_pensiones_2024}{Gálvez et al., 2024};
+\citeproc{ref-madero-cabib_private_2019}{Madero-Cabib et al., 2019}),
+and that frame pensions as personal investments rather than
+solidarity-based rights, promoting individual responsibility,
+self-economisation, contribution-based desert and casting workers as
+employee-entrepreneurs who must navigate financial risks and ``make
+their money work'' (\citeproc{ref-borzutzky_pension_2012}{Borzutzky,
+2012}). The Chilean case thus fits evidence that income-based welfare
+access is more strongly endorsed in liberal, marketised regimes
+(\citeproc{ref-lindh_public_2015}{Lindh, 2015}).This coexistence also
 echoes recent pension conflict---from the ``No+AFP'' protests to
 post-pandemic withdrawals and the ``Con mi plata NO'' mobilisation
 (\citeproc{ref-galvez_con_2023}{Gálvez, 2023})---and illustrates mixed
 policy feedback: the same regime generates rights-based critiques and
 proprietarian defences of pension commodification. Together, these
-patterns show that, despite discontent and a legitimacy crisis, support
-for pension commodification remains salient, raising the question of
-which social trajectories and beliefs underpin it.
+patterns suggest that, despite discontent and a legitimacy crisis,
+support for pension commodification remains a salient and contested
+orientation, raising the question of which social trajectories and
+beliefs underpin it.
 
 Turning to the social mobility hypothesis, the results support a causal
 role of intergenerational mobility in shaping preferences for pension
@@ -1969,45 +1997,49 @@ individualistic attributions of poverty and wealth. In contrast,
 downward or blocked mobility is more often associated with structural
 explanations of inequality and more ambivalent meritocratic beliefs,
 sometimes including the internalisation of status loss as personal
-failure (\citeproc{ref-atria_economic_2020}{Atria et al., 2020};
-\citeproc{ref-bucca_merit_2016}{Bucca, 2016};
-\citeproc{ref-davidai_why_2018}{Davidai, 2018};
+failure (\citeproc{ref-davidai_why_2018}{Davidai, 2018};
 \citeproc{ref-day_movin_2017}{Day \& Fiske, 2017};
 \citeproc{ref-deng_its_2025}{Deng \& Wang, 2025};
 \citeproc{ref-gugushvili_intergenerational_2016}{Gugushvili, 2016b};
-\citeproc{ref-mijs_how_2022}{Mijs \& Hoy, 2022}). Following Mau's
-(\citeproc{ref-mau_inequality_2015}{2015}) account of the ``majority
-class'', I therefore expected upward mobility under strong meritocratic
-convictions to be especially conducive to endorsing commodified
-pensions, and strong meritocracy to dampen the usual de-commodifying
-effect of downward mobility. Empirically, however, the interaction
-models offer little support for this mechanism. Meritocratic perceptions
-do not systematically moderate the mobility effects identified in the
-primary analysis, and the few trajectory-specific patterns that
-tentatively point in the expected direction are small and imprecisely
-estimated. This result contrasts with survey and experimental studies
-showing that upward mobility experiences or exposure to self-made
-narratives reduce support for redistribution and public pension spending
-partly by reinforcing meritocratic convictions
+\citeproc{ref-mijs_how_2022}{Mijs \& Hoy, 2022};
+\citeproc{ref-traini_climbing_2025}{Traini et al., 2025}). Following
+Mau's (\citeproc{ref-mau_inequality_2015}{2015}) account of the
+``majority class'', I therefore expected upward mobility under strong
+meritocratic convictions to be especially conducive to endorsing
+commodified pensions, and strong meritocracy to dampen the usual
+de-commodifying effect of downward mobility. Empirically, however, the
+interaction models offer little support for this mechanism. Meritocratic
+perceptions do not systematically moderate the mobility effects
+identified in the primary analysis, and the few trajectory-specific
+patterns that tentatively point in the expected direction are small and
+imprecisely estimated. This result contrasts with survey and
+experimental studies showing that upward mobility experiences or
+exposure to self-made narratives reduce support for redistribution and
+public pension spending partly by reinforcing meritocratic convictions
 (\citeproc{ref-deng_its_2025}{Deng \& Wang, 2025};
 \citeproc{ref-gugushvili_subjective_2017}{Gugushvili, 2017};
 \citeproc{ref-matamoros-lima_social_2025}{Matamoros-Lima et al., 2025};
 \citeproc{ref-molina_its_2019}{Molina et al., 2019};
 \citeproc{ref-schmidt_experience_2011}{Schmidt, 2011};
-\citeproc{ref-shariff_income_2016}{Shariff et al., 2016}). One
-possibility is that, in this context, intergenerational occupational
-mobility---as operationalised here---has limited impact on meritocratic
-perceptions, which appear more weakly tied to mobility trajectories than
-previous research suggests and more strongly anchored in broader
-socialisation processes and class-specific cultures.
+\citeproc{ref-shariff_income_2016}{Shariff et al., 2016}), and aligns
+with recent research that has shown that meritocracy does not mediate
+the effect of social mobility on redistributive preferences
+(\citeproc{ref-rodriguez_intergenerational_2024}{Rodriguez \&
+Matilla-Garcia, 2024}). One possibility is that, in this context,
+intergenerational occupational mobility---as operationalised here---has
+limited impact on meritocratic perceptions, which appear more weakly
+tied to mobility trajectories than previous research suggests and more
+strongly anchored in broader socialisation processes and class-specific
+cultures.
 
-This study makes several contributions. Substantively, it offers one of
-the first systematic analyses of preferences for pension commodification
-in Chile's highly unequal and marketised pension regime, addressing
-Mau's (\citeproc{ref-mau_inequality_2015}{2015}) question of why core
-elements of neoliberal welfare arrangements gain public acceptance. By
-showing that upward and downward intergenerational mobility into and out
-of upper-class positions causally shape support for market-based pension
+The contributions of this study can be summarized as follows.
+Substantively, it offers one of the first systematic analyses of
+preferences for pension commodification in Chile's highly unequal and
+marketised pension regime, addressing Mau's
+(\citeproc{ref-mau_inequality_2015}{2015}) question of why core elements
+of neoliberal welfare arrangements gain public acceptance. By showing
+that upward and downward intergenerational mobility into and out of
+upper-class positions causally shape support for market-based pension
 allocation, the findings highlight social mobility as a key source of
 legitimation for commodified pensions. Second, the article advances
 research on market justice and market-based welfare preferences by
@@ -2025,29 +2057,30 @@ effects to survey data, formalising mobility as origin-specific
 treatment effects and estimating these using linear probability models
 with inverse probability weighting.
 
-Despite these contributions, the study has limitations that should be
+Despite its merits, the study has limitations that should be
 acknowledged and read as avenues for future improvement. First, the
 causal estimates hinge on the construction of inverse probability
 weighting within Breen and Ermisch's
 (\citeproc{ref-breen_effects_2024}{2024}) framework. Identification
-relies on conditional independence given a relatively limited set of
-origin-side covariates, together with positivity and SUTVA. Entropy
-balancing helps to enforce covariate balance and mitigate selection on
-observables, but unmeasured confounding cannot be ruled out. Sensitivity
-analyses suggest moderate robustness to omitted variables; therefore,
-the estimates should be interpreted with caution. Second, while the
-analysis identifies mobility effects on preferences, it does not explain
-why or how they arise. The results are analysed through material
-self-interest and acculturation mechanisms. Still, the study does not
-implement formal causal mediation analysis, nor can it determine whether
-meritocratic perceptions function as mediators rather than mere
-correlates. Third, the findings are context-specific: they are derived
-from Chile, a highly unequal and strongly marketised pension regime,
-which enhances internal validity but limits external validity. The
-patterns documented here, therefore, cannot be straightforwardly
-generalised to countries with different welfare institutions, mobility
-regimes or levels of inequality, and should be seen as a theoretically
-informed case study rather than a cross-national pattern.
+relies on conditional independence given a relatively limited but
+relevant set of origin-side covariates, together with positivity and
+SUTVA. Entropy balancing helps to enforce covariate balance and mitigate
+selection on observables, but unmeasured confounding cannot be ruled
+out. Sensitivity analyses suggest moderate robustness to omitted
+variables; therefore, the estimates should be interpreted with caution.
+Second, while the analysis identifies mobility effects on preferences,
+it does not explain why or how they arise. The results are analysed
+through material self-interest and acculturation mechanisms. Still, the
+study does not implement formal causal mediation analysis, nor can it
+determine whether meritocratic perceptions function as mediators rather
+than mere correlates. Third, the findings are context-specific: they are
+derived from Chile, a highly unequal country with a strongly marketised
+pension regime, which enhances internal validity but limits external
+validity. The patterns documented here, therefore, cannot be
+straightforwardly generalised to countries with different welfare
+institutions, mobility regimes or levels of inequality, and should be
+seen as a theoretically informed case study rather than a cross-national
+pattern.
 
 Future research could extend these findings in several directions.
 First, there is a need for richer measures of preferences for pension
@@ -2060,17 +2093,18 @@ be addressed by including more detailed origin-side covariates and
 life-course data, repeated measures of meritocratic perceptions, and
 causal mediation analyses that unpack mechanisms such as material
 self-interest, risk exposure, and meritocratic frames, alongside
-alternative measures of mobility based on class schemas, income
+alternative mobility measures based on class schemas, income
 trajectories, or wealth. Third, comparative designs would clarify how
 institutional context shapes the attitudinal consequences of
 intergenerational mobility. Applying similar causal strategies in
 countries with different welfare regimes, levels of inequality, mobility
 patterns, and degrees of pension marketisation would show whether the
 Chilean pattern is context-specific or part of a broader configuration
-linking mobility, merit and support for market-based welfare.
-Ultimately, clarifying when and for whom market allocation of pensions
-is judged fair is crucial to understanding the legitimate reach of
-welfare commodification in unequal, marketised societies.
+linking mobility, merit and support for market-based welfare
+(\citeproc{ref-mau_inequality_2015}{Mau, 2015}). Ultimately, clarifying
+when and for whom market allocation of pensions is judged fair is
+crucial to understanding the legitimate reach of welfare commodification
+in unequal, marketised societies.
 
 \section{References}\label{references}
 
@@ -2721,6 +2755,13 @@ Torche, F. (2005). Unequal {But Fluid}: {Social Mobility} in {Chile} in
 Torche, F. (2014). Intergenerational {Mobility} and {Inequality}: {The
 Latin American Case}. \emph{Annual Review of Sociology}, \emph{40}(1),
 619--642. \url{https://doi.org/10.1146/annurev-soc-071811-145521}
+
+\bibitem[\citeproctext]{ref-traini_climbing_2025}
+Traini, C., Ehmes, S., \& Gangl, M. (2025). Climbing the ladder or
+falling behind: {How} social mobility shapes perceptions of meritocracy
+in the wake of rising inequality. \emph{PO- LAR Working Paper \#7.
+Frankfurt: Goethe University. Retrieved from Www.polar-Project.org,
+Version Dated 12 September 2025}.
 
 \bibitem[\citeproctext]{ref-vandewerfhorst_meritocracy_2024}
 Van De Werfhorst, H. G. (2024). Is {Meritocracy Not So Bad After All}?
