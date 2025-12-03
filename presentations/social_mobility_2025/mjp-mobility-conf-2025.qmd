@@ -207,7 +207,7 @@ We know that support for market-based services is stratified [@lindh_public_2015
 
 (M)odel, (I)nquiry, (D)ata, (A)nswer estrategy [@blair_research_2023]
 
-## Causal model (M): @breen_effects_2024
+## Mobility effects approach 
 
 ::::: columns
 ::: {.column width="50%"}
@@ -231,7 +231,7 @@ We know that support for market-based services is stratified [@lindh_public_2015
 :::
 :::::
 
-## A Causal Model for Mobility Effects 
+## Causal model (M)
 
 ```{r}
 #| label: fig-dag
@@ -280,7 +280,7 @@ dag_mjp |>
 ```
 
 
-## Inquiry and estimand
+## Inquiry and estimand (I)
 ::: {.incremental .highlight-last style="font-size: 120%;"}
 
 - How does intergenerational social mobility affect individuals’ preferences for the commodification of pensions in Chile?
@@ -329,7 +329,7 @@ g1 +
 
 ```
 
-## Treatment: mobility and class matrix (D)
+## Treatment: mobility and class matrix
 
 ::: {.incremental .highlight-last style="font-size: 120%;"}
 
@@ -372,7 +372,7 @@ db %>%
 
 :::
 
-## Weights and covariates (D → A)
+## Weights and covariates
 
 ::: {.incremental .highlight-last style="font-size: 120%;"}
 
@@ -384,7 +384,7 @@ db %>%
 :::
 
 
-## Heterogeneity and controls (D → A)
+## Heterogeneity and controls
 
 ::: {.incremental .highlight-last style="font-size: 120%;"}
 
