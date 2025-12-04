@@ -459,14 +459,7 @@ g4+
 
 :::
 
-## Robustness check and sensitivity analysis
 
-::: {.incremental .highlight-last style="font-size: 120%;"}
-
-- **Unmeasured confounding** [@cinelli_making_2020]: **Moderate robustness** in Middle→High and High→Low; borderline in High→Middle.
-
-- **Robustness check**: I re-estimate the models under three alternative codings of the outcome: (i) recoding the neutral category as agreement (3–5 vs. 1–2), (ii) excluding neutral responses from the analysis, and (iii) using the original 5-point item in a linear specification. The results are maintained and even improved (only in ii).
-:::
 
 # Discussion and conclusions {data-background-color="#523870"}
 
@@ -475,9 +468,9 @@ g4+
 
 ::: {.incremental style="font-size: 120%;"}
 
-1) Most Chileans reject income-based pension allocation, yet support for this market principle has grown in a highly marketised and unequal setting [@lindh_public_2015; @castillo_perceptions_2025].
-
-2) Intergenerational moves into and out of upper-status positions causally shape support for pension commodification, while donward High-Middle y High-Low decrease it [@gugushvili_subjective_2017; @rodriguez_intergenerational_2024; @ares_changing_2020]; meritocratic beliefs correlate with these preferences but seem to operate on a parallel track.
+1) Intergenerational moves into and out of upper-status positions causally shape support for pension commodification, while donward High-Middle y High-Low decrease it [@gugushvili_subjective_2017; @helgason_longterm_2023; @busemeyer_welfare_2020; @ares_changing_2020]
+   
+2) Meritocratic beliefs correlate with these preferences but seem to operate on a parallel track [@@rodriguez_intergenerational_2024]
 
 3) Future work: better origin-side measures, richer batteries of market-justice items and comparative applications beyond Chile.
 
