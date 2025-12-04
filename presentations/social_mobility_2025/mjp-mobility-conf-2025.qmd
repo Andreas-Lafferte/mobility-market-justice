@@ -470,7 +470,7 @@ g4+
 
 1) Intergenerational moves into and out of upper-status positions causally shape support for pension commodification, while donward High-Middle y High-Low decrease it [@gugushvili_subjective_2017; @helgason_longterm_2023; @busemeyer_welfare_2020; @ares_changing_2020]
    
-2) Meritocratic beliefs correlate with these preferences but seem to operate on a parallel track [@@rodriguez_intergenerational_2024]
+2) Meritocratic beliefs correlate with these preferences but seem to operate on a parallel track [@rodriguez_intergenerational_2024]
 
 3) Future work: better origin-side measures, richer batteries of market-justice items and comparative applications beyond Chile.
 
