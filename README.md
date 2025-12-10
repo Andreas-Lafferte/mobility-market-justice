@@ -67,3 +67,4 @@ In the web page it is possible to see/download the paper in html and pdf formats
 - [Presentación coloquio 2025](https://andreas-lafferte.github.io/mobility-market-justice/presentations/coloquio_2025/mjp-mobility.html)
 - [Presentación seminario ISUC](https://andreas-lafferte.github.io/mobility-market-justice/presentations/seminario/mjp-mobility-seminario.html)
 - [Presentación Conference Social Mobility](https://andreas-lafferte.github.io/mobility-market-justice/presentations/social_mobility_2025/mjp-mobility-conf-2025.html)
+- [Presentación Seminario Clase, redes personales y actitudes políticas](https://andreas-lafferte.github.io/mobility-market-justice/presentations/seminario_clase_redes/mjp-mobility-redes-2025.html)
