@@ -163,7 +163,7 @@ breaks_w <- c("2016", "2018", "2023", "All waves")
 
 g2 <- ggplot(pdat, aes(x = mobility, y = value, group = wave)) +
   geom_point(aes(color = wave, shape = wave), 
-             size = 3, stroke = 1) +
+             size = 4.5, stroke = 1) +
   scale_y_continuous(labels = scales::percent, limits = c(0, 1)) + 
   scale_color_manual(
     name   = "Wave",
@@ -421,6 +421,37 @@ g3 <- ggplot(df_pension_lab, aes(x = estimate, y = term)) +
   #geom_text(aes(label = est_lab), hjust = -0.05, size = 4, vjust = -0.5) +
   labs(x = "Treatment Effect", y = NULL) +
   my_pretty_theme()
+
+df_pension_lab2 <- df_pension_lab
+df_pension_lab2$high_lab <- NA
+df_pension_lab2$high_lab <- if_else(df_pension_lab2$sig == "*", TRUE, FALSE)
+df_pension_lab2$lab_hi <- paste0("\u03B2 = ", df_pension_lab2$est_lab)
+df_pension_lab2$xlab <- pmin(df_pension_lab2$conf.high + 0.02, 0.48)
+
+
+g3_v2 <- ggplot(df_pension_lab2, aes(x = estimate, y = term)) +
+  geom_vline(xintercept = 0, linewidth = 0.7, color = "grey60", linetype = "dashed") +
+  geom_pointrange(aes(xmin = conf.low, xmax = conf.high), fatten = 2, 
+                  size = 1, color = "#000004FF") +
+  # capa highlight (solo las 3 relevantes)
+  geom_pointrange(
+    data = df_pension_lab2 %>% filter(high_lab),
+    aes(xmin = conf.low, xmax = conf.high),
+    fatten = 2, size = 1.2, color = "#ca1137"
+  ) +
+  
+  # labels solo para las destacadas
+  geom_text(
+    data = df_pension_lab2 %>% filter(high_lab),
+    aes(x = xlab, label = lab_hi),
+    hjust = 0, vjust = 0.5, size = 5, color = "#ca1137"
+  ) +
+  
+  scale_x_continuous(limits = c(-0.5, 0.5), breaks = seq(-0.5, 0.5, 0.25)) +
+  labs(x = "Treatment Effect", y = NULL) +
+  my_pretty_theme()
+
+g3_v2
 
 # 3.3 Heterogeneity effects -------------------------------------------------------
 
@@ -823,6 +854,216 @@ g5 <- ggplot(
   my_pretty_theme() +
   theme(legend.position = "bottom")
 
+# -----------
+# Age 
+# -----------
+
+### Interacciones
+
+### Low to middle
+
+data_lm_e <- datos1 %>% 
+  select(idencuesta, 
+         ola, 
+         y = just_pension_f, 
+         t = moblm, 
+         w = w_low_lm_t, 
+         edad = m0_edad_f, 
+         sexo = sexo_f, 
+         nac = nacionalidad_f,
+         etnia = etnia_f,
+         hogar = hogar_bip_f, 
+         edu0 = educ_orig_f) %>% 
+  filter(!is.na(t), !is.na(w)) %>% 
+  mutate(ola = factor(ola, levels = c("1", "2", "3"),
+                      labels = c("2016", "2018", "2023")),
+         edad = case_when(
+           edad >= 18 & edad <= 29 ~ '18-29',
+           edad >= 30 & edad <= 49 ~ '30-49',
+           edad >= 50 & edad <= 64 ~ '50-64',
+           edad >= 65 ~ '65 or more'),
+         edad = factor(edad, levels = c('18-29', '30-49', '50-64', '65 or more')))
+
+
+mp_lm_e <-
+  lm_robust(y ~ t*edad + sexo + nac + etnia + hogar + edu0 + ola,
+            weights = w,
+            se_type = "CR2",
+            clusters = idencuesta,
+            data = data_lm_e) 
+
+### Low to high
+
+data_lh_e <- datos1 %>% 
+  select(idencuesta, 
+         ola, 
+         y = just_pension_f, 
+         t = moblh, 
+         w = w_low_lh_t, 
+         edad = m0_edad_f, 
+         sexo = sexo_f, 
+         nac = nacionalidad_f,
+         etnia = etnia_f,
+         hogar = hogar_bip_f, 
+         edu0 = educ_orig_f) %>% 
+  filter(!is.na(t), !is.na(w)) %>% 
+  mutate(ola = factor(ola, levels = c("1", "2", "3"),
+                      labels = c("2016", "2018", "2023")),
+         edad = case_when(
+           edad >= 18 & edad <= 29 ~ '18-29',
+           edad >= 30 & edad <= 49 ~ '30-49',
+           edad >= 50 & edad <= 64 ~ '50-64',
+           edad >= 65 ~ '65 or more'),
+         edad = factor(edad, levels = c('18-29', '30-49', '50-64', '65 or more')))
+
+mp_lh_e <- 
+  lm_robust(y ~ t*edad + sexo + nac + etnia + hogar + edu0+ ola,
+            weights = w,
+            se_type = "CR2",
+            clusters = idencuesta,
+            data = data_lh_e) 
+
+### middle to high
+
+data_mh_e <- datos2 %>% 
+  select(idencuesta, 
+         ola, 
+         y = just_pension_f, 
+         t = mobmh, 
+         w = w_mid_mh_t, 
+         edad = m0_edad_f, 
+         sexo = sexo_f, 
+         nac = nacionalidad_f,
+         etnia = etnia_f,
+         hogar = hogar_bip_f, 
+         edu0 = educ_orig_f) %>% 
+  filter(!is.na(t), !is.na(w)) %>% 
+  mutate(ola = factor(ola, levels = c("1", "2", "3"),
+                      labels = c("2016", "2018", "2023")),
+         edad = case_when(
+           edad >= 18 & edad <= 29 ~ '18-29',
+           edad >= 30 & edad <= 49 ~ '30-49',
+           edad >= 50 & edad <= 64 ~ '50-64',
+           edad >= 65 ~ '65 or more'),
+         edad = factor(edad, levels = c('18-29', '30-49', '50-64', '65 or more')))
+
+mp_mh_e <-  
+  lm_robust(y ~ t*edad + sexo + nac + etnia + hogar + edu0+ ola,
+            weights = w,
+            se_type = "CR2",
+            clusters = idencuesta,
+            data = data_mh_e) 
+
+### middle to low
+
+data_ml_e <- datos2 %>% 
+  select(idencuesta, 
+         ola, 
+         y = just_pension_f, 
+         t = mobml, 
+         w = w_mid_ml_t, 
+         edad = m0_edad_f, 
+         sexo = sexo_f, 
+         nac = nacionalidad_f,
+         etnia = etnia_f,
+         hogar = hogar_bip_f, 
+         edu0 = educ_orig_f) %>% 
+  filter(!is.na(t), !is.na(w)) %>% 
+  mutate(ola = factor(ola, levels = c("1", "2", "3"),
+                      labels = c("2016", "2018", "2023")),
+         edad = case_when(
+           edad >= 18 & edad <= 29 ~ '18-29',
+           edad >= 30 & edad <= 49 ~ '30-49',
+           edad >= 50 & edad <= 64 ~ '50-64',
+           edad >= 65 ~ '65 or more'),
+         edad = factor(edad, levels = c('18-29', '30-49', '50-64', '65 or more')))
+
+
+mp_ml_e <- 
+  lm_robust(y ~ t*edad + sexo + nac + etnia + hogar + edu0+ ola,
+            weights = w,
+            se_type = "CR2",
+            clusters = idencuesta,
+            data = data_ml_e) 
+
+### High to middle
+
+data_hm_e <- datos3 %>% 
+  select(idencuesta, 
+         ola, 
+         y = just_pension_f, 
+         t = mobhm, 
+         w = w_hig_hm_t, 
+         edad = m0_edad_f, 
+         sexo = sexo_f, 
+         nac = nacionalidad_f,
+         etnia = etnia_f,
+         hogar = hogar_bip_f, 
+         edu0 = educ_orig_f) %>% 
+  filter(!is.na(t), !is.na(w)) %>% 
+  mutate(ola = factor(ola, levels = c("1", "2", "3"),
+                      labels = c("2016", "2018", "2023")),
+         edad = case_when(
+           edad >= 18 & edad <= 29 ~ '18-29',
+           edad >= 30 & edad <= 49 ~ '30-49',
+           edad >= 50 & edad <= 64 ~ '50-64',
+           edad >= 65 ~ '65 or more'),
+         edad = factor(edad, levels = c('18-29', '30-49', '50-64', '65 or more')))
+
+
+mp_hm_e <- 
+  lm_robust(y ~ t*edad + sexo + nac + etnia + hogar + edu0+ ola,
+            weights = w,
+            se_type = "CR2",
+            clusters = idencuesta,
+            data = data_hm_e) 
+
+### High to low
+
+data_hl_e <- datos3 %>% 
+  select(idencuesta, 
+         ola, 
+         y = just_pension_f, 
+         t = mobhl, 
+         w = w_hig_hl_t, 
+         edad = m0_edad_f, 
+         sexo = sexo_f, 
+         nac = nacionalidad_f,
+         etnia = etnia_f,
+         hogar = hogar_bip_f, 
+         edu0 = educ_orig_f) %>% 
+  filter(!is.na(t), !is.na(w)) %>% 
+  mutate(ola = factor(ola, levels = c("1", "2", "3"),
+                      labels = c("2016", "2018", "2023")),
+         edad = case_when(
+           edad >= 18 & edad <= 29 ~ '18-29',
+           edad >= 30 & edad <= 49 ~ '30-49',
+           edad >= 50 & edad <= 64 ~ '50-64',
+           edad >= 65 ~ '65 or more'),
+         edad = factor(edad, levels = c('18-29', '30-49', '50-64', '65 or more')))
+
+
+mp_hl_e <- 
+  lm_robust(y ~ t*edad + sexo + nac + etnia + hogar + edu0 + ola,
+            weights = w,
+            se_type = "CR2",
+            clusters = idencuesta,
+            data = data_hl_e) 
+
+screenreg(list(mp_lm_e,
+               mp_lh_e,
+               mp_ml_e,
+               mp_mh_e,
+               mp_hm_e,
+               mp_hl_e),
+          custom.model.names = c(
+            "Low-Middle",
+            "Low-High",
+            "Middle-Low",
+            "Middle-High",
+            "High-Middle",
+            "High-Low"
+          ))
 
 
 # 3.4 Robustness check ------------------------------------------------

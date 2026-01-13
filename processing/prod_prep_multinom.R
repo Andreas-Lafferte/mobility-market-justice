@@ -605,10 +605,12 @@ for (nm in bases) {
   df <- df %>%
     mutate(
       just_pension_f = if_else(just_pension >= 4, 1, 0),
-      merit_i = if_else(merit_i >= 4, 1, 0),
-      merit_i = factor(merit_i, levels = c(0,1), labels = c("Low", "High")),
       nacionalidad_f = if_else(nacionalidad_f == 0, 1, 0),
-      sexo_f = if_else(sexo_f == 1, 0, 1)
+      sexo_f = if_else(sexo_f == 1, 0, 1),
+      ola = case_when(ola == 1 ~ 1,
+                      ola == 3 ~ 2,
+                      ola == 7 ~ 3,
+                      TRUE ~ NA_real_)
     )
   
   assign(nm, df, inherits = TRUE)
@@ -621,14 +623,28 @@ for (nm in bases) {
   df <- get(nm)
   
   df <- df %>%
-    mutate(ola = case_when(ola == 1 ~ 1,
-                           ola == 3 ~ 2,
-                           ola == 7 ~ 3,
-                           TRUE ~ NA_real_)
+    group_by(idencuesta) %>% 
+    mutate(merit_m = mean(merit_i)
+    ) %>% 
+    ungroup()
+  
+  assign(nm, df, inherits = TRUE)
+}
+
+
+for (nm in bases) {
+  df <- get(nm)
+  
+  df <- df %>%
+    mutate(merit_i = if_else(merit_i >= 4, 1, 0),
+           merit_i = factor(merit_i, levels = c(0,1), labels = c("Low", "High")),
+           merit_m = if_else(merit_m >= 4, 1, 0),
+           merit_m = factor(merit_m, levels = c(0,1), labels = c("Low", "High"))
     )
   
   assign(nm, df, inherits = TRUE)
 }
+
 
 save(db,
      datos1,
