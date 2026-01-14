@@ -212,7 +212,7 @@ Sabemos que el apoyo a los servicios basados en el mercado está estratificado y
 
 ::: {.incremental .highlight-last style="font-size: 120%;"}
 
-- RQ1: _¿Cómo afecta la movilidad social intergeneracional a las preferencias por la comodificación de las pensiones en Chile?_
+- RQ1: _¿Cómo la movilidad social intergeneracional afecta las preferencias por la comodificación de las pensiones en Chile?_
   
 - La movilidad social modifica los ingresos, la seguridad y la exposición al riesgo, alterando los _intereses materiales_ en un sistema de capitalización individual de contribución definida [@busemeyer_welfare_2020; @helgason_longterm_2023; @mau_inequality_2015]
 
@@ -230,7 +230,7 @@ Sabemos que el apoyo a los servicios basados en el mercado está estratificado y
 
 - La movilidad social reconfigura las actitudes frente a la desigualdad: la ascendente impulsa visiones más meritocráticas, la descendente explicaciones más estructurales, con las creencias meritocráticas como canal central [@mijs_belief_2022; @gugushvili_intergenerational_2016; @bucca_merit_2016; @traini_climbing_2025; @deng_its_2025]
 
-- Hipótesis de aculturación y self serving-bias: cambio en los criterios de justicia [@jaime-castillo_social_2019; @gugushvili_subjective_2017]
+- Hipótesis de aculturación y self serving-bias: cambio en los criterios de justicia [@jaime-castillo_social_2019; @molina_its_2019]
 
 - $H_{2}$: Bajo altos niveles de creencias meritocráticas, la movilidad ascendente debería asociarse con actitudes más pro-comodificación y la movilidad descendente con actitudes menos des-mercantilizadoras que bajo bajos niveles de meritocracia
 
@@ -259,7 +259,7 @@ Sabemos que el apoyo a los servicios basados en el mercado está estratificado y
 ::: {.column width="50%" .incremental .highlight-last style="font-size: 110%;"}
 
 - Sigo la propuesta de @breen_effects_2024 para estimar efectos causales de la movilidad social intergeneracional
-- ¿En qué habría cambiado el resultado $Y$ entre las personas de origen $j$ que llegaron al destino $k$ si, hipotéticamente, hubieran llegado al destino $k'$? 
+- ¿En qué habría cambiado el resultado $Y$ entre las personas de origen $j$ que llegaron al destino $k$ si, hipotéticamente, hubiesen llegado al destino $k'$? 
 
 :::
 :::::
@@ -426,7 +426,7 @@ Covariables **pretratamiento** $C$:
 
 ::: {.incremental .highlight-last style="font-size: 120%;"}
 
-- **Meritocracia**: 2 ítems (esfuerzo, talento) — Likert 1–5; promedio y dicotomía baja (≤3) vs alta (≥4) [@young_rise_1958].
+- **Meritocracia**: 2 ítems (esfuerzo, talento) — Likert 1–5; promedio y dicotomizada en baja (≤3) vs alta (≥4) [@young_rise_1958]
       
     * “Se recompensa el esfuerzo” / “Se recompensa la inteligencia y habilidades”
 
@@ -440,7 +440,7 @@ Covariables **pretratamiento** $C$:
 
 - Todos los modelos incluyen:
 
-    * FE de ola debido a la estructura panel de los datos
+    * FE de ola debido ($\lambda_t$) a la estructura panel de los datos
     * Las mismas covariables pretratamiento $(C)$ se incluyen en el modelo para bloquear caminos de backdoor ($C \rightarrow Y$) y lograr doble robustez [@gelman_regression_2020]
 
 :::
@@ -550,7 +550,7 @@ g3_v2 +
 ```{r}
 #| label: fig-mp_i
 #| fig-cap-location: top
-#| fig-cap: "Efectos de movilidad en las preferencias por comodificación de las pensiones, según percepciones meritocráticas"
+#| fig-cap: "Efectos marginales de movilidad en las preferencias por comodificación de las pensiones, según meritocracia"
 #| fig-align: center
 #| out-width: '160%'
 #| fig-asp: 0.6
@@ -613,30 +613,35 @@ g4+
 :::
 
 
-## Conclusiones
+## Conclusiones {data-background-color="#523870"}
 
 ::: {.incremental style="font-size: 120%;"}
 
-1. ¿Cómo la movilidad social afecta las preferencias por la comodificación de las pensiones en Chile? ¿Qué rol juegan las percepciones meritocráticas?
-
-    * La movilidad desde posiciones de mediano estatus hacia alto estatus incrementan el apoyo a la comodificación de las pensiones; mientras que las trayectorias descendentes de alta a media y de alta a baja lo reducen
-    * La meritocracia opera por una vía paralela a la movilidad
-  
-2. Contribuciones:
-
+1. **Agenda de investigación**: 
+    
+    * Preferencias por la mercantilización de servicios sociales en general y de las pensiones en particular
     * Primer estudio sistemático de estas preferencias a un caso aplicado (Chile)
-    * Metodológico: línea de aproximación creciente de los efectos de la movilidad [@breen_effects_2024; @song_there_2025]
+    
+2. **Movilidad social y meritocracia**: 
 
+    * La movilidad como un vehículo relevante para la formación de preferencias por la redistribución de mercado
+    * Sí importa, pero solo hacia y desde posiciones de alto estatus
+    * La meritocracia opera por una vía paralela a la movilidad
 :::
 
 
-## Conclusiones
+## Conclusiones {data-background-color="#523870"}
 
 ::: {.incremental style="font-size: 120%;"}
 
-3. Limitaciones y proyecciones: 
+3. **Mayor contribución**: 
+
+    * Empírica: evidencia de una relación entre la movilidad social y preferencias por mercantilización
+    * Metodológica: línea de aproximación creciente de los efectos de la movilidad [@breen_effects_2024; @song_there_2025]
+
+3. **Limitaciones y proyecciones**: 
     
-    * Estimación depende del fuerte supuesto de que el conjunto $C$ es suficiente (revisar y mejorar)
+    * Estimación depende del supuesto de que el conjunto $C$ es suficiente (revisar y mejorar)
     * Explotar el rol temporal del tratamiento
     * Publicarlo en revista de alto impacto
     * Base para explorar mecanismos
