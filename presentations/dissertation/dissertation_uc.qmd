@@ -129,6 +129,7 @@ Comisión: Prof. Mauricio Bucca y Prof. Andrea Canales
 
 # Problema de investigación {.xlarge data-background-color="#523870"}
 
+
 ## Contexto y motivación
 
 ::: {.box-inv-4 .sp-after .fragment style="font-size: 110%;"}
@@ -139,13 +140,13 @@ Privatización y comodificación de bienes públicos y servicios sociales [@ging
 
 ::: {.box-inv-4 .sp-after .fragment style="font-size: 110%;"}
 
-En América Latina, la privatización de las pensiones y la capitalización individual han sido claves [@huber_political_2000; @verbic_political_2019]
+En América Latina, modificaron la arquitectura de las instituciones del bienestar expandiendo la lógica de mercado [@ferre_welfare_2023; @madariaga_three_2020]
 
 :::
 
 ::: {.box-inv-4 .sp-after .fragment style="font-size: 110%;"}
 
-Reasigna los riesgos de la vejez y moldea las normas públicas sobre lo que es justo en materia de bienestar social [@busemeyer_welfare_2020; @madero-cabib_private_2019; @borzutzky_pension_2012]
+Economía moral: efectos de retroalimentación en las actitudes públicas [@lindh_public_2015; @svallforsMoralEconomyClass2006a]
 
 :::
 
@@ -156,40 +157,32 @@ Preferencias por el acceso al bienestar social basado en el mercado [@busemeyer_
 :::
 
 
-## Preferencias por la comodificación
-
-::: {.incremental .highlight-last style="font-size: 120%;"}
-
-- "Creencias normativas que legitiman la idea de que el acceso a los servicios sociales esenciales —como la salud, la educación o las pensiones— debe determinarse según criterios basados en el mercado" [@lindh_public_2015, p.895] $\rightarrow$ Preferencias por la comodificación de servicios
-
-- Explicaciones desde la literatura: 
-
-    * Contextual: características institucionales y económicas de los países [@immergut_it_2020; @busemeyer_skills_2014; @lindh_public_2015; @koos_moral_2019]
-    * Individual: estatus socioeconómico, actitudes políticas y creencias en meritocracia [@castillo_perceptions_2025; @lindh_public_2015; @otero_power_2024; @busemeyer_welfare_2020; @svallfors_political_2007]
-
-
-:::
-
-
-## Preferencias por la comodificación de las pensiones
-
-::: {.incremental .highlight-last style="font-size: 110%;"}
-
-- Mercantilización previsional: riesgo y responsabilidad individual; pensión ligada a trayectoria laboral + retornos; se concibe como inversión/propiedad y el merecimiento se ancla en la contribución [@madero-cabib_private_2019; @oecd_pensions_2023; @arza_pension_2008; @borzutzky_pension_2012]
-
-- Es un ejemplo concreto de cómo las clases medias "abrazan el neoliberalismo"; movilidad ascendente e individualismo [@mau_inequality_2015]
-
-- Evidencia: con alternativas privadas, altos ingresos se salen de lo público ↓ apoyo a gasto público y ↑ preferencia por mercado (más con buenos retornos) [@busemeyer_welfare_2020; @kerner_pension_2020]; en Chile: ↑ ingreso/educación y élites pro-mercado y más tolerancia a desigualdad [@carranza_what_2024; @otero_power_2024; @cortes-orihuela_intergenerational_2022]
-
-:::
-
-
-## Chile y la brecha en la investigación
-
+## Comodificación de las pensiones
 
 ::: {.box-inv-4 .sp-after .fragment style="font-size: 110%;"}
 
-Chile combina una elevada desigualdad, una profunda privatización del bienestar y un sistema de pensiones privado en contestación [@solimano_rise_2021; @somma_no_2021; @madariaga_three_2020]
+En América Latina, la privatización de las pensiones y la expansión de esquemas de capitalización individual han sido claves [@huber_political_2000; @verbic_political_2019]
+
+:::
+
+::: {.box-inv-4 .sp-after .fragment style="font-size: 110%;"}
+
+Reasigna los riesgos de la vejez, vincula beneficios con las trayectorias de contribución y moldea las normas públicas sobre lo que es justo en materia de pensiones [@madero-cabib_private_2019; @oecd_pensions_2023; @arza_pension_2008; @borzutzky_pension_2012]
+
+:::
+
+::: {.box-inv-5 .sp-after-half .fragment style="font-size: 110%;"}
+
+Preferencias por al comodificación de las pensiones en Chile: creencias normativas que legitiman que el acceso a mejores pensiones dependa de criterios de mercado [@lindh_public_2015] 
+
+:::
+
+
+## El caso de Chile
+
+::: {.box-inv-4 .sp-after .fragment style="font-size: 110%;"}
+
+Chile combina una elevada desigualdad con una profunda privatización de servicios sociales [@chancel_world_2025; @madariaga_three_2020; @pnud_desiguales_2017]
 
 :::
 
@@ -203,17 +196,72 @@ Alta movilidad absoluta coexiste con trayectorias cortas, élites cerradas y des
 
 ::: {.box-inv-4 .sp-after .fragment style="font-size: 110%;"}
 
-Sabemos que el apoyo a los servicios basados en el mercado está estratificado y asociado a la meritocracia [@lindh_public_2015; @busemeyer_welfare_2020; @kerner_pension_2020; @otero_power_2024; @castillo_perceptions_2025], pero mucho menos sobre cómo la movilidad social y estas creencias moldean las preferencias por comodificación de las pensiones
+Sistema de pensiones obligatorio, basado en la capitalización individual de contribuciones definidas administradas por entidades privadas (AFP) [@solimano_rise_2021; @arenas_sistemas_2019]
+
+:::
+
+::: {.box-inv-4 .sp-after .fragment style="font-size: 110%;"}
+
+Pensiones en contestación: conflicto previsional y legitimidad propietaria [@somma_no_2021; @galvez_con_2023]
+
+:::
+
+## ¿Qué sabemos?
+
+
+::::: columns
+::: {.column width="50%" .incremental .highlight-last style="font-size: 110%;"}
+
+### Contextual
+
+- Gasto social [@immergut_it_2020; @busemeyer_skills_2014; @busemeyer_welfare_2020]
+- Desigualdad económica [@koos_moral_2019]
+- Nivel de privatización de servicios y regulación del mercado [@lindh_public_2015; @koos_moral_2019]
+
+:::
+
+::: {.column width="50%" .incremental .highlight-last style="font-size: 110%;"}
+
+### Individual
+
+- Estatus socioeconómico -ingresos, educación y ocupación- y retornos financieros [@lindh_public_2015; @kerner_pension_2020; @busemeyer_welfare_2020]
+- Chile: ↑ ingreso/educación y élites pro-mercado y más tolerancia a desigualdad [@carranza_what_2024; @otero_power_2024; @cortes-orihuela_intergenerational_2022]
+- Percepciones sobre la desigualdad y meritocracia [@castillo_perceptions_2025]
+- Conservadurismo/liberalismo económico [@lee_fairness_2023]
+
+
+:::
+:::::
+
+## Este estudio {data-background-color="#523870"}
+
+:::: {.incremental style="font-size: 170%;"}
+
+1) _¿Cómo la movilidad social intergeneracional afecta las preferencias por la comodificación de las pensiones en Chile?_
+
+2) _¿Cómo las creencias meritocráticas condicionan la relación entre movilidad social y comodificación?_
+
+::::
+
+## Movilidad social
+
+::: {.incremental .highlight-last style="font-size: 120%;"}
+
+- Cambios en un outcome que se derivan del _movimiento_ entre clases de origen y destino [ @fosse_diagonal_2025]
+- Exposición a nuevos riesgos, recursos y contextos normativos [@helgason_longterm_2023; @alesina_intergenerational_2018; @jaime-castillo_social_2019]
+- Diversos **mecanismos explicativos**: 
+    
+    * Interés material: **míope** y anticipación
+    * Socialización: **aculturación**, socialización primaria y máximización estatus
+    * Atribuciones causales (ej. self-serving bias) y aprendizaje acumulado de clase
 
 :::
 
 
-## Preguntas e hipótesis
+## Hipótesis: movilidad social
 
 ::: {.incremental .highlight-last style="font-size: 120%;"}
 
-- RQ1: _¿Cómo la movilidad social intergeneracional afecta las preferencias por la comodificación de las pensiones en Chile?_
-  
 - La movilidad social modifica los ingresos, la seguridad y la exposición al riesgo, alterando los _intereses materiales_ en un sistema de capitalización individual de contribución definida [@busemeyer_welfare_2020; @helgason_longterm_2023; @mau_inequality_2015]
 
 - Movilidad social y preferencias por la redistribución y el gasto social [@alesina_intergenerational_2018; @rodriguez_intergenerational_2024; @langsaether_explaining_2022; @ares_changing_2020; @gugushvili_subjective_2017]
@@ -222,17 +270,15 @@ Sabemos que el apoyo a los servicios basados en el mercado está estratificado y
 
 :::
 
-## Preguntas e hipótesis
+## Hipótesis: meritocracia
 
 ::: {.incremental .highlight-last style="font-size: 120%;"}
 
-- RQ2: _¿Cómo las creencias meritocráticas condicionan la relación entre movilidad social y comodificación?_
+- La movilidad moldea marcos de justicia vía **aculturación**/self-serving bias: ascendente → más meritocracia; descendente → más estructuralismo [@mijs_belief_2022; @gugushvili_intergenerational_2016; @bucca_merit_2016; @traini_climbing_2025; @deng_its_2025; @jaime-castillo_social_2019; @molina_its_2019]
 
-- La movilidad social reconfigura las actitudes frente a la desigualdad: la ascendente impulsa visiones más meritocráticas, la descendente explicaciones más estructurales, con las creencias meritocráticas como canal central [@mijs_belief_2022; @gugushvili_intergenerational_2016; @bucca_merit_2016; @traini_climbing_2025; @deng_its_2025]
+- $H_{2a}$ (Upward × meritocracia): con alta meritocracia, la movilidad ascendente aumenta más el apoyo a pensiones vía mercado (vs baja).
 
-- Hipótesis de aculturación y self serving-bias: cambio en los criterios de justicia [@jaime-castillo_social_2019; @molina_its_2019]
-
-- $H_{2}$: Bajo altos niveles de creencias meritocráticas, la movilidad ascendente debería asociarse con actitudes más pro-comodificación y la movilidad descendente con actitudes menos des-mercantilizadoras que bajo bajos niveles de meritocracia
+- $H_{2b}$ (Downward × meritocracia): con baja meritocracia, la movilidad descendente reduce el apoyo; con alta, el efecto negativo se atenúa (≈ neutral/lig. +).
 
 :::
 
@@ -580,9 +626,9 @@ g4+
 
 ::: {.incremental style="font-size: 120%;"}
 
-- General: la expansión del acceso al bienestar basado en mercado se refleja en actitudes públicas [@busemeyer_welfare_2020; @lindh_public_2015], ayudando a explicar por qué acuerdos neoliberales obtienen aceptación [@mau_inequality_2015]
+- La expansión del acceso al bienestar basado en mercado se refleja en actitudes públicas [@busemeyer_welfare_2020; @lindh_public_2015], ayudando a explicar por qué acuerdos neoliberales obtienen aceptación [@mau_inequality_2015]
 
-- Chile: apoyo aún minoritario pero en alza; consistente con evidencia longitudinal y con regímenes liberales/mercantilizados, en un contexto de feedback mixto (conflicto vs defensas propietaristas) [@castillo_perceptions_2025; @galvez_con_2023]
+- En Chile el apoyo es aún minoritario pero va en alza; consistente con evidencia longitudinal y con regímenes liberales/mercantilizados, en un contexto de feedback mixto (conflicto vs defensas propietaristas) [@castillo_perceptions_2025; @galvez_con_2023]
 
 :::
 
@@ -594,9 +640,11 @@ g4+
 
 - Mecanismo de interés material miope [@helgason_longterm_2023; @busemeyer_welfare_2020]
 
+- Efectos solo se encuentran desde y hacia posiciones de alto estatus [@carranza_what_2024; @cortes-orihuela_intergenerational_2022; @busemeyer_welfare_2020; @kerner_pension_2020]
+
 - En línea con investigaciones sobre preferencias redistributivas y gasto social [@ares_changing_2020; @gugushvili_subjective_2017; @schmidt_experience_2011; @rodriguez_intergenerational_2024; @alesina_intergenerational_2018]
 
-- Efectos solo se encuentran desde y hacia posiciones de alto estatus: el peso de los contextos [@carranza_what_2024; @cortes-orihuela_intergenerational_2022]
+
 
 :::
 
@@ -604,7 +652,7 @@ g4+
 
 ::: {.incremental style="font-size: 120%;"}
 
-- Basado en aculturación/sesgo autocomplaciente, esperaba que la movilidad influyera en estas preferencias vía marcos normativos: la ascendente reforzaría lecturas meritocráticas y la descendente explicaciones estructurales, con la meritocracia como canal central [@jaime-castillo_social_2019; @gugushvili_subjective_2017; @traini_climbing_2025; @deng_its_2025]
+- Basado en aculturación/self-serving bias, esperaba que la movilidad influyera en estas preferencias vía marcos normativos: la ascendente reforzaría lecturas meritocráticas y la descendente explicaciones estructurales, con la meritocracia como canal central [@jaime-castillo_social_2019; @helgason_longterm_2023; @traini_climbing_2025; @deng_its_2025]
 
 - Las creencias meritocráticas se correlacionan con estas preferencias, pero parecen operar en una vía paralela a la movilidad ($H_2$ ✗)
 
@@ -624,8 +672,8 @@ g4+
     
 2. **Movilidad social y meritocracia**: 
 
-    * La movilidad como un vehículo relevante para la formación de preferencias por la redistribución de mercado
-    * Sí importa, pero solo hacia y desde posiciones de alto estatus
+    * La movilidad social como fuente clave de legitimidad para la mercantilización de las pensiones
+    * Pero solo hacia y desde posiciones de alto estatus
     * La meritocracia opera por una vía paralela a la movilidad
 :::
 
@@ -641,10 +689,10 @@ g4+
 
 3. **Limitaciones y proyecciones**: 
     
-    * Estimación depende del supuesto de que el conjunto $C$ es suficiente (revisar y mejorar)
-    * Explotar el rol temporal del tratamiento
-    * Publicarlo en revista de alto impacto
-    * Base para explorar mecanismos
+    * Estimación depende del supuesto de $Y(D)\ \perp\kern-5pt \perp D\ \mid\ (O,C)$ → complementar
+    * No se analizan mecanismos → abre una puerta
+    * Uso de otras mediciones ($Y,T$) y explotar el rol del tiempo
+    * Sin validez externa → comparaciones entre países
 :::
 
 # Muchas gracias!
