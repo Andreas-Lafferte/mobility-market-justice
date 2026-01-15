@@ -168,13 +168,6 @@ Chile combina una elevada desigualdad con una profunda privatización de servici
 
 ::: {.box-inv-4 .sp-after .fragment style="font-size: 110%;"}
 
-Alta movilidad absoluta coexiste con trayectorias cortas, élites cerradas y desigualdad intergeneracional persistente [@lopez-roldan_comparative_2021; @salgado_uplifting_2025; @torche_intergenerational_2014]
-
-:::
-
-
-::: {.box-inv-4 .sp-after .fragment style="font-size: 110%;"}
-
 Sistema de pensiones obligatorio, basado en la capitalización individual de contribuciones definidas administradas por entidades privadas (AFP) [@solimano_rise_2021; @arenas_sistemas_2019]
 
 :::
@@ -211,20 +204,12 @@ Pensiones en contestación: conflicto previsional y legitimidad propietaria [@so
 :::
 :::::
 
-## Este estudio {data-background-color="#523870"}
 
-:::: {.incremental style="font-size: 170%;"}
-
-1) _¿Cómo la movilidad social intergeneracional afecta las preferencias por la comodificación de las pensiones en Chile?_
-
-2) _¿Cómo las creencias meritocráticas condicionan la relación entre movilidad social y comodificación?_
-
-::::
-
-
-## Hipótesis: movilidad social
+## Preguntas de investigación e hipótesis
 
 ::: {.incremental .highlight-last style="font-size: 120%;"}
+
+- _RQ1: ¿Cómo afecta la movilidad social intergeneracional a las preferencias por la mercantilización de las pensiones en Chile?_
 
 - La movilidad social modifica los ingresos, la seguridad y la exposición al riesgo, alterando los _intereses materiales_ en un sistema de capitalización individual de contribución definida [@busemeyer_welfare_2020; @helgason_longterm_2023; @mau_inequality_2015]
 
@@ -234,9 +219,11 @@ Pensiones en contestación: conflicto previsional y legitimidad propietaria [@so
 
 :::
 
-## Hipótesis: meritocracia
+## Preguntas de investigación e hipótesis
 
 ::: {.incremental .highlight-last style="font-size: 120%;"}
+
+- _RQ2: ¿Cómo las creencias meritocráticas condicionan la relación entre movilidad social y mercantilización?_
 
 - La movilidad moldea marcos de justicia vía **aculturación**/self-serving bias: ascendente → más meritocracia; descendente → más estructuralismo [@mijs_belief_2022; @gugushvili_intergenerational_2016; @bucca_merit_2016; @traini_climbing_2025; @deng_its_2025; @jaime-castillo_social_2019; @molina_its_2019]
 
@@ -323,11 +310,9 @@ dag_mjp |>
 ```
 
 
-## Pregunta de investigación y estimando (I)
+## Pregunta y estimando (I)
 
 ::: {.incremental .highlight-last style="font-size: 120%;"}
-
-- ¿Cómo la movilidad social intergeneracional afecta las preferencias por la comodificación de las pensiones en Chile?
 
 - @breen_effects_2024: efecto causal promedio de pasar desde una clase de origen $j$ a una clase de destino $k$, comparando a los individuos que efectivamente alcanzan $k$ con su resultado contrafactual si hubiesen permanecido en su clase de origen $j$ (@eq-att)
 
@@ -364,7 +349,6 @@ $${#eq-att}
 
     * Ítem: _“¿Es justo en Chile que quienes tienen mayores ingresos tengan mejores pensiones que quienes tienen menores ingresos?”_ (Likert 1=“muy en desacuerdo” a 5=“muy de acuerdo”)
     * Recodificación para el análisis: indicador binario de apoyo a asignación “de mercado” (1 si 4–5; 0 si 1–3, incluyendo neutralidad)
-    * Justificación: permite comparabilidad con literatura previa y captura dos rasgos clave: ingreso como criterio de acceso y pensiones como mercancía
 
 :::
 
@@ -445,16 +429,7 @@ Covariables **pretratamiento** $C$:
 
 :::
 
-## Controles
 
-::: {.incremental .highlight-last style="font-size: 120%;"}
-
-- Todos los modelos incluyen:
-
-    * FE de ola debido ($\lambda_t$) a la estructura panel de los datos
-    * Las mismas covariables pretratamiento $(C)$ se incluyen en el modelo para bloquear caminos de backdoor ($C \rightarrow Y$) y lograr doble robustez [@gelman_regression_2020]
-
-:::
 
 ## Estrategia analítica (A)
 
@@ -551,16 +526,6 @@ g4+
 
 :::
 
-## Chequeos de robustez y análisis de sensibilidad
-
-
-::: {.incremental .highlight-last style="font-size: 120%;"}
-
-- **Chequeo de robustez:** Recodificar la VD de tres formas (3–5 vs. 1–2, excluir neutros y escala 5 puntos lineal) se mantiene el patrón: Middle→High (+) y High→Low (−); High→Middle es sensible y deja de ser significativo según codificación
-
-- **Sensibilidad (E-values / Cinelli–Hazlett)**: Middle→High y High→Low son moderadamente robustos (se requeriría un confusor > sexo, ~10–11% varianza residual conjunta para anularlos); High→Middle podría desaparecer con confusores más modestos
-
-:::
 
 
 # Discusión y conclusiones {data-background-color="#523870"}
@@ -587,8 +552,6 @@ g4+
 - Mecanismo de interés material miope [@helgason_longterm_2023; @busemeyer_welfare_2020]
 
 - Efectos solo se encuentran desde y hacia posiciones de alto estatus [@carranza_what_2024; @cortes-orihuela_intergenerational_2022; @busemeyer_welfare_2020; @kerner_pension_2020]
-
-
 
 
 :::
@@ -841,6 +804,18 @@ cowplot::plot_grid(p1, p2, p3, p4, p5, p6, label_size = 11, ncol = 2, nrow = 3)
 ```
 
 :::
+
+## Chequeos de robustez y análisis de sensibilidad
+
+
+::: {.incremental .highlight-last style="font-size: 120%;"}
+
+- **Chequeo de robustez:** Recodificar la VD de tres formas (3–5 vs. 1–2, excluir neutros y escala 5 puntos lineal) se mantiene el patrón: Middle→High (+) y High→Low (−); High→Middle es sensible y deja de ser significativo según codificación
+
+- **Sensibilidad (E-values / Cinelli–Hazlett)**: Middle→High y High→Low son moderadamente robustos (se requeriría un confusor > sexo, ~10–11% varianza residual conjunta para anularlos); High→Middle podría desaparecer con confusores más modestos
+
+:::
+
 
 ## Análisis de sensibilidad
 
