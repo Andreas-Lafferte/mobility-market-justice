@@ -130,50 +130,29 @@ Comisión: Prof. Mauricio Bucca y Prof. Andrea Canales
 # Problema de investigación {.xlarge data-background-color="#523870"}
 
 
-## Contexto y motivación
+## Contexto: mercantilización y pensiones
 
 ::: {.box-inv-4 .sp-after .fragment style="font-size: 110%;"}
 
-Privatización y comodificación de bienes públicos y servicios sociales [@gingrich_making_2011; @ferre_welfare_2023]
+Privatización y mercantilización de bienes públicos y servicios sociales [@gingrich_making_2011; @ferre_welfare_2023]
 
 :::
 
 ::: {.box-inv-4 .sp-after .fragment style="font-size: 110%;"}
 
-En América Latina, modificaron la arquitectura de las instituciones del bienestar expandiendo la lógica de mercado [@ferre_welfare_2023; @madariaga_three_2020]
+En América Latina, la privatización de las pensiones y la capitalización individual han sido claves [@huber_political_2000; @verbic_political_2019]
 
 :::
 
 ::: {.box-inv-4 .sp-after .fragment style="font-size: 110%;"}
 
-Economía moral: efectos de retroalimentación en las actitudes públicas [@lindh_public_2015; @svallforsMoralEconomyClass2006a]
+Reasigna los riesgos de la vejez y moldea las normas públicas sobre lo que es justo en materia de bienestar social [@busemeyer_welfare_2020; @madero-cabib_private_2019; @borzutzky_pension_2012]
 
 :::
 
 ::: {.box-inv-5 .sp-after-half .fragment style="font-size: 110%;"}
 
 Preferencias por el acceso al bienestar social basado en el mercado [@busemeyer_skills_2014; @castillo_perceptions_2025; @lindh_public_2015; @immergut_it_2020; @svallfors_political_2007]
-
-:::
-
-
-## Comodificación de las pensiones
-
-::: {.box-inv-4 .sp-after .fragment style="font-size: 110%;"}
-
-En América Latina, la privatización de las pensiones y la expansión de esquemas de capitalización individual han sido claves [@huber_political_2000; @verbic_political_2019]
-
-:::
-
-::: {.box-inv-4 .sp-after .fragment style="font-size: 110%;"}
-
-Reasigna los riesgos de la vejez, vincula beneficios con las trayectorias de contribución y moldea las normas públicas sobre lo que es justo en materia de pensiones [@madero-cabib_private_2019; @oecd_pensions_2023; @arza_pension_2008; @borzutzky_pension_2012]
-
-:::
-
-::: {.box-inv-5 .sp-after-half .fragment style="font-size: 110%;"}
-
-Preferencias por al comodificación de las pensiones en Chile: creencias normativas que legitiman que el acceso a mejores pensiones dependa de criterios de mercado [@lindh_public_2015] 
 
 :::
 
@@ -227,7 +206,6 @@ Pensiones en contestación: conflicto previsional y legitimidad propietaria [@so
 - Estatus socioeconómico -ingresos, educación y ocupación- y retornos financieros [@lindh_public_2015; @kerner_pension_2020; @busemeyer_welfare_2020]
 - Chile: ↑ ingreso/educación y élites pro-mercado y más tolerancia a desigualdad [@carranza_what_2024; @otero_power_2024; @cortes-orihuela_intergenerational_2022]
 - Percepciones sobre la desigualdad y meritocracia [@castillo_perceptions_2025]
-- Conservadurismo/liberalismo económico [@lee_fairness_2023]
 
 
 :::
@@ -242,20 +220,6 @@ Pensiones en contestación: conflicto previsional y legitimidad propietaria [@so
 2) _¿Cómo las creencias meritocráticas condicionan la relación entre movilidad social y comodificación?_
 
 ::::
-
-## Movilidad social
-
-::: {.incremental .highlight-last style="font-size: 120%;"}
-
-- Cambios en un outcome que se derivan del _movimiento_ entre clases de origen y destino [ @fosse_diagonal_2025]
-- Exposición a nuevos riesgos, recursos y contextos normativos [@helgason_longterm_2023; @alesina_intergenerational_2018; @jaime-castillo_social_2019]
-- Diversos **mecanismos explicativos**: 
-    
-    * Interés material: **míope** y anticipación
-    * Socialización: **aculturación**, socialización primaria y máximización estatus
-    * Atribuciones causales (ej. self-serving bias) y aprendizaje acumulado de clase
-
-:::
 
 
 ## Hipótesis: movilidad social
@@ -276,9 +240,9 @@ Pensiones en contestación: conflicto previsional y legitimidad propietaria [@so
 
 - La movilidad moldea marcos de justicia vía **aculturación**/self-serving bias: ascendente → más meritocracia; descendente → más estructuralismo [@mijs_belief_2022; @gugushvili_intergenerational_2016; @bucca_merit_2016; @traini_climbing_2025; @deng_its_2025; @jaime-castillo_social_2019; @molina_its_2019]
 
-- $H_{2a}$ (Upward × meritocracia): con alta meritocracia, la movilidad ascendente aumenta más el apoyo a pensiones vía mercado (vs baja).
+- $H_{2a}$ (Upward × meritocracia): con alta meritocracia, la movilidad ascendente debería tener un efecto más pro-mercantilización
 
-- $H_{2b}$ (Downward × meritocracia): con baja meritocracia, la movilidad descendente reduce el apoyo; con alta, el efecto negativo se atenúa (≈ neutral/lig. +).
+- $H_{2b}$ (Downward × meritocracia): con alta meritocracia, la movilidad descendente debería ser menos desmercantilizadora que con baja meritocracia
 
 :::
 
@@ -446,16 +410,7 @@ db %>%
 
 :::
 
-## Tratamiento: construcción de IPW
 
-::: {style="font-size: 100%;"}
-
-Covariables **pretratamiento** $C$: 
-
-<div style="text-align:center;">
-  <img src="images/propensity.png" style="width:100%; max-width:none;">
-</div>
-:::
 
 ## Tratamiento: construcción de IPW
 
@@ -467,6 +422,16 @@ Covariables **pretratamiento** $C$:
 
 :::
 
+## Tratamiento: construcción de IPW
+
+::: {style="font-size: 100%;"}
+
+Covariables **pretratamiento** $C$: 
+
+<div style="text-align:center;">
+  <img src="images/propensity.png" style="width:100%; max-width:none;">
+</div>
+:::
 
 ## Heterogeneidad
 
@@ -548,28 +513,7 @@ g1 +
 ```
 :::
 
-## Descriptivos
 
-::: {.fragment style="font-size: 110%;"}
-
-```{r}
-#| label: fig-mean
-#| fig-cap: "Porcentaje de acuerdo sobre las preferencias por comodificación de las pensiones según trayectoria de movilidad y tiempo"
-#| out-width: '180%'
-#| fig-asp: 0.6
-#| fig-cap-location: top
-
-g2 +
-  labs(
-    y = "% of Agreement",
-    x = NULL,
-    caption = NULL
-  ) +
-  theme(text = element_text(size = 14))
-  
-
-```
-:::
 
 ## Efectos de movilidad
 
@@ -638,11 +582,12 @@ g4+
 
 - La movilidad intergeneracional desde/hacia alto estatus tiene efectos causales en las preferencias por comodificación de las pensiones: Middle→High aumenta el apoyo, mientras High→Low y High→Middle lo reducen ($H_1$ ✓)
 
+- En línea con investigaciones sobre preferencias redistributivas y gasto social [@ares_changing_2020; @gugushvili_subjective_2017; @schmidt_experience_2011; @rodriguez_intergenerational_2024; @alesina_intergenerational_2018]
+
 - Mecanismo de interés material miope [@helgason_longterm_2023; @busemeyer_welfare_2020]
 
 - Efectos solo se encuentran desde y hacia posiciones de alto estatus [@carranza_what_2024; @cortes-orihuela_intergenerational_2022; @busemeyer_welfare_2020; @kerner_pension_2020]
 
-- En línea con investigaciones sobre preferencias redistributivas y gasto social [@ares_changing_2020; @gugushvili_subjective_2017; @schmidt_experience_2011; @rodriguez_intergenerational_2024; @alesina_intergenerational_2018]
 
 
 
@@ -692,7 +637,6 @@ g4+
     * Estimación depende del supuesto de $Y(D)\ \perp\kern-5pt \perp D\ \mid\ (O,C)$ → complementar
     * No se analizan mecanismos → abre una puerta
     * Uso de otras mediciones ($Y,T$) y explotar el rol del tiempo
-    * Sin validez externa → comparaciones entre países
 :::
 
 # Muchas gracias!
